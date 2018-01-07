@@ -8,7 +8,7 @@ contract PayRoll {
         uint salary;
         uint lastPayDay;
         uint paymentDuration;
-        uint salaryUpdateWindow;
+        uint salaryUpdateWindow; // only allow boss to change the salary within this time window since the emplyee got his/her last salary.
     }
 
     modifier bossOnly {
@@ -29,12 +29,16 @@ contract PayRoll {
         return (msg.value);
     }
 
-    function calculateRunaway() public view returns (uint) {
-        return this.balance;
+    /**
+     * Employees' actions
+     */
+
+    function calculateRunaway() public view validEmployee returns (uint) {
+        return this.balance/employees[msg.sender].salary;
     }
 
-    function hasEnoughFund() internal view validEmployee returns (bool) {
-        return calculateRunaway() >= employees[msg.sender].salary;
+    function hasEnoughFund() public view validEmployee returns (bool) {
+        return this.balance >= employees[msg.sender].salary;
     }
 
     function getSalary() public validEmployee {
@@ -45,12 +49,12 @@ contract PayRoll {
         msg.sender.transfer(employee.salary);
     }
 
+    /**
+     * Bosses' actions.
+     */
+
     function updateBossAddress(address _boss) public bossOnly {
         boss = _boss;
-    }
-
-    function addEmployee(address employee) public bossOnly {
-        addEmployee(employee, 0, 0, 10 seconds);
     }
 
     function addEmployee(address employeeAddr, uint paymentDuration, uint salary, uint salaryUpdateWindow) public bossOnly {
@@ -71,7 +75,7 @@ contract PayRoll {
         employees[employeeAddr].paymentDuration = duration;
     }
 
-    function getEmployees(address employeeAddr) public view bossOnly returns (address, uint, uint, uint, uint) {
+    function getEmployeeInfo(address employeeAddr) public view bossOnly returns (address, uint, uint, uint, uint) {
         Employee storage employee = employees[employeeAddr];
         return (employeeAddr, employee.salary, employee.paymentDuration, employee.lastPayDay, employee.salaryUpdateWindow);
     }
