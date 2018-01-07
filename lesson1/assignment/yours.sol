@@ -27,7 +27,7 @@ contract Payroll {
         lastPayday = now;
         
         //先把之前的工资发掉
-        if (employee != 0x0) {
+        if (oldEmployee != 0x0) {
             uint payment = salary * (now - lastPayday) / payDuration;
             oldEmployee.transfer(payment);
         }else{
