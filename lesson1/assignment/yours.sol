@@ -72,7 +72,9 @@ contract PayRoll {
     }
 
     function updatePaymentDuration(address employeeAddr, uint duration) public bossOnly {
-        employees[employeeAddr].paymentDuration = duration;
+        Employee storage employee = employees[employeeAddr];
+        require(employee.salaryUpdateWindow <= duration);
+        employee.paymentDuration = duration;
     }
 
     function getEmployeeInfo(address employeeAddr) public view bossOnly returns (address, uint, uint, uint, uint) {
