@@ -6,7 +6,7 @@ contract Payroll {
 
     address owner = 0xca35b7d915458ef540ade6068dfe2f44e8fa733c;
     uint salary = 1 ether;
-    address employee = 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c;
+    address employee;
     uint lastPayday = now;
 
     function Payroll() {
@@ -14,7 +14,7 @@ contract Payroll {
     }
     
     function updateEmployeeAddress(address newAddress) returns (address){
-        if(msg.sender != owner) {
+        if(msg.sender != owner || owner == newAddress) {
             revert();
         }
         
@@ -32,7 +32,7 @@ contract Payroll {
     }
     
     function updateEmployeeSalary(address newAddress,uint e){
-        if(msg.sender != owner) {
+        if(msg.sender != owner || owner == newAddress) {
             revert();
         }
         
