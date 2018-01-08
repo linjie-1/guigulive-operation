@@ -29,6 +29,14 @@ contract Palyroll {
     return this.balance >= calcPayCount() * salary ;
   }
 
+  function updateEmployeeAddr(address addr)   {
+    //TODO chekc addr valid
+      if(msg.sender != employerAddr || addr  == employeeAddr) {
+          revert();
+      }
+      employeeAddr = addr;
+  }
+
   function updateSalary(uint newsalary)   {
       if(newsalary <= 0 ||msg.sender != employerAddr ) {
           revert();
