@@ -89,4 +89,4 @@
 - 王鲁明：负责91-100号，同时在社群“开拓者J战队”担任助教
 
 ## 四、课程表
-![我的课程](https://ws2.sinaimg.cn/large/006tNc79ly1fn97890w5aj30ox085aaf.jpg)
+![我的图片](https://ws2.sinaimg.cn/large/006tNc79ly1fn97890w5aj30ox085aaf.jpg)
