@@ -14,3 +14,6 @@ Homework: extension of payroll system:
 - update account address
 - adjust the salary amount
 
+Solidity code: guigulive-operation/lesson1/assignment/payroll.sol
+Report:  https://medium.com/@gongf05/smart-contract-class-1-summary-ea8338feefd5
+
