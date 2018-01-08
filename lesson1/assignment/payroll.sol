@@ -1,5 +1,7 @@
 pragma solidity ^0.4.14;
 
+// report: https://medium.com/@gongf05/smart-contract-class-1-summary-ea8338feefd5
+
 contract Payroll {
     uint constant payDuration = 10 seconds;
 
