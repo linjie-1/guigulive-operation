@@ -2,7 +2,7 @@ pragma solidity ^0.4.14;
 
 contract payRoll{
     uint salary = 1 ether;
-    address wallet = 0xca35b7d915458ef540ade6068dfe2f44e8fa733c;
+    address wallet;
     uint constant payDuration = 30 days;
     uint lastPayday = now;
     
