@@ -7,37 +7,65 @@ contract Payroll  {
     uint constant payDuration = 10 seconds;
     uint lastPayday = now;
     
- 
-    //Boos调整salary
-    function updateSalary()  {
+    
+    //Boss update the salary (only need input Ether amount！！！)
+    function updateSalary(uint _salary) returns (uint)  {
        
-       if(msg.sender != Boss){
-           revert();
-       }
+      if(msg.sender != Boss){
+          revert();
+      }
        
+      salary = _salary*10**18;
+         
+       return _salary;
+   }
+   
+   // staff update his salary account
+   function updateSalaryAccount(address _frank) returns (address){
+       
+         if(msg.sender !=frank || _frank == Boss){
+          revert();
+      }
+       
+      frank = _frank ;
+      
+      return frank;
        
    }
+   // add fund into the account
     function addFund() payable returns(uint) {
           
         return  this.balance;
     }
     
+    // display the current account balance
     function showAccount() returns (uint) {
         
         return  this.balance;
         
     }
+    
+    // display the current staff salary
+    function showSalary() returns (uint) {
+        
+        return  salary;
+        
+    }
+    
+    //calculate how many times can afford for the staff salary
     function calculateRunway() returns (uint){
         
         return this.balance/salary;
     }
   
+    //calculate if has enough fund
     function hasEnoughFund() returns (bool){
         
         return  calculateRunway()> 0;
         
     }
   
+    // the staff claim his salary
    function getPaid() returns (uint) {
        
        if(msg.sender !=frank ){
