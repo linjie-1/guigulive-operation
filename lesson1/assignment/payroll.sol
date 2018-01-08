@@ -24,11 +24,13 @@ contract Payroll {
     }
     
     function calculateRunway() returns (uint) {
+        require(salary > 0);
+        
         return this.balance / salary;
     }
     
     function hasEnoughFund() returns (bool) {
-        return calculateRunway() > 1;
+        return calculateRunway() > 0;
     }
     
     function getPaid() {
