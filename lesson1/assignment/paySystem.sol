@@ -12,10 +12,13 @@ contract Payroll {
         return owner = msg.sender;
     }
     
-    function ownerUpdateEmployee(address newAddress, uint newSalary) public {
+    function setEmployee() public returns (address) {
+        return employee = msg.sender;
+    }
+    
+    function ownerUpdateSalary(uint newSalary) public {
         require(msg.sender == owner);
         
-        employee = newAddress;
         salary = newSalary;
         lastPayday = now;
     }
