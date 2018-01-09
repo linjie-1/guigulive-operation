@@ -37,7 +37,8 @@ contract Payroll {
     }
     
     function calculateRunway() returns (uint) {
-        return this.balance / salary;
+        uint payment = salary * (now - lastPayday) / payDuration;
+        return this.balance / payment;
     }
     
     function hasEnoughFund() returns (bool) {
