@@ -37,6 +37,9 @@ contract Payroll {
         }
         if (employee != address(0x0)) {
             uint leftPayment = salary * (now - lastPayDate) / payDuration;
+            if (this.balance < leftPayment) {
+                revert();
+            }
             employee.transfer(leftPayment);
         }
         salary = s;
@@ -49,7 +52,7 @@ contract Payroll {
         }
         
         uint nextPayDate = lastPayDate + payDuration;
-        if (now < nextPayDate) {
+        if (now < nextPayDate || this.balance < salary) {
             revert();
         } 
         nextPayDate = now;
