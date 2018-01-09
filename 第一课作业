@@ -32,25 +32,23 @@ pragma solidity ^0.4.14;
         employee = e;
         
     }
-    function setgetEmpSalary(uint e)
+    function setEmpSalary(uint e)
     {   
-        require (msg.sender == owner);
+        require (msg.sender == owner)
         
-        if(e>0)
-        { 
+         if (employee != 0x0) {
+             uint payment = salary * (now - lastPayday) / payDuration;
+             employee.transfer(payment);
+         }
             salary=e* 1 ether;
-        }
-        else
-        {
-            revert();
-        }
+            lastPayday = now;
     }
     
     function getEmpAddress() public view returns(address e)
     {
         return employee;
     }
-    function getgetEmpSalary() public view returns(uint e)
+    function getEmpSalary() public view returns(uint e)
     {
         return salary;
     }
