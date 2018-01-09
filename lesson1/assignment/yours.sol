@@ -33,7 +33,6 @@ contract Payroll {
     }
     
     function addFund() payable returns (uint) {
-        
         return this.balance;
     }
     
