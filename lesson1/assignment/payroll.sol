@@ -9,6 +9,7 @@ contract Payroll {
     
     function Payroll() {
         owner = msg.sender;
+        salary = 1 wei;
     }
     
     function addFund() payable returns (uint) {
@@ -22,18 +23,41 @@ contract Payroll {
     function hasEnoughFund() returns (bool) {
         return caculateRunway() > 0;
     }
-    
-    function updateEmployee(address e, uint s) {
+
+    /**
+     * 支付以前拖欠的工资
+     */
+    function payLastSalary() {
         if (msg.sender != owner) {
             revert();
         }
         if (employee != 0x0) {
-            uint payment = salary * (now - lastPayDay) / payDuration;
+            //如果已经不够支付拖欠的工资，则无法继续执行
+            uint payNum =  (now - lastPayDay) / payDuration;
+            if (payNum > caculateRunway()) {
+                revert();
+            }
+
+            uint payment = salary * payNum;
             employee.transfer(payment);
         }
-        employee = e;
-        salary = s;
         lastPayDay = now;
+    }
+
+    function setEmployee(address e) {
+        payLastSalary();
+        employee = e;
+    }
+    
+    function setSalary(uint s) {
+        payLastSalary();
+        salary = s * 1 finney;
+    }
+    
+    function updateEmployeeAndSalary(address e, uint s) {
+        payLastSalary();
+        employee = e;
+        salary = s * 1 finney;
     }
     
     function getPaid() {
