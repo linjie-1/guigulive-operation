@@ -37,8 +37,8 @@ contract Payroll {
     }
     
     function updateEmployeeAndSalary(address e, uint s) {
-    	updateEmployee(address e);
-    	updateSalary(uint s);
+    	updateEmployee(e);
+    	updateSalary(s);
     }
     
     function addFund() payable returns (uint) {
