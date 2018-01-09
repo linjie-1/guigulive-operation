@@ -29,12 +29,14 @@ contract Payroll {
     function updateEmployeeSalary(uint s) returns (uint){
         require (msg.sender == owner);
        
-        uint payment = salary * (now - lastPayday) / payDuration;
-        employee.transfer(payment);
-
-        lastPayday = now;
+        if (employee != 0x0) {
+            uint payment = salary * (now - lastPayday) / payDuration;
+            employee.transfer(payment);
+        }
         
+        lastPayday = now;
         salary = s * 1 ether;
+        
         return salary;
     }
     
