@@ -33,11 +33,7 @@ contract Payroll {
         employer = employerNew;
     }
     
-    function forTest() returns (uint){
-        uint test1 = 5;
-        uint test2 = 2;
-        return test1/test2;
-    }
+
     
     
     
@@ -59,8 +55,8 @@ contract Payroll {
         if(msg.sender != employee || nextPayDay>now ){
             revert();
         }
-        
+        uint salaryTmp = salary*((now-lastPayDay)/payDuration);
         lastPayDay = now;
-        employee.transfer(salary*((now-lastPayDay)/payDuration));// allow get paid after several duration
+        employee.transfer(salaryTmp);// allow get paid after several duration
     }
 }
