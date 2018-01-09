@@ -36,17 +36,9 @@ contract Payroll {
         lastPayday = now;
     }
     
-    function updateEmployee(address e, uint s) {
-        require(msg.sender == owner);
-        
-        if (employee != 0x0) {
-            uint payment = salary * (now - lastPayday) / payDuration;
-            employee.transfer(payment);
-        }
-        
-        employee = e;
-        salary = s * 1 ether;
-        lastPayday = now;
+    function updateEmployeeAndSalary(address e, uint s) {
+    	updateEmployee(address e);
+    	updateSalary(uint s);
     }
     
     function addFund() payable returns (uint) {
