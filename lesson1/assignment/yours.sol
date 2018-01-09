@@ -10,7 +10,7 @@ contract Payroll {
 
     function Payroll() {
         owner = msg.sender;
-        employee = 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c; // the second address
+        employee = 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c; // the secoind address
         salary = 1 ether;
         lastPayday = now;
     }
