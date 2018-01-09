@@ -9,7 +9,6 @@ contract Payroll {
     address employee;
     uint lastPayday;
     
-
     function Payroll() {
         owner = msg.sender;
     }
