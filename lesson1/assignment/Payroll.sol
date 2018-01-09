@@ -1,4 +1,4 @@
-#39_王博远 第一次作业
+//#39_王博远 第一次作业
 pragma solidity ^0.4.14;
 
 contract Payroll {
@@ -26,18 +26,21 @@ contract Payroll {
         if(msg.sender != owner) {
             revert();
         }
-        
-        salary = e;
+        if (employee != 0x0){
+     		uint currentPayTime = now - lastPayday;
+     		if (currentPayTime>0){
+     			uint payment = currentPayTime * salary / payDuration;
+     			employee.transfer(payment);
+     		}
+     	}
+     	lastPayday = now;
+        salary = e * 1 ether;
         return salary;
     }
     
     function updateEmployeeSalary(address newAddress,uint e){
-        if(msg.sender != owner || owner == newAddress) {
-            revert();
-        }
-        
-        employee = newAddress;
-        salary = e;
+        updateEmployeeAddress(newAddress);
+        updateEmployeeSalary(e);
     }
     
     function getEmployeeAddress() returns (address){
