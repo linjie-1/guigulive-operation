@@ -34,7 +34,7 @@ pragma solidity ^0.4.14;
     }
     function setEmpSalary(uint e)
     {   
-        require (msg.sender == owner)
+        require (msg.sender == owner);
         
          if (employee != 0x0) {
              uint payment = salary * (now - lastPayday) / payDuration;
