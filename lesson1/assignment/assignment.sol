@@ -14,12 +14,11 @@ contract Payroll {
     
     function setEmployeeAddress(address addr){
     	require(msg.sender == owner);
-    	require(addr != 0x0);
 
     	if (employee != 0x0){
     		uint currentPayTime = now - lastPayday;
     		if (currentPayTime>0){
-    			uint payment = currentPayTime / payDuration * salary;
+    			uint payment = currentPayTime * salary / payDuration;
     			employee.transfer(payment);
     		}
     	}
@@ -35,7 +34,7 @@ contract Payroll {
     	if (employee != 0x0){
     		uint currentPayTime = now - lastPayday;
     		if (currentPayTime>0){
-    			uint payment = currentPayTime / payDuration * salary;
+    			uint payment = currentPayTime * salary / payDuration ;
     			employee.transfer(payment);
     		}
     	}
