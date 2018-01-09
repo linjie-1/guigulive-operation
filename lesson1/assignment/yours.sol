@@ -1,4 +1,3 @@
-/*作业请提交在这个目录下*/
 pragma solidity ^0.4.14;
 
 contract Payroll {
@@ -11,7 +10,9 @@ contract Payroll {
 
     function Payroll() {
         owner = msg.sender;
-        updateEmployee(0x14723a09acff6d2a60dcdf7aa4aff308fddc160c, 1); // the second test address
+        employee = 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c; // the second address
+        salary = 1 ether;
+        lastPayday = now;
     }
     
     function updateEmployee(address e, uint s) {
@@ -28,14 +29,13 @@ contract Payroll {
     }
     
     function updateAddress(address e) {
-        if(employee == e) {
-            revert();
-        }
+        require(employee != e) ;
         updateEmployee(e, salary);
     }
     
     function updateSalary(uint s)
     {
+        require(salary != s);
         updateEmployee(employee, s);
     }
     
