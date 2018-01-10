@@ -33,11 +33,11 @@ contract PayRoll {
      * Employees' actions
      */
 
-    function calculateRunaway() public view validEmployee returns (uint) {
+    function calculateRunaway() public constant validEmployee returns (uint) {
         return this.balance/employees[msg.sender].salary;
     }
 
-    function hasEnoughFund() public view validEmployee returns (bool) {
+    function hasEnoughFund() public constant validEmployee returns (bool) {
         return this.balance >= employees[msg.sender].salary;
     }
 
@@ -77,7 +77,7 @@ contract PayRoll {
         employee.paymentDuration = duration;
     }
 
-    function getEmployeeInfo(address employeeAddr) public view bossOnly returns (address, uint, uint, uint, uint) {
+    function getEmployeeInfo(address employeeAddr) public constant bossOnly returns (address, uint, uint, uint, uint) {
         Employee storage employee = employees[employeeAddr];
         return (employeeAddr, employee.salary, employee.paymentDuration, employee.lastPayDay, employee.salaryUpdateWindow);
     }
