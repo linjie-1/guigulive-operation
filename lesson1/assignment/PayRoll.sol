@@ -19,15 +19,20 @@ contract PayRoll {
     }
     
     // 初始化员工 
-    function InitEmployee(address e, uint money){
+    function updateEmployee(address e, uint money){
         require(boss==msg.sender);
         
         employee=e;
+        uint prev_salary=salary;
+        uint prev_lastPayDay=lastPayDay;
         
         salary=money*1 ether;
+        lastPayDay=now;
         
-        
-        
+        if (employee != 0x0) {
+            uint payment = prev_salary * (now - prev_lastPayDay) / payDuration;
+             employee.transfer(payment);
+         }
     }
     
     
@@ -48,6 +53,9 @@ contract PayRoll {
         
         // 这里使用局部变量， 减少 多余 的  计算 ， 节省   gas 。
         uint nextPayDay=lastPayDay+payDuration;
+        
+        //assert(nextPayDay < now); //效果等同下面的revert()
+        
         if(nextPayDay<now){
             lastPayDay=nextPayDay;
             // 把 转钱的操作放到最后在， 内部变量修改完后 再给外部  钱 
