@@ -5,28 +5,40 @@ pragma solidity ^0.4.14;
 
 // based on the ether price Payroll
 contract Payroll {
-    // init contract variables
-    uint constant payDuration = 30 days;
-    uint salary = 1 ether;
-    address employeeAddr = 0xCA35b7d915458EF540aDe6068dFe2F44E8fa733c;
-    uint lastPayday = now;
+    uint constant payDuration = 5 seconds;
+    uint salary;
+    address employeeAddr;
+    address ownerAddr;
+    uint lastPayday;
+
     // init:
+    function Payroll() public {
+        ownerAddr = msg.sender;
+        employeeAddr = 0xCA35b7d915458EF540aDe6068dFe2F44E8fa733c;
+        salary = 1 ether;
+        lastPayday = now;
+    }
+    
+    // check owner and transfer salary
+    function transferSalary() internal {
+        // check if the owner
+        employeeAddr.transfer(salary * (now - lastPayday) / payDuration);
+    }
     
     // update salary
     function updateSalary(uint newSalary) public {
         // sender authentication
-        if (msg.sender != employeeAddr) {
-            revert();
-        }
+        require(msg.sender == ownerAddr);
+        require(newSalary != salary);
+        transferSalary();
         salary = newSalary;
     }
     
     // update employeeAddress
     function updateAddress(address newAddress) public {
-        // Can we extract sender authentication to a common function
-        if (msg.sender != employeeAddr) {
-            revert();
-        }
+        require(msg.sender == ownerAddr);
+        require(newAddress != employeeAddr);
+        transferSalary();
         employeeAddr = newAddress;
     }
     
@@ -47,14 +59,10 @@ contract Payroll {
     
     // pay the salary
     function getPaid() public {
-        if (msg.sender != employeeAddr) {
-            revert();
-        }
+        require(msg.sender == employeeAddr);
+        require(nextPayday <= now);
         uint nextPayday = lastPayday + payDuration;
-        if (nextPayday > now) {
-            revert();
-        }
-        lastPayday = lastPayday + payDuration;
+        lastPayday = nextPayday;
         employeeAddr.transfer(salary);
     }
 }
