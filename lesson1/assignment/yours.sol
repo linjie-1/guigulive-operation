@@ -2,7 +2,7 @@
 pragma solidity ^0.4.14;
 
 contract Payroll {
-    uint constant payDuration = 5 seconds;
+    uint constant payDuration = 10 seconds;
 
     address owner;
     uint salary = 1 ether;
@@ -51,7 +51,7 @@ contract Payroll {
     }
     
     function getPaid(){
-        require(msg.sender == owner);
+        require(msg.sender == employee);
         
         uint nextPayday = lastPayday + payDuration;
         assert(nextPayday < now);
