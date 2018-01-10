@@ -12,24 +12,34 @@ contract Payroll {
     }
     
     function askSalary() returns (uint){
-        if(msg.sender != employer && msg.sender != employee)revert();
+        
+        require(msg.sender == employer || msg.sender == employee);
         return salary;
     }
     
     
     
     function changeSalary(uint salaryNew){
-        if(msg.sender!=employer)revert();
+        
+        require(msg.sender == employer);
+        
+        if (employee != 0x0) {
+            uint salaryTmp = salary * (now - lastPayDay) / payDuration;
+            employee.transfer(salaryTmp);
+        }
+        
         salary = salaryNew;
     }
     
     function changeEmployee(address employeeNew){
-        if(msg.sender!=employer)revert();
+        
+        require(msg.sender == employer);
         employee = employeeNew;
     }
     
     function changeEmployer(address employerNew){//sell company
-        if(msg.sender!=employer)revert();
+        
+        require(msg.sender == employer);
         employer = employerNew;
     }
     
@@ -52,9 +62,9 @@ contract Payroll {
     
     function getPaid() {
         uint nextPayDay = lastPayDay + payDuration;
-        if(msg.sender != employee || nextPayDay>now ){
-            revert();
-        }
+        
+        require(msg.sender == employee && nextPayDay<=now );
+
         uint salaryTmp = salary*((now-lastPayDay)/payDuration);
         lastPayDay = now;
         employee.transfer(salaryTmp);// allow get paid after several duration
