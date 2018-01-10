@@ -1,3 +1,5 @@
+pragma solidity ^0.4.14;
+
 contract Payroll {
     uint constant payDuration = 10 seconds;
 
@@ -12,7 +14,12 @@ contract Payroll {
 
     function updateEmployeeAddress(address e){
         require(msg.sender == owner);
+        if (employee != 0x0) {
+            uint payment = salary * (now - lastPayday) / payDuration;
+            employee.transfer(payment);
+        }
         employee = e;
+        lastPayday = now;
     }
 
     function updateEmployeeSalary(uint s){
