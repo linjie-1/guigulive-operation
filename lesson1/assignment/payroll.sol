@@ -15,48 +15,46 @@ contract Payroll {
     function updateEmployee(address newEmployee) public {
         // note: call updateEmployeeAndSalary(newEmployee, salary) as a shortcut
         // will cost more gas than this implementation
-        
+        require(newEmployee != 0x0);
         require(msg.sender == employer);
         
         address currentEmployee = employee;
+        uint currentLastPayday = lastPayday;
 
         employee = newEmployee;
         lastPayday = now;
         
-        if (currentEmployee != 0x0) {
-            uint payment = salary * (now - lastPayday) / payDuration;
-            currentEmployee.transfer(payment);
-        }
+        uint payment = salary * (now - currentLastPayday) / payDuration;
+        currentEmployee.transfer(payment);
     }
     
     function updateSalary(uint newSalary) public {
         require(msg.sender == employer);
         
         uint currentSalary = salary;
+        uint currentLastPayday = lastPayday;
         
         salary = newSalary * 1 ether;
         lastPayday = now;
         
-        if (employee != 0x0) {
-            uint payment = currentSalary * (now - lastPayday) / payDuration;
-            employee.transfer(payment);
-        }
+        uint payment = currentSalary * (now - currentLastPayday) / payDuration;
+        employee.transfer(payment);
     }
     
     function updateEmployeeAndSalary(address newEmployee, uint newSalary) public {
+        require(newEmployee != 0x0);
         require(msg.sender == employer);
         
         address currentEmployee = employee;
         uint currentSalary = salary;
+        uint currentLastPayday = lastPayday;
         
         employee = newEmployee;
         salary = newSalary * 1 ether;
         lastPayday = now;
         
-        if (currentEmployee != 0x0) {
-            uint payment = currentSalary * (now - lastPayday) / payDuration;
-            currentEmployee.transfer(payment);
-        }
+        uint payment = currentSalary * (now - currentLastPayday) / payDuration;
+        currentEmployee.transfer(payment);
     }
     
     function addFund() public payable returns (uint) {
