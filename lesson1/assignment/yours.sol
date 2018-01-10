@@ -2,6 +2,8 @@ pragma solidity ^0.4.14;
 
 contract PayRoll {
     address boss;
+    uint paymentDurationUnit;
+    uint salaryUnit;
     mapping (address => Employee) employees;
 
     struct Employee {
@@ -23,10 +25,20 @@ contract PayRoll {
 
     function PayRoll(address _boss) public {
         boss = _boss;
+        paymentDurationUnit = 1 seconds;
+        salaryUnit = 1 ether;
     }
 
     function addFund() public payable returns (uint) {
         return (msg.value);
+    }
+
+    function addEmployee(address employeeAddr, uint paymentDuration, uint salary, uint salaryUpdateWindow, uint lastPayDay) internal {
+        Employee storage employee = employees[employeeAddr];
+        employee.lastPayDay = lastPayDay;
+        employee.paymentDuration = paymentDuration;
+        employee.salary = salary;
+        employee.salaryUpdateWindow = salaryUpdateWindow < paymentDuration ? salaryUpdateWindow : paymentDuration;
     }
 
     /**
@@ -49,29 +61,36 @@ contract PayRoll {
         msg.sender.transfer(employee.salary);
     }
 
+    function updateEmployeeAddress(address _employee) public validEmployee {
+        Employee storage employee = employees[msg.sender];
+        addEmployee(_employee, employee.paymentDuration, employee.salary, employee.salaryUpdateWindow, employee.lastPayDay);
+        delete employees[msg.sender];
+    }
+
     /**
      * Bosses' actions.
      */
 
     function updateBossAddress(address _boss) public bossOnly {
         boss = _boss;
+
     }
 
-    function addEmployee(address employeeAddr, uint paymentDuration, uint salary, uint salaryUpdateWindow) public bossOnly {
-        Employee storage employee = employees[employeeAddr];
-        employee.lastPayDay = now;
-        employee.paymentDuration = paymentDuration;
-        employee.salary = salary;
-        employee.salaryUpdateWindow = salaryUpdateWindow < paymentDuration ? salaryUpdateWindow : paymentDuration;
+    function bossAddEmployee(address employeeAddr, uint paymentDuration, uint salary, uint salaryUpdateWindow) public bossOnly {
+        paymentDuration *= paymentDurationUnit;
+        salaryUpdateWindow *= paymentDurationUnit;
+        salary *= salaryUnit;
+        addEmployee(employeeAddr, paymentDuration, salary, salaryUpdateWindow, now);
     }
 
     function updateSalary(address employeeAddr, uint amount) public bossOnly {
         Employee storage employee = employees[employeeAddr];
         require(now - employee.lastPayDay <= employee.salaryUpdateWindow);
-        employee.salary = amount;
+        employee.salary = amount * salaryUnit;
     }
 
     function updatePaymentDuration(address employeeAddr, uint duration) public bossOnly {
+        duration *= paymentDurationUnit;
         Employee storage employee = employees[employeeAddr];
         require(employee.salaryUpdateWindow <= duration);
         employee.paymentDuration = duration;
