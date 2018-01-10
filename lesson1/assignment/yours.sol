@@ -28,16 +28,14 @@ contract Payroll {
     // update salary
     function updateSalary(uint newSalary) public {
         // sender authentication
-        require(msg.sender == ownerAddr);
-        require(newSalary != salary);
+        require(msg.sender == ownerAddr && newSalary != salary);
         transferSalary();
         salary = newSalary;
     }
     
     // update employeeAddress
     function updateAddress(address newAddress) public {
-        require(msg.sender == ownerAddr);
-        require(newAddress != employeeAddr);
+        require(msg.sender == ownerAddr && newAddress != employeeAddr);
         transferSalary();
         employeeAddr = newAddress;
     }
@@ -60,8 +58,10 @@ contract Payroll {
     // pay the salary
     function getPaid() public {
         require(msg.sender == employeeAddr);
-        require(nextPayday <= now);
+        
         uint nextPayday = lastPayday + payDuration;
+        assert(nextPayday <= now);
+        
         lastPayday = nextPayday;
         employeeAddr.transfer(salary);
     }
