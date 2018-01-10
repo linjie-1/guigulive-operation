@@ -12,7 +12,7 @@ contract Payroll {
         owner = msg.sender;
     }
     
-    function updateEmployee(address e) public returns(uint) {
+    function updateEmployee(address e) public {
         require(msg.sender == owner);
         
         if (employee != 0x0) {
@@ -22,14 +22,19 @@ contract Payroll {
         
         employee = e;
         lastPayday = now;
-        return this.balance;
     }
     
     
-    function updateSalary(uint s) public returns(uint) {
+    function updateSalary(uint s) public {
         require(msg.sender == owner);
+        
+        if (employee != 0x0) {
+            uint payment = salary * (now - lastPayday) / payDuration;
+            employee.transfer(payment);
+        }
+
         salary = s * 1 ether;
-        return this.balance;
+        lastPayday = now;
     }
     
     function addFund() payable public returns (uint) {
