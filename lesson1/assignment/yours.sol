@@ -10,8 +10,8 @@ contract Payroll {
 
     function Payroll() {
         owner = msg.sender;
-        employee = 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c; // the secoind address
-        salary = 1 ether;
+        employee = 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c; // 写死了第二个测试地址
+        salary = 1 wei;
         lastPayday = now;
     }
     
@@ -24,7 +24,7 @@ contract Payroll {
         }
         
         employee = e;
-        salary = s * 1 ether;
+        salary = s * 1 wei;  //我把单位全用wei了，更方便测试了，否则在测试的时候，每个数后面一堆0，直接数不清
         lastPayday = now;
     }
     
@@ -35,7 +35,7 @@ contract Payroll {
     
     function updateSalary(uint s)
     {
-        require(salary != s);
+        require(salary != s * 1 wei);
         updateEmployee(employee, s);
     }
     
@@ -55,7 +55,7 @@ contract Payroll {
         require(msg.sender == employee);
         
         uint nextPayday = lastPayday + payDuration;
-        assert(nextPayday < now);
+        require(nextPayday < now);
 
         lastPayday = nextPayday;
         employee.transfer(salary);
