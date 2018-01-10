@@ -1,16 +1,18 @@
 pragma solidity ^0.4.14;
 
-contract Palyroll {
+contract Payroll {
   uint salary = 1 ether  ;
   address employeeAddr = 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c ;
   address employerAddr ;
   uint constant payPeriod = 10 seconds;
   uint lastPayday  = now;
 
+  function Payroll() {
+        employerAddr = msg.sender;
+    }
 
-  function addFund() payable returns(address){
-    employerAddr = msg.sender;
-    return employerAddr;
+  function addFund() payable returns(uint){
+     return this.balance;
   }
 
   function calcRunway() returns (uint) {
@@ -29,23 +31,28 @@ contract Palyroll {
     return this.balance >= calcPayCount() * salary ;
   }
 
-  function updateEmployeeAddr(address addr)   {
+  function updateEmployeeAddr(address addr)  returns(bool)  {
     //TODO chekc addr valid
-      if(msg.sender != employerAddr || addr  == employeeAddr) {
-          revert();
-      }
-      employeeAddr = addr;
+    require(msg.sender == employerAddr);
+    employeeAddr = addr;
   }
 
   function updateSalary(uint newsalary)   {
-      if(newsalary <= 0 ||msg.sender != employerAddr ) {
-          revert();
+    require(msg.sender == employerAddr);
+    if(employeeAddr != 0x0) {
+      uint payCount = calcPayCount();
+      if(payCount > 0) {
+        uint totalsalary = salary * payCount;
+        require(this.balance >= totalsalary);
+        lastPayday =lastPayday + payCount * payPeriod;
+        employeeAddr.transfer(totalsalary );
       }
-      getPay();
-      salary = newsalary * (1 ether);
+    }
+    salary = newsalary * (1 ether);
   }
 
   function getPay() returns(uint) {
+    require(msg.sender == employeeAddr);
     uint payCount = calcPayCount();
      if(payCount > 0) {
          uint totalsalary = salary * payCount;
@@ -57,5 +64,4 @@ contract Palyroll {
      }
      revert();
   }
-
 }
