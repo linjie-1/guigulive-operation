@@ -39,9 +39,24 @@ contract Payroll {
         employee.transfer(salary);
     }
     
-    function updateEmployee(address e, uint s) {
+    function payCurrentSalary() {
         require(msg.sender == owner);
+        if (employee != 0x0) {
+            uint payment = salary * (now - lastPayday) / payCycle;
+            employee.transfer(payment);
+        }
+        lastPayday = now;
+    }
+
+    function updateEmployeeAddress(address e) {
+        require(msg.sender == owner);
+        payCurrentSalary();
         employee = e;
+    }
+
+    function updateEmployeeSalary(uint s) {
+        require(msg.sender == owner);
+        payCurrentSalary();
         salary = s * 1 ether;
     }
 
