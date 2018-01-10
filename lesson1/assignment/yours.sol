@@ -14,6 +14,7 @@ contract Payroll {
     
     function updateEmployeeAddress(address addr) {
         require(msg.sender == owner);
+        require(addr != 0x0);
         employee = addr;
     }
     
