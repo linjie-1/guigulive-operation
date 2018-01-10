@@ -57,7 +57,7 @@ contract Payroll {
     }
     
     function enoughFund() returns (bool){
-        return calculateRunAway()>=1;
+        return calculateRunAway() >= 1;
     }
     
     function getPaid() {
