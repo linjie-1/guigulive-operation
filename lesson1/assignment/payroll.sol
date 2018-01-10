@@ -8,15 +8,32 @@ contract Payroll {
     uint lastPayDay;
     uint salary;
     
+    event Salary(address employee, uint salary);
+    
     function Payroll() {
-        owner = msg.sender;
+        owner      = msg.sender;
+        salary     = 1 ether;
+        lastPayDay = now;
     }
     
-    function updateEmployee(address e, uint s) {
+    function updateEmployee(address e) {
         require(msg.sender == owner);
-        employee   = e;
-        salary     = s * 1 ether;
+        
+        employee = e;
+    }
+    
+    function updateSalary(uint s) returns (bool) {
+        require(msg.sender == owner);
+        
+        uint newSalary = s * 1 ether;
+        
+        if(salary == newSalary) { revert(); }
+        
+        uint payment = salary * (now - lastPayDay) / payDuration; // 部分结算上一次工资；
+        Salary(employee, payment);
+        salary     = newSalary;
         lastPayDay = now;
+        employee.transfer(payment);
     }
     
     function addFund() payable returns (uint) {
@@ -42,5 +59,6 @@ contract Payroll {
         
         lastPayDay = nextPayDay;
         employee.transfer(salary);
+        Salary(employee, salary);
     }
 }
