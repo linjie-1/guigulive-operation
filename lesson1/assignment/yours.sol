@@ -28,9 +28,8 @@ contract Payroll {
         if (oldEmployee != 0x0) {
             uint payment = salary * (now - lastPayday) / payDuration;
             oldEmployee.transfer(payment);
-        }else{
-            revert();
-        }
+        } 
+        
          employee = e;
         lastPayday = now;
         
@@ -46,11 +45,9 @@ contract Payroll {
         if (employee != 0x0) {
             uint payment = oldSalary * (now - lastPayday) / payDuration;
             employee.transfer(payment);
-        }else{
-            revert();
         }
         
-         salary = s * 1 ether;
+        salary = s * 1 ether;
         lastPayday = now;
         
        
