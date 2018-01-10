@@ -53,9 +53,12 @@ contract Payroll {
         employee.transfer(salary * numPayCycle);
     }
 
-    function updateEmployee(address e, uint s) {
+    function updateEmployeeAddress(address e) {
         // Sender should be the owner
         require(msg.sender == owner);
+        
+        // Check if addresses are the same
+        require(e != employee);
 
         if (employee != 0x0) {
             // Pay salary before change an existing employee
@@ -65,6 +68,24 @@ contract Payroll {
 
         // Update employee
         employee = e;
+        salary = 1 ether; // Default salary
+        lastPayday = now;
+    }
+
+    function updateEmployeeSalary(uint s) {
+        // Sender should be the owner
+        require(msg.sender == owner);
+        
+        // Check salary range
+        require(s >= 0);
+
+        if (employee != 0x0) {
+            // Pay salary before change an existing employee
+            uint payment = salary * (now - lastPayday) / payDuration;
+            employee.transfer(payment);
+        }
+
+        // Update salary
         salary = s * 1 ether;
         lastPayday = now;
     }
