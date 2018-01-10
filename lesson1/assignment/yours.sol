@@ -14,27 +14,25 @@ contract Payroll{
         employer =  msg.sender;
     }
 
-    function payBalance(){
-        if (employee != 0){
-            uint payment  = salary * (now-lastPayday)/payDuration;
+    function updateEmployeeAddress(address a) {
+        require(msg.sender == boss);
+
+         if (employee != 0x0) {
+            uint payment = salary * (now - lastPayday) / payDuration;
             employee.transfer(payment);
         }
-    }
 
-    function changeEmployee(address e){
-        require(msg.sender == employer);
-        payBalance();
-        employee = e;
+        employee = a;
         lastPayday = now;
     }
 
-    function changeSalary(uint s){
-        require(msg.sender == employer);
-        payBalance();
+    function updateEmployeeSalary(uint s) {
+        require(msg.sender == boss);
+
         salary = s * 1 ether;
     }
 
-    function addFund() payable returns (uint){
+    function addFund() payable returns (uint) {
         return this.balance;
     }
 
@@ -47,17 +45,12 @@ contract Payroll{
     }
 
     function getPaid() {
-        if (msg.sender != employee){
-            revert();
-        }
+        require(msg.sender == employee);
 
-        uint nextPayDay = lastPayday + payDuration;
+        uint nextPayday = lastPayday + payDuration;
+        assert(nextPayday < now);
 
-        if ( nextPayDay > now){
-            revert();
-        }
-
-        lastPayday = nextPayDay;
+        lastPayday = nextPayday;
         employee.transfer(salary);
     }
 }
