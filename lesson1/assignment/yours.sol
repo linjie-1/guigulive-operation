@@ -1,62 +1,47 @@
-/*作业请提交在这个目录下*/
 pragma solidity ^0.4.14;
 
 contract Payroll {
+    // change address and salary
+    
+    uint salary  ;
+    address frank ;
+    
     uint constant payDuration = 10 seconds;
+    uint lastPayday = now;
     
-    address owner;
-    uint salary;
-    address employee;
-    uint lastPayday;
-
-    function Payroll() public {
-        owner = msg.sender;
-    }
-
-    function updateEmployee(address e, uint s) public {
-        require(msg.sender == owner);
-        
-        if (employee != 0x0) {
-            uint payment = salary * (now - lastPayday) / payDuration;
-            employee.transfer(payment);
-        }
-
-        employee = e;
-        salary = s * 1 ether;
-        lastPayday = now;
+    function setSalary (uint m) {
+        salary = m;
     }
     
-    //作业内容 更新雇员地址
-    function updateAddress(address e) public {
-        require(msg.sender == owner);
-        employee = e;
+    function setAddress(address a) {
+        frank = a;
     }
     
-    //作业内容 更新雇员薪酬
-    function updateSalary(uint s) public {
-        require(msg.sender == owner);
-        salary = s * 1 ether;
-    }    
-
-    function addFund() public payable returns (uint) {
+    function addFund () payable returns (uint){
         return this.balance;
     }
-
-    function calculateRunway() public constant returns (uint) {
+    
+    function calculateRunway() returns (uint){
         return this.balance / salary;
     }
-
-    function hasEnoughFund() public constant returns (bool) {
+    
+    function hasEnoughFund() returns (bool){
         return calculateRunway() > 0;
     }
-
-    function getPaid() public {
-        require(msg.sender == employee);
-
+    
+    function getPaid() {
+        if (msg.sender != frank) {
+            revert();
+        }
+        
         uint nextPayday = lastPayday + payDuration;
-        assert(nextPayday < now);
+        if ( nextPayday > now) {
+            revert();
+        }
+        // the order matters
+            lastPayday = nextPayday;
+            frank.transfer(salary);
 
-        lastPayday = nextPayday;
-        employee.transfer(salary);
     }
+    
 }
