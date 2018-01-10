@@ -15,7 +15,7 @@ contract Payroll  {
           revert();
       }
        
-      salary = _salary*10**18;
+      salary = _salary*1 ether;
          
        return _salary;
    }
