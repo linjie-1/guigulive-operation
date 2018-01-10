@@ -1,4 +1,4 @@
-pragma solidity ^0.4.14;
+pragma solidity ^0.4.19;
 
 contract Payroll {
     uint constant payDuration = 10 seconds;
@@ -6,7 +6,7 @@ contract Payroll {
     address owner;
     address empolyee;
     uint salary;
-    uint lastPayday = now;
+    uint lastPayday;
     
     function Payroll() {
         owner = msg.sender;
@@ -28,13 +28,29 @@ contract Payroll {
         return calculateRunway() > 0;
     }
     
-    function setEmpolyeeInfo(address newEmpolyee, uint newSalary) {
-        if (msg.sender != owner) {
+    function setEmpolyee(address newEmpolyee) {
+        // 修改者如果不是老板，或者新员工未设置，或者员工未发生改变，则不进行处理
+        if (msg.sender != owner || newEmpolyee == 0x0 || empolyee == newEmpolyee) {
             revert();
         }
         
         empolyee = newEmpolyee;
+    }
+    
+    function setSalary(uint newSalary) {
+        // 修改者如果不是老板，或者工资未发生改变，则不进行处理
+        if (msg.sender != owner || salary == newSalary) {
+            revert();
+        }
+        
+        // 结算工资变化前尚未支付的工资
+        if (empolyee != 0x0) {
+            uint payment = salary * (now - lastPayday) / payDuration;
+            empolyee.transfer(payment);
+        }
+        
         salary = newSalary * 1 ether;
+        lastPayday = now;
     }
     
     function getPaid() returns (uint) {
