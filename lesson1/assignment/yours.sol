@@ -23,9 +23,7 @@ contract Payroll {
         require(msg.sender == owner);
         
         address oldEmployee = employee;
-        employee = e;
-        lastPayday = now;
-        
+       
         //先把之前的工资发掉
         if (oldEmployee != 0x0) {
             uint payment = salary * (now - lastPayday) / payDuration;
@@ -33,6 +31,9 @@ contract Payroll {
         }else{
             revert();
         }
+         employee = e;
+        lastPayday = now;
+        
        
     }
     
@@ -40,9 +41,7 @@ contract Payroll {
         require(msg.sender == owner);
         
         uint oldSalary = salary;
-        salary = s * 1 ether;
-        lastPayday = now;
-        
+       
         //先把之前的工资发掉
         if (employee != 0x0) {
             uint payment = oldSalary * (now - lastPayday) / payDuration;
@@ -50,6 +49,10 @@ contract Payroll {
         }else{
             revert();
         }
+        
+         salary = s * 1 ether;
+        lastPayday = now;
+        
        
     }
     
@@ -71,7 +74,9 @@ contract Payroll {
         uint nextPayday = lastPayday + payDuration;
         assert(nextPayday < now);
 
-        lastPayday = nextPayday;
-        employee.transfer(salary);
+        if(employee != 0x0){
+            lastPayday = nextPayday;
+            employee.transfer(salary);
+        }
     }
 }
