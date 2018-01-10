@@ -1,22 +1,24 @@
 pragma solidity ^0.4.14;
 
 contract Payroll {
-    address owner = 0xca35b7d915458ef540ade6068dfe2f44e8fa733c;
+    address owner;
     address employee;
     uint salary;
     uint lastPayday;
     
-    uint constant payDuration = 30 days;
+    uint constant payDuration = 10 seconds;
     
-    function ownerUpdateEmployee(address newAddress, uint newSalary) public {
+    function ImOwner() public returns (address) {
+        return owner = msg.sender;
+    }
+    
+    function setEmployee() public returns (address) {
+        return employee = msg.sender;
+    }
+    
+    function ownerUpdateSalary(uint newSalary) public {
         require(msg.sender == owner);
         
-        if (employee != address(0)) {
-            uint payment = salary * (now - lastPayday) / payDuration;
-            employee.transfer(payment);
-        }
-        
-        employee = newAddress;
         salary = newSalary;
         lastPayday = now;
     }
@@ -35,7 +37,7 @@ contract Payroll {
     
     function getPaid() public {
         require(msg.sender == employee);
-
+ 
         uint shouldPayday = lastPayday + payDuration;
         assert(shouldPayday < now);
         
