@@ -28,6 +28,7 @@ contract Payroll {
     
         
     /* Add 2 functions */
+    
     function myUpdateEmployee(address e) {
         // 1. make sure only owner can call this function, which means the balance coming from owner
         // 2. make sure if employee address is not null, pay last emoployee
@@ -50,7 +51,7 @@ contract Payroll {
             require(this.balance >= payment);
             employee.transfer(payment);
         }        
-        salary = s;
+        salary = s * 1 ether;
         lastPayday = now;
     }
     
