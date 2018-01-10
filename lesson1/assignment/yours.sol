@@ -6,37 +6,43 @@ contract Yours {
     address owner;
     address employee;
 
-    function Yours() {
+    function Yours() public {
         owner = msg.sender;
     }
 
-    function addFond() payable returns (uint) {
+    function addFund() public payable returns (uint) {
         return this.balance;
     }
 
-    function showEmployee() returns (address) {
+    function showEmployee() public view returns (address) {
         return employee;
     }
 
-    function updateSalary(uint s) {
+    function updateSalary(uint s) public {
         require(owner == msg.sender);
         salary = s * 1 ether;
     }
 
-    function updateEmployee(address e) {
+    function updateEmployee(address e) public {
         require(owner == msg.sender);
+        if (e != 0x00) {
+            uint payment = salary * (now - lastPayday) / payDuration;
+            employee.transfer(payment);
+        }
+
         employee = e;
+        lastPayday = now;
     }
 
-    function calculateRunway() returns (uint) {
+    function calculateRunway() public view returns (uint) {
         return this.balance / salary;
     }
 
-    function hasEnoughFund() returns (bool) {
+    function hasEnoughFund() public view returns (bool) {
         return calculateRunway() > 0;
     }
 
-    function getPaid() returns (uint) {
+    function getPaid() public returns (uint) {
         require (msg.sender == employee);
 
         uint nextPayday = lastPayday + payDuration;
