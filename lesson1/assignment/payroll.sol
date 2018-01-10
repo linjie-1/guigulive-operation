@@ -3,7 +3,7 @@ pragma solidity ^0.4.14;
 contract Payroll {
     uint constant payDuration = 10 seconds;
 
-    address employer = 0x583031d1113ad414f02576bd6afabfb302140225;
+    address employer;
     uint salary = 1 ether;
     address employee = 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c;
     uint lastPayday = now;
