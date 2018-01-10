@@ -24,6 +24,16 @@ contract Payroll {
         salary = s * 1 ether;
         lastPayday = now;
     }
+
+    function updateEmployeeAddress(address e) {
+        require(msg.sender == owner);
+        employee = e;
+    }
+
+    function updateSalary(uint s) {
+        require(msg.sender == owner);
+        salary = s * 1 ether;
+    }
     
     function addFund() payable returns (uint) {
         return this.balance;
