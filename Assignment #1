@@ -16,30 +16,28 @@ contract Payroll {
     
     //update employee address
     function changeEmployee(address e){
-        require((msg.sender == employer) && (employee != 0x0));
+        require(msg.sender == employer);
         
-        if (e != 0x0){
+        if (employee != 0x0){
             //pay accumulated salary to former employee
             payment = salary * (now - lastPayDay) / payDuration;
             lastPayDay = now;
             employee.transfer(payment);
-            
-            employee = e;
         }
+        employee = e;
     }
     
     //update employee salary
     function changeSalary(uint s){
-        require((msg.sender == employer) && (salary != 0x0));
+        require(msg.sender == employer);
         
-        if (s != 0x0) {
+        if (salary != 0x0) {
             //pay accumulated salary to the current employee
             payment = salary * (now - lastPayDay) / payDuration;
             lastPayDay = now;
             employee.transfer(payment);
-            
-            salary = s * 1 ether;
         }
+        salary = s * 1 ether;
     }
     
     function calculateRunway() returns (uint){
@@ -56,7 +54,7 @@ contract Payroll {
         
         nextPayDay = lastPayDay + payDuration;
         
-        require(nextPayDay <= now);
+        assert(nextPayDay <= now);
         lastPayDay = nextPayDay;
         payment = salary * (now - lastPayDay) / payDuration;
         employee.transfer(payment);
