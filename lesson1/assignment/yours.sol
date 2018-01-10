@@ -14,10 +14,6 @@ contract Yours {
         return this.balance;
     }
 
-    function showEmployee() public view returns (address) {
-        return employee;
-    }
-
     function updateSalary(uint s) public {
         require(owner == msg.sender);
         salary = s * 1 ether;
