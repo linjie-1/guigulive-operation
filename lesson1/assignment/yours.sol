@@ -24,7 +24,6 @@ contract Payroll {
         lastPayday = now;
     }
     
-    
     function updateSalary(uint s) public {
         require(msg.sender == owner);
         
