@@ -15,9 +15,9 @@ contract Payroll  {
           revert();
       }
        
-      salary = _salary*1 ether;
+      salary = _salary * 1 ether;
          
-       return _salary;
+       return salary;
    }
    
    // staff update his salary account
