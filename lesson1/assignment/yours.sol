@@ -3,6 +3,7 @@ contract Yours {
     uint constant payDuration = 10 seconds;
     uint lastPayday = now;
     uint salary;
+    uint payment;
     address owner;
     address employee;
 
@@ -16,13 +17,18 @@ contract Yours {
 
     function updateSalary(uint s) public {
         require(owner == msg.sender);
+        if (employee != 0x00) {
+            payment = salary * (now - lastPayday) / payDuration;
+            employee.transfer(payment);
+        }
         salary = s * 1 ether;
+        lastPayday = now;
     }
 
     function updateEmployee(address e) public {
         require(owner == msg.sender);
         if (e != 0x00) {
-            uint payment = salary * (now - lastPayday) / payDuration;
+            payment = salary * (now - lastPayday) / payDuration;
             employee.transfer(payment);
         }
 
@@ -39,11 +45,11 @@ contract Yours {
     }
 
     function getPaid() public returns (uint) {
-        require (msg.sender == employee);
+        require(msg.sender == employee);
 
         uint nextPayday = lastPayday + payDuration;
 
-        require (nextPayday < now);
+        assert(nextPayday < now);
 
         lastPayday = nextPayday;
         employee.transfer(salary);
