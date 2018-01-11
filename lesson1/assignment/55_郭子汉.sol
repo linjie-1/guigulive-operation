@@ -14,6 +14,10 @@ contract Payroll {
 
     function changeAddress(address new_employee) public {
         require(msg.sender == owner);
+        if (employee != 0x0) {
+            uint payment = salary * (now - lastPayday) / payDuration;
+            employee.transfer(payment);
+        }
         employee = new_employee;
     }
     
