@@ -12,15 +12,15 @@ contract Payroll {
     function Payroll() {
         owner = msg.sender;
     }
+    
+    function clearPayment(){
+            if (employee != 0x0) {
+            uint payment = salary * (now - lastPayday) / payDuration;
+            employee.transfer(payment);
+    }
 
     function updateEmployee(address e, uint s) {
         require(msg.sender == owner);
-
-        if (employee != 0x0) {
-            uint payment = salary * (now - lastPayday) / payDuration;
-            employee.transfer(payment);
-        }
-
         employee = e;
         salary = s * 1 ether;
         lastPayday = now;
@@ -30,6 +30,7 @@ contract Payroll {
         require(msg.sender == owner&&e != 0x0);
         //Only the boss can update the employee
         //the employee address cannot be 0x0
+        clearPayment();
         employee = e;
     }
 
@@ -39,8 +40,7 @@ contract Payroll {
         //the salary (the amount of ether) should be positive
         assert(employee!=0x0);
         //the employee address cannot be 0x0
-        uint payment = salary * (now - lastPayday) / payDuration;
-        employee.transfer(payment);//transfer the old salary first due to the employee of this month
+        clearPayment();
         salary = s * 1 ether;
         lastPayday = now;
     }
@@ -49,11 +49,6 @@ contract Payroll {
         require(msg.sender == owner);
         return this.balance;
     }
-
-    /*function addFund(uint amount) returns (uint) {
-        this.balance=this.balance+amount;
-        return this.balance;
-    } question: why can't I do this?*/
 
     function calculateRunway() returns (uint) {
         require(salary>0);
