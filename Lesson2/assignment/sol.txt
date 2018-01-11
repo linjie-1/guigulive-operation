@@ -1,0 +1,50 @@
+1) gas变化的记录
+
+1: 1694
+2: 2475
+3: 3256
+4: 4037
+5: 4818
+6: 5599
+7: 6380
+8: 7161
+9: 7942
+10: 8723
+
+2)如果有 为什么
+
+Because the function is doing iteration and sum up the salary. The function need to iterate more when the number of employee grows, which cost more computation time. That's why the gas grwos when the number of employee grows.
+
+3) 如何优化calculateRunway这个函数来减少gas的消耗
+
+CASE 1: All employees' salary are fixed to 1 ehter
+In this case, we do not need to sum up the salary, all we need to do is to divide balance by employee number.
+
+function calculateRunway() public returns (uint) {
+	return this.balance / (employees.length * 1 ether);
+}
+
+CASE 2: Employees will have different salary:
+In this case, we need to have state variable to record the current total salary. And update the current total salary when we ADD/REMOVE/UPDATE employee.
+
+function calculateRunway() public returns (uint) {
+	return this.balance / totalSalary;
+}
+
+function addEmployee(address employeeId, uint salary) public onlyOwner {
+	/*code to add employee*/
+	totalSalary += salary * 1 ether;
+}
+
+function removeEmployee(address employeeId) public onlyOwner {
+	/*code to remove employee*/
+	totalSalary -= employee.salary;
+}
+
+function updateEmployee(address employeeId, uint salary) public onlyOwner {
+	/*code to update employee*/
+	totalSalary += salary-oldSalary;
+
+}
+
+The running time for old method will be O(N), where N is number of employee, the running time for optimized version is O(1)
