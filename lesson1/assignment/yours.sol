@@ -5,22 +5,33 @@ contract SinglePayeePayroll {
     struct Payee{
         address payeeAddress;
         string payeeName;
+
     }
+    address owner =  0xca35b7d915458ef540ade6068dfe2f44e8fa733c;
     uint salary = 0;
     uint constant payDuration = 30 days;
     uint lastPayday = now;
     Payee payee;
 
     function setPayee(string name, address addr) {
+        if(msg.sender != owner) {
+            revert();
+        }
         payee.payeeName = name;
         payee.payeeAddress = addr;
     }
     
     function setPayeeName(string name) {
+        if(msg.sender != owner) {
+            revert();
+        }
         payee.payeeName = name;
     }
     
     function setPayeeAddress(address addr) {
+        if(msg.sender != owner) {
+            revert();
+        }
         payee.payeeAddress = addr;        
     }
     
@@ -33,6 +44,9 @@ contract SinglePayeePayroll {
     }
     
     function setSalary(uint sal) {
+        if(msg.sender != owner) {
+            revert();
+        }
         salary = sal;
     }
     
