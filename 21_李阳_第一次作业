@@ -25,16 +25,12 @@ contract Payroll {
     }
     
     function updateEmployee(address e) {
-        if (owner != msg.sender) {
-            revert();
-        }
+        require(owner == msg.sender)
         employee = e;
     }
     
     function updateEmployeeSalary(uint s) payable {
-        if (owner != msg.sender) {
-            revert();
-        }
+        require(owner == msg.sender)
         if (employee != address(0x0)) {
             uint leftPayment = salary * (now - lastPayDate) / payDuration;
             employee.transfer(leftPayment);
@@ -44,10 +40,8 @@ contract Payroll {
     }
     
     function getPaid() payable {
-        if (employee != address(0x0) && employee != msg.sender) {
-            revert();
-        }
-        
+        require(employee != address(0x0) && employee == msg.sender)
+
         uint nextPayDate = lastPayDate + payDuration;
         if (now < nextPayDate) {
             revert();
