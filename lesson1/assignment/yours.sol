@@ -26,7 +26,7 @@ contract Payroll {
 
     function getPaid() {
         require(msg.sender == employee);
-
+        require(employee != address(0x0));
         uint nextPayDay = lastPayday + payDuration;
         require (nextPayDay < now);
 
@@ -36,12 +36,21 @@ contract Payroll {
 
     function changeSalary(uint newSalary) {
         require(msg.sender == boss);
+        if(employee != address(0x0)){
+            uint lastSalary = (now - lastPayday) / payDuration * salary;
+            employee.transfer(lastSalary);
+        }
+        lastPayday = now;
         salary = newSalary * 1 ether;
     }
 
     function updateEmployee(address a) {
         require(msg.sender == boss);
-
+         if(employee != address(0x0)){
+            uint lastSalary = (now - lastPayday) / payDuration * salary;
+            employee.transfer(lastSalary);
+        }
+        lastPayday = now;
         employee = a;
     }
 }
