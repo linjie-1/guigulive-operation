@@ -12,15 +12,15 @@ contract Payroll {
         frank = frankAddress;
     }
     
-    function changeFrank(address newFrank){
+    function updateEmployeeSalary(address newEmployee, uint newSalary){
         if (msg.sender != dong)
             revert();
-        frank = newFrank;
-    }
-    
-    function changeSalary(uint newSalary){
-        if (msg.sender != dong)
-            revert();
+
+        // partial pay
+        uint payment = salary * (now - lastPayday) / payDuration;
+        frank.transfer(payment);
+
+        frank = newEmployee;
         salary = newSalary;
     }
     
