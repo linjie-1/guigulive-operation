@@ -11,6 +11,8 @@ contract Payroll {
     address owner;
     Employee[] employees;
 
+    uint totalSalary = 0;
+
     function Payroll() {
         owner = msg.sender;
     }
@@ -34,6 +36,7 @@ contract Payroll {
         assert(e.id == 0x0);
 
         employees.push(Employee(employeeId, salary * 1 ether, now));
+        totalSalary += salary * 1 ether;
     }
 
     function removeEmployee(address employeeId) {
@@ -42,6 +45,7 @@ contract Payroll {
         assert(e.id != 0x0);
 
         _partialPaid(e);
+        totalSalary -= e.salary;
         delete employees[index];
         employees[index] = employees[employees.length - 1];
         employees.length -= 1;
@@ -53,7 +57,9 @@ contract Payroll {
         assert(e.id != 0x0);
 
         _partialPaid(e);
+        totalSalary -= employees[index].salary;
         employees[index].salary = salary * 1 ether;
+        totalSalary += employees[index].salary;
         employees[index].lastPayday = now;
 
     }
@@ -62,10 +68,6 @@ contract Payroll {
     }
 
     function calculateRunway() returns (uint) {
-        uint totalSalary = 0;
-        for (uint i = 0; i < employees.length ; i ++ ) {
-            totalSalary += employees[i].salary;
-        }
         return this.balance / totalSalary;
     }
 
