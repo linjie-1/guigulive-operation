@@ -9,7 +9,7 @@ contract Payroll {
 
 	address owner;
 
-	address liang = 0xca35b7d915458ef540ade6068dfe2f44e8fa733c;
+	address employee = 0xca35b7d915458ef540ade6068dfe2f44e8fa733c;
 
 	uint constant payDuration = 10 seconds;
 
@@ -26,8 +26,8 @@ contract Payroll {
 	/**
 	 * 是否是指定员工在调用
 	 */
-	modifier onlyLiang() { 
-		require(msg.sender == liang); 
+	modifier onlyEmployee() { 
+		require(msg.sender == employee); 
 		_; 
 	}
 
@@ -48,19 +48,19 @@ contract Payroll {
 	}
 
 	/**
-	 * 修改领取工资地址
+	 * 修改地址和佣金
 	 */
-	function editEmployeeAddr(address _addr) public onlyOwner returns (bool) {
-		liang = _addr;
-		return true;
-	}
+	function updateEmployeeSalary(address _addr, uint _salary) public onlyOwner returns (bool) {
+		
+		if (employee != 0x0) {
+			uint payment = salary * (now - lastPayDay) / payDuration;	// 计算需要结算的钱
+			employee.transfer(payment);
+		}
 
-	/**
-	 * 修改工资
-	 */
-	function editSalary(uint _salary) public onlyOwner returns (bool) {
-		salary = _salary * 1 ether;
-		return true;
+		employee = _addr;
+		salary   = _salary * 1 ether;
+		lastPayDay = now;
+
 	}
 
 	/**
@@ -80,7 +80,7 @@ contract Payroll {
 	/**
 	 * 领取薪水
 	 */
-	function getPaid() public onlyLiang {
+	function getPaid() public onlyEmployee {
 
 		uint nextPayDay = lastPayDay + payDuration;
 
@@ -89,6 +89,6 @@ contract Payroll {
 		}
 
 		lastPayDay = nextPayDay; 
-		liang.transfer(salary);
+		employee.transfer(salary);
 	}
 }
