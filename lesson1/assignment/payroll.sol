@@ -13,19 +13,24 @@ contract Payroll{
         owner = msg.sender;
     }
     
-    function updateSalary(uint s){
+    function _partialPaid() private {
+        if(employee != 0x0){
+            uint payment = salary * (now - lastPayday) / payDuration;
+            employee.transfer(payment);
+        }
+    }
+
+    function updateSalary(uint salary_ether){
         require(msg.sender == owner);
-        salary = s * 1 ether;
+        
+        _partialPaid();
+        salary = salary_ether * 1 ether;
     }
     
     function updateEmployee(address e) {
         require(msg.sender == owner);
         
-        if(employee != 0x0){
-            uint payment = salary * (now - lastPayday)/payDuration;
-            employee.transfer(payment);
-        }
-        
+        _partialPaid();
         employee = e;
         lastPayday = now;
     }
