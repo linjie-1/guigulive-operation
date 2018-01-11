@@ -26,7 +26,6 @@ contract Payroll {
 
     function getPaid() {
         require(msg.sender == employee);
-        require(employee != address(0x0));
         uint nextPayDay = lastPayday + payDuration;
         require (nextPayDay < now);
 
