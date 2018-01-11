@@ -16,12 +16,12 @@ contract Payroll {
 
     //function to change employee's salary
 	//Input: number of ether for salary
-    function changeEmployeeSalary(uint s){
+    function changeEmployeeSalary(uint salary_in_ether){
         require(msg.sender == owner);
         if (employee != 0x0) {
 			//payoff the previous salary first
             uint payment = salary * (now - lastPayday) / payDuration;
-            salary = s * 1 ether;
+            salary = salary_in_ether * 1 ether;
             employee.transfer(payment);
         }
     }
