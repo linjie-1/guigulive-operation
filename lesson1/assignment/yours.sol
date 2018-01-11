@@ -14,28 +14,23 @@ contract Payroll {
         owner = msg.sender;
     }
 
-    //function to change employee's ssalary
+    //function to change employee's salary
+	//Input: number of ether for salary
     function changeEmployeeSalary(uint s){
         require(msg.sender == owner);
-        salary = s * 1 ether;
+        if (employee != 0x0) {
+			//payoff the previous salary first
+            uint payment = salary * (now - lastPayday) / payDuration;
+            salary = s * 1 ether;
+            employee.transfer(payment);
+        }
     }
     
     //function to change emplyee's wallet
-    function changeEmployeeAdress(address newAddr, bool newEmployee){
+    function changeEmployeeAdress(address newAddr){
         require(msg.sender == owner);
-        
-        //if neweEmployee = false => same person just new address, like changing to new deposit bank acocunt 
-        //In this case no need to payoff previous payment first
-        if(employee != 0x0 && newEmployee){
-            //pay off the remaining funds to previous employee
-            uint payment = salary * (now - lastPayday) / payDuration;
-            lastPayday = now;
-            employee.transfer(payment);
-        }
         employee = newAddr;
     }
-    
-    
     
     function updateEmployee(address e, uint s) {
         require(msg.sender == owner);
