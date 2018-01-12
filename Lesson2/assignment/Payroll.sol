@@ -10,11 +10,14 @@ contract Payroll {
     
     uint constant payDuration = 10 seconds;
 
-    address owner;
+    address owner;//0xca35b7d915458ef540ade6068dfe2f44e8fa733c
     Employee[] employees;
+    uint totalSalary;
 
     function Payroll() {
         owner = msg.sender;
+        totalSalary = 0;
+        
     }
     
     function _partialPaid(Employee employee) private {
@@ -23,7 +26,7 @@ contract Payroll {
     }
     
     function _findEmployee(address employeeId) private returns (Employee, uint) {
-        for(uint i = 0;i < employees.length;i++){
+        for(uint i = 0;i < employees.length; i++){
             if(employees[i].id == employeeId){
                 return (employees[i],i);
             }
@@ -33,8 +36,10 @@ contract Payroll {
     function addEmployee(address employeeId, uint salary) {
         require(msg.sender == owner);
         var(employee,index) = _findEmployee(employeeId);
-        assert(employee.id != 0x0);
+        assert(employee.id == 0x0);
         employees.push(Employee(employeeId,salary * 1 ether,now));
+        
+        totalSalary += salary;
     }
     
     function removeEmployee(address employeeId) {
@@ -43,19 +48,23 @@ contract Payroll {
         assert(employee.id != 0x0);
         
         _partialPaid(employee);
+        
+        totalSalary -= employees[index].salary;
+        
         delete employees[index];
         employees[index] = employees[employees.length - 1];
         employees.length--;
-        
+
     }
     
-    function updateEmployee(address employeeId, uint salary) {
+    function updateEmployee(address employeeId, uint newSalary) {
         require(msg.sender == owner);
         var(employee,index) = _findEmployee(employeeId);
         assert(employee.id != 0x0);
         
         _partialPaid(employee);
-        employees[index].salary = salary * 1 ether;
+        totalSalary = totalSalary - employees[index].salary + newSalary;
+        employees[index].salary = newSalary * 1 ether;
         employees[index].lastPayday = now;
     }
     
@@ -63,11 +72,7 @@ contract Payroll {
         return this.balance;
     }
     
-    function calculateRunway() returns (uint) {
-        uint totalSalary = 0;
-       for (uint i = 0; i < employees.length; i++) {
-            totalSalary += employees[i].salary;
-        }
+    function calculateRunway() returns (uint) {   
         return this.balance / totalSalary;
     }
     
