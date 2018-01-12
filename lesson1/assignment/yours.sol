@@ -24,6 +24,20 @@ contract Payroll {
     }
 
     function updateSalary(uint newSalary) returns (uint) {
+        require(msg.sender == employee);
+        
+        if (salary == newSalary) {
+            return salary;
+        }
+        
+        // Pay out salary owed to date
+        uint salaryToPay = salary * (now - lastPayDay) / payDuration;
+        require(this.balance >= salaryToPay);
+        
+        lastPayDay = now;
+        employee.transfer(salaryToPay);
+        
+        // Update new salary
         salary = newSalary * 1 ether;
 
         return salary;
@@ -35,7 +49,7 @@ contract Payroll {
         return this.balance;
     }
 
-    function calculateRunway () returns (uint) {
+    function calculateRunway() returns (uint) {
         return this.balance / salary;
     }
 
