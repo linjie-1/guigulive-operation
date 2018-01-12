@@ -1,49 +1,61 @@
-/*作业请提交在这个目录下*/
-/*金昭作业*/
 pragma solidity ^0.4.14;
 
 contract Payroll {
-    // change address and salary
-    
-    uint salary  ;
-    address frank ;
-    
     uint constant payDuration = 10 seconds;
-    uint lastPayday = now;
+
+    address owner;
+    uint salary;
+    address employee;
+    uint lastPayday;
     
     function setSalary (uint m) {
+        require(msg.sender == owner);
         salary = m;
     }
     
-    function setAddress(address a) {
-        frank = a;
+    function setAddress(address e) {
+        
+        require(msg.sender == owner);
+        employee = e;
+    
     }
     
-    function addFund () payable returns (uint){
+    function Payroll() {
+        owner = msg.sender;
+    }
+    
+    function updateEmployee(address e, uint s) {
+        require(msg.sender == owner);
+        
+        if (employee != 0x0) {
+            uint payment = salary * (now - lastPayday) / payDuration;
+            employee.transfer(payment);
+        }
+        
+        employee = e;
+        salary = s * 1 ether;
+        lastPayday = now;
+    }
+    
+    function addFund() payable returns (uint) {
         return this.balance;
     }
     
-    function calculateRunway() returns (uint){
+    function calculateRunway() returns (uint) {
         return this.balance / salary;
     }
     
-    function hasEnoughFund() returns (bool){
+    function hasEnoughFund() returns (bool) {
         return calculateRunway() > 0;
     }
     
     function getPaid() {
-        if (msg.sender != frank) {
-            revert();
-        }
+        require(msg.sender == employee);
         
         uint nextPayday = lastPayday + payDuration;
-        if ( nextPayday > now) {
-            revert();
-        }
-        // the order matters
-            lastPayday = nextPayday;
-            frank.transfer(salary);
+        assert(nextPayday < now);
 
+        lastPayday = nextPayday;
+        employee.transfer(salary);
     }
-    
 }
