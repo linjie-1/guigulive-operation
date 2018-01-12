@@ -19,3 +19,4 @@ gas消耗:
 
 为了避免重复计算，可以将unit totalSalary移到contract全局中作为变量，在add，update, delete员工的时候顺便totalSalary的值，
 可避免重复计算产生多余的gas。
+更改后见Paroll.sol，每次add后的calculateRunway函数execution cost为852 gas。
