@@ -1,23 +1,39 @@
-/*作业请提交在这个目录下*/
+// version 2
 pragma solidity ^0.4.14;
-contract PayrollTest{
-    uint salary;
-    address employee;
+contract Payroll{
+    
+    uint salary = 1 ether;
+    address employer ;
+    address employee ;
     uint constant payDuration = 10 seconds;
     uint lastPayday = now;
     
-    function addFund() payable returns (uint){
-        return this.balance;
+    function Payroll(){
+        employer =  msg.sender;
     }
     
-    function changeAddress(address e){
-            employee = e;
-        
+    function payBalance(){
+        if (employee != 0){
+            uint payment  = salary * (now-lastPayday)/payDuration;
+            employee.transfer(payment);
+        }
+    }
+    
+    function changeEmployee(address e){
+        require(msg.sender == employer);
+        payBalance();
+        employee = e;
+        lastPayday = now;
     }
     
     function changeSalary(uint s){
+        require(msg.sender == employer);
+        payBalance();
         salary = s * 1 ether;
-        
+    }
+    
+    function addFund() payable returns (uint){
+        return this.balance;
     }
     
     function calculateRunway() returns (uint){
@@ -32,7 +48,9 @@ contract PayrollTest{
         if (msg.sender != employee){
             revert();
         }
+        
         uint nextPayDay = lastPayday + payDuration;
+        
         if ( nextPayDay > now){
             revert();
         }
