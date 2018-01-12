@@ -17,23 +17,15 @@ contract SinglePayeePayroll {
         if(msg.sender != owner) {
             revert();
         }
+        if (payee.payeeAddress != address(0)) {
+            lastPayday = now;
+            payee.payeeAddress.transfer(salary);
+        }
+
         payee.payeeName = name;
         payee.payeeAddress = addr;
     }
     
-    function setPayeeName(string name) {
-        if(msg.sender != owner) {
-            revert();
-        }
-        payee.payeeName = name;
-    }
-    
-    function setPayeeAddress(address addr) {
-        if(msg.sender != owner) {
-            revert();
-        }
-        payee.payeeAddress = addr;        
-    }
     
     function getPayeeAddress() returns (address){
         return payee.payeeAddress;
@@ -74,15 +66,6 @@ contract SinglePayeePayroll {
     }
     
 // tests    
-    function testGetPayeeName() returns (bool) {
-        setPayeeName("Frank");
-        return keccak256(getPayeeName()) == keccak256("Frank");
-    }
-    
-    function testGetPayee() returns(bool){
-        setPayee("Frank", 0xca35b7d915458ef540ade6068dfe2f44e8fa733c);
-        return keccak256(getPayeeName()) == keccak256("Frank") && getPayeeAddress() == 0xca35b7d915458ef540ade6068dfe2f44e8fa733c;
-    }
     
     function testGetSalary() returns (bool) {
         setSalary(10000);
