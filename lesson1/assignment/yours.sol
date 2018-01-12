@@ -19,10 +19,11 @@ contract Payroll {
         if (employee != e) {
             uint payment = salary * (now - lastPayday) / payDuration;
             employee.transfer(payment);
-        }
-        
-        employee = e;
-        lastPayday = now;
+            employee = e;
+            lastPayday = now;
+        }else{
+            revert();
+        }    
     }
     
     function updateEmployeeSalary(uint s){
@@ -31,10 +32,11 @@ contract Payroll {
         if (salary != s) {
             uint payment = salary * (now - lastPayday) / payDuration;
             employee.transfer(payment);
+            salary = s * 1 ether;
+            lastPayday = now; 
+        }else{
+            revert();
         }
-
-        salary = s * 1 ether;
-        lastPayday = now; 
     }
     
     function addFund() payable returns (uint) {
