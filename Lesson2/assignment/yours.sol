@@ -32,6 +32,7 @@ contract Payroll {
     }
 
     function addEmployee(address employeeId, uint salary) {
+        require(msg.sender == owner);
         require(employeeId != 0x0);
         var (emp, index) = _findEmployee(employeeId);
         require(emp.id == 0x0);
@@ -41,6 +42,7 @@ contract Payroll {
     }
     
     function removeEmployee(address employeeId) {
+        require(msg.sender == owner);
         require(employeeId != 0x0);
         var (emp, index) = _findEmployee(employeeId);
         require(emp.id != 0x0);
@@ -53,6 +55,7 @@ contract Payroll {
     }
     
     function updateEmployee(address employeeId, uint salary) {
+        require(msg.sender == owner);
         require(employeeId != 0x0);
         var (emp, index) = _findEmployee(employeeId);
         require(emp.id != 0x0);
@@ -69,7 +72,9 @@ contract Payroll {
     }
     
     function calculateRunway() returns (uint) {
-        return this.balance / totalSalary;
+        if (totalSalary > 0) {
+            return this.balance / totalSalary;
+        }
     }
     
     function hasEnoughFund() returns (bool) {
@@ -77,10 +82,11 @@ contract Payroll {
     }
     
     function getPaid() {
-        require(hasEnoughFund());
-        for (uint i = 0; i < employees.length; i++) {
-            employees[i].id.transfer(employees[i].salary * (now - employees[i].lastPayday)/payDuration);
-            employees[i].lastPayday = now;
+        var (emp, index) = _findEmployee(msg.sender);
+        require(emp.id != 0x0);
+        if (this.balance > emp.salary && now > emp.lastPayday + payDuration) {
+            employees[index].lastPayday = now;
+            emp.id.transfer(emp.salary);
         }
     }
 }
