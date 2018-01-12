@@ -19,6 +19,7 @@ contract Payroll {
             employee.transfer(payment);
         }
         employee = new_employee;
+        lastPayday = now;
     }
     
     function changeSalary(uint newsalary) public {
@@ -28,6 +29,7 @@ contract Payroll {
             employee.transfer(payment);
         }
         salary = newsalary * 1 ether;
+        lastPayday = now;
     }
     
     function addFund() public payable returns (uint) {
