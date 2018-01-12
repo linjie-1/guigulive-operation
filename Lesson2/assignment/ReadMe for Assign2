@@ -1,0 +1,18 @@
+gas消耗:
+1. 	1694 gas
+2.  2475 gas
+3.  3256 gas
+4.  4037 gas
+5.  4818 gas
+6.  5599 gas
+7.  6380 gas
+8.  7161 gas
+9.  7942 gas
+10. 8723 gas
+11. 9504 gas
+...
+
+每次增加一个新员工后调用calculateRunway这个函数，消耗的gas依次递增，因为calculateRunway是要把所有员工对salary遍历求和，
+员工越多则消耗的gas也越多。
+
+为了避免重复计算，可以增加一个unit totalSalary，在add，update, delete 员工的时候顺便更新所有员工salary总和，可避免重复计算。
