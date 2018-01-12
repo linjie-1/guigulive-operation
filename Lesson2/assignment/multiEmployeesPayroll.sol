@@ -10,6 +10,7 @@ contract Payroll {
     uint constant payDuration = 10 seconds;
     address owner;
     Employee[] employees;
+    uint totalSalary = 0;
     
     function Payroll() {
         owner = msg.sender;
@@ -33,6 +34,7 @@ contract Payroll {
         var (employee, index) = _findEmployee(employeeId);
         assert(employee.id == 0x0);
         employees.push(Employee(employeeId, salary, now));
+        totalSalary += salary;
     }
     
     function removeEmployee(address employeeId) {
@@ -44,6 +46,7 @@ contract Payroll {
         delete employees[index];
         employees[index] = employees[employees.length -1];
         employees.length -= 1;
+        totalSalary -= employees[index].salary;
 
     }
     
@@ -52,6 +55,7 @@ contract Payroll {
         var (employee, index) = _findEmployee(employeeId);
         assert(employee.id != 0x0);
         _partialPaid(employee);
+        totalSalary = totalSalary - employees[index].salary + newSalary; 
         employees[index].salary = newSalary;
         employees[index].lastPayday = now;
     }
