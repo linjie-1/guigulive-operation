@@ -13,6 +13,7 @@
         address owner;
         Employee[] employees;
         
+        //添加一个变量存储当前薪水总和，这样不需要每一次都计算从而增加gas的cost
         uint salarySum;
 
         function Payroll() {
