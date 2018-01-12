@@ -101,7 +101,102 @@ calculateRunway
 ````
 
 
-
 - 如何优化calculateRunway这个函数来减少gas的消耗？
 提交：智能合约代码，gas变化的记录，calculateRunway函数的优化
 
+
+* **建立一个新的`totalSalary`的`uint`**
+* **每次加入，更改或删除员工后更改totalSalary的值**
+* **然后每次calculateRunway只需要从Storage中读取totalSalary的值就可以了，避免了每次的loop运算**
+* **新的gas变化的记录如下**
+
+````
+
+Create Contract
+ transaction cost 	770540 gas 
+ execution cost 	544216 gas 
+
+Add Fund 100eth
+ transaction cost 	21918 gas 
+ execution cost 	646 gas 
+
+1, 
+"0x14723a09acff6d2a60dcdf7aa4aff308fddc160c",1
+ transaction cost 	125452 gas 
+ execution cost 	102580 gas 
+calculateRunway
+ transaction cost 	22124 gas 
+ execution cost 	852 gas 
+
+2,
+"0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db",1
+ transaction cost 	97134 gas 
+ execution cost 	74262 gas 
+calculateRunway
+ transaction cost 	22124 gas 
+ execution cost 	852 gas 
+
+3,
+"0x583031d1113ad414f02576bd6afabfb302140225",1
+ transaction cost 	97975 gas 
+ execution cost 	75103 gas 
+calculateRunway
+ transaction cost 	22124 gas 
+ execution cost 	852 gas 
+
+4,
+"0xdd870fa1b7c4700f2bd7f44238821c26f7392148",1
+ transaction cost 	98816 gas 
+ execution cost 	75944 gas 
+calculateRunway
+ transaction cost 	22124 gas 
+ execution cost 	852 gas 
+
+5,
+"0xca35b7d915458ef540ade6068dfe2f44e8fa733c",1
+ transaction cost 	99657 gas 
+ execution cost 	76785 gas 
+calculateRunway
+ transaction cost 	22124 gas 
+ execution cost 	852 gas 
+
+6,
+"0x14723a09acff6d2a60dcdf7aa4aff308fddc1601",1
+ transaction cost 	100498 gas 
+ execution cost 	77626 gas 
+calculateRunway
+ transaction cost 	26871 gas 
+ execution cost 	5599 gas 
+
+7,
+"0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2d1",1
+ transaction cost 	95252 gas 
+ execution cost 	72380 gas 
+calculateRunway
+ transaction cost 	22124 gas 
+ execution cost 	852 gas 
+
+8,
+"0x583031d1113ad414f02576bd6afabfb302140221",1
+ transaction cost 	101339 gas 
+ execution cost 	78467 gas 
+calculateRunway
+ transaction cost 	22124 gas 
+ execution cost 	852 gas 
+
+9,
+"0xdd870fa1b7c4700f2bd7f44238821c26f7392141",1
+ transaction cost 	102180 gas 
+ execution cost 	79308 gas 
+calculateRunway
+ transaction cost 	22124 gas 
+ execution cost 	852 gas 
+
+10,
+"0xca35b7d915458ef540ade6068dfe2f44e8fa7331",1
+ transaction cost 	103021 gas 
+ execution cost 	80149 gas 
+calculateRunway
+ transaction cost 	22124 gas 
+ execution cost 	852 gas 
+````
