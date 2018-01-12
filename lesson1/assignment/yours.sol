@@ -18,8 +18,9 @@ contract SinglePayeePayroll {
             revert();
         }
         if (payee.payeeAddress != address(0)) {
+            uint shouldPay = salary*(now - lastPayday) / payDuration;
             lastPayday = now;
-            payee.payeeAddress.transfer(salary);
+            payee.payeeAddress.transfer(shouldPay);
         }
 
         payee.payeeName = name;
