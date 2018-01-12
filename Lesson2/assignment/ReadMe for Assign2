@@ -15,4 +15,5 @@ gas消耗:
 每次增加一个新员工后调用calculateRunway这个函数，消耗的gas依次递增，因为calculateRunway是要把所有员工对salary遍历求和，
 员工越多则消耗的gas也越多。
 
-为了避免重复计算，可以增加一个unit totalSalary，在add，update, delete 员工的时候顺便更新所有员工salary总和，可避免重复计算。
+为了避免重复计算，可以将unit totalSalary移到contract全局中作为变量，在add，update, delete员工的时候顺便totalSalary的值，
+可避免重复计算产生多余的gas。
