@@ -20,9 +20,10 @@ contract Payroll {
     }
     
     // check owner and transfer salary
-    function transferSalary() internal {
+    function _transferSalary() private {
         // check if the owner
         employeeAddr.transfer(salary * (now - lastPayday) / payDuration);
+        lastPayday = now;
     }
     
     // update salary
