@@ -49,9 +49,9 @@ contract Payroll {
         
         _partialPaid(emp);
         totalSalary -= emp.salary;
-        delete employees[index];
         employees[index] = employees[employees.length-1];
         delete employees[employees.length-1];
+        employees.length--;
     }
     
     function updateEmployee(address employeeId, uint salary) {
