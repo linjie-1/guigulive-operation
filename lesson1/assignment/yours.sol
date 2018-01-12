@@ -1,3 +1,4 @@
+// version 2
 pragma solidity ^0.4.14;
 contract Payroll{
     uint salary = 1 ether;
