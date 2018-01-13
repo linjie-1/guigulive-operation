@@ -1,0 +1,94 @@
+pragma solidity ^0.4.14;
+contract Payroll{
+address owner;
+uint constant payDuration=10 seconds;
+struct Employee {
+address id;
+uint salary;
+uint lastPayDay;
+}
+Employee[] employees;
+
+function Payroll(){
+    owner=msg.sender;
+}
+
+function _partialPaid(Employee employee) private {
+    uint payment=employee.salary*(now-employee.lastPayDay)/payDuration;
+    employee.id.transfer(payment);
+}
+function _findEmployee(address employee) private returns(Employee,uint){
+   for(uint i=0;i<employees.length;i++){
+        if(employees[i].id==employee){
+            return(employees[i],i);
+        }
+    } 
+}
+function addEmployee(address employeeId,uint salary){
+    require(owner==msg.sender);
+    var (employee,index)=_findEmployee(employeeId);
+    assert(employee.id==0x0);
+    
+    employees.push(Employee(employeeId,salary,now));
+}
+
+function removeEmployee(address employeeId){
+    require(owner==msg.sender);
+    var (employee,index)=_findEmployee(employeeId);
+    assert(employee.id!=0x0);
+    _partialPaid(employee);
+    delete employees[index];
+    employees[index]=employees[employees.length-1];
+    employees.length-=1;
+    
+}
+function addFund() payable returns (uint) {
+    return this.balance;
+}
+function updateEmployee(address employeeId,uint salary){
+    require(owner==msg.sender);
+    var (employee,index)=_findEmployee(employeeId);
+    assert(employee.id!=0x0);
+    _partialPaid(employee);
+    employees[index].salary=salary*1 ether;
+    employees[index].lastPayDay=now;
+}
+
+function calculateRunway() returns (uint) {
+    uint totalSalary=0;
+    for(uint i=0;i<employees.length;i++){
+       totalSalary += employees[i].salary; 
+    } 
+    return this.balance/totalSalary;
+}
+function hasEnoughFund() returns (bool) {
+    //return this.balance >=salary;
+   return calculateRunway() >= 0;
+}
+function getPaid(){
+    var (employee,index)=_findEmployee(msg.sender);
+    assert(employee.id!=0x0);
+    uint nextPayday=employee.lastPayDay+payDuration;
+    assert(now>nextPayday);
+    
+    employees[index].lastPayDay=nextPayday;
+    employee.id.transfer(employee.salary);
+   
+}
+}
+/****************************************************
+1、不知道怎么回事，我几次看到的gas值都是22966、1694，不过我想应该是递增的，因为每次循环都增加了一次累加运算。
+2、calculateRunway()函数优化：
+function calculatePreTotal() returns (uint){
+uint preTotalSalary =0;
+for(uint i=0;i<employees.length;i++){
+preTotalSalary+= employees[i].salary;
+}
+return preTotalSalary;
+}
+function calculateRunway() returns (uint) {
+uint e=calculatePreTotal();
+uint totalSalary=e+employees[employees.length-1].salary；
+return this.balance/totalSalary;
+}
+*****************************************************/
