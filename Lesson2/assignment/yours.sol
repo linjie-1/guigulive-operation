@@ -9,7 +9,7 @@ contract tenemployees{
     }
     
     employee[] es;
-    uint salarysum=10;
+    uint salarysum=0;
     
     function addFund() payable returns (uint) {
         return this.balance;
