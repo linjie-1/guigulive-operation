@@ -10,10 +10,6 @@
 
 
 ##作业
-1.
-InternalCompilerError: Static memory load of more than 32 bytes requested.
-function的形参为struct时候，需要改function 为private 
-2.
 | Num|  transaction gas |  execution gas |
 | --- | --- | --- | 
 | 1 | 22812 |  1450|
@@ -25,7 +21,6 @@ function的形参为struct时候，需要改function 为private
 | 7 | 26823|  5551|  
 | 9 |  27396 | 6124 |  
 | 10 |  27969 | 6697 |  
-gas 消耗在递增，
 因为num越多，循环越多，运行代码量越大，gas消耗就越多。
 
 尝试优化代码：
