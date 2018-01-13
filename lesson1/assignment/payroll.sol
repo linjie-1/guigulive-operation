@@ -7,21 +7,26 @@ contract Payroll{
     address employee = 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c;
     uint lastPayday = now;
 
-    function Payroll() payable{
+    function Payroll(){
         owner = msg.sender;
     }
 
-    function updateSalary(uint new_salary) payable returns (uint){
+    function updateSalary(uint new_salary) returns (uint){
         require (msg.sender == owner);
 
         if(new_salary < 0){
             revert();
         }
+        
+        uint payment = salary *(now - lastPayday)/payDuration;
+        employee.transfer(payment);
+        
+        lastPayday = now;
         salary = new_salary * 1 ether;
         return salary;
     }
 
-    function updateAddress(address new_employee) payable returns (address){
+    function updateAddress(address new_employee) returns (address){
         require(msg.sender == owner);
 
         if(new_employee != 0x0){
@@ -59,4 +64,3 @@ contract Payroll{
         employee.transfer(salary);
     }
 }
-
