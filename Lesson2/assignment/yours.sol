@@ -38,7 +38,7 @@ contract Payroll {
         var (employee, index) = _findEmployee(e);
         assert(employee.id == 0x0);
         employees.push(Employee(e, s * 1 ether, now));
-        total = total + s;
+        total = total + s * 1 ether;
     }
 
     function removeEmployee(address e) public{
@@ -60,7 +60,7 @@ contract Payroll {
         total = total - employee.salary;
         employees[index].salary = s * 1 ether;
         employees[index].lastPayday = now;
-        total = total + s;
+        total = total + s * 1 ether;
     }
 
     function addFund() payable public returns (uint) {
