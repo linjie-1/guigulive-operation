@@ -36,7 +36,7 @@ contract Payroll {
   function calculRunway() returns(uint,uint) {
     uint totalsalary = 0 ;
     uint amount  =  employees.length;
-    assert( employees.length > 0);
+    assert(amount > 0);
     for(uint i = 0 ; i < amount ; i++) {
      totalsalary += employees[i].salary;
     }
