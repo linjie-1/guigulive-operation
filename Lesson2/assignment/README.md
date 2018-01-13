@@ -9,7 +9,7 @@
 提交：智能合约代码，gas变化的记录，calculateRunway函数的优化
 
 
-##作业
+## 作业
 | Num|  transaction gas |  execution gas |
 | --- | --- | --- | 
 | 1 | 22812 |  1450|
