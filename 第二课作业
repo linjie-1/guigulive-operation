@@ -1,0 +1,151 @@
+在每添加一个新员工后 ；数组的长度变长  ；所以在每添加一个新员工后去调用calculateRunway函数；函数里做的for循环因为数组变长而比之前要多做一次；
+gas是通过计算量和写入量来收费的；因为for循环每变长一次就消耗了更多的计算力；所以gas收费变多。
+
+对于calculateRunway函数的优化来说就是优化for循环；如果不去循环可以减少很少的算力 ；所以我就定义了一个变量totalSalary;在每一次添加新员工时;
+totalSalary+=salary; 删除时 totalSalary-=salary; 修改时  totalSalary=totalSalary-employee.salary+salary * 1 ether;
+一直保存当前所有员工工资的总和；然后在calculateRunway里去使用就可以避免for循环.
+
+下面是没有优化前calculateRunway函数调用时花费的gas数量
+  1708
+	2489 
+	3270
+	4051
+	4832 
+	5613 
+	6394 
+	7175 
+	7956 
+	8737 
+  这是优化后函数调用后花费的gas数量，这其实不能算是优化  只是去掉了函数里的for循环，把计算totalSalary的算力分摊到了其他函数中增加了其他函数里需要
+  消耗的gas；
+  874
+  874
+  874
+  874
+  874
+  874
+  874
+  874
+  874
+  874
+
+
+
+pragma solidity ^0.4.14;
+
+contract Payroll {
+    struct Employee {
+        address id;
+        uint salary;
+        uint lastPayday;
+    }
+    
+    uint constant payDuration = 10 seconds;
+    uint totalSalary ;
+    address owner;
+    Employee[] employees;
+    event aaa(address a);
+    function Payroll() {
+        owner = msg.sender;
+    }
+    
+    function _partialPaid(Employee employee) private {
+        uint payment = employee.salary * (now - employee.lastPayday)/payDuration;
+        employee.id.transfer(payment);
+    }
+    
+    function _findEmployee(address employeeId) private returns (Employee , uint) {
+            for(uint i;i<employees.length;i++)
+            {
+                if(employees[i].id==employeeId)
+                {
+                    return(employees[i],i);
+                }
+            }
+            
+    }
+
+    function addEmployee(address employeeId, uint salary) {
+        require (msg.sender == owner);
+        
+        var (employee,index)= _findEmployee(employeeId);
+        
+        assert(employee.id == 0x0);
+        
+        employees.push(Employee(
+            employeeId,
+            salary * 1 ether,
+            now
+        ));
+        totalSalary+=salary * 1 ether;
+    }
+
+    function removeEmployee(address employeeId) {
+        require (msg.sender == owner);
+        var (employee,index)= _findEmployee(employeeId);
+        assert(employee.id != 0x0 );
+        _partialPaid(employee);
+        delete employees[index];
+        totalSalary -= employee.salary;
+        employees[index]=employees[employees.length-1];
+        employees.length-=1;
+
+        
+    }
+    
+    function updateEmployee(address employeeId, uint salary) {
+        require (msg.sender == owner);
+        var (employee,index)= _findEmployee(employeeId);
+        assert(employee.id !=0x0);
+        _partialPaid(employee);
+        employees[index].salary = salary * 1 ether;
+        employees[index].lastPayday = now;
+        totalSalary=totalSalary-employee.salary+salary * 1 ether;
+    
+    }
+    function addFund() payable returns (uint) {
+         require (msg.sender == owner);
+         return this.balance;
+    }
+    
+   /* function calculateRunway()public view returns (uint) {
+        uint totalSalary ;
+       for (uint i = 0; i < employees.length; i++) {
+            totalSalary+=employees[i].salary;
+        }
+       // return totalSalary;
+        return this.balance / totalSalary;
+    }*/(原方法)
+    function calculateRunway()public view returns (uint) {
+        //return totalSalary;
+        return this.balance / totalSalary;
+    }
+    
+    
+      function emplength() public view returns(uint)
+    {
+        
+        return  employees.length;
+    }
+    
+    function balanceOf() public view returns(uint)
+    {
+        return this.balance;
+    }
+    function hasEnoughFund() returns (bool) {
+        return calculateRunway() > 0;
+    }
+    
+    function getPaid() {
+          aaa(msg.sender);
+          var (employee,index)= _findEmployee(msg.sender);
+          assert(employee.id!=0x0);
+          uint nextPayday = employee.lastPayday + payDuration;
+          assert(now>nextPayday);
+          employees[index].lastPayday = nextPayday;
+          employee.id.transfer(employee.salary);
+    }
+}
+
+
+
