@@ -8,3 +8,14 @@
 - 如何优化calculateRunway这个函数来减少gas的消耗？
 提交：智能合约代码，gas变化的记录，calculateRunway函数的优化
 
+
+------
+
+如果calculateRunway使用循环计算：
+
+加入第一个员工后调用calculateRunway, gas 是 22988/1716
+加入第二个员工后调用calculateRunway, gas 是 23769/2497
+
+修改后，每次add, remove 或 update employee时都update total, 这样calculateRunway就只需要return this.balance / total;
+
+修改后，调用calculateRunway gas 永远是 22146/874
