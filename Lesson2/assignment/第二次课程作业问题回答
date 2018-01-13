@@ -1,0 +1,14 @@
+加入十个员工，每个员工的薪水都是1ETH 每次加入一个员工后调用calculateRunway这个函数，并且记录消耗的gas是多少？Gas变化么？如果有 为什么？
+1、gas：3000000;          transaction cost：22987 gas;       execution cost：1715 gas
+2、gas：3000000;          transaction cost：23757 gas;       execution cost：2485 gas
+3、gas：3000000;          transaction cost：24527 gas;       execution cost：3255 gas
+4、gas：3000000;          transaction cost：25297 gas;       execution cost：4025 gas
+5、gas：3000000;          transaction cost：26067 gas;       execution cost：4715 gas
+6、gas：3000000;          transaction cost：26837 gas;       execution cost：5565 gas
+7、gas：3000000;          transaction cost：27607 gas;       execution cost：6335 gas
+8、gas：3000000;          transaction cost：28377 gas;       execution cost：7105 gas
+9、gas：3000000;          transaction cost：29147 gas;       execution cost：7875 gas
+10、gas：3000000;         transaction cost：29917 gas;       execution cost：8645 gas
+
+
+每次的transaction cost差距为770 gas，每次的execution cost差距也为770 gas
