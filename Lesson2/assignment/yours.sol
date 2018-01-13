@@ -1,8 +1,10 @@
 /*作业请提交在这个目录下*/
 
 /*
+第1题：加入十个员工，每个员工的薪水都是1ETH 每次加入一个员工后调用calculateRunway这个函数，并且记录消耗的gas是多少？Gas变化么？如果有 为什么？
+
 增加几位员工时的Gas变化情况
-   transaction cost , execution cost    , getRunway() cost
+   transaction cost , execution cost    , calculateRunway() cost
 1     105162   82290    22966  1694
 2      91003   68131    23747  2475
 3      91844   68972    24528  3256
@@ -11,6 +13,9 @@
 6      94367   71495    26871  5599
 7      95208   72336    27652  6380
 后面没有记录了，已经发现规律了
-addEmployee时，每次操作时gas增加841，getRunway时，每次gas增加781
 
+gas不断增大
+addEmployee时，每次操作时gas增加841，calculateRunway时，每次gas增加781
+在addEmployee代码中，调用了findEmployee()函数，里面要遍历查找一个员工，当员工人数越多时，查找操作的次数越多，gas就会消耗越多
+在calculateRunway代码中，有一个for循环，每次要将所有员工的salary累加，并没有利用以前的交易中计算的中间结果，数组中元素越多，gas消耗就越多
 */
