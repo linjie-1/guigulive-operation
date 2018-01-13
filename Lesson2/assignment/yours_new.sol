@@ -7,12 +7,14 @@ contract Payroll {
         uint lastPayday;
     }
     uint constant payDuration = 10 seconds;
-
+    
+    uint totalSalary;
     address owner;
     Employee[] employees;
 
     function Payroll() {
         owner = msg.sender;
+        totalSalary = 0;
     }
     
     function _partialPaid(Employee employee) private {
@@ -34,6 +36,8 @@ contract Payroll {
         assert(employee.id == 0x0);
 
         employees.push(Employee(employeeId, salary * 1 ether, now));
+        
+        totalSalary += salary * 1 ether;
     }
     
     function removeEmployee(address employeeId) {
@@ -53,7 +57,8 @@ contract Payroll {
         assert(employee.id != 0x0);
         
         _partialPaid(employee);
-        employees[index].salary = salary;
+        totalSalary = totalSalary - employees[index].salary + salary * 1 ether;
+        employees[index].salary = salary * 1 ether;
         employees[index].lastPayday = now;
     }
     
@@ -62,10 +67,6 @@ contract Payroll {
     }
     
     function calculateRunway() returns (uint) {
-        uint totalSalary = 0;
-        for (uint i = 0; i < employees.length; i++) {
-            totalSalary += employees[i].salary;
-        }
         return this.balance / totalSalary;
     }
     
