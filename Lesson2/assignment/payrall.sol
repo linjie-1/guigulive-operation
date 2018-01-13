@@ -63,7 +63,7 @@ contract Payroll {
 
         employees.push(Employee(employeeId, salary * 1 ether, now));
 
-		// 同步工资总金额
+	// 同步工资总金额
         totalSalary += salary;
     }
 
@@ -71,14 +71,14 @@ contract Payroll {
         var(employee, index) = _partialFindEmployee(employeeId);
         assert(employee.id != 0x0);
 
-		// 结算工资变化前尚未支付的工资
+	// 结算工资变化前尚未支付的工资
         _partialPaid(employee);
         uint len = employees.length;
         delete employees[index];
         employees[index] = employees[len - 1];
         len--;
 
-		// 同步工资总金额
+	// 同步工资总金额
         totalSalary -= employee.salary;
     }
 
@@ -89,12 +89,12 @@ contract Payroll {
         uint newSalary = salary * 1 ether;
         assert(newSalary != employee.salary);
 
-		// 结算工资变化前尚未支付的工资
+	// 结算工资变化前尚未支付的工资
         _partialPaid(employee);
         employees[index].salary     = newSalary;
         employees[index].lastPayDay = now;
 
-				// 同步工资总金额
+	// 同步工资总金额
         totalSalary = totalSalary - employee.salary + salary;
     }
 
