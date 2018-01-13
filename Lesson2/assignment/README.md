@@ -10,7 +10,7 @@
 
 ### Solutions
 
-### Gas consumption
+#### Gas consumption before optimization
 
 | # | Transaction cost | Execution cost |
 |:-:|:----------------:|:--------------:|
@@ -27,12 +27,12 @@
 
 Execution cost increases as the size of the `employees` array increases.
 
-### Optimization
+#### Optimization method
 
 `totalSalary` can be updated in function `addEmployee()`, `removeEmployee()`, and `updateEmployee()`
 instead of in `calculateRunway()`.
 
-### Gas consumption
+#### Gas consumption after optimization
 
 | # | Transaction cost | Execution cost |
 |:-:|:----------------:|:--------------:|
