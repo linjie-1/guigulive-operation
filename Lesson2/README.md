@@ -6,7 +6,7 @@
   <br/>|
   <br/>|--orgin 课程初始代码
   <br/>|
-  <br/>|--assignment 课程作业提交代码
+  <br/>|--assignment 课程作业提交代码: before_optimization.sol and after_optimization.sol
 <br/> 
 ### 本节知识点
 第2课：智能合约设计进阶-多员工薪酬系统
