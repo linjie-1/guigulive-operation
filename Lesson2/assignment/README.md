@@ -8,3 +8,7 @@
 - 如何优化calculateRunway这个函数来减少gas的消耗？
 提交：智能合约代码，gas变化的记录，calculateRunway函数的优化
 
+Transaction cost    22913    23224    24642    25412    26041    26952    27749    28457    29268    29979
+Execution Cost      1072      2453     3163     4031     4773     5609     6419     7128     8010     8851
+
+优化后calculateRunway的Transaction cost：22124；Execution Cost：852
