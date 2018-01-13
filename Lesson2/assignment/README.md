@@ -37,6 +37,8 @@ employee# 	trans gas	exec gas
 原因是因為, 每次運算 calcaulateRunway的時候, 我們都是重新計算總薪水的量質, 因此for-loop 隨著員工數目的增加, 而需要iterate更多的員工 導致Gas得使用量也一起增長
 
 - 如何优化calculateRunway这个函数来减少gas的消耗？
+
+
 我使用了類似於 dynamic programming 的理念, 隨著我們加入新的employee, 更新employee salary, 移除employee, 我們設置一個cache variable存取當下的total_salary, 每家一個新的員工就把當下員工的salary加到  total_saraly裡面, 然後更新的時候隨著更新total_salary, 移除的時候再從total_salary中移除該員工的薪水, 
 
 這樣一來calcaulteRunway 只需要回傳 total_salary的質即可
