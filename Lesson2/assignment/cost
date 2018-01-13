@@ -1,0 +1,50 @@
+ 每次添加完新的employee 算runway的函数的cost都会增加, 因为随着添加的employee数量变大，计算量也变大了
+
+ 1. 
+
+ transaction cost 	22966 gas 
+ execution cost 	1694 gas 
+
+ 2. 
+
+ transaction cost 	23747 gas 
+ execution cost 	2475 gas 
+
+ 3. 
+
+ transaction cost 	24528 gas 
+ execution cost 	3256 gas 
+
+ 4. 
+
+ transaction cost 	25309 gas 
+ execution cost 	4037 gas 
+
+ 5. 
+
+ transaction cost 	26090 gas 
+ execution cost 	4818 gas 
+
+ 6.  
+
+ transaction cost 	26871 gas 
+ execution cost 	5599 gas 
+
+ 7. 
+
+ transaction cost 	27652 gas 
+ execution cost 	6380 gas 
+
+ 8. 
+
+ transaction cost 	28433 gas 
+ execution cost 	7161 gas 
+
+ 9. 
+ transaction cost 	29214 gas 
+ execution cost 	7942 gas 
+
+ 10.
+
+ transaction cost 	29995 gas 
+ execution cost 	8723 gas 

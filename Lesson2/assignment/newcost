@@ -1,0 +1,16 @@
+这是优化过代码以后的cost，每次执行的cost都不会变化
+
+1.
+
+transaction cost 	22124 gas 
+ execution cost 	852 gas 
+
+ 2. 
+
+
+  transaction cost 	22124 gas 
+ execution cost 	852 gas 
+
+3. 
+ transaction cost 	22124 gas 
+ execution cost 	852 gas 
