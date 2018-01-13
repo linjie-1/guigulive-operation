@@ -7,6 +7,11 @@ contract Payroll {
     address employee = 0xca35b7d915458ef540ade6068dfe2f44e8fa733c;
     uint constant payDuration = 10 seconds;
     uint lastPayday = now;
+    address owner;
+    
+    function Payroll() {
+        owner = msg.sender;
+    }
     
     function addFund() payable returns (uint) {
         return this.balance;
@@ -21,19 +26,19 @@ contract Payroll {
     }
     
     function setAddress(address newEmployee) {
-        if(newEmployee == 0) {
-            revert();
-        }
+        require(newEmployee != 0x0 && owner == msg.sender);
         
         employee = newEmployee;
     }
     
     function setSalary(uint newSalary) {
-        if(newSalary == 0) {
-            revert();
-        }
-        
-        salary = newSalary;
+        require(newSalary != 0 && owner == msg.sender);
+        uint nextPayday = lastPayday + payDuration;
+        assert(nextPayday < now);
+        uint payment = salary * (now - lastPayday) / payDuration;
+        employee.transfer(payment);
+        lastPayday = now;
+        salary = newSalary * 1 ether;
     }
     
     function getPaid() {
@@ -42,9 +47,7 @@ contract Payroll {
         }
 
         uint nextPayday = lastPayday + payDuration;
-        if (nextPayday > now) {
-            revert();
-        }
+        assert(nextPayday < now);
         
         lastPayday = nextPayday;
         employee.transfer(salary);
