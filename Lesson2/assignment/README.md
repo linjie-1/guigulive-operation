@@ -8,3 +8,41 @@
 - 如何优化calculateRunway这个函数来减少gas的消耗？
 提交：智能合约代码，gas变化的记录，calculateRunway函数的优化
 
+### Solutions
+
+### Gas consumption
+
+| # | Transaction cost | Execution cost |
+|:-:|:----------------:|:--------------:|
+| 1 |22966|1694|
+| 2 |23747|2475|
+| 3 |24528|3256|
+| 4 |25309|4037|
+| 5 |26090|4818|
+| 6 |26871|5599|
+| 7 |27652|6380|
+| 8 |28433|7161|
+| 9 |29214|7942|
+| 10 |29995|8723|
+
+Execution cost increases as the size of the `employees` array increases.
+
+### Optimization
+
+`totalSalary` can be updated in function `addEmployee()`, `removeEmployee()`, and `updateEmployee()`
+instead of in `calculateRunway()`.
+
+### Gas consumption
+
+| # | Transaction cost | Execution cost |
+|:-:|:----------------:|:--------------:|
+| 1 |22353|1081|
+| 2 |22353|1081|
+| 3 |22353|1081|
+| 4 |22353|1081|
+| 5 |22353|1081|
+| 6 |22353|1081|
+| 7 |22353|1081|
+| 8 |22353|1081|
+| 9 |22353|1081|
+| 10 |22353|1081|
