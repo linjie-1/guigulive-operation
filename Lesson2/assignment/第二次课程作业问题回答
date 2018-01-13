@@ -12,3 +12,4 @@
 
 
 每次的transaction cost差距为770 gas，每次的execution cost差距也为770 gas
+是因为每次调用calculateRunway这个函数时候，都会用for循环遍历一遍employees这个数组，这样随着员工数量的增加，遍历次数增多，gas消耗也会增加。
