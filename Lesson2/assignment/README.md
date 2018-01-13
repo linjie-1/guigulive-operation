@@ -10,6 +10,20 @@
 
 ### Solutions
 
+#### 优化calculateRunway
+
+```solidity
+function calculateRunway() returns (uint) {
+    uint totalSalary = 0;
+    for (uint i = 0; i < employees.length; i++) {
+        totalSalary += employees[i].salary;
+    }
+    return this.balance / totalSalary;
+}
+```
+
+分析`calculateRunway`函数，发现问题在于`employees`数组会不断增长，导致循环带来的计算量变大。`totalSalary`这个数据可以在`addEmployee`、`removeEmployee`以及`updateEmployee`时及时更新，这样可以避免每次都遍历数组去计算`totalSalary`，所以可以通过在`contract`中增加一个变量`totalSalary`来记录总工资的变化。
+
 #### Gas 消耗 (优化前)
 
 | # | Transaction cost | Execution cost |
