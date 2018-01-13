@@ -1,0 +1,29 @@
+Test Results Before Code Optimization
+Transaction Cost, Execution Cost(10 times AddEmployee and CalculateRunway)
+22966, 1694
+23747, 2475
+24528, 3256
+25309, 4037
+26090, 4818
+26871, 5599
+27652, 6380
+28433, 7161
+29214, 7942
+29995, 8723
+Gas消耗不断上升，因为CalculateRunway函数里有循环，添加的Employee数量越多，计算步数越多，所以Gas消耗越多。
+
+
+Test Results After Code Optimization
+Transaction Cost, Execution Cost(10 times AddEmployee and CalculateRunway)
+22124, 852
+22124, 852
+22124, 852
+22124, 852
+22124, 852
+22124, 852
+22124, 852
+22124, 852
+22124, 852
+22124, 852
+优化方法：维护一个内部变量totalSalary,每次update,add,remove employee的时候更新，使CalculateRunway的计算步数为固定步数。
+
