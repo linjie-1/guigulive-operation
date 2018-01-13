@@ -33,7 +33,7 @@ contract Payroll {
         var (employee, index) = _findEmployee(employeeId);
         assert(employee.id == 0x0);
 
-        employees.push(Employee(employeeId, salary, now));
+        employees.push(Employee(employeeId, salary * 1 ether, now));
     }
     
     function removeEmployee(address employeeId) {
