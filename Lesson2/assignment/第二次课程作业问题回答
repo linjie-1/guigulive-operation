@@ -15,4 +15,7 @@
 是因为每次调用calculateRunway这个函数时候，都会用for循环遍历一遍employees这个数组，这样随着员工数量的增加，遍历次数增多，gas消耗也会增加。
 
 如果想要避免消耗，那么在调用calculateRunway这个函数时候，不再遍历数组即可。
-但是不遍历数组而想得到totalSalary的数值的话，可以在其它地方将totalSalary预先算出来，这样在调用calculateRunway函数时，只要读取totalSalary值计算即可。
+但是不遍历数组而想到totalSalary的数值，可以在其它地方将totalSalary预先算出来，这样在调用calculateRunway函数时，只要读取totalSalary值计算即可。
+
+最终优化后，每次调用calculateRunway函数，消耗如下：
+gas: 3000000;      transaction cost: 22180 gas;      execution cost: 908 gas
