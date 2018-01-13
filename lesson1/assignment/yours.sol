@@ -6,6 +6,11 @@ contract Payroll{
     address employee = 0xca35b7d915458ef540ade6068dfe2f44e8fa733c;
     uint constant payDuration = 10 seconds;
     uint lastPayday = now;
+    address owner;
+        
+    function Payroll() { 
+        owner = msg.sender; 
+    } 
     
     function addFund() payable returns(uint) {
         return this.balance;
@@ -32,11 +37,26 @@ contract Payroll{
         employee.transfer(salary);
     }
     
+     function updateEmployee(address e, uint s) { 
+        
+        employee = e; 
+        salary = s * 1 ether; 
+        lastPayday = now; 
+    } 
+    
     function SetAddr(address _newAddr){
+        require(msg.sender == owner); 
+        if (employee != 0x0) { 
+            uint payment = salary * (now - lastPayday) / payDuration; 
+            employee.transfer(payment); 
+        } 
         employee = _newAddr;
+        lastPayday = now;
     }
     
     function ChangeSalary(uint _newSalary){
-        salary = _newSalary;
+        require(msg.sender == owner); 
+        salary = _newSalary * 1 ether; 
+        /*改变薪水不需要立即支付工资,这也是一种合理的场景，老板临时提高工资来鼓励员工*/
     }
 }
