@@ -58,7 +58,7 @@ contract Payroll {
     }
     
     function payRemainingSalary(){
-        require(msg.sender == owner || msg.sender == employee);
+        require(msg.sender == owner);
         require(employee != 0x0);
 
         uint payment = salary * (now - lastPayday) / payDuration;
