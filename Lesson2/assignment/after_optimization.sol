@@ -93,10 +93,6 @@ contract Payroll {
     
     // 7. calculate times of pay in this contract - avoid for-loop to save gas!
     function calculateRunway() returns (uint) {
-        //uint totalSalary = 0;
-        //for (uint i = 0; i < employees.length; i++) {
-        //     totalSalary += employees[i].salary;
-        // }
         return this.balance / totalSalary;
     }
     
