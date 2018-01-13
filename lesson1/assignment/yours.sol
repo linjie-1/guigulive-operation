@@ -56,7 +56,7 @@ contract Payroll {
     function updateEmployeeAddress(address e) {
         // Sender should be the owner
         require(msg.sender == owner);
-        
+
         // Check if addresses are the same
         require(e != employee);
 
@@ -75,7 +75,7 @@ contract Payroll {
     function updateEmployeeSalary(uint s) {
         // Sender should be the owner
         require(msg.sender == owner);
-        
+
         // Check salary range
         require(s >= 0);
 
