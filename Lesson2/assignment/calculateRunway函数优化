@@ -1,0 +1,59 @@
+一、优化前的消耗GAS的情况如下：
+
+第一次
+transaction cost 	22966 gas 
+ execution cost 	1694 gas 
+
+第二次
+transaction cost 	23747 gas 
+ execution cost 	2475 gas 
+
+第三次
+ transaction cost 	24528 gas 
+ execution cost 	3256 gas 
+
+第四次
+ transaction cost 	25309 gas 
+ execution cost 	4037 gas 
+
+第五次
+ transaction cost 	26090 gas 
+ execution cost 	4818 gas 
+
+第六次
+ transaction cost 	26871 gas 
+ execution cost 	5599 gas 
+
+第七次
+ transaction cost 	27652 gas 
+ execution cost 	6380 gas 
+
+第八次
+transaction cost 	28433 gas 
+ execution cost 	7161 gas 
+
+第九次
+ transaction cost 	29214 gas 
+ execution cost 	7942 gas 
+
+第十次
+transaction cost 	29995 gas 
+ execution cost 	8723 gas 
+
+原因：计算TotalSalary的时候要进行for循环，随着员工数增多，数组的长度不断增加，导致运行程序时计算量增加
+
+，从而导致消耗GAS量增大。
+
+二、优化方式
+定义全局变量TotalSalary，将TotalSalary的计算放在增加员工和修改员工工资时进行。
+calculateRunway中直接调用全局变量TotalSalary即可，不用进行循环遍历计算。
+
+优化后的函数见payroll.sol代码。
+
+三、优化后的结果
+第一次~第十次的结果均为：
+
+ transaction cost 	22146 gas 
+ execution cost 	874 gas 
+
+没有增长。
