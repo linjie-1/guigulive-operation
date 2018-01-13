@@ -1,0 +1,199 @@
+pragma solidity ^0.4.14;
+
+contract Payroll{
+    
+    struct Employee {
+        address id;
+        uint    salary;
+        uint    lastPayday;
+    }
+    
+    uint constant payDuration = 30 days;
+    uint          totalSalary = 0;
+    address       owner;
+    Employee[]    employees;
+    
+    function Payroll() {
+        owner = msg.sender;
+    }
+    
+    function _partialPaid(Employee employee) private {
+        uint payment = employee.salary * (now - employee.lastPayday) / payDuration;
+        if (0 == payment) {
+            return;
+        }
+        employee.id.transfer(payment);
+    }
+    
+    function _findEmployee(address employeeId) private returns (Employee, uint) {
+        for (uint i = 0; i < employees.length; i++) {
+            if (employees[i].id == employeeId) {
+                return (employees[i], i);
+            }
+        }    
+    }
+    
+    function addTenEmployees() returns(address) {
+        require(msg.sender == owner);
+        
+        addEmployee(0x1, 1);
+        addEmployee(0x2, 1);
+        addEmployee(0x3, 1);
+        addEmployee(0x4, 1);
+        addEmployee(0x5, 1);
+        addEmployee(0x6, 1);
+        addEmployee(0x7, 1);
+        addEmployee(0x8, 1);
+        addEmployee(0x9, 1);
+        addEmployee(0xA, 1);
+        return employees[0].id;
+    }
+    
+    function addEmployee(address employeeId, uint salary) returns(uint, uint) {
+        require(msg.sender == owner);
+        
+        var (employee, index) = _findEmployee(employeeId);
+        assert(employee.id == 0x0);     // can't find
+        
+        uint tmp = salary * 1 ether;
+        employees.push(Employee(employeeId, tmp, now));
+        totalSalary += tmp;
+        return (employees.length, totalSalary);
+    }
+    
+    function removeEmployee(address employeeId) returns(uint, uint) {
+        require(msg.sender == owner);
+        
+        var (employee, index) = _findEmployee(employeeId);
+        assert(employee.id != 0x0);
+        
+        _partialPaid(employees[index]);
+        
+        totalSalary -= employees[index].salary;
+        delete employees[index];
+        employees[index] = employees[employees.length - 1];
+        employees.length -= 1;
+        return (employees.length, totalSalary);
+    }
+    
+    function updateEmployee(address employeeId, uint salary) {
+        require(msg.sender == owner);
+        
+        var (employee, index) = _findEmployee(employeeId);
+        assert(employee.id != 0x0);
+        
+        _partialPaid(employee);
+        
+        uint tmp = salary * 1 ether;
+        totalSalary += (tmp - employees[index].salary);
+        employees[index].salary     = tmp;
+        employees[index].lastPayday = now;
+    }
+    
+    function addFund() payable returns (uint) {
+        return this.balance;
+    }
+    
+    function calculateRunway() returns (uint) {
+        return this.balance / totalSalary;
+    }
+    
+    function hasEnoughFund() returns (bool) {
+        return calculateRunway() > 0;
+    }
+    
+    function getPaid() {
+        var (employee, index) = _findEmployee(msg.sender);
+        assert(employee.id != 0x0);
+        
+        uint nextPayday = employee.lastPayday + payDuration;
+        assert(nextPayday < now);
+
+        employees[index].lastPayday = nextPayday;
+        employee.id.transfer(employee.salary);
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+一个员工gas消耗：
+transaction cost 	22966 gas 
+ execution cost 	1694 gas 
+decoded output 	{
+	"0": "uint256: 100"
+}
+
+二个员工gas消耗：
+transaction cost 	23747 gas 
+ execution cost 	2475 gas 
+decoded output 	{
+	"0": "uint256: 50"
+}
+
+三个员工gas消耗：
+transaction cost 	24528 gas 
+ execution cost 	3256 gas 
+decoded output 	{
+	"0": "uint256: 33"
+}
+
+四个员工gas消耗：
+transaction cost 	25309 gas 
+ execution cost 	4037 gas 
+ decoded output 	{
+	"0": "uint256: 25"
+}
+
+五个员工gas消耗：
+ transaction cost 	26090 gas 
+ execution cost 	4818 gas 
+ decoded output 	{
+	"0": "uint256: 20"
+}
+
+六个员工gas消耗：
+transaction cost 	26871 gas 
+ execution cost 	5599 gas 
+ decoded output 	{
+	"0": "uint256: 16"
+}
+
+七个员工gas消耗：
+transaction cost 	27652 gas 
+ execution cost 	6380 gas 
+ decoded output 	{
+	"0": "uint256: 14"
+}
+
+八个员工gas消耗：
+ transaction cost 	28433 gas 
+ execution cost 	7161 gas 
+ decoded output 	{
+	"0": "uint256: 12"
+}
+
+九个员工gas消耗：
+ transaction cost 	29214 gas 
+ execution cost 	7942 gas 
+ decoded output 	{
+	"0": "uint256: 11"
+}
+
+十个员工gas消耗：
+ transaction cost 	29995 gas 
+ execution cost 	8723 gas 
+ decoded output 	{
+	"0": "uint256: 10"
+}
+
+每增加一个员工， calculateRunway函数的gas消耗便会增加，因为函数中的for循环次数随着员工数量的增加而增加，需要执行更多次的加法运算，故消耗更多的gas
+
+通过增加一个public变量，在每次add，remove和update员工时就计算好总的工资和，这样在calculateRunway的时候就不需要跑for循环来计算。
+
+改进之后gas消耗：
+transaction cost 	22124 gas 
+ execution cost 	852 gas 
+decoded output 	{
+	"0": "uint256: 10"
+}
