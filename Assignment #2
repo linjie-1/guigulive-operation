@@ -1,0 +1,153 @@
+pragma solidity ^0.4.14;
+
+contract Payroll {
+    struct Employee {
+        address id;
+        uint salary;
+        uint lastPayday;
+    }
+    
+    uint constant payDuration = 10 seconds;
+    
+    //added
+    uint totalSalary_New = 0 ether; 
+
+    address owner;
+    Employee[] employees;
+
+    function Payroll() {
+        owner = msg.sender;
+    }
+    
+    function _partialPaid(Employee employee) private {
+        uint payment = employee.salary * (now - employee.lastPayday) / payDuration;
+        employee.id.transfer(payment);
+    }
+    
+    function _findEmployee(address employeeId) private returns (Employee, uint) {
+        for(uint i = 0; i<employees.length;i++){
+            if(employees[i].id == employeeId){
+                return (employees[i],i);
+            }
+        }
+    }
+
+    function addEmployee(address employeeId, uint salary) {
+        require(msg.sender == owner);
+        var(employee,index) = _findEmployee(employeeId);
+        assert(employee.id == 0x0);
+        employees.push(Employee(employeeId,salary * 1 ether,now));
+        //added
+        totalSalary_New += salary;
+    }
+    
+    function removeEmployee(address employeeId) {
+        require(msg.sender == owner);
+        var (employee,index) = _findEmployee(employeeId);
+        assert(employee.id != 0x0);
+        _partialPaid(employee);
+        //added
+        totalSalary_New -= employees[index].salary;
+        delete employees[index];
+        employees[index] = employees[employees.length-1];
+        employees.length -=1;
+    }
+    
+    function updateEmployee(address employeeId, uint salary) {
+        require(msg.sender == owner);
+        var(employee,index) = _findEmployee(employeeId);
+        assert(employee.id != 0x0);
+        
+        _partialPaid(employee);
+        //added
+        totalSalary_New -= employees[index].salary;
+        employees[index].salary = salary * 1 ether;
+        employees[index].lastPayday = now;
+        //added
+        totalSalary_New += employees[index].salary;
+    }
+    
+    function addFund() payable returns (uint) {
+        return this.balance;
+    }
+    
+    function calculateRunway_Old() returns (uint) {
+        uint totalSalary = 0;
+       for (uint i = 0; i < employees.length; i++) {
+            totalSalary += employees[i].salary;
+        }
+        return this.balance / totalSalary;
+    }
+    
+    //added
+    function calculateRunway_New() returns (uint) {
+        return this.balance / totalSalary_New;
+    }
+    
+    function hasEnoughFund() returns (bool) {
+        return calculateRunway_New() > 0;
+    }
+    
+    function getPaid() {
+        var(employee,index) = _findEmployee(msg.sender);
+        assert(employee.id != 0x0);
+        
+        uint nextPayday = employee.lastPayday + payDuration;
+        assert(nextPayday < now);
+
+        employees[index].lastPayday = nextPayday;
+        employee.id.transfer(employee.salary);
+    }
+}
+
+//优化前calculateRunway gas记录
+//1:
+// "0x14723a09acff6d2a60dcdf7aa4aff308fddc160c",1
+// transaction cost 	22966 gas 
+// execution cost 	1694 gas 
+//2:
+// "0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db",1
+// transaction cost 	23747 gas 
+// execution cost 	2475 gas 
+//3:
+// "0x583031d1113ad414f02576bd6afabfb302140225",1
+// transaction cost 	24528 gas 
+// execution cost 	3256 gas 
+//4:
+// "0xdd870fa1b7c4700f2bd7f44238821c26f7392148",1
+// transaction cost 	25309 gas 
+// execution cost 	4037 gas 
+//5:
+// "0x14723a09acff6d2a60dcdf7aa4aff308fddc160d",1
+// transaction cost 	26090 gas 
+// execution cost 	4818 gas 
+//6:
+// "0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2dc",1
+// transaction cost 	26871 gas 
+// execution cost 	5599 gas 
+//7:
+// "0x583031d1113ad414f02576bd6afabfb302140226",1
+// transaction cost 	27652 gas 
+// execution cost 	6380 gas 
+//8:
+// "0xdd870fa1b7c4700f2bd7f44238821c26f7392149",1
+// transaction cost 	28433 gas 
+// execution cost 	7161 gas 
+//9:
+// "0x14723a09acff6d2a60dcdf7aa4aff308fddc160e",1
+// transaction cost 	29214 gas 
+// execution cost 	7942 gas 
+//10:
+// "0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2de",1
+// transaction cost 	29995 gas 
+// execution cost 	8723 gas 
+
+//每次调用calculateRunway，gas都会增加，因为for循环遍历数组，随着员工数的增加，
+//for循环执行次数增加
+
+//优化方案：定义totalSalary_New变量，在addEmployee、removeEmployee、updateEmployee
+//中更改此变量，可以避免在calculateRunway_New中使用for循环
+
+//优化后，每次运行calculateRunway_New的gas为：
+//transaction cost 	22146 gas 
+//execution cost 	874 gas 
