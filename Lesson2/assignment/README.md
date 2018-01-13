@@ -61,4 +61,3 @@ function calculateRunway() returns (uint) {
 | 8 |22353|1081|
 | 9 |22353|1081|
 | 10 |22353|1081|
-
