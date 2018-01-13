@@ -6,9 +6,9 @@
 - 加入十个员工，每个员工的薪水都是1ETH
 每次加入一个员工后调用calculateRunway这个函数，并且记录消耗的gas是多少？Gas变化么？如果有 为什么？
 
-##Gas usages stats: 
+## Gas usages stats: 
 employee# 	trans gas	exec gas 
-##original version:
+## original version:
 1	22966	1694
 2	23747	2475
 3	24528	3256
@@ -20,7 +20,7 @@ employee# 	trans gas	exec gas
 9	29214	7942
 10	29995	8723
 		
-##optimized version:
+## optimized version:
 1	22353	1081
 2	22353	1081
 3	22353	1081
