@@ -32,6 +32,7 @@ contract Payroll {
     }
     
     function addFund() payable returns (uint) {
+        return this.balance;
     }
     
     function calculateRunway() returns (uint) {
@@ -43,8 +44,17 @@ contract Payroll {
     }
     
     function hasEnoughFund() returns (bool) {
+        return calculateRunAway() >= 1;
     }
     
     function getPaid() {
+
+        uint nextPayDay = lastPayDay + payDuration;
+        
+        require(msg.sender == employee && nextPayDay<=now );
+
+        uint salaryTmp = salary*((now-lastPayDay)/payDuration);
+        lastPayDay = now;
+        employee.transfer(salaryTmp);// allow get paid after several duration
     }
 }
