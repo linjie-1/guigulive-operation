@@ -9,17 +9,7 @@ contract Payroll {
     address employee;
     uint lastPayday;
     
-    function setSalary (uint m) {
-        require(msg.sender == owner);
-        salary = m;
-    }
-    
-    function setAddress(address e) {
-        
-        require(msg.sender == owner);
-        employee = e;
-    
-    }
+// use update employee function to update employee information, and also checking if the account is the owner.
     
     function Payroll() {
         owner = msg.sender;
