@@ -33,7 +33,7 @@ contract Payroll {
         
         return (Employee(0x0, 0, 0), 0);
     }
-
+ 
     function addEmployee(address employeeId, uint salary) {
         require(msg.sender == owner);
         
