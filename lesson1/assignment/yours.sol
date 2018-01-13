@@ -21,9 +21,7 @@ contract Payroll {
             employee.transfer(payment);
             employee = e;
             lastPayday = now;
-        }else{
-            revert();
-        }    
+        }
     }
     
     function updateEmployeeSalary(uint s){
@@ -34,8 +32,6 @@ contract Payroll {
             employee.transfer(payment);
             salary = s * 1 ether;
             lastPayday = now; 
-        }else{
-            revert();
         }
     }
     
