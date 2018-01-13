@@ -127,7 +127,7 @@ contract PayRoll {
 
 Gas 消耗记录：
 
-employee										gas			transaction cost				execution cost 
+employee									gas			transaction cost				execution cost 
 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c		3000000		22962							1690
 0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db		3000000		23755							2483
 0x583031d1113ad414f02576bd6afabfb302140225		3000000		24548							3276	
