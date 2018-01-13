@@ -9,4 +9,4 @@
 
 - 如何优化calculateRunway这个函数来减少gas的消耗？
 提交：智能合约代码，gas变化的记录，calculateRunway函数的优化
-如果读取计算结果次数多，使用全局变量进行优化，在每次增删改employee的时候改变该全局变量，删除calculateRunway中的循环，达到优化gas消耗的目的
+答：如果读取计算结果次数多，使用全局变量进行优化，在每次增删改employee的时候改变该全局变量，删除calculateRunway中的循环，达到优化gas消耗的目的
