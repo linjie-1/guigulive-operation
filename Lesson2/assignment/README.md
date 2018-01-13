@@ -5,6 +5,7 @@
 完成今天的智能合约添加100ETH到合约中
 - 加入十个员工，每个员工的薪水都是1ETH
 每次加入一个员工后调用calculateRunway这个函数，并且记录消耗的gas是多少？Gas变化么？如果有 为什么？
+
 下表展示的是加入10个员工的过程中每次调用calculateRunway()时消耗的gas。
 我们可以看到gas一直在增长。
 我认为原因是在calculateRunway()里我们是用loop来算total，因为员工不断增加，计算量也不断增加，导致gas也不断增加。
@@ -28,6 +29,7 @@
 
 我们可以引入状态变量total并在add, update, remove这几个function里用total做更新
 更新后，gas非常稳
+
 |    Round  | Transaction Cost   | Execution Cost |
 | :----------: |:-------------:| :-----:|
 | 1 | 22124 | 852 |
