@@ -1,0 +1,23 @@
+
+The used gas for running calculateRunway() after adding each new employee are the following,
+1694 gas
+2475 gas
+3256 gas
+4037 gas
+4818 gas
+5599 gas
+6380 gas
+7161 gas
+7942 gas
+8723 gas
+
+Gas is increasing, the reason is that calculateRunway() sum over all salary from an array. Increasing length of array
+caused increasing gas.
+
+To solve the issue, I create a global variable 'current_totalSalary', when we run addEmployee(), we just add the new
+employee's salary to current_totalSalary; when we run removeEmployee, we just subtract the removed employee's salary
+from current_totalSalary; when we run updateEmployee(), we just update current_totalSalary by adding the difference between
+new salary and old salary.
+
+After making the change, the gas used for running calculateRunway() after adding new employee become 852, which is a
+constant amount.  
