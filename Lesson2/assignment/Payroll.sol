@@ -39,7 +39,7 @@ contract Payroll {
         assert(employee.id == 0x0);
         employees.push(Employee(employeeId,salary * 1 ether,now));
         
-        totalSalary += salary;
+        totalSalary += salary * 1 ether;
     }
     
     function removeEmployee(address employeeId) {
@@ -63,7 +63,7 @@ contract Payroll {
         assert(employee.id != 0x0);
         
         _partialPaid(employee);
-        totalSalary = totalSalary - employees[index].salary + newSalary;
+        totalSalary = totalSalary - employees[index].salary + newSalary * 1 ether;
         employees[index].salary = newSalary * 1 ether;
         employees[index].lastPayday = now;
     }
