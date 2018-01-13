@@ -7,7 +7,6 @@
 每次加入一个员工后调用calculateRunway这个函数，并且记录消耗的gas是多少？Gas变化么？如果有 为什么？
 
 ## Gas usages stats: 
-
 employee# 	trans gas	exec gas 
 ## original version:
 
@@ -53,8 +52,6 @@ employee# 	trans gas	exec gas
 9	22353	1081
 
 10	22353	1081
-
-
 
 原本的方法, Gas使用量會跟著employee數目的增加而增加
 原因是因為, 每次運算 calcaulateRunway的時候, 我們都是重新計算總薪水的量質, 因此for-loop 隨著員工數目的增加, 而需要iterate更多的員工 導致Gas得使用量也一起增長
