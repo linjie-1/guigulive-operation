@@ -24,7 +24,7 @@
 - 如何优化calculateRunway这个函数来减少gas的消耗？
 提交：智能合约代码，gas变化的记录，calculateRunway函数的优化
 
-可以引入状态变量totalSalary, 并在addEmployee(), updateEmployee()和removeEmployee()中相应对totalSalary做更新，那么在calculateRunway()函数中直接
+可以引入状态变量totalSalary, 并在addEmployee(), updateEmployee()和removeEmployee()中相应对totalSalary做更新(详细代码见yours.sol)，那么在calculateRunway()函数中直接
 ``` C
 function calculateRunway() returns(bool) {
   return this.balance / totalSalry;
