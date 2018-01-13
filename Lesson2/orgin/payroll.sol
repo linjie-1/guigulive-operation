@@ -15,6 +15,14 @@ contract Payroll {
     address owner;
     Employee[] employees; // 动态数组
 
+   //test steps
+   // use the first address to create contract
+   // addFund 10 ether, balance = 10 ether
+   // add employee "0x14723a09acff6d2a60dcdf7aa4aff308fddc160c", 2
+   // add employee "0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db", 3
+   // use the second address to getPaid, balance = 8 ether
+
+
     // 构造函数
     function Payroll() {
         owner = msg.sender;
@@ -40,17 +48,17 @@ contract Payroll {
 
     // 增A
     // dynimic array use push function
-    function addEmployee(address employeeId, uint salary) {
+    function addEmployee(address employeeId, uint salaryOfEther) {
         require(msg.sender == owner);
         var (employee, index) = _findEmployee(employeeId);
-        employees.push(Employee(employeeId, salary, now));
+        employees.push(Employee(employeeId, salaryOfEther * 1 ether, now));
     }
     
     // 删D
     function removeEmployee(address employeeId) {
         require(msg.sender == owner);
 
-        var (employee, index)= _findEmployee(msg.sender);
+        var (employee, index)= _findEmployee(employeeId);
         assert(employee.id != 0x0);
         _partialPaid(employee);
         delete employees[index]; // 会留下一个空位 
