@@ -40,3 +40,6 @@
     return (this.balance / totalsalary,amount);
   }
 ```
+## 作业修改
+将totalsaslary提成为state变量。每次对员工做 update remove add 操作，均重新计算totalsaslary
+
