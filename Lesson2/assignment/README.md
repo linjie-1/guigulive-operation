@@ -8,6 +8,7 @@
 - 如何优化calculateRunway这个函数来减少gas的消耗？
 提交：智能合约代码，gas变化的记录，calculateRunway函数的优化
 
+
 1.  
 transaction cost 	22966 gas 
 execution cost 		1694 gas 
@@ -48,3 +49,7 @@ execution cost 		7942 gas
 transaction cost 	29995 gas 
 execution cost 		8723 gas 
 
+More employees, more cost. The For loop will cost more gas because it needs to traverse every employee in the array.
+
+
+Set a new state variable called totalSalary to record the salary and update it in addEmployee(), removeEmployee() and updateEmployee().
