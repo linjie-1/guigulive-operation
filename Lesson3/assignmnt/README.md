@@ -16,7 +16,7 @@ Answer: 课程开发的合约产品化内容：payroll-origin.sol
 7. removeEmployee.jpg:  owner remove this employee from contract
 8. transferOwnership.jpg: owner transfer the ownership of this contract to others
 
-===========================================================================================
+==================================================================================
 - 第二题：增加 changePaymentAddress 函数，更改员工的薪水支付地址，思考一下能否使用modifier整合某个功能
 
 Answer: 增加changePaymentAddress函数以后的solidity程序： payroll_with_changePaymentAddress.sol
@@ -26,7 +26,7 @@ Answer: 增加changePaymentAddress函数以后的solidity程序： payroll_with_
 9. changePaymentAddress.jpg: owner change the payment address of this employee
 10. getPaid after changePaymentAddress:  employee request to get paid, and the salary is transferred to his new payment address
 
-===========================================================================================
+===================================================================================
 - 第三题（加分题）：自学C3 Linearization, 求以下 contract Z 的继承线
 - contract O
 - contract A is O
