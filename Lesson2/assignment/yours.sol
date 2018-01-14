@@ -4,7 +4,7 @@ contract Payroll {
     
     struct Employee {
         address id;
-        uint salary;
+        uint salary;//(in wei)
         uint lastPayday;
     }
     
@@ -31,34 +31,34 @@ contract Payroll {
         }
     }
 
-    function addEmployee(address employeeId, uint salary) {
+    function addEmployee(address employeeId, uint salaryInEther) {
         require(msg.sender==owner);
         var (employee, index)=_findEmployee(employeeId);
         assert(employee.id==0x0);
-        employees.push(Employee(employeeId, salary, now));
-        totalSalary+=salary;
+        employees.push(Employee(employeeId, salaryInEther*1 ether, now));
+        totalSalary+=salaryInEther*1 ether;
     }
     
     function removeEmployee(address employeeId) {
         require(msg.sender==owner);
         var (employee, index)=_findEmployee(employeeId);
         assert(employee.id!=0x0);
-        _partialPaid(employee);
+        totalSalary-=employees[index].salary;
+        _partialPaid(employees[index]);
         delete employees[index];
-        totalSalary-=employee.salary;
         employees[index]=employees[employees.length-1];
         employees.length--;
     }
     
-    function updateEmployee(address employeeId, uint salary) {
+    function updateEmployee(address employeeId, uint salaryInEther) {
         require(msg.sender==owner);
         var (employee, index)=_findEmployee(employeeId);
         assert(employee.id!=0x0);
-        _partialPaid(employee);
-        totalSalary-=employee.salary;//update totalSalary
-        employee.salary=salary*1 ether;
-        totalSalary+=employee.salary;//update totalSalary
-        employee.lastPayday=now;
+        _partialPaid(employees[index]);
+        totalSalary-=employees[index].salary;//update totalSalary
+        employees[index].salary=salaryInEther*1 ether;
+        totalSalary+=employees[index].salary;//update totalSalary
+        employees[index].lastPayday=now;
     }
     
     function addFund() payable returns (uint) {
@@ -66,7 +66,7 @@ contract Payroll {
     }
     
     function calculateRunway() returns (uint) {
-        return this.balance / (totalSalary*1 ether);
+        return this.balance / totalSalary;
     }
     
     function hasEnoughFund() returns (bool) {
