@@ -11,7 +11,7 @@ contract Payroll  {
     
     Employee[] employees;
     address owner;
-    uint constant payDuration = 1000 seconds;
+    uint constant payDuration = 10 seconds;
     uint totalSalary;
     
     
