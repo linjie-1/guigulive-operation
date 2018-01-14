@@ -9,6 +9,7 @@ contract Payroll {
     }
     
     uint constant payDuration = 10 seconds;
+    uint totalSalary;
 
     address owner;
     Employee[] employees;
@@ -35,6 +36,7 @@ contract Payroll {
         var (employee, index)=_findEmployee(employeeId);
         assert(employee.id==0x0);
         employees.push(Employee(employeeId, salary, now));
+        totalSalary+=salary;
     }
     
     function removeEmployee(address employeeId) {
@@ -43,6 +45,7 @@ contract Payroll {
         assert(employee.id!=0x0);
         _partialPaid(employee);
         delete employees[index];
+        totalSalary-=employee.salary;
         employees[index]=employees[employees.length-1];
         employees.length--;
     }
@@ -52,7 +55,9 @@ contract Payroll {
         var (employee, index)=_findEmployee(employeeId);
         assert(employee.id!=0x0);
         _partialPaid(employee);
+        totalSalary-=employee.salary;//update totalSalary
         employee.salary=salary*1 ether;
+        totalSalary+=employee.salary;//update totalSalary
         employee.lastPayday=now;
     }
     
@@ -61,10 +66,6 @@ contract Payroll {
     }
     
     function calculateRunway() returns (uint) {
-        uint totalSalary = 0;
-       for (uint i = 0; i < employees.length; i++) {
-            totalSalary += employees[i].salary;
-        }
         return this.balance / (totalSalary*1 ether);
     }
     
@@ -84,6 +85,7 @@ contract Payroll {
 }
 
 /*
+Answer to Question 1:
 
 Added 10 employees. The gas used in each action was not the same. 
 When there is no employee yet while we add the first employee, the gas was used the most, more than all the other circumstances. 
@@ -123,6 +125,9 @@ Reason: The first time we add an employee, there is no array yet. We need to cre
 From the 2nd time to the 10th time, each time, the function find employee is called, and we need to travers the whole array of employees.
 Each time, there is one more element in the array, that is why the gas is increased linearly.
 
-
-
+Answer to Question 2: 
+Made totalSalary a global variable. Modified the value in:
+- Add Employee
+- Remove Employee
+- Update Employee
 */
