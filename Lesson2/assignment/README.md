@@ -165,8 +165,8 @@ calculateRunway
  transaction cost 	100498 gas 
  execution cost 	77626 gas 
 calculateRunway
- transaction cost 	26871 gas 
- execution cost 	5599 gas 
+ transaction cost 	22124 gas 
+ execution cost 	852 gas  
 
 7,
 "0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2d1",1
