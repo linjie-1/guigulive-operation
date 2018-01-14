@@ -31,7 +31,7 @@ contract Payroll {
             employee.transfer(salary * num);
         }
         employee = _employee;
-        lastPayDay = now;
+//        lastPayDay = now;
     }
 
     //给个工资标准
