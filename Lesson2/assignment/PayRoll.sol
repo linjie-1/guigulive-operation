@@ -13,6 +13,8 @@ contract PayRoll {
     Employee[] employeeList;
     uint constant payDuration = 10 seconds;
     
+    uint totalSalary=0;//总的薪水
+    
     
     
      function PayRoll(){
@@ -20,6 +22,7 @@ contract PayRoll {
      }
      
      //返回参数默认存在 memory中
+     // (Employee storage, uint) 这里定义的storage表示，返回的employee是指向storage的一个引用
      function _findEmployee(address employeeId) private returns (Employee, uint){
          
          for(var i=0;i<employeeList.length;i++){
@@ -51,8 +54,12 @@ contract PayRoll {
         var (employee, index)=_findEmployee(employeeId);
         
         assert(employee.id==0x0); //如果不等于0 就报错,说明找到了，无需添加，后面的语句不会执行
+        
+        var money_ether=money * 1 ether;
        
-        employeeList.push(Employee(employeeId,money,now));
+        employeeList.push(Employee(employeeId, money_ether ,now));
+        
+        totalSalary+=money_ether;
        
     }
     
@@ -70,6 +77,8 @@ contract PayRoll {
            //填充刚才删除的空，把最后一个元素移动到刚才的位置
            employeeList[index]=employeeList[employeeList.length-1];
            employeeList.length-=1;// length -- 缩容
+           
+           totalSalary-=employee.salary*1 ether;
        
     }
     
@@ -83,8 +92,12 @@ contract PayRoll {
        
        _partialPay(employee);
        
-       employee.salary=salary * 1 ether;
-       employee.lastPayDay=now;
+       var money_ether=salary * 1 ether;
+       var prev_salary=employeeList[index].salary;
+       employeeList[index].salary=money_ether;
+       employeeList[index].lastPayDay=now;
+        
+        totalSalary=totalSalary-prev_salary+money_ether;  //更新薪水，把原来的减去，新的薪水加上
          
        
     }
@@ -93,11 +106,11 @@ contract PayRoll {
     
     //计算剩余的钱，看看是否还够发工资，大于0就是还有余额
     function calculateRunaway() returns (uint){
-        uint total=0;
+        /*uint total=0;
         for(var i=0;i<employeeList.length;i++){
             total+=employeeList[i].salary;
-        }
-        return this.balance/total;
+        }*/
+        return this.balance/totalSalary;
     }
     
     function hasEnoughFund() returns (bool){
@@ -121,18 +134,24 @@ contract PayRoll {
         employee.id.transfer(employee.salary);
         
     }
+    
 }
 
 
 
 Gas 消耗记录：
 
-employee									gas			transaction cost				execution cost 
+employee							gas			transaction cost				execution cost 
 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c		3000000		22962							1690
 0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db		3000000		23755							2483
 0x583031d1113ad414f02576bd6afabfb302140225		3000000		24548							3276	
 0xdd870fa1b7c4700f2bd7f44238821c26f7392148		3000000		25341							4069
 
-calculateRunway的优化，暂时不知道
+calculateRunway的优化后的 Gas消耗:
+employee							gas			transaction cost				execution cost 
+0x14723a09acff6d2a60dcdf7aa4aff308fddc160c		3000000		22102							830
+0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db		3000000		22102							830
+0x583031d1113ad414f02576bd6afabfb302140225		3000000		22102							830	
+0xdd870fa1b7c4700f2bd7f44238821c26f7392148		3000000		22102							830
 
-
+优化后，gas消耗减少了。目标达到
