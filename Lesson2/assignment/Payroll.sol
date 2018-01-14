@@ -8,9 +8,11 @@ contract Payroll {
         uint lastPayDate;
     }
 
+    uint constant payInterval = 10 seconds;
+
     address employer;
     Employee[] employees;
-    uint constant payInterval = 10 seconds;
+    uint totalSalary;
 
     function Payroll(address _employee) {
         employer = msg.sender;
@@ -34,10 +36,6 @@ contract Payroll {
     }
 
     function calculateRunway() returns (uint) {
-        uint totalSalary = 0;
-        for (uint i = 0; i < employees.length; i++) {
-            totalSalary += employees[i].salary;
-        }
         return this.balance / totalSalary;
     }
 
@@ -50,6 +48,7 @@ contract Payroll {
         var (employee, idx) = _findEmployee(employeeId);
         assert(employee.id == 0x0);
         employees.push(Employee(employeeId, salary * 1 ether, now));
+        totalSalary += salary * 1 ether;
     }
 
     function removeEmployee(address employeeId) {
@@ -57,7 +56,7 @@ contract Payroll {
         var (employee, idx) = _findEmployee(employeeId);
         assert(employee.id != 0x0);
         _partialPay(employee);
-        delete employees[idx]; // 这一行是否必要？
+        totalSalary -= employee.salary;
         employees[idx] = employees[employees.length -1];
         employees.length -= 1;
     }
@@ -86,6 +85,7 @@ contract Payroll {
         assert(employee.id != 0x0);
         _partialPay(employee);
         employees[idx].lastPayDate = now;
+        totalSalary += (s * 1 ether - employees[idx].salary);
         employees[idx].salary = s * 1 ether;
     }
 
@@ -112,6 +112,7 @@ contract Payroll {
         assert(employees[1].salary == 1 ether);
         assert(employees[2].id == 0x583031d1113ad414f02576bd6afabfb302140225);
         assert(employees[2].salary == 1 ether);
+        assert(totalSalary == 3 ether);
     }
 
     function testGetPaid() {
@@ -124,6 +125,7 @@ contract Payroll {
         removeEmployee(0x14723a09acff6d2a60dcdf7aa4aff308fddc160c);
         assert(employees.length == 2);
         assert(employees[0].id == 0x583031d1113ad414f02576bd6afabfb302140225);
+        assert(totalSalary == 2 ether);
     }
 
     function testUpdateEmployee() {
@@ -136,6 +138,7 @@ contract Payroll {
         updateEmployeeSalary(employees[0].id, 2);
         assert(employees[0].salary == 2 ether);
         assert(employees[0].id.balance - oldBalance == oldSalary * (employees[0].lastPayDate - oldLastPayDate) / payInterval);
+        assert(totalSalary == 3 ether);
     }
 
     /**
@@ -162,7 +165,7 @@ contract Payroll {
     在合约中定义一个 currentTotalSalary 的变量，每次添加员工是就把这个员工的 salary 累加到 currentTotalSalary 上，
     remove 员工是就把对应的 salary 从 currentTotalSalary 中减去，
     update 员工 salary 的时候也对应 update currentTotalSalary，
-    这样 在 calculateRunway 函数中只需直接 return this.balance / currentTotalSalary 即可，不需要做重复的循环遍历计算
-
+    这样在 calculateRunway 函数中只需直接 return this.balance / currentTotalSalary 即可，不需要做重复的循环遍历计算.
+    优化后的代码每次调用 calculateRunway 都消耗 918 gas
     **/
 }
