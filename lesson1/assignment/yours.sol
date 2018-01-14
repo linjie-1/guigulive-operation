@@ -1,17 +1,14 @@
-/*作业请提交在这个目录下*/
-=======
-// version 2
 pragma solidity ^0.4.14;
-contract Payroll{
 
-    uint salary = 1 ether;
-    address employer ;
-    address employee ;
+contract Payroll {
+    uint salary;
+    address boss;
+    address employee;
     uint constant payDuration = 10 seconds;
     uint lastPayday = now;
 
-    function Payroll(){
-        employer =  msg.sender;
+    function Payroll() {
+        boss = msg.sender;
     }
 
     function updateEmployeeAddress(address a) {
@@ -29,7 +26,7 @@ contract Payroll{
     function updateEmployeeSalary(uint s) {
         require(msg.sender == boss);
 
-        if (employee != 0x0) {
+	if (employee != 0x0) {
             uint payment = salary * (now - lastPayday) / payDuration;
             employee.transfer(payment);
         }
@@ -42,11 +39,11 @@ contract Payroll{
         return this.balance;
     }
 
-    function calculateRunway() returns (uint){
+    function calculateRunway() returns (uint) {
         return this.balance / salary;
     }
 
-    function hasEnoughFund() returns (bool){
+    function hasEnoughFund() returns (bool) {
         return calculateRunway() > 0;
     }
 
