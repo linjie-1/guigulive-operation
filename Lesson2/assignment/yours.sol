@@ -60,7 +60,6 @@ contract Payroll {
 
     	employees[index].salary = salary * 1 ether;
     	employees[index].lastPayday = now;
-
     }
     
     function addFund() payable public returns (uint) {

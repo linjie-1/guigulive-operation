@@ -47,4 +47,4 @@ function updateEmployee(address employeeId, uint salary) public onlyOwner {
 
 }
 
-The running time for old method will be O(N), where N is number of employee, the running time for optimized version is O(1)
+The running time for old method will be O(N), where N is number of employee, the running time for optimized version is O(1) 
