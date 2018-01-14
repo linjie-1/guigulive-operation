@@ -21,6 +21,7 @@ Answer: 课程开发的合约产品化内容：payroll-origin.sol
 Answer: 增加changePaymentAddress函数以后的solidity程序： payroll_with_changePaymentAddress.sol
 
 函数调用截图：
+
 9. changePaymentAddress.jpg: owner change the payment address of this employee
 
 10. getPaid after changePaymentAddress:  employee request to get paid, and the salary is transferred to his new payment address
