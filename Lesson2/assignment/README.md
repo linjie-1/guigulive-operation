@@ -8,3 +8,43 @@
 - 如何优化calculateRunway这个函数来减少gas的消耗？
 提交：智能合约代码，gas变化的记录，calculateRunway函数的优化
 
+1.  
+transaction cost 	22966 gas 
+execution cost 		1694 gas 
+
+2.  
+transaction cost 	23747 gas 
+execution cost 		2475 gas 
+
+3.  
+transaction cost 	24528 gas 
+execution cost 		3256 gas 
+
+4.  
+transaction cost 	25309 gas 
+execution cost 		4037 gas 
+
+5.  
+transaction cost 	26090 gas 
+execution cost 		4818 gas 
+
+6.  
+transaction cost 	26871 gas 
+execution cost 		5599 gas 
+
+7.  
+transaction cost 	27652 gas 
+execution cost 		6380 gas 
+
+8.  
+transaction cost 	28433 gas 
+execution cost 		7161 gas 
+
+9.  
+transaction cost 	29214 gas 
+execution cost 		7942 gas 
+
+10.  
+transaction cost 	29995 gas 
+execution cost 		8723 gas 
+
