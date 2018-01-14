@@ -22,6 +22,7 @@ Answer: 增加changePaymentAddress函数以后的solidity程序： payroll_with_
 
 函数调用截图：
 9. changePaymentAddress.jpg: owner change the payment address of this employee
+
 10. getPaid after changePaymentAddress:  employee request to get paid, and the salary is transferred to his new payment address
 
 - 第三题（加分题）：自学C3 Linearization, 求以下 contract Z 的继承线
