@@ -11,7 +11,8 @@ contract Payroll {
 
     address owner;
     Employee[] employees;
-
+    uint totalSalary; //track the change of totalsalary
+    
     function Payroll() {
         owner = msg.sender;
     }
@@ -36,7 +37,8 @@ contract Payroll {
         
         var(employee,index) = _findEmployee(employeeId);
         assert(employee.id == 0x0);
-        employees.push(Employee(employeeId, salary, now));
+        employees.push(Employee(employeeId, salary * 1 finney, now));
+        totalSalary += salary * 1 finney;
     }
     
     function removeEmployee(address employeeId) {
@@ -46,6 +48,7 @@ contract Payroll {
         assert(employee.id != 0x0);
         
         _partialPaid(employee);
+        totalSalary -= employee.salary;
         delete employees[index];
         employees[index] = employees[employees.length - 1];
         employees.length -=1;
@@ -59,7 +62,9 @@ contract Payroll {
         var(employee,index) = _findEmployee(employeeId);
         
         _partialPaid(employees[index]);
-        employees[index].salary = salary;
+        totalSalary -= employee.salary;
+        totalSalary += salary * 1 finney;
+        employees[index].salary = salary * 1 finney;
         employees[index].lastPayday = now;
         return;
           
@@ -70,10 +75,10 @@ contract Payroll {
     }
     
     function calculateRunway() returns (uint) {
-        uint totalSalary = 0;
+       /* uint totalSalary = 0;
        for (uint i = 0; i < employees.length; i++) {
-            totalSalary += employees[i].salary;
-        }
+           totalSalary += employees[i].salary;
+        }*/
         return this.balance / totalSalary;
     }
     
@@ -88,10 +93,24 @@ contract Payroll {
         
         uint nextPayDay = employee.lastPayday + payDuration;
         
-        require(msg.sender == employee.id && nextPayDay<=now );
+        assert(nextPayDay <= now );
 
         uint salaryTmp = employee.salary*((now-employee.lastPayday)/payDuration);
         employees[index].lastPayday = now;
         employees[index].id.transfer(salaryTmp);// allow get paid after several duration
+    }
+    
+    function Test() returns (uint){
+        addEmployee(1,1);
+        addEmployee(2,1);
+        addEmployee(3,1);
+        addEmployee(4,1);
+        addEmployee(5,1);
+        addEmployee(6,1);
+        addEmployee(7,1);
+        addEmployee(8,1);
+        addEmployee(9,1);
+        addEmployee(10,1);
+        return  calculateRunway();
     }
 }
