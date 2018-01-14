@@ -1,7 +1,7 @@
 pragma solidity ^0.4.14;
 
 contract Payroll {
-  
+
   struct Employee {
     address id  ;
     uint salary  ;
@@ -10,6 +10,7 @@ contract Payroll {
   uint constant payCycle  = 10 seconds;
   address owner ;
   Employee[] employees ;
+  uint totalsalary = 0 ;
 
   function Payroll() {
     owner = msg.sender;
@@ -33,20 +34,15 @@ contract Payroll {
     return this.balance ;
   }
 
-  function calculRunway() returns(uint,uint) {
-    uint totalsalary = 0 ;
-    uint amount  =  employees.length;
-    assert(amount > 0);
-    for(uint i = 0 ; i < amount ; i++) {
-     totalsalary += employees[i].salary;
-    }
-    return (this.balance / totalsalary,amount);
+  function calculRunway() returns(uint) {
+    return (this.balance / totalsalary);
   }
 
   function addEmployee(address eaddr ,uint sal) {
     require(msg.sender == owner );
     var (employee,index) = _findEmployee(eaddr);
     assert(employee.id == 0x0);
+    totalsalary += sal  * (1 ether);
     employees.push(Employee(eaddr, sal * (1 ether), now));
   }
 
@@ -56,6 +52,7 @@ contract Payroll {
     assert(employee.id != 0x0);
     uint amount  =  employees.length;
     _payFullSal(employee);
+    totalsalary -=  employees[index].salary;
     delete employees[index];
     employees[index] =  employees[amount -1];
     employees.length -= 1;
@@ -67,6 +64,7 @@ contract Payroll {
     var (employee,index) = _findEmployee(eaddr);
     assert(employee.id != 0x0);
     _payFullSal(employee);
+    totalsalary = totalsalary - employee.salary + newsal  * (1 ether);
     employees[index].salary = newsal  * (1 ether);
     employees[index].lastPayday =now;
   }
