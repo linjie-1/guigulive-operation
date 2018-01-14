@@ -1,3 +1,5 @@
+// gas 消耗记录表格见 ./gasChangeRecord.md
+
 pragma solidity ^0.4.14;
 
 contract Payroll {
