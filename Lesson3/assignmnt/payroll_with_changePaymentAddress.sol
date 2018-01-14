@@ -31,7 +31,7 @@ contract Payroll is Ownable {
     }
     
     // modifer to check whether the new paymentAddress is valid
-    modifier addressExist(address paymentAddress){
+    modifier addressIsValid(address paymentAddress){
         assert(paymentAddress != 0x0);
         _;
     }
@@ -82,8 +82,8 @@ contract Payroll is Ownable {
         totalSalary = totalSalary.add(employees[employeeId].salary);
     }
     
-    // 5. owner change payment address of employee
-    function updatePaymentAddress(address employeeId, address paymentAddress) onlyOwner employeeExist(employeeId) addressExist(paymentAddress){
+    // 5. change payment address 
+    function updatePaymentAddress(address employeeId, address paymentAddress) onlyOwner employeeExist(employeeId) addressIsValid(paymentAddress){
         var employee = employees[employeeId];
         
         // pay employee before update
