@@ -22,7 +22,7 @@
 
 ### 函数参数返回进阶
 - 命名参数返回    
-```solidity        
+```bash        
     function checkEmployee(address employeeId) returns(uint salary,uint lastPayday){
         var employee = employees[employeeId];
         return (employee.salary,employee.lastPayday);
@@ -30,7 +30,7 @@
     }
 ```
 - 命名返回参数直接赋值
-```solidity
+```bash
     function checkEmployee(address employeeId) returns(uint salary,uint lastPayday){
         var employee = employees[employeeId];
         salary = employee.salary;
@@ -51,4 +51,38 @@
   合约的所有成员变量都是肉眼可以看见的！！！！<br>
   合约的所有成员变量都是肉眼可以看见的！！！！<br>
 - 函数的可见度：pubilc,internal,private，external
+  默认public<br>
   
+### 继承
+- interface
+```bash
+pragma solidity ^0.4.14;
+interface Parent{
+    // 不可继承其他合约和interface
+    // 没有构造函数
+    // 没有状态变量
+    // 没有struct
+    // 没有enum
+    // 简单来说，只有function定义，啥都没有
+   function someFunc() returns (uint);
+}
+
+contract Child is Parent{
+    //必须要实现
+    function someFunc() retruns (uint){
+    return 1;
+    }
+}
+···
+
+### MODIFIER
+
+```bash
+   modifier employeeExist(address employeeId){
+        var employee = employees[employeeId];
+        assert(employee.id == 0x0);
+        _;
+        
+    }
+```
+
