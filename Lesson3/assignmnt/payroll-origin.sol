@@ -8,6 +8,7 @@ contract Payroll is Ownable {
     
     using SafeMath for uint;
     
+    // struct with employee info
     struct Employee {
         address id;
         uint salary;
