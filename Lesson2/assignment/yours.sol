@@ -51,7 +51,7 @@ contract Payroll {
         assert (employee.id != 0x0);
         _partialPaid(employee);
         delete employees[index];
-        totalSalary -= employee.salary * 1 ether;
+        totalSalary -= employee.salary;
         employees[index]= employees[--employees.length];
     }
     
@@ -61,10 +61,9 @@ contract Payroll {
         var (employee,index) = _findEmployee(employeeId);
         assert(employee.id != 0x0);
         _partialPaid(employee);
-        totalSalary -= employee.salary * 1 ether;
+        totalSalary = totalSalary - employee.salary + salary * 1 ether;
         employees[index].lastPayday= now;
         employees[index].salary = salary * 1 ether;
-        totalSalary += salary * 1 ether;
     }
     
     function addFund() payable returns (uint) {
