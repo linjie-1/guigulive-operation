@@ -79,11 +79,11 @@ contract Payroll {
         var (e, index) = _findEmployee(msg.sender);
         assert(e.id != 0x0);
 
-        uint nextPayDay = e.lastPayday + payDuration;
+        uint nextPayDay = employees[index].lastPayday + payDuration;
         assert(nextPayDay < now);
 
-        e.lastPayday = nextPayDay;
-        e.id.transfer(e.salary);
+        employees[index].lastPayday = nextPayDay;
+        employees[index].id.transfer(employees[index].salary);
     }
 
 }
