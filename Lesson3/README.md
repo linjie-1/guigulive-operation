@@ -22,19 +22,22 @@
 
 ### 函数参数返回进阶
 - 命名参数返回    
+```bash
     function checkEmployee(address employeeId) returns(uint salary,uint lastPayday){
         var employee = employees[employeeId];
         return (employee.salary,employee.lastPayday);
         
     }
+```
 - 命名返回参数直接赋值
+```bash
     function checkEmployee(address employeeId) returns(uint salary,uint lastPayday){
         var employee = employees[employeeId];
         salary = employee.salary;
         lastPayday = employee.lastPayday;
     }
-    
-#### 函数参数返回进阶
+```
+### 函数参数返回进阶
 - public 谁都可见
 - external 只有外部调用可见
 - internal 外部调用不可见，内部和子类可见
