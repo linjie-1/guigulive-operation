@@ -15,6 +15,7 @@ contract Payroll {
 
     function Payroll() {
         owner = msg.sender;
+        employees.push(Employee(0, 0, 0));
     }
 
     function _partialPaid(Employee employee) private {
@@ -28,6 +29,7 @@ contract Payroll {
                 return (employees[i], i);
             }
         }
+        return (Employee(0,0,0), 0);
     }
 
     function addEmployee(address employeeId, uint salary) {
@@ -57,8 +59,7 @@ contract Payroll {
         assert(employee.id != 0x0);
         _partialPaid(employee);
         current_totalSalary += salary * 1 ether - employees[index].salary;
-        employees[index].salary = salary * 1 ether;
-        employees[index].lastPayday = now;
+        employees[index] = Employee(employeeId, salary * 1 ether, now);
     }
 
     function addFund() payable returns (uint) {
