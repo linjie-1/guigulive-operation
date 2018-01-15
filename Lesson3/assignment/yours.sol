@@ -88,3 +88,14 @@ contract Payroll is Ownable {
         employee.id.transfer(payment);
     }
 }
+
+
+/*附加题：
+O[O],
+A[A,O],
+B[B,O],
+C[C,O],
+K1[K1,A,B,O],
+K2[K2,A,C,O],
+Z【K1,K2,A,B,C,O】
+}*/
