@@ -1,3 +1,5 @@
+/*作业请提交在这个目录下*/
+=======
 // version 2
 // @ 1/12/18
 pragma solidity ^0.4.14;
@@ -59,3 +61,4 @@ contract Payroll{
         employee.transfer(salary);
     }
 }
+
