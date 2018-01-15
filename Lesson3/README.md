@@ -16,9 +16,9 @@
 - 以太坊函数库的使用和基本介绍
 
 
-### Homework:
+### Homework 3:
 
-assignment
+源文件在assignment folder里面：
 - 课程开发的合约产品化内容：payroll-origin.sol
 - 增加changePaymentAddress函数以后的solidity程序： payroll_with_changePaymentAddress.sol
 
