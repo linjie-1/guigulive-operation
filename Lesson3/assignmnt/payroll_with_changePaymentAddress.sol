@@ -7,7 +7,7 @@ contract Payroll is Ownable {
     
     using SafeMath for uint;
     
-    // add paymentAddress that may be different from id
+    // add paymentAddress that may be different from id address
     struct Employee {
         address id;
         address paymentAddress;
