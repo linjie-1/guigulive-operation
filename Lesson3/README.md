@@ -73,7 +73,7 @@ contract Child is Parent{
     return 1;
     }
 }
-···
+```
 
 ### MODIFIER
 
