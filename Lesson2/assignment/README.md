@@ -20,5 +20,6 @@ Gas变化么？如果有 为什么？
 ```
 由于每次修改employee（add/delete/update）时才会对totalSalary有影响，故将totalSalary设为成员变量并只有当修改employee时才计算，即可避免每次都重新计算。
 详见代码。
+优化后，每次gas消耗保持不变，transaction cost均为22361 gas，execution cost均为1089 gas。
 ```
 提交：智能合约代码，gas变化的记录，calculateRunway函数的优化
