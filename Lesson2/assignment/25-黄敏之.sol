@@ -26,6 +26,7 @@ contract Payroll {
             if (employees[i].id == employeeId)
                 return (employees[i], i);
         }
+        return (Employee(0,0,0), 0);
     }
 
     function addEmployee(address employeeId, uint salary) {
@@ -47,15 +48,14 @@ contract Payroll {
         employees.length -= 1;
     }
     
-    function updateEmployee(address employeeId, uint salary) {
+    function updateEmployee(address employeeId, address employeeIdNew, uint salary) {
         require(msg.sender == owner);
         var (employee, index) = _findEmployee(employeeId);
         totalSalary -= employee.salary;
         assert(employee.id != 0x0);
         _partialPaid(employee);
         uint salaryInWei = salary * 1 ether;
-        employees[index].id = employeeId;
-        employees[index].salary = salaryInWei;
+        employees[index] = Employee(employeeIdNew, salaryInWei, now);
         totalSalary += salaryInWei;
         
     }
