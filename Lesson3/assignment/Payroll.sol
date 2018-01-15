@@ -43,9 +43,10 @@ contract Payroll is Ownable {
         address employeeId
     ) onlyOwner employeeExist(employeeId) external {
         Employee storage employee = employees[employeeId];
-        _partialPay(employeeId);
+        uint payment = _calculatePayment(employee);
         totalSalary = totalSalary.sub(employee.salary);
         delete employees[employeeId];
+        _partialPay(employeeId, payment);
     }
     
     function updateEmployee(
@@ -53,10 +54,11 @@ contract Payroll is Ownable {
         uint salary
     ) onlyOwner employeeExist(employeeId) external {
         Employee storage employee = employees[employeeId];
-        _partialPay(employeeId);
+        uint payment = _calculatePayment(employee);
         totalSalary = totalSalary.sub(employee.salary);
         employee.salary = salary.mul(1 ether);
         totalSalary = totalSalary.add(employee.salary);
+        _partialPay(employeeId, payment);
     }
     
     function addFund() external payable returns (uint) {
@@ -91,11 +93,12 @@ contract Payroll is Ownable {
         delete employees[msg.sender];
     }
     
-    function _partialPay(address employeeId) private {
-        Employee storage employee = employees[employeeId];
+    function _partialPay(address employeeId, uint payment) private {
+        employeeId.transfer(payment);
+    }
+    
+    function _calculatePayment(Employee employee) private view returns (uint) {
         uint workDuration = now.sub(employee.lastPayday);
-        uint payment = employee.salary.mul(workDuration).div(payDuration);
-        employee.lastPayday = now;
-        employee.id.transfer(payment);
+        return employee.salary.mul(workDuration).div(payDuration);
     }
 }
