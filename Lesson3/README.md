@@ -40,7 +40,11 @@
 - internal 外部调用不可见，内部和子类可见
 - private 只有当前合约可见
 - 状态变量:pubilc,internal,private
-  -- 默认internal
-  -- public 自定义取值函数
-  
-
+  
+  默认internal
+  public: 自定义取值函数
+  private: 不代表别的无法肉眼看到，只代表别的区块链智能合约无法看到
+  合约的所有成员变量都是肉眼可以看见的！！！！
+  合约的所有成员变量都是肉眼可以看见的！！！！
+  合约的所有成员变量都是肉眼可以看见的！！！！
+- 函数的可见度：pubilc,internal,private，external
