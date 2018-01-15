@@ -17,3 +17,25 @@
 - value是引用，在storage上存储，可以直接修改
 - 当key不存在，value = type‘s default
 
+引用类型相关学习 http://liyuechun.org/2017/09/30/solidity-contract-0006/
+使用mapping是为了减少gas的消耗
+
+#### 函数参数返回进阶
+- 命名参数返回    
+    function checkEmployee(address employeeId) returns(uint salary,uint lastPayday){
+        var employee = employees[employeeId];
+        return (employee.salary,employee.lastPayday);
+        
+    }
+- 命名返回参数直接赋值
+    function checkEmployee(address employeeId) returns(uint salary,uint lastPayday){
+        var employee = employees[employeeId];
+        salary = employee.salary;
+        lastPayday = employee.lastPayday;
+    }
+    
+#### 函数参数返回进阶
+- public 谁都可见
+- external 只有外部调用可见
+- internal 外部调用不可见，内部和子类可见
+- private 只有当前合约可见
