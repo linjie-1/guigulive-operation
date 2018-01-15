@@ -22,7 +22,7 @@
 
 ### 函数参数返回进阶
 - 命名参数返回    
-```bash
+```solidity        
     function checkEmployee(address employeeId) returns(uint salary,uint lastPayday){
         var employee = employees[employeeId];
         return (employee.salary,employee.lastPayday);
@@ -30,7 +30,7 @@
     }
 ```
 - 命名返回参数直接赋值
-```bash
+```solidity
     function checkEmployee(address employeeId) returns(uint salary,uint lastPayday){
         var employee = employees[employeeId];
         salary = employee.salary;
@@ -44,10 +44,11 @@
 - private 只有当前合约可见
 - 状态变量:pubilc,internal,private
   
-  默认internal
-  public: 自定义取值函数
-  private: 不代表别的无法肉眼看到，只代表别的区块链智能合约无法看到
-  合约的所有成员变量都是肉眼可以看见的！！！！
-  合约的所有成员变量都是肉眼可以看见的！！！！
-  合约的所有成员变量都是肉眼可以看见的！！！！
+  默认internal<br>
+  public: 自定义取值函数<br>
+  private: 不代表别的无法肉眼看到，只代表别的区块链智能合约无法看到<br>
+  合约的所有成员变量都是肉眼可以看见的！！！！<br>
+  合约的所有成员变量都是肉眼可以看见的！！！！<br>
+  合约的所有成员变量都是肉眼可以看见的！！！！<br>
 - 函数的可见度：pubilc,internal,private，external
+  
