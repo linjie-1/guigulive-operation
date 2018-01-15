@@ -1,4 +1,5 @@
 # 截图
+## 图床存在google，显示可能需要等一会儿
 
 ![](https://lh3.googleusercontent.com/-Z7wmwDmr2Yo/Wly58wMqz8I/AAAAAAAACN4/k7H-zjCS3jouLSKjn64eLfQfurpUxFBKgCHMYCw/I/15160261093451.jpg)
 
