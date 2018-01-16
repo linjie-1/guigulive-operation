@@ -3,5 +3,8 @@
 
 ### 第三课：课后作业
 
-- 增加员工<br>
+- addEmployee<br>
 ![增加员工](https://github.com/alanwang123/guigulive-operation/blob/master/Lesson3/assignment/Screenshots/addEmployee.jpg)
+- addFund<br>
+!(https://github.com/alanwang123/guigulive-operation/blob/master/Lesson3/assignment/Screenshots/addFund.jpg)
+- caculateRunway<br>
