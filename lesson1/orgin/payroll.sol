@@ -15,7 +15,7 @@ contract Payroll {
     // 上次时间
     uint lastPayday;
     address owner;
-    unint totalSalary = 0 ether
+    uint totalSalary = 0 ether;
     // 构造函数
     function Payroll() {
         owner = msg.sender;
@@ -33,7 +33,7 @@ contract Payroll {
     function _findEmployee(address employeeId) private returns (Employee) {
         for (uint i = 0; i < employees.length; i++) {
             if (employees[i].id == employeeId) {
-                return (employees[i], i);
+                return(employees[i], i);
             }
         }     
     }

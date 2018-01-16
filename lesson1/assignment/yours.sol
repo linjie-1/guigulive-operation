@@ -1,15 +1,36 @@
-
-// 第一课作业
+/*作业请提交在这个目录下*/
 pragma solidity ^0.4.14;
 contract Payroll {
-    uint salary = 1 ether;
-    // 默认转账地址
-    address person = 0xdd870fa1b7c4700f2bd7f44238821c26f7392148;
+    
+
+    address employee;
     uint constant payDuration = 10 seconds;
     uint lastPayday = now;
+    address owner;
+    uint salary = 1 ether;
+
+    // 新加..
+    function Payroll() {
+        owner = msg.sender;
+    }
+    
+    //设置地址和工资额+新增
+    function updateEmployee(address e, uint s) {
+        require(msg.sender == owner);
+        
+        if (employee != 0x0) {
+            uint payment = salary * (now - lastPayday) / payDuration;
+            employee.transfer(payment);
+        }
+        
+        employee = e;
+        salary = s * 1 ether;
+        lastPayday = now;
+    }
+
     // 设置地址
     function setAddress(address addr) {
-        person = addr;
+        employee = addr;
     }
     
     function addFund() payable returns (uint) {
@@ -32,7 +53,7 @@ contract Payroll {
         uint nextPayDay = lastPayday + payDuration;
         if(nextPayDay < now) {
             lastPayday = nextPayDay;
-            person.transfer(salary);
+            employee.transfer(salary);
         }
       
     }
