@@ -1,32 +1,33 @@
-²âÊÔ¹ı³ÌÓë½ØÍ¼ËµÃ÷£º	
+æµ‹è¯•è¿‡ç¨‹ä¸æˆªå›¾è¯´æ˜ï¼š	
 
-1. ¸øÕÊ»§ÖĞ³äÖµ1000 ether
+1. ç»™å¸æˆ·ä¸­å……å€¼1000 ether
 addFund: 1000 ether;
 
-2. Ôö¼Ó3¸öÔ±¹¤£¬µØÖ·Óë¹¤×ÊÈçÏÂ£º
+2. å¢åŠ 3ä¸ªå‘˜å·¥ï¼Œåœ°å€ä¸å·¥èµ„å¦‚ä¸‹ï¼š
 addEmployee: address = "0x14723a09acff6d2a60dcdf7aa4aff308fddc160c", salary = 1;
 addEmployee: address = "0x24723a09acff6d2a60dcdf7aa4aff308fddc160c", salary = 2;
 addEmployee: address = "0x34723a09acff6d2a60dcdf7aa4aff308fddc160c", salary = 3;
 
-3. É¾³ıÆäÖĞÒ»Î»Ô±¹¤£¬µØÖ·ÈçÏÂ£º
+3. åˆ é™¤å…¶ä¸­ä¸€ä½å‘˜å·¥ï¼Œåœ°å€å¦‚ä¸‹ï¼š
 removeEmployee: address = "0x34723a09acff6d2a60dcdf7aa4aff308fddc160c";
 
-4. ¸üĞÂÆäÖĞÒ»Î»Ô±¹¤µÄ¹¤×Ê£º
+4. æ›´æ–°å…¶ä¸­ä¸€ä½å‘˜å·¥çš„å·¥èµ„ï¼š
 updateEmployee: address = "0x24723a09acff6d2a60dcdf7aa4aff308fddc160c", salary = 10;
 
-5. ±ä¸üÆäÖĞÒ»Î»Ô±¹¤µÄÖ§¸¶µØÖ·£º
+5. å˜æ›´å…¶ä¸­ä¸€ä½å‘˜å·¥çš„æ”¯ä»˜åœ°å€ï¼š
 changePaymentAddress: oldAddress = "0x14723a09acff6d2a60dcdf7aa4aff308fddc160c", newAddress = "0x44723a09acff6d2a60dcdf7aa4aff308fddc160c";
 
-6. ²é¿´±ä¸üºóµÄµØÖ·µÄÕÊ»§£¬È·ÈÏ´æÔÚ¡£
+6. æŸ¥çœ‹å˜æ›´åçš„åœ°å€çš„å¸æˆ·ï¼Œç¡®è®¤å­˜åœ¨ã€‚
 gEmployees[0x44723a09acff6d2a60dcdf7aa4aff308fddc160c];
 
-7. ²é¿´±ä¸üÇ°µÄµØÖ·µÄÕË»§£¬È·ÈÏÒÑ¾­²»´æÔÚ¡£
+7. æŸ¥çœ‹å˜æ›´å‰çš„åœ°å€çš„è´¦æˆ·ï¼Œç¡®è®¤å·²ç»ä¸å­˜åœ¨ã€‚
 gEmployees[0x14723a09acff6d2a60dcdf7aa4aff308fddc160c];
 
-8. ¼ÆËãcalculateRunway
+8. è®¡ç®—calculateRunway
 calculateRunway;
-ËµÃ÷£º½ØÍ¼Ê±¼ä¹ı³¤£¬ĞèÒª¸¶µÄ¹¤×Ê¹ı¶à£¬ÒÑ¾­¸¶²»Æğ¹¤×ÊÁË¡£¡£¡£
 
-9. ¼ÆËãhasEnoughFund
+9. è®¡ç®—hasEnoughFund
 hasEnoughFund;
 
+10. è¿è¡ŒgetPaid
+getPaid;
