@@ -4,4 +4,4 @@
 ### 第三课：课后作业
 
 - 增加员工<br>
-！[增加员工](guigulive-operation/Lesson3/assignment/Screenshots/addEmployee.jpg)
+![增加员工](guigulive-operation/Lesson3/assignment/Screenshots/addEmployee.jpg)
