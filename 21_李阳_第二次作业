@@ -27,6 +27,7 @@ contract Payroll {
                 return (employees[i], i);
             }
         }
+        return (Employee(0, 0, 0), 0);
     }
 
     function addEmployee(address employeeId, uint salary) {
@@ -35,7 +36,7 @@ contract Payroll {
         employees.push(Employee(employeeId, salary * 1 ether, now));
     }
     
-    function removeEmployee(address employeeId) payable {
+    function removeEmployee(address employeeId) {
         var (employee, index) = _findEmployee(employeeId);
         require(employee.id != 0x0);
         _partialPaid(employee);
@@ -44,14 +45,12 @@ contract Payroll {
         employees.length = employees.length - 1;
     }
     
-    function updateEmployee(address employeeId, uint salary) payable {
+    function updateEmployee(address employeeId, uint salary) {
         require(msg.sender == owner);
         var (employee, index) = _findEmployee(employeeId);
         require(employee.id != 0x0);
         _partialPaid(employee);
-        employees[index].lastPayday = now;
-        employees[index].id = employeeId;
-        employees[index].salary = salary * 1 ether;
+        employees[index] = Employee(employeeId, salary * 1 ether, now);
     }
     
     function addFund() payable returns (uint) {
@@ -70,7 +69,7 @@ contract Payroll {
         return calculateRunway() >= 1;
     }
     
-    function getPaid() payable {
+    function getPaid() {
         var(employee, index) = _findEmployee(msg.sender);
         require(employee.id != 0x0);
         
