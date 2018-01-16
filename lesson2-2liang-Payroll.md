@@ -32,7 +32,7 @@
 
 ### 3、优化后的代码
 
-```solidity
+```javascript
 pragma solidity ^0.4.14;
 
 /**
