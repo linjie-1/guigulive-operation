@@ -1,0 +1,218 @@
+pragma solidity ^0.4.14;
+
+contract Payroll{
+    
+    struct Employee {
+        address id;
+        uint    salary;
+        uint    lastPayday;
+    }
+    
+    uint constant payDuration = 10 seconds;
+    uint          totalSalary = 0;
+    address       owner;
+    mapping(address => Employee) public employees;
+    
+    function Payroll() {
+        owner = msg.sender;
+    }
+    
+    modifier onlyOwner {
+        require(msg.sender == owner);
+        _;
+    }
+    
+    modifier employeeExist(address employeeId) {
+        var employee = employees[employeeId];
+        assert(employee.id != 0x0);
+        _;
+    }
+    
+    function _partialPaid(Employee employee) private {
+        uint payment = employee.salary * (now - employee.lastPayday) / payDuration;
+        if (0 == payment) {
+            return;
+        }
+        employee.id.transfer(payment);
+    }
+
+    function addTenEmployees() onlyOwner {
+
+        addEmployee(0x1, 1);
+        addEmployee(0x2, 1);
+        addEmployee(0x3, 1);
+        addEmployee(0x4, 1);
+        addEmployee(0x5, 1);
+        addEmployee(0x6, 1);
+        addEmployee(0x7, 1);
+        addEmployee(0x8, 1);
+        addEmployee(0x9, 1);
+        addEmployee(0xA, 1);
+    }
+    
+    function addEmployee(address employeeId, uint salary) onlyOwner {
+        var employee = employees[employeeId];
+        assert(employee.id == 0x0);     // can't find
+        
+        uint tmp = salary * 1 ether;
+        employees[employeeId] = Employee(employeeId, tmp, now);
+        totalSalary += tmp;
+    }
+    
+    function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId) {
+        var employee = employees[employeeId];
+        
+        _partialPaid(employee);
+        
+        totalSalary -= employees[employeeId].salary;
+        delete employees[employeeId];
+    }
+    
+    function updateEmployee(address employeeId, uint salary) onlyOwner employeeExist(employeeId) {
+        var employee = employees[employeeId];
+        
+        _partialPaid(employee);
+        
+        uint tmp = salary * 1 ether;
+        totalSalary += (tmp - employees[employeeId].salary);
+        employees[employeeId].salary     = tmp;
+        employees[employeeId].lastPayday = now;
+    }
+    
+    function changePaymentAddress(address newEmployeeId) employeeExist(msg.sender) {
+        var employee = employees[msg.sender];
+        
+        var newEmployee = employees[newEmployeeId];
+        assert(newEmployee.id == 0x0);    // address cannot be the same
+        
+        // _partialPaid(employee);
+        
+        employees[newEmployeeId] = Employee(newEmployeeId, employee.salary, employee.lastPayday);
+        
+        delete employees[msg.sender];
+    }
+    
+    function addFund() payable returns (uint) {
+        return this.balance;
+    }
+    
+    function calculateRunway() returns (uint) {
+        return this.balance / totalSalary;
+    }
+    
+    function hasEnoughFund() returns (bool) {
+        return calculateRunway() > 0;
+    }
+    
+    function getPaid() employeeExist(msg.sender) {
+        var employee = employees[msg.sender];
+        
+        uint nextPayday = employee.lastPayday + payDuration;
+        assert(nextPayday < now);
+
+        employees[msg.sender].lastPayday = nextPayday;
+        employee.id.transfer(employee.salary);
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------------------
+creation of Payroll pending...
+[vm] from:0xca3...a733c, to:Payroll.(constructor), value:0 wei, data:0x606...80029, 0 logs, hash:0x713...bfcd4
+Details
+Debug
+transact to Payroll.addFund pending ... 
+transact to Payroll.addFund pending ... 
+[vm] from:0xca3...a733c, to:Payroll.addFund() 0x692...77b3a, value:100000000000000000000 wei, data:0xa2f...09dfa, 0 logs, hash:0xf3b...a038a
+Details
+Debug
+[vm] from:0xca3...a733c, to:Payroll.addFund() 0x692...77b3a, value:100000000000000000000 wei, data:0xa2f...09dfa, 0 logs, hash:0x19c...15697
+Details
+Debug
+transact to Payroll.addFund pending ... 
+[vm] from:0xca3...a733c, to:Payroll.addFund() 0x692...77b3a, value:100000000000000000000 wei, data:0xa2f...09dfa, 0 logs, hash:0xb66...8641a
+Details
+Debug
+transact to Payroll.addTenEmployees pending ... 
+[vm] from:0xca3...a733c, to:Payroll.addTenEmployees() 0x692...77b3a, value:0 wei, data:0x755...77a38, 0 logs, hash:0xaf5...a26aa
+Details
+Debug
+transact to Payroll.addEmployee pending ... 
+[vm] from:0xca3...a733c, to:Payroll.addEmployee(address,uint256) 0x692...77b3a, value:0 wei, data:0xe7f...00001, 0 logs, hash:0xf36...c2cc3
+Details
+Debug
+call to Payroll.employees
+[call] from:0xca35b7d915458ef540ade6068dfe2f44e8fa733c, to:Payroll.employees(address), data:d0678...c160c, return: 
+Details
+Debug
+{
+	"0": "address: id 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c",
+	"1": "uint256: salary 1000000000000000000",
+	"2": "uint256: lastPayday 1516050356"
+}
+transact to Payroll.updateEmployee pending ... 
+[vm] from:0xca3...a733c, to:Payroll.updateEmployee(address,uint256) 0x692...77b3a, value:0 wei, data:0x5e9...00002, 0 logs, hash:0x37e...868c7
+Details
+Debug
+transact to Payroll.calculateRunway pending ... 
+transact to Payroll.calculateRunway pending ... 
+[vm] from:0xca3...a733c, to:Payroll.calculateRunway() 0x692...77b3a, value:0 wei, data:0x4ec...19512, 0 logs, hash:0x8a9...d07ac
+Details
+Debug
+[vm] from:0xca3...a733c, to:Payroll.calculateRunway() 0x692...77b3a, value:0 wei, data:0x4ec...19512, 0 logs, hash:0x7fb...f7b9c
+Details
+Debug
+transact to Payroll.hasEnoughFund pending ... 
+[vm] from:0xca3...a733c, to:Payroll.hasEnoughFund() 0x692...77b3a, value:0 wei, data:0x23f...ed09e, 0 logs, hash:0xed8...79001
+Details
+Debug
+transact to Payroll.changePaymentAddress pending ... 
+[vm] from:0x147...c160c, to:Payroll.changePaymentAddress(address) 0x692...77b3a, value:0 wei, data:0x712...c160d, 0 logs, hash:0x2a2...0fab4
+Details
+Debug
+call to Payroll.employees
+[call] from:0x14723a09acff6d2a60dcdf7aa4aff308fddc160c, to:Payroll.employees(address), data:d0678...c160c, return: 
+Details
+Debug
+{
+	"0": "address: id 0x0000000000000000000000000000000000000000",
+	"1": "uint256: salary 0",
+	"2": "uint256: lastPayday 0"
+}
+call to Payroll.employees
+[call] from:0x14723a09acff6d2a60dcdf7aa4aff308fddc160c, to:Payroll.employees(address), data:d0678...c160d, return: 
+Details
+Debug
+{
+	"0": "address: id 0x14723a09acff6d2a60dcdf7aa4aff308fddc160d",
+	"1": "uint256: salary 2000000000000000000",
+	"2": "uint256: lastPayday 1516050371"
+}
+transact to Payroll.removeEmployee pending ... 
+[vm] from:0xca3...a733c, to:Payroll.removeEmployee(address) 0x692...77b3a, value:0 wei, data:0xd10...c160d, 0 logs, hash:0x9e6...011bc
+
+
+
+L(O) = [O]
+
+L(A) = [A] + merge(L(O), [O])
+	 = [A] + merge([O], [O])
+	 = [A, O]
+	 
+L(B) = [B, O]
+L(C) = [C, O]
+
+L(K1) = [K1] + merge(L(A), L(B), [A, B])
+	  = [K1] + merge([A, O], [B, O], [A, B])
+	  = [K1, A] + merge([O], [B, O], [B])
+	  = [K1, A, B] + merge([O],[O])
+	  = [K1, A, B, O]
+
+L(K2) = [K2, A, C, O]
+
+L(Z) = [Z] + merge(L(K1), L(K2), [K1, K2])
+	 = [Z] + merge([K1, A, B, O], [K2, A, C, O], [K1, K2])
+	 = [Z, K1] + merge([A, B, O], [K2, A, C, O], [K2])
+	 = [Z, K1, K2] + merge([A, B, O], [A, C, O])
+	 = [Z, K1, K2, A] + merge([B, O], [C, O])
+	 = [Z, K1, K2, A, B] + merge([O], [C, O])
+	 = [Z, K1, K2, A, B, C] + merge([O], [O])
+	 = [Z, K1, K2, A, B, C, O]
