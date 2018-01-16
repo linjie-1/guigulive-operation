@@ -1,0 +1,50 @@
+## 硅谷live以太坊智能合约 第三课作业
+这里是同学提交作业的目录
+
+### 第三课：课后作业
+- 第一题：完成今天所开发的合约产品化内容，使用Remix调用每一个函数，提交函数调用截图
+- 第二题：增加 changePaymentAddress 函数，更改员工的薪水支付地址，思考一下能否使用modifier整合某个功能
+- 第三题（加分题）：自学C3 Linearization, 求以下 contract Z 的继承线
+- contract O
+- contract A is O
+- contract B is O
+- contract C is O
+- contract K1 is A, B
+- contract K2 is A, C
+- contract Z is K1, K2
+
+### 答案
+推导过程如下：
+
+L(0) := [0]
+
+L(A) := [A] + merge(L(0), [0])
+      = [A] + merge([0],[0])
+      = [A,0]
+
+L(B) := [B,0]
+
+L(C) := [C,0]
+
+L(K1) := [K1] + merge(L[A],L[B],[A,B])
+       = [K1] + merge([A,0],[B,0],[A,B])
+       = [K1, A] + merge([0],[B,0],[B])
+       = [K1, A, B] + merge([0],[0])
+       = [K1, A, B, 0]
+
+L(K2) := [K2] + merge(L[A],L[C],[A,C])
+       = [K2] + merge([A,0],[C,0],[A,C])
+       = [K2, A] + merge([0],[C,0],[C])
+       = [K2, A, C] + merge([0],[0])
+       = [K2, A, C, 0]
+
+L(Z)  := [Z] + merge(L[K1],L[K2],[K1,K2])
+       = [Z] + merge([K1,A,B,0],[K2,A,C,0],[K1,K2])
+       = [Z, K1] + merge([A,B,0],[K2,A,C,0],[K2])
+       = [Z, K1, K2] + merge([A,B,0],[A,C,0])
+       = [Z, K1, K2, A] + merge([B,0],[C,0])
+       = [Z, K1, K2, A, B] + merge([0],[C,0])
+       = [Z, K1, K2, A, B, C] + merge([0],[0])
+       = [Z, K1, K2, A, B, C, 0] 
+
+
