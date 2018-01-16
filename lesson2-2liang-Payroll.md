@@ -97,6 +97,7 @@ contract Payroll {
 				return (employees[i], i);
 			}
 		}
+		return (Employee(0, 0, 0), 0);
 	}
 
 	/**
@@ -139,8 +140,8 @@ contract Payroll {
 		// 当该雇员是最后一个变量 无需处理
 		if (index != employees.length - 1) {	
 			employees[index] = employees[employees.length - 1];
-			employees.length -= 1;
 		}
+		employees.length -= 1;
 		return;
 	}
 
