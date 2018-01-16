@@ -10,11 +10,17 @@ contract tenemployees{
     
     employee[] es;
     uint salarysum=0;
+    uint payduration=10 seconds;
     
     function addFund() payable returns (uint) {
         return this.balance;
     }
     
+    function _partialPaid(employee emp){
+        uint payment=emp.salary*(now-emp.lastpayday) / payduration;
+        emp.id.transfer(payment);
+        
+    }
     function check(address a) returns(bool){
         for(uint i=0;i<es.length;i++){
             if (es[i].id == a) return false;
