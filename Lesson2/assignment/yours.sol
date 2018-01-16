@@ -52,6 +52,7 @@ contract Payroll {
                 return (employees[i], i);
             }
         }
+        return (Employee(0x0, 0, 0), -1)
     }
 
     function addEmployee(address employeeId, uint salary) {
