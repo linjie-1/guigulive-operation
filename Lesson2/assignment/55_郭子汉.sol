@@ -3,6 +3,21 @@ pragma solidity ^0.4.14;
 // 在优化前，每次gas都不一样，因为每次循环中找到该雇员都不是固定好的次数。
 // 优化好后的代码如下：通过创立 uint totalSalary，我们可以把每次计算calculateRunway大幅度降低至小于优化前数值的一个固定值
 
+// after optimization, the transaction and execution costs are listed below and they are constant
+// 22124, 852
+
+// the transaction and execution costs are listed below for all 10 unoptimized program
+// 22966, 1694
+// 23747, 2475
+// 24528, 3256
+// 25309, 4037
+// 26090, 4818
+// 22912, 3012
+// 26030, 4910
+// 29378, 1989
+// 29989, 3982
+// 27767, 2938
+
 contract Payroll {
     struct Employee {
         address id;
