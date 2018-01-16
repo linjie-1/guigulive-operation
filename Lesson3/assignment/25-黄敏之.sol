@@ -12,6 +12,21 @@ contract Payroll {
     address owner;
     mapping (address => Employee) public employees;
 
+    modifier onlyOwner {
+        require(msg.sender == owner);
+        _;
+    }
+    
+    modifier employeeExist(address employeeId){
+        assert(employees[employeeId].id != 0x0);
+        _;
+    }
+    
+    modifier employeeNotExist(address employeeId){
+        assert(employees[employeeId].id == 0x0);
+        _;
+    }
+    
     function Payroll() {
         owner = msg.sender;
     }
@@ -21,34 +36,29 @@ contract Payroll {
         employee.id.transfer(payment);
     }
 
-    function addEmployee(address employeeId, uint salary) {
-        require(msg.sender == owner);
+    function addEmployee(address employeeId, uint salary) onlyOwner employeeNotExist(employeeId) {
         var employee = employees[employeeId];
-        assert(employee.id == 0x0);
         uint salaryInWei = salary * 1 ether;
         employees[employeeId] = Employee(employeeId, salaryInWei, now);
         totalSalary += salaryInWei;
     }
     
-    function removeEmployee(address employeeId) {
+    function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId) {
         var employee = employees[employeeId];
-        assert(employee.id != 0x0);
         _partialPaid(employee);
         totalSalary -= employee.salary;
         delete employees[employeeId];
     }
     
-    function updateEmployee(address employeeId, address employeeIdNew, uint salary) {
-        require(msg.sender == owner);
-        var employee = employees[employeeId];
-        totalSalary -= employee.salary;
-        assert(employee.id != 0x0);
-        _partialPaid(employee);
-        delete employees[employeeId];
-        uint salaryInWei = salary * 1 ether;
-        employees[employeeIdNew] = Employee(employeeIdNew, salaryInWei, now);
-        totalSalary += salaryInWei;
-        
+    function updateEmployee(address employeeId, address employeeIdNew, uint salary) onlyOwner employeeExist(employeeId) {
+        removeEmployee(employeeId);
+        addEmployee(employeeIdNew, salary);
+    }
+    
+    function changePaymentAddress(address employeeNewAddress) employeeExist(msg.sender)  employeeNotExist(employeeNewAddress){
+        var employee = employees[msg.sender];
+        employees[employeeNewAddress] = Employee(employeeNewAddress, employee.salary, employee.lastPayday);
+        delete employees[msg.sender];
     }
     
     function addFund() payable returns (uint){
@@ -63,9 +73,8 @@ contract Payroll {
         return calculateRunway() > 0;
     }
     
-    function getPaid() {
+    function getPaid() employeeExist(msg.sender) {
         var employee = employees[msg.sender];
-        assert(employee.id != 0x0);
             
         uint nextPayday = employee.lastPayday + payDuration;
         if (nextPayday > now)
@@ -75,6 +84,4 @@ contract Payroll {
         employee.id.transfer(employee.salary);
     }
 }
-
-
 
