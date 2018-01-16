@@ -75,6 +75,15 @@ contract Payroll {
          return calculateRunway() > 0;
     }
     
+    function checkEmployee(address  employeeId) returns (uint salary, uint lastPayday) {
+        var employee = employees[employeeId];
+        
+        //return (employee.salary, employee.lastPayday);
+        //OR
+        salary = employee.salary;
+        lastPayday = employee.lastPayday;
+    }
+    
     function getPaid() {
         var employee = employees[msg.sender];
         assert(employee.id != 0x0);
