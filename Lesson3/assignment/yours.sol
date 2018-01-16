@@ -15,8 +15,7 @@ contract Payroll {
 
     address owner;
     mapping(address=>Employee) public employees;
-    uint public totalSalary = 0;
-    uint public totalPaid = 0;
+    uint totalSalary = 0;
     function Payroll() {
         owner = msg.sender;
     }
@@ -34,8 +33,9 @@ contract Payroll {
     }
     
     function _partialPaid(Employee employee) private {
-        uint payment = employee.salary * (now - employee.lastPayday)/payDuration;
-        totalPaid += payment;
+        uint payment = employee.salary
+            .mul(now.sub(employee.lastPayday))
+            .div(payDuration);
         employee.id.transfer(payment);
     }
     
@@ -45,11 +45,12 @@ contract Payroll {
         
         //makesure employee is not exist before add
         assert(employee.id == 0x0);
-        uint newSalary = salary * 1 ether;
+        uint newSalary = salary.mul(1 ether);
         employees[employeeId] = Employee(employeeId,newSalary,now);
         totalSalary = totalSalary.add(newSalary);
     }
     
+
     
     function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId) {
        var employee = employees[employeeId];
@@ -62,7 +63,7 @@ contract Payroll {
         var employee = employees[employeeId];
         _partialPaid(employee);
         totalSalary = totalSalary.sub(employee.salary);
-        uint newSalary = salary * 1 ether;
+        uint newSalary = salary.mul(1 ether);
         totalSalary = totalSalary.add(newSalary);
         employees[employeeId].salary = newSalary;
         employees[employeeId].lastPayday = now;
@@ -73,7 +74,7 @@ contract Payroll {
     }
     
     function calculateRunway() returns (uint) {
-        return this.balance / totalSalary;
+        return this.balance.div(totalSalary);
     }
     
     function hasEnoughFund() returns (bool) {
@@ -84,7 +85,6 @@ contract Payroll {
         var employee = employees[msg.sender];
         uint nextPayday = employee.lastPayday.sub(payDuration);
         assert(nextPayday < now);
-        totalPaid += employee.salary;
         employees[msg.sender].lastPayday = nextPayday;
         employee.id.transfer(employee.salary);
         
