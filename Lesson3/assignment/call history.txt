@@ -1,0 +1,68 @@
+creation of PayRoll pending...
+[vm] from:0xca3...a733c, to:PayRoll.(constructor), value:0 wei, data:0x606...10029, 0 logs, hash:0x5e3...2e1ab
+
+transact to PayRoll.addFund pending ... 
+[vm] from:0xca3...a733c, to:PayRoll.addFund() 0x692...77b3a, value:100000000000000000000 wei, data:0xa2f...09dfa, 0 logs, hash:0xf3b...a038a
+
+transact to PayRoll.addEmployee pending ... 
+[vm] from:0xca3...a733c, to:PayRoll.addEmployee(address,uint256) 0x692...77b3a, value:0 wei, data:0xe7f...00001, 0 logs, hash:0x5e0...92783
+
+transact to PayRoll.addEmployee pending ... 
+[vm] from:0xca3...a733c, to:PayRoll.addEmployee(address,uint256) 0x692...77b3a, value:0 wei, data:0xe7f...00001, 0 logs, hash:0x67a...4b0b1
+
+transact to PayRoll.calculateRunaway pending ... 
+[vm] from:0xca3...a733c, to:PayRoll.calculateRunaway() 0x692...77b3a, value:0 wei, data:0x0ef...76b35, 0 logs, hash:0xe3d...f8032
+
+transact to PayRoll.checkEmployee pending ... 
+[vm] from:0xca3...a733c, to:PayRoll.checkEmployee(address) 0x692...77b3a, value:0 wei, data:0x7cf...c160c, 0 logs, hash:0xc53...c86c6
+
+transact to PayRoll.hasEnoughFund pending ... 
+[vm] from:0xca3...a733c, to:PayRoll.hasEnoughFund() 0x692...77b3a, value:0 wei, data:0x23f...ed09e, 0 logs, hash:0x0fc...6cfe9
+
+call to PayRoll.employeeList
+[call] from:0xca35b7d915458ef540ade6068dfe2f44e8fa733c, to:PayRoll.employeeList(address), data:cd16a...c160c, return: 
+{
+	"0": "address: id 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c",
+	"1": "uint256: salary 1000000000000000000",
+	"2": "uint256: lastPayDay 1516067404"
+}
+
+transact to PayRoll.addEmployee pending ... 
+[vm] from:0xca3...a733c, to:PayRoll.addEmployee(address,uint256) 0x692...77b3a, value:0 wei, data:0xe7f...00001, 0 logs, hash:0x991...0b013
+
+transact to PayRoll.addEmployee pending ... 
+[vm] from:0xca3...a733c, to:PayRoll.addEmployee(address,uint256) 0x692...77b3a, value:0 wei, data:0xe7f...00001, 0 logs, hash:0xd98...ed28b
+
+transact to PayRoll.updateEmployee pending ... 
+[vm] from:0xca3...a733c, to:PayRoll.updateEmployee(address,uint256) 0x692...77b3a, value:0 wei, data:0x5e9...00002, 0 logs, hash:0xd7f...27560
+
+//故意使用非owner的地址调用updateEmployee，出现错误
+transact to PayRoll.updateEmployee pending ... 
+[vm] from:0x147...c160c, to:PayRoll.updateEmployee(address,uint256) 0x692...77b3a, value:0 wei, data:0x5e9...00002, 0 logs, hash:0x7a1...e2785
+
+transact to PayRoll.updateEmployee errored: VM error: revert.
+revert	The transaction has been reverted to the initial state.
+Note: The constructor should be payable if you send value.	Debug the transaction to get more information. 
+transact to PayRoll.updateEmployee pending ... 
+[vm] from:0xca3...a733c, to:PayRoll.updateEmployee(address,uint256) 0x692...77b3a, value:0 wei, data:0x5e9...00003, 0 logs, hash:0xbec...d8ef5
+
+transact to PayRoll.removeEmployee pending ... 
+[vm] from:0xca3...a733c, to:PayRoll.removeEmployee(address) 0x692...77b3a, value:0 wei, data:0xd10...40225, 0 logs, hash:0xaf2...10b4e
+
+call to PayRoll.getPaid
+[call] from:0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db, to:PayRoll.getPaid(), data:cf41d...1d6f8, return: 
+{
+	"0": "uint256: 0"
+}
+
+call to PayRoll.employeeList
+[call] from:0xca35b7d915458ef540ade6068dfe2f44e8fa733c, to:PayRoll.employeeList(address), data:cd16a...4d2db, return: 
+
+{
+	"0": "address: id 0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db",
+	"1": "uint256: salary 1000000000000000000",
+	"2": "uint256: lastPayDay 1516067509"
+}
+
+transact to PayRoll.changePaymentAddress pending ... 
+[vm] from:0x147...c160c, to:PayRoll.changePaymentAddress(address,address) 0x987...04485, value:0 wei, data:0xbc4...4d2db, 0 logs, hash:0x838...ba269
