@@ -40,16 +40,14 @@ contract Payroll {
 
     function removeEmployee(address employeeId) {
         require(msg.sender == owner);
-        for(uint index = 0;index<employees.length;index++){
-            if(employees[index].id == employeeId){
-                _partialPaid(employees[index]);
-                totalSalary -= employees[index].salary;
-                delete employees[index];
-                employees[index] = employees[employees.length-1];
-                employees.length -=1;
-                return;
-            }
-        }
+        var(employee,index) = _findEmployee(employeeId);
+        _partialPaid(employees[index]);
+        totalSalary -= employees[index].salary;
+        delete employees[index];
+        employees[index] = employees[employees.length-1];
+        employees.length -=1;
+        return;
+
     }
 
     function updateEmployee(address employeeId, uint salary) {
@@ -84,3 +82,4 @@ contract Payroll {
         employee.id.transfer(employee.salary);
     }
 }
+
