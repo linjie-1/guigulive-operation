@@ -58,8 +58,8 @@ contract Payroll {
         
         payRemainingSalary(id);
 
+        total = total - e.salary + s * 1 ether;
         e.salary = s * 1 ether;
-        total += e.salary;
         e.lastPayday = now;
     }
     
