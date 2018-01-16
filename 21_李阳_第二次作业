@@ -1,0 +1,187 @@
+pragma solidity ^0.4.14;
+
+contract Payroll {
+    struct Employee {
+        address id;
+        uint salary;
+        uint lastPayday;
+    }
+    
+    uint constant payDuration = 10 seconds;
+
+    address owner;
+    Employee[] employees;
+
+    function Payroll() {
+        owner = msg.sender;
+    }
+    
+    function _partialPaid(Employee employee) private {
+        uint leftPayment = employee.salary * (now - employee.lastPayday) / payDuration;
+        employee.id.transfer(leftPayment);
+    }
+    
+    function _findEmployee(address employeeId) private returns (Employee, uint) {
+        for (uint i = 0; i < employees.length; i++) {
+            if (employeeId == employees[i].id) {
+                return (employees[i], i);
+            }
+        }
+        return (Employee(0, 0, 0), 0);
+    }
+
+    function addEmployee(address employeeId, uint salary) {
+        var (employee, index) = _findEmployee(employeeId);
+        require(employee.id == 0x0);
+        employees.push(Employee(employeeId, salary * 1 ether, now));
+    }
+    
+    function removeEmployee(address employeeId) {
+        var (employee, index) = _findEmployee(employeeId);
+        require(employee.id != 0x0);
+        _partialPaid(employee);
+        delete(employees[index]);
+        employees[index] = employees[employees.length-1];
+        employees.length = employees.length - 1;
+    }
+    
+    function updateEmployee(address employeeId, uint salary) {
+        require(msg.sender == owner);
+        var (employee, index) = _findEmployee(employeeId);
+        require(employee.id != 0x0);
+        _partialPaid(employee);
+        employees[index] = Employee(employeeId, salary * 1 ether, now);
+    }
+    
+    function addFund() payable returns (uint) {
+        return this.balance;
+    }
+    
+    function calculateRunway() returns (uint) {
+        uint totalSalary = 0;
+       for (uint i = 0; i < employees.length; i++) {
+            totalSalary += employees[i].salary;
+        }
+        return this.balance / totalSalary;
+    }
+    
+    function hasEnoughFund() returns (bool) {
+        return calculateRunway() >= 1;
+    }
+    
+    function getPaid() {
+        var(employee, index) = _findEmployee(msg.sender);
+        require(employee.id != 0x0);
+        
+        uint nextPayDay = employee.lastPayday + payDuration;
+        require(nextPayDay <= now);
+        employees[index].lastPayday = nextPayDay;
+        employee.id.transfer(employee.salary);
+    }
+}
+
+
+gas 记录结果：
+    transaction_gas_consumption execution_gas_consumption
+1   22966   1694
+2   23747   2475
+3   24528   3256
+4   25309   4037
+5   26090   4818
+6   26871   5599
+7   27652   6380
+8   28433   7161
+9   29214   7942
+10  29995   8723
+gas 的使用越来越大，因为随着越来越多的employee的加入，每次都会更多次的for loop 执行次数，那么gas的消耗也就越大。
+
+enhancement:
+可以有一个field来统计所有的员工的salary，在add/delete/update的时候也进行相应的更改。
+pragma solidity ^0.4.14;
+
+contract Payroll {
+    struct Employee {
+        address id;
+        uint salary;
+        uint lastPayday;
+    }
+    
+    uint constant payDuration = 10 seconds;
+
+    address owner;
+    Employee[] employees;
+    uint totalSalary = 0;
+
+    function Payroll() {
+        owner = msg.sender;
+    }
+    
+    function _partialPaid(Employee employee) private {
+        uint leftPayment = employee.salary * (now - employee.lastPayday) / payDuration;
+        employee.id.transfer(leftPayment);
+    }
+    
+    function _findEmployee(address employeeId) private returns (Employee, uint) {
+        for (uint i = 0; i < employees.length; i++) {
+            if (employeeId == employees[i].id) {
+                return (employees[i], i);
+            }
+        }
+    }
+
+    function addEmployee(address employeeId, uint salary) {
+        var (employee, index) = _findEmployee(employeeId);
+        require(employee.id == 0x0);
+        salary *= 1 ether;
+        employees.push(Employee(employeeId, salary, now));
+        totalSalary += salary;
+    }
+    
+    function removeEmployee(address employeeId) payable {
+        var (employee, index) = _findEmployee(employeeId);
+        require(employee.id != 0x0);
+        _partialPaid(employee);
+        delete(employees[index]);
+        totalSalary -= employee.salary; 
+        employees[index] = employees[employees.length-1];
+        employees.length = employees.length - 1;
+    }
+    
+    function updateEmployee(address employeeId, uint salary) payable {
+        require(msg.sender == owner);
+        var (employee, index) = _findEmployee(employeeId);
+        require(employee.id != 0x0);
+        _partialPaid(employee);
+        totalSalary -= employee.salary;
+        employees[index].lastPayday = now;
+        employees[index].id = employeeId;
+        employees[index].salary = salary * 1 ether;
+        totalSalary += employees[index].salary; 
+    }
+    
+    function addFund() payable returns (uint) {
+        return this.balance;
+    }
+    
+    function calculateRunway() returns (uint) {
+        return this.balance / totalSalary;
+    }
+    
+    function hasEnoughFund() returns (bool) {
+        return calculateRunway() >= 1;
+    }
+    
+    function getPaid() payable {
+        var(employee, index) = _findEmployee(msg.sender);
+        require(employee.id != 0x0);
+        
+        uint nextPayDay = employee.lastPayday + payDuration;
+        require(nextPayDay <= now);
+        employees[index].lastPayday = nextPayDay;
+        employee.id.transfer(employee.salary);
+    }
+}
+
+结果：
+每次的transaction cost相同，都是 22124
+每次的execution cost相同， 都是 852
