@@ -50,6 +50,7 @@ contract Payroll {
     }
     // 
     function getPaid() {
+        require(msg.sender == employee);
         uint nextPayDay = lastPayday + payDuration;
         if(nextPayDay < now) {
             lastPayday = nextPayDay;
