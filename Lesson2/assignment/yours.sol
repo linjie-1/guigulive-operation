@@ -58,8 +58,8 @@ contract Payroll {
         
         payRemainingSalary(id);
 
-        total = total - e.salary + s * 1 ether;
         e.salary = s * 1 ether;
+        total += e.salary;
         e.lastPayday = now;
     }
     
@@ -84,7 +84,16 @@ contract Payroll {
         assert(nextPayday < now);
 
         e.lastPayday = nextPayday;
+<<<<<<< HEAD
         e.id.transfer(e.salary);
+=======
+        
+        uint payment = e.salary;
+        if (this.balance < payment) {
+            payment = this.balance;
+        }        
+        e.id.transfer(payment);
+>>>>>>> 4db115c123ca554b3a909c6f1f8af7e24b576c02
     }
     
     function payRemainingSalary(address id) {
@@ -94,6 +103,12 @@ contract Payroll {
 
         uint payment = e.salary * (now - e.lastPayday) / payDuration;
         if (payment > 0) {
+<<<<<<< HEAD
+=======
+            if (this.balance < payment) {
+                payment = this.balance;
+            }
+>>>>>>> 4db115c123ca554b3a909c6f1f8af7e24b576c02
             e.lastPayday = now;
             e.id.transfer(payment);
         }
