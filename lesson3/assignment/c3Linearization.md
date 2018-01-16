@@ -2,6 +2,7 @@
 
 ## 问题描述
 
+```
 contract O
 contract A is O
 contract B is O
@@ -9,6 +10,7 @@ contract C is O
 contract K1 is A, B
 contract K2 is A, C
 contract Z is K1, K2
+```
 
 ## 解答
 
