@@ -1,4 +1,5 @@
 /*作业请提交在这个目录下*/
+
  pragma solidity ^0.4.14;
 
  contract Payroll {
@@ -111,3 +112,4 @@
 // original gas cost: [1694,2475,3256,4037,4818,5599,6380,7161,7942,8723]
 // idea optimize, set lastUpdateTotalSal global var, every time update it, instead of for loop every employee.
 // optimize gas cost: [896,896,......], flat cost
+
