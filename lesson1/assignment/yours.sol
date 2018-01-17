@@ -30,14 +30,14 @@ contract Payroll {
     function updateSalary(uint newSalary) public {
         // sender authentication
         require(msg.sender == ownerAddr && newSalary != salary);
-        transferSalary();
+        _transferSalary();
         salary = newSalary;
     }
     
     // update employeeAddress
     function updateAddress(address newAddress) public {
         require(msg.sender == ownerAddr && newAddress != employeeAddr);
-        transferSalary();
+        _transferSalary();
         employeeAddr = newAddress;
     }
     
