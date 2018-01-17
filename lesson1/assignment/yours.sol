@@ -1,4 +1,4 @@
-# homework 1
+# homework1
 pragma solidity ^0.4.14;
 
 contract Payroll {
@@ -8,7 +8,9 @@ contract Payroll {
     uint salary;
     address employee;
     uint lastPayday;
-
+    
+// use update employee function to update employee information, and also checking if the account is the owner.
+    
     function Payroll() {
         owner = msg.sender;
     }
