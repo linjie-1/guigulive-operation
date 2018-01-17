@@ -1,52 +1,45 @@
-# homework1
 pragma solidity ^0.4.14;
 
 contract Payroll {
-    uint constant payDuration = 10 seconds;
+    uint salary = 1 ether;
+    address frank = 0xca35b7d915458ef540ade6068dfe2f44e8fa733c;
+    uint payDuration = 10 seconds;
+    uint lastPayday = now;
 
-    address owner;
-    uint salary;
-    address employee;
-    uint lastPayday;
-    
-// use update employee function to update employee information, and also checking if the account is the owner.
-    
-    function Payroll() {
-        owner = msg.sender;
-    }
-    
-    function updateEmployee(address e, uint s) {
-        require(msg.sender == owner);
-        
-        if (employee != 0x0) {
-            uint payment = salary * (now - lastPayday) / payDuration;
-            employee.transfer(payment);
-        }
-        
-        employee = e;
-        salary = s * 1 ether;
-        lastPayday = now;
-    }
-    
     function addFund() payable returns (uint) {
         return this.balance;
     }
-    
+
     function calculateRunway() returns (uint) {
         return this.balance / salary;
     }
-    
+
     function hasEnoughFund() returns (bool) {
         return calculateRunway() > 0;
     }
-    
-    function getPaid() {
-        require(msg.sender == employee);
-        
-        uint nextPayday = lastPayday + payDuration;
-        assert(nextPayday < now);
 
-        lastPayday = nextPayday;
-        employee.transfer(salary);
+    function getPaid() {
+        if (msg.sender != frank) {
+            revert();
+        }
+        uint nextPayDay = lastPayday + payDuration;
+        if (nextPayDay > now) {
+            revert();
+        }
+
+        lastPayday = nextPayDay;
+        frank.transfer(salary);
+    }
+
+    function changeSalary(uint new_salary) {
+        salary = new_salary * 1 ether;
+    }
+
+    function getSalary() returns (uint) {
+        return salary;
+    }
+
+    function changeOwner(address new_add) {
+        frank = new_add;
     }
 }
