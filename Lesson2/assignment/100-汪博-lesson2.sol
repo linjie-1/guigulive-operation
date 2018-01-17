@@ -32,7 +32,7 @@ contract Payroll {
         }
     }
 
-    function addEmployee(address employeeId, uint salary) {
+    function addEmployee(address employeeId, uint salary) {/*每次运行addEmployee的gas消耗增加。因为在_findEmployee循环中的运行代价增加*/
         require(msg.sender == owner);
         
         var(employee,index) = _findEmployee(employeeId);
