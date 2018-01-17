@@ -1,16 +1,11 @@
-## 硅谷live以太坊智能合约频道官方地址
-
-### 第三课《智能合约后端优化和产品化》
-
-目录结构
-  <br/>|
-  <br/>|--orgin 课程初始代码
-  <br/>|
-  <br/>|--assignment 课程作业提交代码
-<br/> 
-### 本节知识点
-第3课：智能合约后端优化和产品化
-- 如何通过数据结构优化降低合约执行成本
-- 合约的继承
-- 巧用modifier
-- 以太坊函数库的使用和基本介绍
+作业：
+    1、 第一题：完成今天所开发的合约产品化内容，使用Remix调用每一个函数，提交函数调用截图
+    2、 第二题：增加 changePaymentAddress 函数，更改员工的薪水支付地址，思考一下能否使用modifier整合某个功能
+    3、 第三题：自学C3 Linearization, 求以下 contract Z 的继承线
+        contract O
+        contract A is O
+        contract B is O
+        contract C is O
+        contract K1 is A, B
+        contract K2 is A, C
+        contract Z is K1, K2
