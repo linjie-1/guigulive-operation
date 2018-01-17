@@ -3,33 +3,36 @@
 
 ### 第三课：课后作业
 - 第一题：完成今天所开发的合约产品化内容，使用Remix调用每一个函数，提交函数调用截图
-![1.png](images/1.png)
-```
+
 合约Owner: "0xca35b7d915458ef540ade6068dfe2f44e8fa733c"
 1. msg.sender为"0xca35b7d915458ef540ade6068dfe2f44e8fa733c"（合约Owner）的函数调用结果
-	过程如下：
-	1.1 addFund(100 ether)
-	1.2 添加第一个employee: addEmployee("0x14723a09acff6d2a60dcdf7aa4aff308fddc160c", 1)
-	1.3 添加第二个employee: addEmployee("0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db", 2)
-	1.4 删除第一个employee: removeEmployee("0x14723a09acff6d2a60dcdf7aa4aff308fddc160c")
-	1.5 更新第二个employee: updateEmployee("0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db", 3)
-	1.6 calculateRunway()
-	1.7 hasEnoughFund()
-	1.8 getPaid()
-	结果如下：
-	![1.png](./images/1.png)
-2. msg.sender为"0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db"（第二个employee）的函数调用结果
-	过程如下：
-	2.1 addFund(100 ether)
-	2.2 添加第三个employee: addEmployee("0x583031d1113ad414f02576bd6afabfb302140225")
-	2.3 删除第二个employee: removeEmployee("0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db")
-	2.4 更新第二个employee: updateEmployee("0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db", 5)
-	2.5 calculateRunway()
-	2.6 hasEnoughFund()
-	2.7 getPaid()
-	结果如下：
-	![2.png](./images/2.png)
 ```
+过程如下：
+1.1 addFund(100 ether)
+1.2 添加第一个employee: addEmployee("0x14723a09acff6d2a60dcdf7aa4aff308fddc160c", 1)
+1.3 添加第二个employee: addEmployee("0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db", 2)
+1.4 删除第一个employee: removeEmployee("0x14723a09acff6d2a60dcdf7aa4aff308fddc160c")
+1.5 更新第二个employee: updateEmployee("0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db", 3)
+1.6 calculateRunway()
+1.7 hasEnoughFund()
+1.8 getPaid()
+```
+结果如下：
+![1.png](./images/1.png)
+
+2. msg.sender为"0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db"（第二个employee）的函数调用结果
+```
+过程如下：
+2.1 addFund(100 ether)
+2.2 添加第三个employee: addEmployee("0x583031d1113ad414f02576bd6afabfb302140225")
+2.3 删除第二个employee: removeEmployee("0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db")
+2.4 更新第二个employee: updateEmployee("0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db", 5)
+2.5 calculateRunway()
+2.6 hasEnoughFund()
+2.7 getPaid()
+```
+结果如下：
+![2.png](images/2.png)
 - 第二题：增加 changePaymentAddress 函数，更改员工的薪水支付地址，思考一下能否使用modifier整合某个功能
 ```
  function changePaymentAddress(address oldAddr, address newAddr) onlyOwner hasEmployee(oldAddr) {
