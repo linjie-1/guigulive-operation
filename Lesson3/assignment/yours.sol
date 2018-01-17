@@ -1,4 +1,32 @@
 /*作业请提交在这个目录下*/
+
+/****第一题:
+放在img文件夹
+*/
+
+/****第二题：
+employee可以改Payment地址，Modifier不是必须的。
+function changePaymentAddress(address empolyeeId, address newEmployeeId) onlyOwner employeeExist(empolyeeId) {
+        var employee = employees[empolyeeId];
+        employees[newEmployeeId] = Employee(newEmployeeId, employee.salary, employee.lastPayDay);
+        delete employees[empolyeeId];
+    }
+*/
+
+/*****第三题：
+L(O) := [O]
+L(A) := [A, O]
+L(B) := [B, O]
+L(C) := [C, O]
+L(K1) := [K1, A, B, O]
+L(K2) := [K2, A, C, O]
+L(Z) := [Z, K1, K2, A, B, C, O]
+*/
+
+
+/**
+完整代码
+*/
 pragma solidity ^0.4.14;
 
 contract Payroll {
