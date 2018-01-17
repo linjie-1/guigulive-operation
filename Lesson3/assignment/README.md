@@ -3,6 +3,7 @@
 
 ### 第三课：课后作业
 - 第一题：完成今天所开发的合约产品化内容，使用Remix调用每一个函数，提交函数调用截图
+![1.png](images/1.png)
 ```
 合约Owner: "0xca35b7d915458ef540ade6068dfe2f44e8fa733c"
 1. msg.sender为"0xca35b7d915458ef540ade6068dfe2f44e8fa733c"（合约Owner）的函数调用结果
