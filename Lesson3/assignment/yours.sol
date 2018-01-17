@@ -26,11 +26,6 @@ contract Payroll is Ownable  {
         
     }
 
-    modifier notOwner(){
-        
-        
-        
-    }
     function _partialPaid(Employee employee) private{
         uint payment = employee.salary.mul((now.sub(employee.lastPayday))).div(payDuration);
         employee.id.transfer(payment);
