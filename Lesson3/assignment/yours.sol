@@ -44,12 +44,18 @@ contract Payroll {
         _;
     }
     
+    modifier onlyEmployee {
+        Employee employee = employees[msg.sender];
+        assert(employee.id != 0x0);
+        _;
+    }
+
     modifier employeeExists(address employeeId) {
         Employee employee = employees[employeeId];
         assert(employee.id != 0x0);
         _;
     }
-
+    
     function Payroll() {
         owner = msg.sender;
     }
@@ -90,6 +96,14 @@ contract Payroll {
         employees[employeeId].salary = newSalary;
     }
     
+    function changeEmployeeAddress(address newEmployeeId) onlyEmployee {
+        Employee employee = employees[msg.sender];
+        
+        employee.id = newEmployeeId;
+        employees[newEmployeeId] = employee;
+        delete employees[msg.sender];
+    }
+    
     function addFund() payable returns (uint) {
         require(msg.sender == owner);
         
@@ -104,7 +118,7 @@ contract Payroll {
         return calculateRunway() > 0;
     }
     
-    function getPaid() employeeExists(msg.sender) returns (Employee) {
+    function getPaid() onlyEmployee returns (Employee) {
         Employee employee = employees[msg.sender];
 
         uint nextPayday = employee.lastPayday + payDuration;
