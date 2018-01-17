@@ -16,19 +16,19 @@
 ### Solutions
 
 #### Problem 1
-- Call addEmployee("0x14723a09acff6d2a60dcdf7aa4aff308fddc160c",1):
+- Call addEmployee("0x14723a09acff6d2a60dcdf7aa4aff308fddc160c",1):  
 	![](https://github.com/mblsktxy/guigulive-operation/blob/master/Lesson3/assignment/images/addEmployee.png)
-- Call addFund():
+- Call addFund():  
 	![](https://github.com/mblsktxy/guigulive-operation/blob/master/Lesson3/assignment/images/addFund.png)
-- Call calculateRunway():
+- Call calculateRunway():  
  	![](https://github.com/mblsktxy/guigulive-operation/blob/master/Lesson3/assignment/images/calculateRunway.png)
-- Call getPaid():
+- Call getPaid():  
 	![](https://github.com/mblsktxy/guigulive-operation/blob/master/Lesson3/assignment/images/getPaid.png)
-- Call hasEnoughFund():
+- Call hasEnoughFund():  
 	![](https://github.com/mblsktxy/guigulive-operation/blob/master/Lesson3/assignment/images/hasEnoughFund.png)
-- Call removeEmployee("0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db") after addEmployee("0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db",1) is called:
+- Call removeEmployee("0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db") after addEmployee("0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db",1) is called:  
 	![](https://github.com/mblsktxy/guigulive-operation/blob/master/Lesson3/assignment/images/removeEmployee.png)
-- Call updateEmployee("0xca35b7d915458ef540ade6068dfe2f44e8fa733c",2):
+- Call updateEmployee("0xca35b7d915458ef540ade6068dfe2f44e8fa733c",2):  
 	![](https://github.com/mblsktxy/guigulive-operation/blob/master/Lesson3/assignment/images/updateEmployee.png)
 
 #### Problem 2
@@ -37,6 +37,7 @@ Please refer to the code
 
 #### Problem 3
 
+```
 L(O)  := [O]
 L(A)  := [A] + merge(L(O), [O])
        = [A] + merge([O], [O])
@@ -52,3 +53,4 @@ L(K2) := [K2] + merge(L(A), L(C), [A, C])
 L(Z)  := [Z] + merge(L(K1), L(K2), [K1, K2])
        = [Z] + merge([K1, A, B, O], [K2, A, C, O], [K1, K2])
        = [Z, K1, K2, A, B, C, O]
+```
