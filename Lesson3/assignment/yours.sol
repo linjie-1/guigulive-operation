@@ -1,3 +1,29 @@
+/* 
+C3 Linearization Problem:
+contract O
+=> O
+contract A is O
+=> A + merge(L[O], [O])
+   A + merge([O], [O])
+   [A, O]
+contract B is O
+=> [B, O]
+contract C is O
+=> [C, O]
+contract K1 is A, B
+=> K1 + merge(L[B], L[A], [B, A])
+   K1 + merge([B, O], [A, O], [B, A])
+   [K1, B, A, O]
+contract K2 is A, C
+=> [K2, C, A, O]
+contract Z is K1, K2
+=> Z + merge(L[K2], L[K1], [K2, K1])
+   Z + merge([K2, C, A, O], [K1, B, A, O], [K2, K1])
+   [Z, K2] + merge([C, A, O], [K1, B, A, O], [K1])
+   [Z, K2, K1] + merge([C, A, O], [B, A, O])
+   [Z, K2, K1, C, B, A, O]
+*/
+
 pragma solidity ^0.4.14;
 
 contract Payroll {
