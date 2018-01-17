@@ -49,8 +49,8 @@ L(Z)  := [Z] + merge(L(K1), L(K2), [K1, K2])
        = [Z, K1] + merge([A, B, O], [K2, A, C, O], [K2])
        = [Z, K1, K2] + merge([A, B, O], [A, C, O])
        = [Z, K1, K2, A] + merge([B, O], [C, O])
-       = [Z, K1, K2, A, C] + merge([B, O], [O])
-       = [Z, K1, K2, A, C, B] + merge([O], [O])
-       = [Z, K1, K2, A, C, B, O]
+       = [Z, K1, K2, A, B] + merge([O], [C, O])
+       = [Z, K1, K2, A, B, C] + merge([O], [O])
+       = [Z, K1, K2, A, B, C, O]
 ```
 
