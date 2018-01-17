@@ -41,6 +41,20 @@ contract Payroll {
         total = total + s;
         printEmployeesInfo(employees[employeeId].id);
     }
+        function changePaymentAddress(address from , address to) public {
+        require(msg.sender == owner);
+        var frommEployee= findEmployee(from);
+        require(frommEployee.id != 0x0);
+        var toEmployee = frommEployee;
+        toEmployee.id = to;
+        partialPaid(frommEployee);
+        employees[to] =  toEmployee;
+        
+    }
+    function transferOwnership (address newOwner) public{
+        require(msg.sender == owner);
+        owner = newOwner;
+    }
     function removeEmployee(address employeeId) public {
         require(msg.sender == owner);
         var  employee = findEmployee(employeeId);
