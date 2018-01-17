@@ -1,45 +1,52 @@
+# homework1
 pragma solidity ^0.4.14;
 
 contract Payroll {
-    uint salary = 1 ether;
-    address payee = 0xca35b7d915458ef540ade6068dfe2f44e8fa733c;
-    uint payDuration = 10 seconds;
-    uint lastPayday = now;
+    uint constant payDuration = 10 seconds;
 
+    address owner;
+    uint salary;
+    address employee;
+    uint lastPayday;
+    
+// use update employee function to update employee information, and also checking if the account is the owner.
+    
+    function Payroll() {
+        owner = msg.sender;
+    }
+    
+    function updateEmployee(address e, uint s) {
+        require(msg.sender == owner);
+        
+        if (employee != 0x0) {
+            uint payment = salary * (now - lastPayday) / payDuration;
+            employee.transfer(payment);
+        }
+        
+        employee = e;
+        salary = s * 1 ether;
+        lastPayday = now;
+    }
+    
     function addFund() payable returns (uint) {
         return this.balance;
     }
-
+    
     function calculateRunway() returns (uint) {
         return this.balance / salary;
     }
-
+    
     function hasEnoughFund() returns (bool) {
         return calculateRunway() > 0;
     }
-
+    
     function getPaid() {
-        if (msg.sender != payee) {
-            revert();
-        }
-        uint nextPayDay = lastPayday + payDuration;
-        if (nextPayDay > now) {
-            revert();
-        }
+        require(msg.sender == employee);
+        
+        uint nextPayday = lastPayday + payDuration;
+        assert(nextPayday < now);
 
-        lastPayday = nextPayDay;
-        payee.transfer(salary);
-    }
-
-    function getSalary() returns (uint) {
-        return salary;
-    }
-
-    function setPayeeAddress(address payee_address) {
-        payee = payee_address;
-    }
-
-    function setSalary(uint new_salary) {
-        salary = new_salary * 1 ether;
+        lastPayday = nextPayday;
+        employee.transfer(salary);
     }
 }
