@@ -12,7 +12,6 @@ contract Payroll is Ownable {
         uint lastPayday;
     }
     uint constant payDuratin = 10 seconds;
-    address ownerAddress;
     mapping(address => Employee) public employees;
     uint totalSalary;
 
