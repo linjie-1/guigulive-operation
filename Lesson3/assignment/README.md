@@ -1,9 +1,3 @@
-## 我只完成了第一和第二题
-
-## 第三题暂时没空研究，明天要考试了，暂时先把作业交了，不拖后腿，我后面再补充吧  ^_^
-
-
-
 
 ## 硅谷live以太坊智能合约 第三课作业
 这里是同学提交作业的目录
@@ -20,25 +14,26 @@
 - contract K2 is A, C
 - contract Z is K1, K2
 
-L[O]  = O
-L[A]  = A O
-L[B]  = B O
-L[C]  = C O
-L[K1] = K1 + merge(AO,BO,AB)
-      = k1 + A + merge(O,BO,B)
-      = k1 + A + B + merge(O,O)
-      = K1 + A + B + O
-      = k1 A B O
-L[K2] = K2 + merge(AO,CO,AC)
-      = K2 + A + merge(O,CO,C)
-      = K2 + A + C + merge(O,O)
-      = K2 + A + C + O
-      = K2 A C O
-L[Z]  = Z + merge(K1ABO,K2ACO,K1K2)
-      = Z + K1 + merge(ABO,K2ACO,K2)
-      = Z + K1 + K2 + merge(ABO,ACO)
-      = Z + K1 + K2 + A + merge(BO,CO)
-      = Z + K1 + K2 + A + B + merge(O,CO)
-      = Z + K1 + K2 + A + B + C + merge(O,O)
-      = Z + K1 + K2 + A + B + C + O
-      = Z K1 K2 A B C O
+##   解答如下
+- L[O]  = O
+- L[A]  = A O
+- L[B]  = B O
+- L[C]  = C O
+- L[K1] = K1 + merge(AO,BO,AB)
+-       = k1 + A + merge(O,BO,B)
+-       = k1 + A + B + merge(O,O)
+-       = K1 + A + B + O
+-       = k1 A B O
+- L[K2] = K2 + merge(AO,CO,AC)
+-       = K2 + A + merge(O,CO,C)
+-       = K2 + A + C + merge(O,O)
+-       = K2 + A + C + O
+-       = K2 A C O
+- L[Z]  = Z + merge(K1ABO,K2ACO,K1K2)
+-       = Z + K1 + merge(ABO,K2ACO,K2)
+-       = Z + K1 + K2 + merge(ABO,ACO)
+-       = Z + K1 + K2 + A + merge(BO,CO)
+-       = Z + K1 + K2 + A + B + merge(O,CO)
+-       = Z + K1 + K2 + A + B + C + merge(O,O)
+-       = Z + K1 + K2 + A + B + C + O
+-       = Z K1 K2 A B C O
