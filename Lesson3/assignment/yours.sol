@@ -31,6 +31,11 @@ contract tenemployees is Ownable{
     function addFund() payable returns (uint balance) {
         return this.balance;
     }
+    
+    function changePaymentAddress(address oldid,address newid) onlyOwner notVoid(oldid) notVoid(newid) {
+        es[oldid].id = newid;
+        
+    }
 
     function _partialPaid(employee e) private {
          uint payment = e.salary.mul (now - e.lastpayday) .div(payduration);
