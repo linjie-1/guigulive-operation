@@ -1,5 +1,7 @@
 pragma solidity ^0.4.14;
 
+import './Ownable.sol';
+
 contract Payroll {
     struct Employee {
         address id;
@@ -12,15 +14,6 @@ contract Payroll {
     address owner;
     mapping(address => Employee) public employees;
     uint totalSalary;
-    
-    function Payroll() {
-        owner = msg.sender;
-    }
-    
-    modifier onlyOwner {
-        require(msg.sender == owner);
-        _;
-    }
     
     modifier employeeExist(address employeeId) {
         var employee = employees[employeeId];
