@@ -19,13 +19,13 @@
 1 作业回顾
 随着人数的增多 数组变长 导致 for 循环的时候 gas的消耗会越来越多 这样来看是换不来
  
-所以抛出问题 我们应该如何 建设gas的消耗
+所以抛出问题 我们应该如何 减少gas的消耗
 
 引出 map的数据类型
-类似于 map 或者dict nsdictionary的概念
+类似于java中的 map 或者Python 和iOS object-c dict nsdictionary的概念
 key 只能是这几种数据类型 （bool,int,address,string）
 value 可以是任意类型
-mapping(address => Employee) employees 
+例如 ：mapping(address => Employee) employees 
 只能做成员变量，不能做本地的局部变量
 
 mapping 低层实现
@@ -61,7 +61,7 @@ private 不代表别的合约无法肉眼看到 ，只代表别的区块链智�
 重要的事情说三遍 合约的所有成员变量都是肉眼可见的！
  
 函数上 public external internal private
-默认函数上是public
+默认函数上的可视度是public
 
 external
 contract Test{
