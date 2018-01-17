@@ -68,14 +68,14 @@ L(A)  := [A] + merge(L(O), [O])
 L(B)  := [B, O]
 L(C)  := [C, O]
 
-L(K1) := [K1] + merge(L(A), L(B), [A, B])
-       = [K1] + merge([A, O], [B, O], [A, B])
-       = [K1, A, B, O]
-L(K2) := [K2] + merge(L(A), L(C), [A, C])
-       = [K2] + merge([A, O], [C, O], [A, C])
-       = [K2, A, C, O]
+L(K1) := [K1] + merge(L(B), L(A), [B, A])
+       = [K1] + merge([B, O], [A, O], [B, A])
+       = [K1, B, A, O]
+L(K2) := [K2] + merge(L(C), L(A), [C, A])
+       = [K2] + merge([C, O], [A, O], [C, A])
+       = [K2, C, A, O]
 
-L(Z)  := [Z] + merge(L(K1), L(K2), [K1, K2])
-       = [Z] + merge([K1, A, B, O], [K2, A, C, O], [K1, K2])
-       = [Z, K1, K2, A, B, C, O]
+L(Z)  := [Z] + merge(L(K2), L(K1), [K2, K1])
+       = [Z] + merge([K2, C, A, O], [K1, B, A, O], [K2, K1])
+       = [Z, K2, C, K1, B, A, O]
 ```
