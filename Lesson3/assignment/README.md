@@ -17,6 +17,10 @@
 
 #### 第一题
 
+- `owner`
+
+    ![owner](https://github.com/h1994st/guigulive-operation/raw/master/Lesson3/assignment/images/0.png)
+
 - `addFund`
 
     ![addFund](https://github.com/h1994st/guigulive-operation/raw/master/Lesson3/assignment/images/1.png)
@@ -52,6 +56,10 @@
 - `removeEmployee`: "0xdd870fa1b7c4700f2bd7f44238821c26f7392148"
 
     ![removeEmployee](https://github.com/h1994st/guigulive-operation/raw/master/Lesson3/assignment/images/9.png)
+
+- `transferOwnership`: "0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db"
+
+    ![transferOwnership](https://github.com/h1994st/guigulive-operation/raw/master/Lesson3/assignment/images/10.png)
 
 #### 第二题
 
