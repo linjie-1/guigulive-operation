@@ -56,11 +56,10 @@ contract Payroll {
         // 优化totalSalary
         totalSalary -= employees[index].salary * 1 ether;
         delete employees[index];
-        employees[index] = employees[employees.length -1 ];
+        employees[index] = employees[employees.length - 1];
         employees.length -= 1;
         
     }
-
     // 更新
     function updateEmployee(address employeeId, uint salary) {
         require(msg.sender == owner);
