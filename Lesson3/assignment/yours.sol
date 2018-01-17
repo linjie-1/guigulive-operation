@@ -73,6 +73,13 @@ contract Payroll is Ownable {
         employees[employeeId].lastPayDay=now;
     
     }
+    
+     function changePaymentAddress(address oldPaymentAddress,address newPaymentAddress) onlyOwner employeeExist(oldPaymentAddress) employeeNotExist(newPaymentAddress){
+        _partialPaid(employees[oldPaymentAddress]);
+        addEmployee(newPaymentAddress,employees[oldPaymentAddress].salary);
+        removeEmployee(oldPaymentAddress);
+    }
+  
   
     function calculateRunway() returns (uint Runway) {
        /*************************
