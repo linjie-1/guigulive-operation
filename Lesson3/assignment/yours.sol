@@ -12,6 +12,17 @@ contract Payroll {
 
     address owner;
     mapping(address => Employee) public employees;
+    
+    modifier onlyOwner {
+        require(msg.sender == owner);
+        _;
+    }
+    
+    modifier employeeExists(address employeeId) {
+        Employee employee = employees[employeeId];
+        assert(employee.id != 0x0);
+        _;
+    }
 
     function Payroll() {
         owner = msg.sender;
@@ -25,9 +36,7 @@ contract Payroll {
         employee.id.transfer(partialPayment);
     }
     
-    function addEmployee(address employeeId, uint salary) {
-        require(msg.sender == owner);
-        
+    function addEmployee(address employeeId, uint salary) onlyOwner {
         Employee employee = employees[employeeId];
         assert(employee.id == 0x0);
         
@@ -36,24 +45,18 @@ contract Payroll {
         totalSalary += salary;
     }
     
-    function removeEmployee(address employeeId) {
-        require(msg.sender == owner);
-        
+    function removeEmployee(address employeeId) onlyOwner employeeExists(employeeId) {
         Employee employee = employees[employeeId];
-        assert(employee.id != 0x0);
-        
+
         _partialPaid(employees[employeeId]);
         
         totalSalary -= employee.salary;
         delete employees[employeeId];
     }
     
-    function updateEmployee(address employeeId, uint salary) {
-        require(msg.sender == owner);
-        
+    function updateEmployee(address employeeId, uint salary) onlyOwner employeeExists(employeeId) {
         Employee employee = employees[employeeId];
-        assert(employee.id != 0x0);
-        
+
         _partialPaid(employees[employeeId]);
         
         uint newSalary = salary * 1 ether;
@@ -75,10 +78,9 @@ contract Payroll {
         return calculateRunway() > 0;
     }
     
-    function getPaid() returns (Employee) {
+    function getPaid() employeeExists(msg.sender) returns (Employee) {
         Employee employee = employees[msg.sender];
-        assert(employee.id != 0x0);
-        
+
         uint nextPayday = employee.lastPayday + payDuration;
         assert(nextPayday < now);
         assert(this.balance >= employee.salary);
