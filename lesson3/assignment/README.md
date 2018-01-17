@@ -3,15 +3,23 @@
 
 ### 第三课：课后作业
 - 第一题：完成今天所开发的合约产品化内容，使用Remix调用每一个函数，提交函数调用截图
-  * ![AddFund](images/2018/01/addfund.png)
-  * ![AddEmployee](images/2018/01/addemployee.png)
-  * ![getPaid](images/2018/01/getpaid.png)
-  * ![CalculateRunway](images/2018/01/calculaterunway.png)
-  * ![HasEnoughFund](images/2018/01/hasenoughfund.png)
-  * ![UpdateEmployee](images/2018/01/updateemployee.png)
-  * ![RemoveEmployee](images/2018/01/removeemployee.png)
+  * AddFund
+    + ![AddFund](../../images/2018/01/addfund.png)
+  * AddEmployee
+    + ![AddEmployee](../../images/2018/01/addemployee.png)
+  * getPaid
+    + ![getPaid](../../images/2018/01/getpaid.png)
+  * CalculateRunway
+    + ![CalculateRunway](../../images/2018/01/calculaterunway.png)
+  * HasEnoughFund
+    + ![HasEnoughFund](../../images/2018/01/hasenoughfund.png)
+  * UpdateEmployee
+    + ![UpdateEmployee](../../images/2018/01/updateemployee.png)
+  * RemoveEmployee
+    + ![RemoveEmployee](../../images/2018/01/removeemployee.png)
 - 第二题：增加 changePaymentAddress 函数，更改员工的薪水支付地址，思考一下能否使用modifier整合某个功能
-  * ![changePaymentAddress](images/2018/01/changepaymentaddress.png)
+  * changePaymentAddress
+    + ![changePaymentAddress](../../images/2018/01/changepaymentaddress.png)
 - 第三题（加分题）：自学C3 Linearization, 求以下 contract Z 的继承线
 - contract O
   * L(Z)  := [O]
