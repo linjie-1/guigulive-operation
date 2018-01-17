@@ -33,9 +33,9 @@
 
     ![calculateRunway](https://github.com/h1994st/guigulive-operation/raw/master/Lesson3/assignment/images/4.png)
 
-- `hasEnoughPaid`
+- `hasEnoughFund`
 
-    ![hasEnoughPaid](https://github.com/h1994st/guigulive-operation/raw/master/Lesson3/assignment/images/5.png)
+    ![hasEnoughFund](https://github.com/h1994st/guigulive-operation/raw/master/Lesson3/assignment/images/5.png)
 
 - `updateEmployee`: "0x14723a09acff6d2a60dcdf7aa4aff308fddc160c", 1
 

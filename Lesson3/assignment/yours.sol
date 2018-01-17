@@ -2,24 +2,50 @@ pragma solidity ^0.4.14;
 
 import "http://github.com/OpenZeppelin/zeppelin-solidity/contracts/math/SafeMath.sol";
 
-contract Payroll {
+contract BasePayroll {
+    using SafeMath for uint;
+
+    address owner;
+    uint constant payDuration = 10 seconds;
+    uint totalSalary;
+
+    function BasePayroll() {
+        // Assign a contract owner
+        owner = msg.sender;
+    }
+
+    function addEmployee(address employeeId, uint salary);
+    function removeEmployee(address employeeId);
+    function updateEmployee(address employeeId, uint salary);
+    function changePaymentAddress(address employeeId);
+
+    function addFund() payable external returns (uint) {
+        return this.balance;
+    }
+
+    function calculateRunway() returns (uint) {
+        require(totalSalary > 0);
+
+        // return this.balance / totalSalary;
+        return this.balance.div(totalSalary);
+    }
+
+    function hasEnoughFund() returns (bool) {
+        return calculateRunway() > 0;
+    }
+
+    function getPaid() external;
+}
+
+contract Payroll is BasePayroll {
     struct Employee {
         address id;
         uint salary;
         uint lastPayday;
     }
 
-    address owner;
-    uint constant payDuration = 10 seconds;
-    uint totalSalary;
-
     // Employee information
     mapping (address => Employee) private employees;
-
-    function Payroll() {
-        // Assign a contract owner
-        owner = msg.sender;
-    }
 
     modifier onlyOwner {
         // Sender should be the owner
@@ -44,13 +70,11 @@ contract Payroll {
         assert(employee.id == 0x0);
 
         // Add new employee
-        employees[employeeId] = Employee(
-            employeeId, SafeMath.mul(salary, 1 ether), now);
+        employees[employeeId] = Employee(employeeId, salary.mul(1 ether), now);
 
         // Update total salary
         // totalSalary += salary * 1 ether;
-        totalSalary = SafeMath.add(
-            totalSalary, employees[employeeId].salary);
+        totalSalary = totalSalary.add(employees[employeeId].salary);
     }
 
     function removeEmployee(address employeeId) onlyOwner
@@ -65,7 +89,7 @@ contract Payroll {
 
         // Update total salary
         // totalSalary -= employee.salary;
-        totalSalary = SafeMath.sub(totalSalary, employee.salary);
+        totalSalary = totalSalary.sub(employee.salary);
     }
 
     function updateEmployee(address employeeId, uint salary) onlyOwner
@@ -77,16 +101,16 @@ contract Payroll {
 
         // Update total salary
         // totalSalary -= employee.salary;
-        totalSalary = SafeMath.sub(totalSalary, employee.salary);
+        totalSalary = totalSalary.sub(employee.salary);
 
         // Update employee information
         // employees[employeeId].salary = salary * 1 ether;
-        employees[employeeId].salary = SafeMath.mul(salary, 1 ether);
+        employees[employeeId].salary = salary.mul(1 ether);
         employees[employeeId].lastPayday = now;
 
         // Update total salary
         // totalSalary += employees[employeeId].salary;
-        totalSalary = SafeMath.add(totalSalary, employees[employeeId].salary);
+        totalSalary = totalSalary.add(employees[employeeId].salary);
     }
 
     function changePaymentAddress(address employeeId)
@@ -104,27 +128,12 @@ contract Payroll {
         delete employees[msg.sender];
     }
 
-    function addFund() payable returns (uint) {
-        return this.balance;
-    }
-
-    function calculateRunway() returns (uint) {
-        require(totalSalary > 0);
-
-        // return this.balance / totalSalary;
-        return SafeMath.div(this.balance, totalSalary);
-    }
-
-    function hasEnoughFund() returns (bool) {
-        return calculateRunway() > 0;
-    }
-
-    function getPaid() employeeExist(msg.sender) {
+    function getPaid() employeeExist(msg.sender) external {
         Employee employee = employees[msg.sender];
 
         // Check payday information
         // uint nextPayday = employee.lastPayday + payDuration;
-        uint nextPayday = SafeMath.add(employee.lastPayday, payDuration);
+        uint nextPayday = employee.lastPayday.add(payDuration);
         assert(nextPayday < now);
 
         // Check salary balance
