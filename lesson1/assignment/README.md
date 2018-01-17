@@ -13,4 +13,5 @@ constant声明变量可以，声明函数目前无用
 msg  block
 function使用payable修饰才能接收ether
 transfer要在所有相关状态改变完成在调用
+test。。。
 
