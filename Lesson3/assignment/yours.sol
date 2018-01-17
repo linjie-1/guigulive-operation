@@ -1,18 +1,13 @@
 pragma solidity ^0.4.14;
 
 import "http://github.com/OpenZeppelin/zeppelin-solidity/contracts/math/SafeMath.sol";
+import "http://github.com/OpenZeppelin/zeppelin-solidity/contracts/ownership/Ownable.sol";
 
-contract BasePayroll {
+contract BasePayroll is Ownable {
     using SafeMath for uint;
 
-    address owner;
     uint constant payDuration = 10 seconds;
     uint totalSalary;
-
-    function BasePayroll() {
-        // Assign a contract owner
-        owner = msg.sender;
-    }
 
     function addEmployee(address employeeId, uint salary);
     function removeEmployee(address employeeId);
