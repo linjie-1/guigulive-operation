@@ -1,0 +1,20 @@
+L()  : 該contract的繼承線
+
+L(O): [O]
+L(A): [A,O]
+L(B): [B,O]
+L(C): [C,O]
+
+L(K1): [K1] + merge(L(A),L(B), [A,B])
+     : [K1, A, B, O]
+	 
+
+L(K2): [K2] + merge(L(A), L(C), [A,C])
+     : [K2, A, C, O]
+
+L(Z) : [Z] + merge(L[K1], L[K2])
+     : [Z] + merge([K1, A, B, O], [K2, A, C, O], [K1, K2])
+	 : [Z, K1, K2, A, B, C, O]
+	 
+	 
+Answer: contract Z 的繼承線 為  [Z, K1, K2, A, B, C, O]
