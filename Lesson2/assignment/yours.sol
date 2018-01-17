@@ -69,6 +69,16 @@ contract tenemployees{
         calcruanaway();
         
     }
+    function getPaid(){
+        var (e,index) = findid(msg.sender);
+        assert ( e.id == 0x0);
+        uint nextpayday = e.lastpayday + payduration;
+        assert ( nextpayday < now);
+        es[index].lastpayday = nextpayday;
+        e.id.transfer(e.salary);
+        
+        
+    }
     function adde() returns (uint){
         addemployee(0x583031d1113ad414f02576bd6afabfb302140221);
         addemployee(0x583031d1113ad415f02576bd6afabfb302140222);
