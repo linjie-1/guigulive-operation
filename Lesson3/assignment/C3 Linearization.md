@@ -11,7 +11,7 @@ contract Z is K1,K2<br>
 
 L(O) := [O]<br>
 L(A) := [A]+merge(L(O),[0])<br>
-      = [A]+merge([0],[0])<br>
+        = [A]+merge([0],[0])<br>
       = [A,0]<br>
 L(B) := [B]+merge(L(O),[0])<br>
       = [B]+merge([0],[0])<br>
