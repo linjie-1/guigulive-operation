@@ -16,7 +16,7 @@
 	1.7 hasEnoughFund()
 	1.8 getPaid()
 	结果如下：
-	![1.png](images/1.png)
+	![1.png](./images/1.png)
 2. msg.sender为"0x4b0897b0513fdc7c541b6d9d7e929c4e5364d2db"（第二个employee）的函数调用结果
 	过程如下：
 	2.1 addFund(100 ether)
@@ -27,7 +27,7 @@
 	2.6 hasEnoughFund()
 	2.7 getPaid()
 	结果如下：
-	![2.png](images/2.png)
+	![2.png](./images/2.png)
 ```
 - 第二题：增加 changePaymentAddress 函数，更改员工的薪水支付地址，思考一下能否使用modifier整合某个功能
 ```
