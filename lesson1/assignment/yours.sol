@@ -1,52 +1,70 @@
-# homework1
 pragma solidity ^0.4.14;
 
 contract Payroll {
     uint constant payDuration = 10 seconds;
 
     address owner;
-    uint salary;
     address employee;
-    uint lastPayday;
-    
-// use update employee function to update employee information, and also checking if the account is the owner.
-    
+    uint salary;
+    uint lastPayDay;
+
     function Payroll() {
         owner = msg.sender;
     }
-    
-    function updateEmployee(address e, uint s) {
+
+    function updateEmployee(address newEmployee) returns (address) {
         require(msg.sender == owner);
-        
-        if (employee != 0x0) {
-            uint payment = salary * (now - lastPayday) / payDuration;
-            employee.transfer(payment);
+
+        if (employee != newEmployee) {
+            employee = newEmployee;
+            lastPayDay = now;
         }
-        
-        employee = e;
-        salary = s * 1 ether;
-        lastPayday = now;
+
+        return employee;
     }
-    
+
+    function updateSalary(uint newSalary) returns (uint) {
+        require(msg.sender == employee);
+
+        if (salary == newSalary) {
+            return salary;
+        }
+
+        // Pay out salary owed to date
+        uint salaryToPay = salary * (now - lastPayDay) / payDuration;
+        require(this.balance >= salaryToPay);
+
+        lastPayDay = now;
+        employee.transfer(salaryToPay);
+
+        // Update new salary
+        salary = newSalary * 1 ether;
+
+        return salary;
+    }
+
     function addFund() payable returns (uint) {
+        require(msg.sender == owner);
+
         return this.balance;
     }
-    
+
     function calculateRunway() returns (uint) {
         return this.balance / salary;
     }
-    
+
     function hasEnoughFund() returns (bool) {
         return calculateRunway() > 0;
     }
-    
+
     function getPaid() {
         require(msg.sender == employee);
-        
-        uint nextPayday = lastPayday + payDuration;
-        assert(nextPayday < now);
+        require(hasEnoughFund());
 
-        lastPayday = nextPayday;
+        uint newPayDay = lastPayDay + payDuration;
+        require(newPayDay < now);
+
+        lastPayDay = newPayDay;
         employee.transfer(salary);
     }
 }

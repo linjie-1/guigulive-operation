@@ -1,115 +1,122 @@
-/*作业请提交在这个目录下*/
+/*
+优化前合约用gas如下：
+action          txn_cost exe_cost
+calculateRunway    22966     1694
+calculateRunway    23747     2475
+calculateRunway    24528     3256
+calculateRunway    25309     4037
 
- pragma solidity ^0.4.14;
+可以看到gas usage逐渐增长，因为计算totalSalary的for loop每次加一个员工都会从头到尾跑一次，重新计算已经算过的totalSalary。
+优化方法将totalSalary变成一个state variable，每次加减或改变一个员工时都会同时计算它，这样无论有多少个员工计算calculateRunway()耗掉的资源都是一样的。
 
- contract Payroll {
+优化后合约用gas如下：
+action          txn_cost exe_cost
+calculateRunway    22124      852
+calculateRunway    22124      852
+calculateRunway    22124      852
+calculateRunway    22124      852
+
+可见每次calculateRunway用的gas都是一样的，并且比以前少。
+*/
+
+pragma solidity ^0.4.14;
+
+contract Payroll {
     struct Employee {
         address id;
         uint salary;
         uint lastPayday;
-     }
+    }
 
-     uint constant payDuration = 10 seconds;
-     uint totalSalary = 0;  //for new calculateRunway function
-     address owner;
-     Employee[] employees;
+    uint constant payDuration = 10 seconds;
+    uint totalSalary = 0;
 
-     function Payroll() {
-         owner = msg.sender;
-     }
+    address owner;
+    Employee[] employees;
 
-     function _partialPaid(Employee employee) private {
-         uint payment = employee.salary * (now - employee.lastPayday) / payDuration;
-         employee.id.transfer(payment);
-     }
+    function Payroll() {
+        owner = msg.sender;
+    }
 
-     function _findEmployee(address employeeId) private returns (Employee, uint) {
-         for (uint i=0; i< employees.length; i++){
-             if (employees[i].id == employeeId)
-                 return (employees[i], i);
-         }
-     }
+    function _partialPaid(Employee employee) private {
+        uint partialPayment = employee.salary * (now - employee.lastPayday) / payDuration;
+        assert(this.balance >= partialPayment);
 
-     function addEmployee(address employeeId, uint salary) {
-         require(msg.sender == owner);
-         var (employee, index) = _findEmployee(employeeId);
-         assert(employee.id == 0x0);
-         uint salaryInWei = salary * 1 ether;
-         employees.push(Employee(employeeId, salaryInWei, now));
-        totalSalary += salaryInWei;
-     }
+        employee.lastPayday = now;
+        employee.id.transfer(partialPayment);
+    }
 
-     function removeEmployee(address employeeId) {
-         var (employee, index) = _findEmployee(employeeId);
-         assert(employee.id != 0x0);
-         _partialPaid(employee);
-         totalSalary -= employee.salary;
-         delete employees[index];
-         employees[index] = employees[employees.length - 1];
-         employees.length -= 1;
-     }
-
-     function updateEmployee(address employeeId, uint salary) {
-         require(msg.sender == owner);
-         var (employee, index) = _findEmployee(employeeId);
-         totalSalary -= employee.salary;
-         assert(employee.id != 0x0);
-         _partialPaid(employee);
-        uint salaryInWei = salary * 1 ether;
-        employees[index].id = employeeId;
-         employees[index].salary = salaryInWei;
-         totalSalary += salaryInWei;
-
-     }
-
-     function addFund() payable returns (uint){
-         return this.balance;
-     }
-
-     function calculateRunway() returns (uint) {
-         uint _totalSalary = 0;
+    function _findEmployee(address employeeId) private returns (Employee, uint) {
         for (uint i = 0; i < employees.length; i++) {
-             _totalSalary += employees[i].salary;
-         }
-         return this.balance / _totalSalary;
-     }
+            if (employees[i].id == employeeId) {
+                return (employees[i], i);
+            }
+        }
+        return (Employee(0x0, 0, 0), -1)
+    }
 
-    function calculateRunwayNew() returns (uint) {
-         return this.balance / totalSalary;
-     }
+    function addEmployee(address employeeId, uint salary) {
+        require(msg.sender == owner);
 
-    function hasEnoughFund() returns (bool){
-         return calculateRunway() > 0;
-     }
+        var (employee, _index) = _findEmployee(employeeId);
+        assert(employee.id == 0x0);
 
-     function getPaid() {
+        employees.push(Employee(employeeId, salary, now));
+        totalSalary += salary;
+    }
+
+    function removeEmployee(address employeeId) {
+        require(msg.sender == owner);
+
+        var (employee, index) = _findEmployee(employeeId);
+        assert(employee.id != 0x0);
+
+        _partialPaid(employees[index]);
+
+        totalSalary -= employees[index].salary;
+        delete employees[index];
+        employees[index] = employees[employees.length - 1];
+        employees.length--;
+    }
+
+    function updateEmployee(address employeeId, uint salary) {
+        require(msg.sender == owner);
+
+        var (employee, index) = _findEmployee(employeeId);
+        assert(employee.id != 0x0);
+
+        _partialPaid(employees[index]);
+
+        uint newSalary = salary * 1 ether;
+        totalSalary += newSalary - employees[index].salary;
+        employees[index].salary = newSalary;
+    }
+
+    function addFund() payable returns (uint) {
+        require(msg.sender == owner);
+
+        return this.balance;
+    }
+
+    /* Optimize this operation by storing a running count of totalSalary
+       whenever an employee is added, removed, or updated */
+    function calculateRunway() returns (uint) {
+        return this.balance / totalSalary;
+    }
+
+    function hasEnoughFund() returns (bool) {
+        return calculateRunway() > 0;
+    }
+
+    function getPaid() {
         var (employee, index) = _findEmployee(msg.sender);
-         assert(employee.id != 0x0);
+        assert(employee.id != 0x0);
 
-         uint nextPayday = employee.lastPayday + payDuration;
-         if (nextPayday > now)
-             revert();
-         employees[index].lastPayday = nextPayday;
-         employee.id.transfer(employee.salary);
-         }
+        uint nextPayday = employees[index].lastPayday + payDuration;
+        assert(nextPayday >= now);
+        assert(this.balance >= employees[index].salary);
 
-     }
-
-
-// address for mocking:
-// 0x6fFF3806Bbac52A20e0d79BC538d527f6a22c96b
-// 0x6fFF3806Bbac52A20e0d79BC538d527f6a22c96c
-// 0x6fFF3806Bbac52A20e0d79BC538d527f6a22c96e
-// 0x6fFF3806Bbac52A20e0d79BC538d527f6a22c96f
-// 0x6fFF3806Bbac52A20e0d79BC538d527f6a22c96g
-// 0x6fFF3806Bbac52A20e0d79BC538d527f6a22c96h
-// 0x6fFF3806Bbac52A20e0d79BC538d527f6a22c96i
-// 0x6fFF3806Bbac52A20e0d79BC538d527f6a22c96g
-// 0x6fFF3806Bbac52A20e0d79BC538d527f6a22c96k
-// 0x6fFF3806Bbac52A20e0d79BC538d527f6a22c96l
-// 0xca35b7d915458ef540ade6068dfe2f44e8fa733c - dummy
-
-// original gas cost: [1694,2475,3256,4037,4818,5599,6380,7161,7942,8723]
-// idea optimize, set lastUpdateTotalSal global var, every time update it, instead of for loop every employee.
-// optimize gas cost: [896,896,......], flat cost
-
+        employees[index].lastPayday = nextPayday;
+        employees[index].id.transfer(employees[index].salary);
+    }
+}
