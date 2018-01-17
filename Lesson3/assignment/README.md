@@ -4,7 +4,7 @@
 ### 第三课：课后作业
 - 第一题：完成今天所开发的合约产品化内容，使用Remix调用每一个函数，提交函数调用截图
 
-       See contract in yours.sol. See plots in /image folder
+       See contract in yours.sol. See plots in /images folder
        
 - 第二题：增加 changePaymentAddress 函数，更改员工的薪水支付地址，思考一下能否使用modifier整合某个功能
        
