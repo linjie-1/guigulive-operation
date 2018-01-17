@@ -9,7 +9,7 @@ contract Payroll {
     address employee;
     uint lastPayday;
     
-// use update employee function to update employee information, and also checking if the account is the owner.
+// use update employee function to update employee information, and also checking if the account is the owner..
     
     function Payroll() {
         owner = msg.sender;
