@@ -1,4 +1,4 @@
-/*作业请提交在这个目录下*/
+# homework1
 pragma solidity ^0.4.14;
 
 contract Payroll {
@@ -9,27 +9,10 @@ contract Payroll {
     address employee;
     uint lastPayday;
     
-
+// use update employee function to update employee information, and also checking if the account is the owner.
+    
     function Payroll() {
         owner = msg.sender;
-    }
-
-    //function to change employee's salary
-    //Input: number of ether for salary
-    function changeEmployeeSalary(uint salary_in_ether){
-        require(msg.sender == owner);
-        if (employee != 0x0) {
-            //payoff the previous salary first
-            uint payment = salary * (now - lastPayday) / payDuration;
-            salary = salary_in_ether * 1 ether;
-            employee.transfer(payment);
-        }
-    }
-    
-    //function to change emplyee's wallet
-    function changeEmployeeAdress(address newAddr){
-        require(msg.sender == owner);
-        employee = newAddr;
     }
     
     function updateEmployee(address e, uint s) {
@@ -50,7 +33,6 @@ contract Payroll {
     }
     
     function calculateRunway() returns (uint) {
-        if (salary == 0) return 0;
         return this.balance / salary;
     }
     
