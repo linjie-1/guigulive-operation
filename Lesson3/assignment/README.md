@@ -12,3 +12,16 @@
 - contract K1 is A, B
 - contract K2 is A, C
 - contract Z is K1, K2
+
+
+## 截圖 檔名對照:
+employees mapping : employees.PNG
+addEmployee : addEmployee.PNG
+addFund : addFund.png
+calculateRunway : calculateRunway.PNG
+updateEmployee: updateEmployee.PNG
+changePaymentAddressByOwner : changePaymentAddressByOwner.PNG
+changePaymentAddressByEmployee: changePaymentAddresByEmployee.PNG
+getPaid : getPaid.PNG
+hasEnoughFund : hasEnoughFund.PNG
+checkEmployee: checkEmployee.PNG

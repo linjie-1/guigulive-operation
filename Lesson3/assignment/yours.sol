@@ -1,4 +1,3 @@
-/*作业请提交在这个目录下*/
 pragma solidity ^0.4.14;
 
 contract Payroll {
@@ -20,7 +19,7 @@ contract Payroll {
         require(msg.sender == owner);
         _;
     }
-    
+
     modifier employeeExist(address employeeId){
         var employee = employees[employeeId];
         assert(employee.id != 0x0);
@@ -48,6 +47,20 @@ contract Payroll {
         
     }
     
+    function changePaymentAddressByOwner(address oldId, address newId) onlyOwner employeeExist(oldId){
+        var employee = employees[oldId];
+        var newEmployee = Employee(newId, employee.salary, employee.lastPayday);
+        employees[newId] = newEmployee;
+        delete employees[oldId];
+    }
+    
+    function changePaymentAddressByEmployee(address newId) employeeExist(msg.sender) {
+        var employee = employees[msg.sender];
+        var newEmployee = Employee(newId, employee.salary, employee.lastPayday);
+        employees[newId] = newEmployee;
+        delete employees[msg.sender];
+    }
+    
     function updateEmployee(address employeeId, uint salary) onlyOwner employeeExist(employeeId) {
         var employee = employees[employeeId];
         _partialPaid(employee);
@@ -62,8 +75,7 @@ contract Payroll {
     }
     
     function calculateRunway() returns (uint) {
-        uint totalSalary = 0;
-        return this.balance / totalSalary;
+        return this.balance / total_salary;
     }
     
     function checkEmployee(address employeeId) returns (uint salary, uint lastPayday) {
