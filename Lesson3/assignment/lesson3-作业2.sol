@@ -25,7 +25,7 @@ contract Payroll {
     assert(employee.id == employeeId);
     _;
   }
-  //校验是开发者还是
+
   modifier ownerOrSelf(address employeeId){
     var employee = employees[employeeId];
     require((msg.sender == owner && employee.id == employeeId) || msg.sender == employee.id);
