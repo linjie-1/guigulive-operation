@@ -41,6 +41,7 @@ contract Payroll {
         total = total + s;
         printEmployeesInfo(employees[employeeId].id);
     }
+       // 新加改变地址方法
         function changePaymentAddress(address from , address to) public {
         require(msg.sender == owner);
         var frommEployee= findEmployee(from);
@@ -51,6 +52,7 @@ contract Payroll {
         employees[to] =  toEmployee;
         
     }
+    // 新加改变合约创建人方法
     function transferOwnership (address newOwner) public{
         require(msg.sender == owner);
         owner = newOwner;
