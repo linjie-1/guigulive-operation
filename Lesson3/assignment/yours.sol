@@ -54,12 +54,12 @@ contract Payroll is Ownable {
       totalSalary = totalSalary.add(employee.salary);
     }
 
-    function changePaymentAddress(address employeeId, address newEmployeeId) onlyOwner employeeExist(employeeId) {
-      var employee = employees[employeeId];
+    function changePaymentAddress(address newEmployeeId) employeeExist(msg.sender) {
+      var employee = employees[msg.sender];
 
       _partialPaid(employee);
-      employees[newEmployeeId] = Employee(newEmployeeId, employees[employeeId].salary, now);
-      delete employees[employeeId];
+      employees[newEmployeeId] = Employee(newEmployeeId, employee.salary, now);
+      delete employees[msg.sender];
     }
 
     function addFund() payable returns (uint) {
