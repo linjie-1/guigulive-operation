@@ -14,18 +14,12 @@ contract PayRoll is Ownable {
         uint lastPayDay;
     }
 
-    //成员变量存储在storage中
-    address boss;
     mapping(address=>Employee) public employeeList;
     uint constant payDuration = 10 seconds;
     
     uint totalSalary=0;//总的薪水
     
     
-    
-     function PayRoll(){
-         boss=msg.sender;        // 指定boss
-     }
      
      //存储employee信息改为map后，下面的函数不需要了。
      //返回参数默认存在 memory中
@@ -73,7 +67,7 @@ contract PayRoll is Ownable {
     }
     
     // 初始化员工 
-    function addEmployee(address employeeId, uint money) onlyBoss onlyOwner  {
+    function addEmployee(address employeeId, uint money) onlyOwner  {
 
         var employee=employeeList[employeeId];
         
@@ -97,7 +91,7 @@ contract PayRoll is Ownable {
     }
     
     //更改员工地址
-    function changePaymentAddress(address oldEmployeeId, address newEmployeeId)  onlyBoss onlyOwner employeeExist(oldEmployeeId){
+    function changePaymentAddress(address oldEmployeeId, address newEmployeeId) onlyOwner employeeExist(oldEmployeeId){
        var (oldsalary, oldLastPayday)=checkEmployee(oldEmployeeId);
        var (salary, lastPayday)=checkEmployee(newEmployeeId);
        assert(salary==0);//新的Employee应该不存在
@@ -112,7 +106,7 @@ contract PayRoll is Ownable {
     
     
     // 移除员工 
-    function removeEmployee(address employeeId) onlyBoss onlyOwner employeeExist(employeeId){
+    function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId){
     
         var employee=employeeList[employeeId];
        
@@ -124,7 +118,7 @@ contract PayRoll is Ownable {
     }
     
     // 更新员工 
-    function updateEmployee(address employeeId, uint salary) onlyBoss onlyOwner employeeExist(employeeId){
+    function updateEmployee(address employeeId, uint salary) onlyOwner employeeExist(employeeId){
         
        var employee=employeeList[employeeId];
        
