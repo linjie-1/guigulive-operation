@@ -3,4 +3,16 @@
 
 ### 第三课：课后作业
 
+第一题：完成今天所开发的合约产品化内容
+    使用remix调用每一个含糊，提交函数调用截图
+第二题：增加changePaymentAddress函数，更改员工的薪水支付地址 
+    思考一下能否使用modifier整合整个功能
+第三题（加分题）：自学C3 ，求以下contract Z的继承栈
+contract O
+contract A is O
+contract B is O
+contract C is O
+contract K1 is A,B
+contract K2 is A,C
+contract Z is K1,K2
 
