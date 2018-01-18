@@ -1,7 +1,7 @@
 pragma solidity ^0.4.14;
 
-import './SafeMath.sol';
-import './Ownable.sol';
+import "github.com/OpenZeppelin/zeppelin-solidity/contracts/math/SafeMath.sol";
+import "github.com/OpenZeppelin/zeppelin-solidity/contracts/ownership/Ownable.sol";
 
 /**
  * The Payroll contract does this and that...
