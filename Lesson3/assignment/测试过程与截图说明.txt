@@ -1,0 +1,33 @@
+测试过程与截图说明：	
+
+1. 给帐户中充值1000 ether
+addFund: 1000 ether;
+
+2. 增加3个员工，地址与工资如下：
+addEmployee: address = "0x14723a09acff6d2a60dcdf7aa4aff308fddc160c", salary = 1;
+addEmployee: address = "0x24723a09acff6d2a60dcdf7aa4aff308fddc160c", salary = 2;
+addEmployee: address = "0x34723a09acff6d2a60dcdf7aa4aff308fddc160c", salary = 3;
+
+3. 删除其中一位员工，地址如下：
+removeEmployee: address = "0x34723a09acff6d2a60dcdf7aa4aff308fddc160c";
+
+4. 更新其中一位员工的工资：
+updateEmployee: address = "0x24723a09acff6d2a60dcdf7aa4aff308fddc160c", salary = 10;
+
+5. 变更其中一位员工的支付地址：
+changePaymentAddress: oldAddress = "0x14723a09acff6d2a60dcdf7aa4aff308fddc160c", newAddress = "0x44723a09acff6d2a60dcdf7aa4aff308fddc160c";
+
+6. 查看变更后的地址的帐户，确认存在。
+gEmployees[0x44723a09acff6d2a60dcdf7aa4aff308fddc160c];
+
+7. 查看变更前的地址的账户，确认已经不存在。
+gEmployees[0x14723a09acff6d2a60dcdf7aa4aff308fddc160c];
+
+8. 计算calculateRunway
+calculateRunway;
+
+9. 计算hasEnoughFund
+hasEnoughFund;
+
+10. 运行getPaid
+getPaid;
