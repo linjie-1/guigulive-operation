@@ -13,73 +13,68 @@ contract Payroll is Ownable {
         uint salary;
         uint lastPayDay;
     }
-    mapping(address=>Employee) public employees;//_findEmployee()
-    /*******************************************************
+    mapping(address=>Employee) public xEmployees;//_findEmployee()
+   /**********************************
     function Payroll() {
          owner = msg.sender;
+    }
     modifier onlyOwner() {
         require(msg.sender == owner);
     _;
     }
-    *******************************************************/
+    *********************************/
     modifier employeeExist(address employeeId){
-        var employee=employees[employeeId];
-        assert(employee.id!=0x0);
+      
+        assert(xEmployees[employeeId].id!=0x0);
         _;
     }
     modifier employeeNotExist(address employeeId){
-        var employee=employees[employeeId];
-        assert(employee.id==0x0);
+        assert(xEmployees[employeeId].id==0x0);
         _;
     }
 
     function _partialPaid(Employee employee) private {
-        uint payment=employee.salary
-            .mul(now-employee.lastPayDay)
-            .div(payDuration);
+        //uint payment=employee.salary*(now-employee.lastPayDay)/(payDuration);
+        uint payment=(employee.salary.mul(now.sub(employee.lastPayDay))).div(payDuration);
         employee.id.transfer(payment);
     }
    
     function addEmployee(address employeeId,uint salary) payable onlyOwner employeeNotExist(employeeId) {
-        //var employee=employees[employeeId];
-        //assert(employee.id==0x0);
+        //assert(xEmployees[employeeId].id==0x0);
         //totalSalary+=salary*1 ether;
-        salary=salary.mul(1 ether);
         
+        salary=salary.mul(1 ether);
         totalSalary=totalSalary.add(salary);
-        employees[employeeId]=Employee(employeeId,salary*1 ether,now);
+        xEmployees[employeeId]=Employee(employeeId,salary,now);//
     }
     
     function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId){
 
-        _partialPaid(employees[employeeId]);
-         totalSalary-=employees[employeeId].salary;
-         //totalSalary= totalSalary.sub(employees[employeeId].salary);
-        delete employees[employeeId];
+        _partialPaid(xEmployees[employeeId]);
+         //totalSalary-=xEmployees[employeeId].salary;
+         totalSalary= totalSalary.sub(xEmployees[employeeId].salary);
+        delete xEmployees[employeeId];
     }
     
     function addFund() payable returns (uint Balance) {
        Balance=this.balance;
     }
-    function updateEmployee(address employeeId,uint salary) onlyOwner employeeExist(employeeId) {
+    function updateEmployee(address employeeId,uint newSalary) onlyOwner employeeExist(employeeId) {
 
-        _partialPaid(employees[employeeId]);
-          totalSalary-=employees[employeeId].salary;
-        //totalSalary= totalSalary.sub(employees[employeeId].salary);
-        employees[employeeId].salary=salary*1 ether;
-        //employees[employeeId].salary=salary.mul(1 ether);
-        totalSalary+=employees[employeeId].salary;
-         //totalSalary= totalSalary.add(employees[employeeId].salary);
-        employees[employeeId].lastPayDay=now;
+        _partialPaid(xEmployees[employeeId]);
+          //totalSalary-=xEmployees[employeeId].salary;
+        //xEmployees[employeeId].salary=newSalary*1 ether;
+        //totalSalary+=xEmployees[employeeId].salary;
+        totalSalary= (totalSalary.sub(xEmployees[employeeId].salary)).add(newSalary.mul(1 ether));
+        xEmployees[employeeId].salary=newSalary.mul(1 ether);
+        xEmployees[employeeId].lastPayDay=now;
     
     }
-    
-     function changePaymentAddress(address oldPaymentAddress,address newPaymentAddress) onlyOwner employeeExist(oldPaymentAddress) employeeNotExist(newPaymentAddress){
-        _partialPaid(employees[oldPaymentAddress]);
-        addEmployee(newPaymentAddress,employees[oldPaymentAddress].salary);
+    function changePaymentAddress(address oldPaymentAddress,address newPaymentAddress) onlyOwner employeeExist(oldPaymentAddress) employeeNotExist(newPaymentAddress){
+        _partialPaid(xEmployees[oldPaymentAddress]);
+        addEmployee(newPaymentAddress,xEmployees[oldPaymentAddress].salary);
         removeEmployee(oldPaymentAddress);
     }
-  
   
     function calculateRunway() returns (uint Runway) {
        /*************************
@@ -88,27 +83,21 @@ contract Payroll is Ownable {
            totalSalary += employees[i].salary; 
         } //mapping can't traverse the hashtable
         ************************/
-        Runway=this.balance/totalSalary;
+        Runway=this.balance.div(totalSalary);
     }
     function hasEnoughFund() returns (bool enough) {
         //return this.balance >=salary;
-       enough=calculateRunway() >= 0;
+       enough=calculateRunway() > 0;
     }
     function getPaid() employeeExist(msg.sender){
-        var employee=employees[msg.sender];
-        //assert(employee.id!=0x0);
-        uint nextPayday=employee.lastPayDay+payDuration;
-        assert(now>nextPayday);
+        var getPaidEmployee=xEmployees[msg.sender];
+        //assert(getPaidEmployee.id!=0x0);
+        uint nextPayday=getPaidEmployee.lastPayDay.add(payDuration);
+        assert(nextPayday<now);
         
-        employee.lastPayDay=nextPayday;
-        employee.id.transfer(employee.salary);
+        getPaidEmployee.lastPayDay=nextPayday;
+        getPaidEmployee.id.transfer(getPaidEmployee.salary);
        
     }
     
-    function checkEmployee(address checkEmployeeId) returns (uint salary,uint lastPayDay){
-        var employee=employees[checkEmployeeId];
-       // return(employee.salary,employee.lastPayDay);
-       salary=employee.salary;
-       lastPayDay=employee.lastPayDay;
-    }
 }
