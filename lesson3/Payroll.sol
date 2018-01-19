@@ -23,6 +23,8 @@ contract Payroll is Ownable {
 
 	uint constant payDuration = 5 minutes;
 
+	event AddFund(address indexed sender, address indexed addr, uint value);
+
 	/**
 	 * 是否存在指定雇员
 	 */
@@ -38,6 +40,7 @@ contract Payroll is Ownable {
 	 * 添加余额
 	 */
 	function addFund() payable public returns(uint) {
+		AddFund(msg.sender, this, msg.value);
 		return this.balance;
 	}
 
