@@ -2,7 +2,7 @@ pragma solidity ^0.4.14;
 
 contract Payroll {
     uint constant payDuration = 10 seconds;
-
+    
     address owner;
     uint salary = 1;
     address employee;
@@ -14,7 +14,7 @@ contract Payroll {
 
     function updateEmployee(address e, uint s) public {
         require(msg.sender == owner);
-
+        
         if (employee != 0x0) {
             uint payment = salary * (now - lastPayday) / payDuration;
             employee.transfer(payment);
@@ -24,38 +24,38 @@ contract Payroll {
         salary = s * 1;
         lastPayday = now;
     }
-
-    event updateAddressLog(bool b);
-
-    function updateAddress(address e) public {
+    
+     event updateAddressLog(bool b);
+    
+     function updateAddress(address e) public {
         bool b = (msg.sender == owner);
         updateAddressLog(b);
         employee = e;
     }
-
+    
     event updateSalaryLog(uint s);
-    function updateSalary(uint s) public {
+     function updateSalary(uint s) public {
         require(msg.sender == owner);
         salary = s * 1;
         updateSalaryLog(salary);
-    }
+    }    
 
     event addFundLog(uint balance);
     function addFund() public payable returns (uint) {
         addFundLog(this.balance);
         return this.balance;
     }
-
+    
     function getBalance() public{
         addFundLog(this.balance);
-    }
-
+     }
+    
     event calculateRunwayLog(uint balance);
-
+    
     function calculateRunway() public    returns (uint) {
         calculateRunwayLog(this.balance);
-        calculateRunwayLog(salary);
-        calculateRunwayLog(this.balance / salary);
+         calculateRunwayLog(salary);
+         calculateRunwayLog(this.balance / salary);
         return this.balance / salary;
     }
 
