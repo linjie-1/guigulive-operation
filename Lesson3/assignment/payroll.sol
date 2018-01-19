@@ -9,7 +9,7 @@ contract Payroll {
     uint constant payDuration = 10 seconds;
 
     address owner;
-    mapping(address => Employee) employees;
+    mapping(address => Employee) public employees;
     
     uint totalSalary;
 
@@ -36,6 +36,28 @@ contract Payroll {
         owner = msg.sender;
     }
     
+    modifier onlyOwner {
+        require(msg.sender == owner);
+        _;
+    }
+    
+    modifier employeeExist(address employeeId) {
+        var employee = employees[employeeId];
+        assert(employee.id != 0x0);
+        _;
+    }
+    
+    // 员工自己有责任修改自己的地址
+    function changePaymentAddress(address employeeId, address newId) employeeExist(employeeId) {
+        require(employeeId == msg.sender);
+        require(newId != 0x0);
+        uint s = employees[employeeId].salary;
+        uint d = employees[employeeId].lastPayday;
+        delete employees[employeeId];
+        employees[newId] = Employee(newId, s, d);
+    }
+    
+    
     // 知识点：private
     // 如果不加private，会出现这种奇怪的错误 
     // InternalCompilerError: Static memory load of more than 32 bytes requested.
@@ -45,29 +67,22 @@ contract Payroll {
     }
     
     // 增A
-    function addEmployee(address employeeId, uint salaryOfEther) {
-        require(msg.sender == owner);
+    function addEmployee(address employeeId, uint salaryOfEther) onlyOwner {
         employees[employeeId] = Employee(employeeId, salaryOfEther * 1 ether, now);
         totalSalary += salaryOfEther * 1 ether;
     }
     
     // 删D
-    function removeEmployee(address employeeId) {
-        require(msg.sender == owner);
-
+    function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId){
         var employee = employees[employeeId];
-        assert(employee.id != 0x0);
         _partialPaid(employee);
         delete employees[employeeId];
         totalSalary -= employee.salary;
     }
     
     // 改U
-    function updateEmployee(address employeeId, uint salary) {
-        require(msg.sender == owner);
-
+    function updateEmployee(address employeeId, uint salary) onlyOwner employeeExist(employeeId) {
         var employee = employees[employeeId];
-        assert(employee.id != 0x0);
         _partialPaid(employee);
         
         totalSalary = totalSalary - employee.salary + salary * 1 ether;
@@ -97,12 +112,14 @@ contract Payroll {
         return calculateRunway() > 0;
     }
     
+    /* public member variable, 
     function checkEmployee(address employeeId) returns(uint salary, uint lastPayday) {
         var employee = employees[employeeId];
         salary = employee.salary;
         lastPayday = employee.lastPayday;
         //return (employee.salary, employee.lastPayday);
     }
+    */
     
     function getPaid() {
         // 支持var变量声明 
