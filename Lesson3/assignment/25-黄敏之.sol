@@ -1,6 +1,11 @@
 pragma solidity ^0.4.14;
 
-contract Payroll {
+import "github.com/OpenZeppelin/zeppelin-solidity/contracts/math/SafeMath.sol";
+import "github.com/OpenZeppelin/zeppelin-solidity/contracts/ownership/Ownable.sol";
+
+contract Payroll is Ownable {
+    using SafeMath for uint;
+    
     struct Employee {
         address id;
         uint salary;
@@ -9,13 +14,7 @@ contract Payroll {
     
     uint constant payDuration = 10 seconds;
     uint totalSalary = 0;  //for new calculateRunway function
-    address owner;
     mapping (address => Employee) public employees;
-
-    modifier onlyOwner {
-        require(msg.sender == owner);
-        _;
-    }
     
     modifier employeeExist(address employeeId){
         assert(employees[employeeId].id != 0x0);
@@ -32,21 +31,21 @@ contract Payroll {
     }
     
     function _partialPaid(Employee employee) private {
-        uint payment = employee.salary * (now - employee.lastPayday) / payDuration;
+        uint payment = employee.salary.mul(now.sub(employee.lastPayday).div(payDuration));
         employee.id.transfer(payment);
     }
 
     function addEmployee(address employeeId, uint salary) onlyOwner employeeNotExist(employeeId) {
         var employee = employees[employeeId];
-        uint salaryInWei = salary * 1 ether;
+        uint salaryInWei = salary.mul(1 ether);
         employees[employeeId] = Employee(employeeId, salaryInWei, now);
-        totalSalary += salaryInWei;
+        totalSalary = totalSalary.add(salaryInWei);
     }
     
     function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId) {
         var employee = employees[employeeId];
         _partialPaid(employee);
-        totalSalary -= employee.salary;
+        totalSalary = totalSalary.sub(employee.salary);
         delete employees[employeeId];
     }
     
@@ -66,7 +65,7 @@ contract Payroll {
     }
     
     function calculateRunway() returns (uint) {
-        return this.balance / totalSalary;
+        return this.balance.div(totalSalary);
     }
     
     function hasEnoughFund() returns (bool){
@@ -111,19 +110,19 @@ L(A) = [A, O]
 L(B) = [B, O]
 L(C) = [C, O]
 
-L(K1) = [K1] + merge(L[A] + L[B] + [A, B])
-      = [K1] + merge([A, O] + [B, O] + [A, B])
-	  = [K1, A] + merge([O] + [B, O] + [B])
-	  = [K1, A, B] + merge([O], [O])
-	  = [K1, A, B, O]
-L(K2) = [K2, A, C, O]
+L(K1) = [K1] + merge(L[B] + L[A] + [B, A])
+      = [K1] + merge([B, O] + [A, O] + [B, A])
+	  = [K1, B] + merge([O] + [A, O] + [A])
+	  = [K1, B, A] + merge([O], [O])
+	  = [K1, B, A, O]
+L(K2) = [K2, C, A, O]
 
-L(Z) = [Z] + merge(L[K1] + L[K2] + [K1, K2])
-     = [Z] + merge([K1, A, B, O] + [K2, A, C, O] + [K1, K2])
-	 = [Z, K1] + merge([A, B, O] + [K2, A, C, O] + [K2])
-	 = [Z, K1, K2] + merge([A, B, O] + [A, C, O])
-	 = [Z, K1, K2, A] + merge([B, O] + [C, O])
-	 = [Z, K1, K2, A, B] + merge([O] + [C, O])
-	 = [Z, K1, K2, A, B, C] + merge([O], [O])
-	 = [Z, K1, K2, A, B, C, O]
+L(Z) = [Z] + merge(L[K2] + L[K1] + [K2, K1])
+     = [Z] + merge([K2, C, A, O] + [K1, B, A, O] + [K2, K1])
+	 = [Z, K2] + merge(C, A, O] + [K1, B, A, O] + [K1])
+	 = [Z, K2, C] + merge([A, O] + [K1, B, A, O] + [K1])
+	 = [Z, K2, C, K1] + merge([A, O] + [B, A, O])
+	 = [Z, K2, C, K1, B] + merge([A, O] + [A, O])
+	 = [Z, K2, C, K1, B, A] + merge([O], [O])
+	 = [Z, K2, C, K1, B, A, O]
 */
