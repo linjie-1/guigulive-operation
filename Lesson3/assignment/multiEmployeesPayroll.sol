@@ -45,8 +45,6 @@ contract Payroll is Ownable {
     }
     
     function addEmployee(address employeeId, uint salary) onlyOwner employeeNotExist(employeeId) {
-        var employee = employees[employeeId];
-        assert(employee.id == 0x0);
         employees[employeeId] = Employee(employeeId, salary.mul(1 ether), now);
         totalSalary = totalSalary.add(employees[employeeId].salary);
     }
