@@ -20,19 +20,19 @@ L(A) = A O
 L(B) = B O  
 L(C) = C O  
 
-L(K1) = K1 + merge(AO, BO, AB)  
-      = K1 + A + merge(O,BO,B)  
-      = K1 + A + B + merge(O,O)  
-      = K1 A B O  
+L(K1) = K1 + merge(BO, AO, BA)  
+      = K1 + B + merge(O,AO,A)  
+      = K1 + B + A + merge(O,O)  
+      = K1 B A O  
         
-L(K2) = K2 + merge(AO, CO, AC)  
-      = K2 + A + merge(O,CO,C)  
-      = K2 + A + C + merge(O,O)  
-      = K2 A C O   
+L(K2) = K2 + merge(CO, AO, CA)  
+      = K2 + C + merge(O,AO,A)  
+      = K2 + C + A + merge(O,O)  
+      = K2 C A O   
       
-L(Z) = Z + merge(K1ABO, K2ACO, K1K2)  
-     = Z + K1 + merge(ABO,K2ACO,K2)  
-     = Z + K1 + K2 + merge(ABO,ACO)  
-     = Z + K1 + K2 + A + merge(BO,CO)  
-     = Z + K1 + K2 + A + B + merge(O,CO)  
-     = Z K1 K2 A B C O  
+L(Z) = Z + merge(K2CAO, K1BAO, K2K1)  
+     = Z + K2 + merge(CAO,K1BAO,K1)  
+     = Z + K2 + C + merge(AO,K1BAO,K1)  
+     = Z + K2 + C + K1 + merge(AO,BAO)  
+     = Z + K2 + C + K1 + B + merge(AO,AO)  
+     = Z K2 C K1 B A O  
