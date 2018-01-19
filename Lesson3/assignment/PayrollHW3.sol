@@ -97,7 +97,8 @@ contract Payroll is Ownable{
     }
     
     // new changePaymentAddress function here
-    function changePaymentAddress(address employeeId, address newemployeeId) employeeExist(employeeId) employeeNotExist(newemployeeId) {
+    // 新加入onlyOwner 
+    function changePaymentAddress(address employeeId, address newemployeeId) onlyOwner employeeExist(employeeId) employeeNotExist(newemployeeId) {
          employees[newemployeeId] = employees[employeeId];
          employees[newemployeeId].id = newemployeeId;
          delete employees[employeeId];
