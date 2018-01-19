@@ -26,7 +26,12 @@ contract Z is K1, K2
 
 pragma solidity ^0.4.14;
 
-contract Payroll {
+import "github.com/OpenZeppelin/zeppelin-solidity/contracts/math/SafeMath.sol";
+import "github.com/OpenZeppelin/zeppelin-solidity/contracts/ownership/Ownable.sol";
+
+contract Payroll is Ownable{
+    using SafeMath for uint;
+
     struct Employee {
         address id;
         uint salary;
@@ -36,13 +41,7 @@ contract Payroll {
     uint constant payDuration = 10 seconds;
     uint totalSalary;
 
-    address owner;
     mapping(address => Employee) public employees;
-
-    modifier onlyOwner {
-        require(msg.sender == owner);
-        _;
-    }
 
     modifier onlyEmployee {
         Employee employee = employees[msg.sender];
@@ -61,7 +60,7 @@ contract Payroll {
     }
 
     function _partialPaid(Employee employee) private {
-        uint partialPayment = employee.salary * (now - employee.lastPayday) / payDuration;
+        uint partialPayment = employee.salary.mul(now.sub(employee.lastPayday)).div(payDuration);
         assert(this.balance >= partialPayment);
 
         employee.lastPayday = now;
@@ -72,9 +71,9 @@ contract Payroll {
         Employee employee = employees[employeeId];
         assert(employee.id == 0x0);
 
-        salary = salary * 1 ether;
+        salary = salary.mul(1 ether);
         employees[employeeId] = Employee(employeeId, salary, now);
-        totalSalary += salary;
+        totalSalary = totalSalary.add(salary);
     }
 
     function removeEmployee(address employeeId) onlyOwner employeeExists(employeeId) {
@@ -82,7 +81,7 @@ contract Payroll {
 
         _partialPaid(employees[employeeId]);
 
-        totalSalary -= employee.salary;
+        totalSalary = totalSalary.sub(employee.salary);
         delete employees[employeeId];
     }
 
@@ -91,8 +90,8 @@ contract Payroll {
 
         _partialPaid(employees[employeeId]);
 
-        uint newSalary = salary * 1 ether;
-        totalSalary += newSalary - employee.salary;
+        uint newSalary = salary.mul(1 ether);
+        totalSalary = totalSalary.add(newSalary).sub(employee.salary);
         employees[employeeId].salary = newSalary;
     }
 
@@ -111,7 +110,7 @@ contract Payroll {
     }
 
     function calculateRunway() returns (uint) {
-        return this.balance / totalSalary;
+        return this.balance.div(totalSalary);
     }
 
     function hasEnoughFund() returns (bool) {
@@ -121,7 +120,7 @@ contract Payroll {
     function getPaid() onlyEmployee returns (Employee) {
         Employee employee = employees[msg.sender];
 
-        uint nextPayday = employee.lastPayday + payDuration;
+        uint nextPayday = employee.lastPayday.add(payDuration);
         assert(nextPayday < now);
         assert(this.balance >= employee.salary);
 
