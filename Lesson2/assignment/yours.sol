@@ -107,9 +107,10 @@
 // 0x6fFF3806Bbac52A20e0d79BC538d527f6a22c96g
 // 0x6fFF3806Bbac52A20e0d79BC538d527f6a22c96k
 // 0x6fFF3806Bbac52A20e0d79BC538d527f6a22c96l
-// 0xca35b7d915458ef540ade6068dfe2f44e8fa733c - dummy
+// 0xca35b7d915458ef540ade6068dfe2f44e8fa733c - dummy..
 
 // original gas cost: [1694,2475,3256,4037,4818,5599,6380,7161,7942,8723]
 // idea optimize, set lastUpdateTotalSal global var, every time update it, instead of for loop every employee.
 // optimize gas cost: [896,896,......], flat cost
+//
 
