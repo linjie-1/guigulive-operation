@@ -1,0 +1,31 @@
+contract O
+contract A is O
+contract B is O
+contract C is O
+contract K1 is A, B
+contract K2 is A, C
+contract Z is K1, K2
+
+##   解答如下
+- L[O]  = O
+- L[A]  = A O
+- L[B]  = B O
+- L[C]  = C O
+- L[K1] = K1 + merge(BO,AO,BA)
+-       = k1 + B + merge(O,AO,A)
+-       = k1 + B + A + merge(O,O)
+-       = K1 + B + A + O
+-       = k1 B A O
+- L[K2] = K2 + merge(CO,AO,CA)
+-       = K2 + C + merge(O,AO,A)
+-       = K2 + C + A + merge(O,O)
+-       = K2 + C + A + O
+-       = K2 C A O
+- L[Z]  = Z + merge(K2CAO,K1BAO,K2K1)
+-       = Z + K2 + merge(CAO,K1BAO,K1)
+-       = Z + K2 + C + merge(AO,K1BAO,K1)
+-       = Z + K2 + C + K1 + merge(AO,BAO)
+-       = Z + K2 + C + K1 + B + merge(AO,AO)
+-       = Z + K2 + C + K1 + B + A + merge(O,O)
+-       = Z + K2 + C + K1 + B + A + O
+-       = Z K2 C K1 B A O
