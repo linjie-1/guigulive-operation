@@ -62,13 +62,12 @@ contract Payroll {
          totalSalary=totalSalary-employee.salary+salary * 1 ether;
     
     }
-    
-    function changePaymentAddress(address oldAddress, address newAddress)
-         onlyowner  employeeExist(oldAddress){
-         var emp = employees[oldAddress];
+      function changePaymentAddress(address newAddress)
+         employeeExist(msg.sender){
+         var emp = employees[msg.sender];
          _partialPaid(emp);
          employees[newAddress] = Employee(newAddress, emp.salary, emp.lastPayday);
-         delete employees[oldAddress];
+         delete employees[msg.sender];
      }
     
     
