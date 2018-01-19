@@ -1,0 +1,21 @@
+优化前的消耗GAS的情况如下：
+1、gas：3000000;          transaction cost：21916 gas;       execution cost：644 gas
+2、gas：3000000;          transaction cost：22206 gas;       execution cost：934 gas
+3、gas：3000000;          transaction cost：22496 gas;       execution cost：1224 gas
+4、gas：3000000;          transaction cost：22786 gas;       execution cost：1514 gas
+5、gas：3000000;          transaction cost：23076 gas;       execution cost：1804 gas
+6、gas：3000000;          transaction cost：23366 gas;       execution cost：2094 gas
+7、gas：3000000;          transaction cost：23656 gas;       execution cost：2384 gas
+8、gas：3000000;          transaction cost：23946 gas;       execution cost：2674 gas
+9、gas：3000000;          transaction cost：24236 gas;       execution cost：2964 gas
+10、gas：3000000;         transaction cost：24526 gas;       execution cost：3254 gas
+
+原因：调用calculateRunway函数计算TotalSalary时，需for循环遍历employees数组。
+随着员工数量增多，遍历次数也随之增多，导致程序计算量增加，gas消耗也随之增加。
+
+想优化gas消耗，则需在调用calculateRunway函数时，不再通过遍历数组来计算TotalSalary。
+定义全局变量TotalSalary，将TotalSalary的计算放在增加员工和修改员工工资时进行。
+这样调用calculateRunway函数，则只需要调用全局变量TotalSalary值计算即可，不再进行循环遍历计算。
+
+优化后每次调用calculateRunway函数，消耗均为：
+gas: 3000000; transaction cost: 21145 gas; execution cost: 587 gas
