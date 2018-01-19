@@ -5,7 +5,7 @@ import "../contracts/Payroll.sol";
 
 contract TestPayroll {
 
-	address employeeAddr = 0xee68889212b99d649b610dd03982b6f4381bc069;
+	address employeeAddr = 0x228d2c17eb24e516167b38289d8d0730ea7c6a74;
 
 	Payroll pay = new Payroll();
 
