@@ -1,17 +1,71 @@
-var SimpleStorage = artifacts.require("./SimpleStorage.sol");
+var Payroll = artifacts.require("./Payroll.sol");
 
-contract('SimpleStorage', function(accounts) {
+contract('Payroll', function(accounts) {
 
-  it("...should store the value 89.", function() {
-    return SimpleStorage.deployed().then(function(instance) {
-      simpleStorageInstance = instance;
+//TEST addEmployee()
 
-      return simpleStorageInstance.set(89, {from: accounts[0]});
-    }).then(function() {
-      return simpleStorageInstance.get.call();
-    }).then(function(storedData) {
-      assert.equal(storedData, 89, "The value 89 was not stored.");
+  it("...should not add employee, if not owner", function() {
+    return Payroll.deployed().then(function(instance) {
+      PayrollInstance = instance;
+      return PayrollInstance.addEmployee(accounts[1],1,{from:accounts[1]});
+    }).catch(function(error) {
+      assert(error.toString().includes('invalid'), "shall not add");
     });
   });
+
+  it("...should add new employee", function() {
+    return Payroll.deployed().then(function(instance) {
+      PayrollInstance = instance;
+      return PayrollInstance.addEmployee(accounts[1],1);
+    }).then(function() {
+      return PayrollInstance.employees(accounts[1]);
+    }).then(function(returnData) {
+      assert.equal(returnData[0], accounts[1], "The new employee added");
+    });
+  });
+
+
+  it("...should not add employee, if already exist", function() {
+    return Payroll.deployed().then(function(instance) {
+      PayrollInstance = instance;
+      return PayrollInstance.addEmployee(accounts[1],1);
+    }).catch(function(error) {
+      assert(error.toString().includes('invalid'), "The employee already exist");
+    });
+  });
+
+
+  //TEST removeEmployee()
+
+  it("...should not remove employee, if not owner", function() {
+    return Payroll.deployed().then(function(instance) {
+      PayrollInstance = instance;
+      return PayrollInstance.removeEmployee(accounts[1],{from:accounts[1]});
+    }).catch(function(error) {
+      assert(error.toString().includes('invalid'), "shall not remove");
+    });
+  });
+
+
+  it("...should remove employee", function() {
+    return Payroll.deployed().then(function(instance) {
+      PayrollInstance = instance;
+      return PayrollInstance.removeEmployee(accounts[1]);
+    }).then(function() {
+      return PayrollInstance.employees(accounts[1]);
+    }).then(function(returnData) {
+      assert.equal(returnData[0], '0x0000000000000000000000000000000000000000', "Employee removed");
+    });
+  });
+
+  it("...error if employee not exist", function() {
+    return Payroll.deployed().then(function(instance) {
+      PayrollInstance = instance;
+      return PayrollInstance.removeEmployee(accounts[1]);
+    }).catch(function(error) {
+      assert(error.toString().includes('invalid'), "can't remove again");
+    });
+  });
+
 
 });
