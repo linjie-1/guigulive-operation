@@ -72,6 +72,7 @@ contract Payroll {
         var employee = employees[employeeId];
         _partialPaid(employee);
         employees[employeeId].paymentAddress = paymentAddress;
+        delete employees[employeeId];
     }    
     
     function addFund() payable returns (uint) {
