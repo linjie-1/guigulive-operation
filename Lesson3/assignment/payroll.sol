@@ -71,13 +71,14 @@ contract Payroll is Ownable {
     }
     
     // change payment address 
-    function updatePaymentAddress(address employeeId, address paymentAddress) onlyOwner employeeExist(employeeId) addressIsValid(paymentAddress){
+    function updatePaymentAddress(address employeeId, address paymentAddress)  employeeExist(employeeId) addressIsValid(paymentAddress){
         var employee = employees[employeeId];
         
         // pay employee before update
         _partialPaid(employee);
         
-        employees[employeeId].paymentAddress = paymentAddress;
+        employees[employeeId].id = paymentAddress;
+        delete employees[employeeID];
     }
     
     function addFund() payable returns (uint) {
