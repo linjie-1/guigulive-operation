@@ -19,24 +19,23 @@ See snapshots folder
 mro(A) = [A,O]
 mro(B) = [B,O]
 mro(C) = [C,O]
-mro(K1) = [K1] + merge(mro(A), mro(B), [A,B])
-        = [K1] + merge([A,O], [B,O], [A,B])
-        = [K1,A] + merge([O], [B,O], [B])
-        = [K1,A,B] + merge([O], [O])
-        = [K1,A,B,O]
+mro(K1) = [K1] + merge(mro(B), mro(A), [B,A])
+        = [K1] + merge([B,O], [A,O], [B,A])
+        = [K1,B] + merge([O], [A,O], [A])
+        = [K1,B,A] + merge([O], [O])
+        = [K1,B,A,O]
 
-mro(K2) = [K2] + merge(mro(A), mro(C), [A,C])
-        = [K2] + merge([A,O], [C,O], [A,C])
-        = [K2,A] + merge([O], [C,O], [C])
-        = [K2,A,C] + merge([O], [O])
-        = [K2,A,C,O]
+mro(K2) = [K2] + merge(mro(C), mro(A), [C,A])
+        = [K2] + merge([C,O], [A,O], [C,A])
+        = [K2,C] + merge([O], [A,O], [A])
+        = [K2,C,A] + merge([O], [O])
+        = [K2,C,A,O]
 
-mro(Z) = [Z] + merge(mro(K1), mro(K2), [K1, K2])
-       = [Z] + merge([K1,A,B,O], [K2,A,C,O], [K1, K2])
-       = [Z,K1] + merge([A,B,O], [K2,A,C,O], [K2])
-       = [Z,K1,K2] + merge([A,B,O], [A,C,O])
-       = [Z,K1,K2,A] + merge([B,O], [C,O])
-       = [Z,K1,K2,A,B] + merge([O], [C,O])
-       = [Z,K1,K2,A,B,C] + merge([O], [O])
-       = [Z,K1,K2,A,B,C,O]
+mro(Z) = [Z] + merge(mro(K2), mro(K1), [K2, K1])
+       = [Z] + merge([K2,C,A,O], [K1,B,A,O], [K2, K1])
+       = [Z,K2] + merge([C,A,O], [K1,B,A,O], [K1])
+       = [Z,K2,C] + merge([A,O], [K1,B,A,O], [K1])
+       = [Z,K2,C,K1] + merge([A,O], [B,A,O])
+       = [Z,K2,C,K1,B] + merge([A,O], [A,O])
+       = [Z,K2,C,K1,B,A,O]
        

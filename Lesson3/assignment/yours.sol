@@ -1,8 +1,9 @@
 pragma solidity ^0.4.14;
 
-import './Ownable.sol';
+import "github.com/OpenZeppelin/zeppelin-solidity/contracts/math/SafeMath.sol";
+import "github.com/OpenZeppelin/zeppelin-solidity/contracts/ownership/Ownable.sol";
 
-contract Payroll {
+contract Payroll is Ownable {
     struct Employee {
         address id;
         uint salary;
@@ -11,7 +12,6 @@ contract Payroll {
     }
     uint constant payDuration = 10 seconds;
     
-    address owner;
     mapping(address => Employee) public employees;
     uint totalSalary;
     
@@ -22,8 +22,12 @@ contract Payroll {
     }
 
     function _partialPaid(Employee employee) private {
-        uint payment = employee.salary * (now - employee.lastPayday) / payDuration;
+        uint payment = SafeMath.div(SafeMath.mul(employee.salary, SafeMath.sub(now, employee.lastPayday)), payDuration);
         employee.id.transfer(payment);
+    }
+    
+    function changePaymentAddress(address newEmployeeId) employeeExist(msg.sender){
+        employees[msg.sender].id = newEmployeeId;
     }
     
     function checkEmployee(address employeeId) returns (uint salary, uint lastPayday) {
@@ -35,26 +39,28 @@ contract Payroll {
     function addEmployee(address employeeId, uint numOfEthers) onlyOwner {
         var employee = employees[employeeId];
         assert(employee.id == 0x0);
-        uint salary = numOfEthers * 1 ether;
-        totalSalary += salary;
+        uint salary = SafeMath.mul(numOfEthers, 1 ether);
+        totalSalary = SafeMath.add(totalSalary, salary);
         
         employees[employeeId] = Employee(employeeId, salary, now);
     }
     
     function removeEmployee(address employeeId) public onlyOwner employeeExist(employeeId) {
-        _partialPaid(employees[employeeId]);
+        var employee = employees[employeeId];
+        _partialPaid(employee);
 
-        totalSalary -= employees[employeeId].salary;
+        totalSalary = SafeMath.sub(totalSalary, employee.salary);
         delete employees[employeeId];
         
     }
     
     function updateEmployee(address employeeId, uint numOfEthers) public onlyOwner employeeExist(employeeId) {
-        totalSalary -= employees[employeeId].salary;
-        _partialPaid(employees[employeeId]);
-        employees[employeeId].salary = numOfEthers * 1 ether;
-        totalSalary += employees[employeeId].salary;
-        employees[employeeId].lastPayday = now;
+        var employee = employees[employeeId];
+        totalSalary = SafeMath.sub(totalSalary, employee.salary);
+        _partialPaid(employee);
+        employee.salary = SafeMath.mul(numOfEthers, 1 ether);
+        totalSalary = SafeMath.add(totalSalary, employee.salary);
+        employee.lastPayday = now;
     }
     
     function addFund() public onlyOwner payable returns (uint)  {
@@ -66,7 +72,7 @@ contract Payroll {
     }
     
     function calculateRunway() returns (uint) {
-        return this.balance / totalSalary;
+        return SafeMath.div(this.balance, totalSalary);
     }
     
     function hasEnoughFund() returns (bool) {
@@ -75,7 +81,7 @@ contract Payroll {
     
     function getPaid() employeeExist(msg.sender){
         var employee = employees[msg.sender];
-        uint nextPayday = employee.lastPayday + payDuration;
+        uint nextPayday = SafeMath.add(employee.lastPayday, payDuration);
         assert(nextPayday < now);
 
         employee.lastPayday = nextPayday;
