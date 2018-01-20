@@ -1,0 +1,22 @@
+Using network 'development'.
+
+
+
+  Contract: Payroll-1
+      ✓ should add employee correctly by owner (248ms)
+            ✓ should not add employee by others except owner (320ms)
+            ✓ should not add a already-exists employee (41ms)
+
+          Contract: Payroll-2
+              ✓ should remove employee correctly by owner (302ms)
+            ✓ should not remove employee by others (115ms)
+            ✓ should not remove a non-exists employee by owner (463ms)
+
+          Contract: Payroll-3
+              ✓ should pay to an correct employee in correct time (778ms)
+            ✓ should not pay to an non-exists employee (53ms)
+            ✓ should not pay before payduration (484ms)
+
+
+          9 passing (3s)
+
