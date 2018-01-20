@@ -11,6 +11,29 @@ var expectRevert = async promise => {
   }
 };
 
+// TODO: replace expectRevert with zeppelin's increaseTime helper
+var increaseTime = (duration) => {
+  const id = Date.now();
+
+  return new Promise((resolve, reject) => {
+    web3.currentProvider.sendAsync({
+      jsonrpc: '2.0',
+      method: 'evm_increaseTime',
+      params: [duration],
+      id: id,
+    }, err1 => {
+      if (err1) return reject(err1);
+      web3.currentProvider.sendAsync({
+        jsonrpc: '2.0',
+        method: 'evm_mine',
+        id: id + 1,
+      }, (err2, res) => {
+        return err2 ? reject(err2) : resolve(res);
+      });
+    });
+  });
+};
+
 contract('Payroll.addEmployee', async function(accounts) {
   let payrollInstance = await Payroll.deployed();
 
@@ -65,5 +88,42 @@ contract('Payroll.removeEmployee', async function(accounts) {
   it("Should fail if msg.sender is not owner", async function() {
     let fakeAddress = '0xdd12f8c4e5f62fa68ef27035cc6f2393f3b57628';
     await expectRevert(payrollInstance.removeEmployee(fakeAddress, {from: accounts[1]}));
+  });
+});
+
+contract('Payroll.getPaid', async function(accounts) {
+  let payrollInstance = await Payroll.deployed();
+
+  it("Should succeed if employee exists and works longer than Payroll.PAY_DURATION.", async function() {
+    let employeeAddress = accounts[1];
+    await payrollInstance.addEmployee(employeeAddress, 1, {from: accounts[0]});
+    await payrollInstance.addFund({from: employeeAddress, value: web3.toWei(1, "ether")});
+    let storedData = await payrollInstance.employees.call(employeeAddress);
+    assert.equal(storedData[0], employeeAddress, "The employee address should exist.");
+    let originalBalance = web3.eth.getBalance(employeeAddress);
+
+    let pay_duration = await payrollInstance.PAY_DURATION.call();
+
+    await increaseTime(pay_duration); // seconds
+
+    let transactionResult = await payrollInstance.getPaid({from: employeeAddress, gasPrice: 0});
+    let newBalance = web3.eth.getBalance(employeeAddress);
+    let gas = transactionResult.receipt.gasUsed * web3.eth.gasPrice;
+    let expectedBalance = originalBalance.toNumber() + parseInt(web3.toWei(1, "ether"));
+    assert.equal(newBalance.toNumber(), expectedBalance, "Should be paid 1 ether");
+  });
+
+  it("Should fail if working time is shorter than Payroll.PAY_DURATION.", async function() {
+    let employeeAddress = accounts[2];
+    await payrollInstance.addEmployee(employeeAddress, 1, {from: accounts[0]});
+    let storedData = await payrollInstance.employees.call(employeeAddress);
+    assert.equal(storedData[0], employeeAddress, "The employee address should exist.");
+
+    await expectRevert(payrollInstance.getPaid({from: employeeAddress}));
+  });
+
+  it("Should fail if employee doesn't exist.", async function() {
+    let employeeAddress = accounts[3];
+    await expectRevert(payrollInstance.getPaid({from: employeeAddress}));
   });
 });

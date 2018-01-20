@@ -12,7 +12,7 @@ contract Payroll is Ownable {
         uint nextPayTime;
     }
 
-    uint constant PAY_DURATION = 10 seconds;
+    uint constant public PAY_DURATION = 10 seconds;
 
     mapping(address => Employee) public employees;
     uint totalSalaries = 0;
