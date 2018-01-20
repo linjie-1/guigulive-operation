@@ -7,7 +7,7 @@
     }
     
 //如果是员工调用：
-    function changePaymentAddress(address employeeId) onlyOwner employeeExist(msg.sender) {
+    function changePaymentAddress(address employeeId) employeeExist(msg.sender) {
         var employee = employees[msg.sender];
         employees[employeeId] = Employee(employeeId, employee.salary, employee.lastPayday);
         
