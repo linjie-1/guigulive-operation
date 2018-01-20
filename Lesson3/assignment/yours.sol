@@ -3,9 +3,7 @@
 function changePaymentAddress(address employeeId, address newEmployeeId) onlyOwner employeeExist(employeeId) {
   var employee = employees[employeeId];
   
-  _partialPaid(employee);
   employees[employeeId].id = newEmployeeId;
-  employees[newEmployeeId].lastPayday = now;
 }
 
 //加分题
@@ -20,17 +18,20 @@ L[B] = B + merge[L[0],0]
 L[C] = C + merge[L[0],0] 
      = [C,0]
 
-L[K1] = K1 + merge[[A,0],[B,0],[A,B]]
-      = [K1,B] + merge[[A,0],[0],[A]]
+L[K1] = K1 + merge[L[B],L[A],B,A]
+      = K1 + merge[[B,0],[A,0],[B,A]]
+      = [K1,B] + merge[[0],[A,0],[A]]
       = [K1,B,A,0]
       
-L[K2] = K2 + merge[[A,0]],[C,0]],[A,C]]
+L[K2] = K2 + merge[L[C],L[A],C,A]
+      = K2 + merge[[C,0]],[A,0]],[C,A]]
       = [K2,C,A,0]
 
-L[Z] = Z + merge[[K1,B,A,0],[K2,C,A,0],[K1,K2]]     
-     = [Z,K2] + merge[[K1,B,A,0],[C,A,0],K1]
-     = [Z,K2,K1] + merge[[B,A,0],[C,A,0]]
-     = [Z,K2,K1,A,C,B,0]
+L[Z] = Z + merge[L[K2],L[K1],[K2,K1]]     
+     = Z + merge[[K2,C,A,0],[K1,B,A,0],[K2,K1]]     
+     = [Z,K2] + merge[[C,A,0],[B,A,0],K1]
+     = [Z,K2,K1] + merge[[C,A,0],[B,A,0]]
+     = [Z,K2,K1,C,A,B,0]
 
 
 //源码
