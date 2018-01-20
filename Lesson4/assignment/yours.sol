@@ -91,14 +91,13 @@ contract payRoll{
         employee.id.transfer(employee.salary);
     }
 
-}
+    /// q2
+    function changePaymentAddress(address employeeId, address newEmployeeId) onlyOwner employeeExist(employeeId) {
+      var employee = employees[employeeId];
 
+      _partialPaid(employee);
+      employees[employeeId].id = newEmployeeId;
+      employees[newEmployeeId].lastPayday = now;
+    }
 
-/// q2
-function changePaymentAddress(address employeeId, address newEmployeeId) onlyOwner employeeExist(employeeId) {
-  var employee = employees[employeeId];
-
-  _partialPaid(employee);
-  employees[employeeId].id = newEmployeeId;
-  employees[newEmployeeId].lastPayday = now;
 }
