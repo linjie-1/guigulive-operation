@@ -1,5 +1,9 @@
 build
 node_modules
+<<<<<<< HEAD
 public
 src
 config
+=======
+
+>>>>>>> parent of 02431fc... Revert "Lession 4 test case"
