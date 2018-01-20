@@ -8,10 +8,10 @@ contract('Payroll', function(accounts) {
     // add fund   
     it("should add fund", function() {
         return Payroll.deployed().then(function(instance) {
-            return instance.addFund.call({value: web3.toWei(1000), from: owner});
+            return instance.addFund.call({value: web3.toWei(1000, 'ether'), from: owner});
         }).then(function(balance) {
             assert.ok(true);
-            assert.equal(balance.toNumber(), web3.toWei(1000));          
+            assert.equal(balance.toNumber(), web3.toWei(1000, 'ether'));          
         });
     });
     
@@ -26,7 +26,7 @@ contract('Payroll', function(accounts) {
         }).then(function(newEmployee) {
             assert.ok(true, 'add employee success');
             assert.equal(newEmployee[0], employeeId, 'check employee address');
-            assert.equal(newEmployee[1].valueOf(), web3.toWei(salary), 'ether', 'check employee salary');
+            assert.equal(newEmployee[1].valueOf(), web3.toWei(salary, 'ether'), 'check employee salary');
         });
     });
 
