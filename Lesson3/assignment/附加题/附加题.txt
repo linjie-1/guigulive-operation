@@ -1,0 +1,10 @@
+L(O) = O
+L(A) = AO
+L(B) = BO
+L(C) = CO
+L(K1) = K1 + merge(L(A) + L(B) + AB)
+      = K1ABO
+L(K2) = K2 + merge(L(A) + L(C) + AC)
+      = K2ACO
+L(Z) = Z + merge(L(K1) + L(K2) + K1K2)
+     = Z, K1, K2, A, B, C, O
