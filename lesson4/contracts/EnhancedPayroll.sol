@@ -20,6 +20,17 @@ contract EnhancedPayroll is Ownable {
         assert(employee.id != 0x0);
         _;
     }
+
+
+    // for test
+    function getEmployeeInfo(address id) returns (uint salary) {
+        var employee = employees[id];
+        if (employee.id == 0x0) {
+            return (0);
+        } else {
+            return (employee.salaryInMonth);
+        }
+    }
     
     function _partialPaid(Employee employee) private {
         uint value = employee.salaryInMonth
