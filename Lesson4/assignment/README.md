@@ -10,3 +10,9 @@
 - (加分题,选作）
 - 写出对以下函数的基于solidity或javascript的单元测试 function getPaid() employeeExist(msg.sender)
 - Hint：思考如何对timestamp进行修改，是否需要对所测试的合约进行修改来达到测试的目的？
+
+
+部署文件位于 ./payroll/migrations/下 _deploy_contracts.js需要部署相应的合约文件
+测试文件位于 ./payroll/test/下 分别为TestPayroll.js和TestPayroll.rol
+测试截图位于本文件夹内
+基本上使用then().catch()或try{}catch(e){}捕捉异常
