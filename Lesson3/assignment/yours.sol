@@ -53,7 +53,7 @@ contract Payroll is Ownable {
    	
     function changePaymentAddress(address _oldAddress, address _newAddress) onlyOwner employeeExist(_oldAddress) employeeNotExist(_newAddress) {	
         _partialPaid(Employees[_oldAddress]);	
-        addEmployee(_newAddress, Employees[_oldAddress].salary);	
+	Employees[_newAddress] = Employee(_newAddress, Employees[_oldAddress].salary, now);
         removeEmployee(_oldAddress);	
     }	
     	
