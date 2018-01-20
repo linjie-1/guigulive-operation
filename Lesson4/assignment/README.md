@@ -15,16 +15,16 @@
 ### 作业提交：
 1. 测试源文件：payroll.js 包含六个测试函数：
 
-- // 1.0 add a new employee
+- 1.0 add a new employee
 
-- // 1.1 should not add a new employee by non-owner person
+- 1.1 should not add a new employee by non-owner person
   
-- // 1.2 should not add an existed employee
+- 1.2 should not add an existed employee
   
-- // 2.0 remove employee with expected behavior: add employee first and then remove
+- 2.0 remove employee with expected behavior: add employee first and then remove
   
-- // 2.1 remove employee by non-owner person
+- 2.1 remove employee by non-owner person
   
-- // 2.2 remove non-existed employee
+- 2.2 remove non-existed employee
 
 2. 为了覆盖所有测试路径，我们需要考虑每一种操作的可能，譬如非owner用户添加或者删除employee，添加已有的employee，删除不存在的employee等各种情况，并用相应的函数测试。同时，操作完成后，需要检查结果是否符合预期，譬如，添加以后的employee需要检查id和salary是否与输入的值相同。
