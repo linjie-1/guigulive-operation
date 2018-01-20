@@ -40,7 +40,7 @@
   });
 ```
 - 思考一下我们如何能覆盖所有的测试路径，包括函数异常的捕捉
-![](link)
+![](https://github.com/yanyangbaobeiIsEmma/guigulive-operation/blob/master/Lesson4/assignment/testResult.png)
 - (加分题,选作）
 - 写出对以下函数的基于solidity或javascript的单元测试 function getPaid() employeeExist(msg.sender)
 - Hint：思考如何对timestamp进行修改，是否需要对所测试的合约进行修改来达到测试的目的？
