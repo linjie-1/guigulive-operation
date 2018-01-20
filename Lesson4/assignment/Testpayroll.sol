@@ -8,14 +8,21 @@ contract Testpayroll is  payroll{
   function testaddEmployee() public {
     payroll payRoll = payroll(DeployedAddresses.payroll());
 
-    payRoll.addemployee(0x583031d1113ad415f02576bd6afabfb302140223,1);
+    addemployee(0x583031d1113ad415f02576bd6afabfb302140223,1);
 
-    uint expectedsalary = 1  ;
+    uint expectedsalary = 1 ether ;
     address expectedid = 0x583031d1113ad415f02576bd6afabfb302140223;
 
-    Assert.equal(es[expectedid].slaray, expectedsalary, "the employee added and the salary is 1 ether.");
+    Assert.equal(es[expectedid].salary, expectedsalary, "the employee added and the salary is 1 ether.");
   }
 
-  
 
+  function testremoveemployee() public {
+    var e=es[0x583031d1113ad415f02576bd6afabfb302140223];
+
+    //Assert.equal(e.id, 0x583031d1113ad415f02576bd6afabfb302140223, "the employee is not exist");
+
+    removeemployee(e.id);
+    Assert.equal(es[e.id].id, 0x0, "the employee is not exist");
+  }
 }
