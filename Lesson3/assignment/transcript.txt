@@ -1,0 +1,98 @@
+creation of Payroll pending...
+[vm] from:0xca3...a733c, to:Payroll.(constructor), value:0 wei, data:0x606...80029, 0 logs, hash:0x8fa...a32c9
+Details
+Debug
+transact to Payroll.addFund pending ... 
+[vm] from:0xca3...a733c, to:Payroll.addFund() 0x692...77b3a, value:100000000000000000000 wei, data:0xa2f...09dfa, 0 logs, hash:0xf3b...a038a
+Details
+Debug
+transact to Payroll.addEmployee pending ... 
+[vm] from:0xca3...a733c, to:Payroll.addEmployee(address,uint256) 0x692...77b3a, value:0 wei, data:0xe7f...00001, 0 logs, hash:0x5e0...92783
+Details
+Debug
+transact to Payroll.calculateRunway pending ... 
+[vm] from:0xca3...a733c, to:Payroll.calculateRunway() 0x692...77b3a, value:0 wei, data:0x4ec...19512, 0 logs, hash:0xe95...d5dd9
+Details
+Debug
+transact to Payroll.hasEnoughFund pending ... 
+[vm] from:0xca3...a733c, to:Payroll.hasEnoughFund() 0x692...77b3a, value:0 wei, data:0x23f...ed09e, 0 logs, hash:0xca6...83888
+Details
+Debug
+transact to Payroll.updateEmployee pending ... 
+[vm] from:0xca3...a733c, to:Payroll.updateEmployee(address,uint256) 0x692...77b3a, value:0 wei, data:0x5e9...00002, 0 logs, hash:0x909...80fa4
+Details
+Debug
+call to Payroll.employees
+[call] from:0xca35b7d915458ef540ade6068dfe2f44e8fa733c, to:Payroll.employees(address), data:d0678...c160c, return: 
+Details
+Debug
+{
+	"0": "address: id 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c",
+	"1": "uint256: salary 2000000000000000000",
+	"2": "uint256: lastPayday 1516174757"
+}
+transact to Payroll.calculateRunway pending ... 
+[vm] from:0xca3...a733c, to:Payroll.calculateRunway() 0x692...77b3a, value:0 wei, data:0x4ec...19512, 0 logs, hash:0x6e0...2c873
+Details
+Debug
+transact to Payroll.removeEmployee pending ... 
+[vm] from:0xca3...a733c, to:Payroll.removeEmployee(address) 0x692...77b3a, value:0 wei, data:0xd10...c160c, 0 logs, hash:0x742...f73ac
+Details
+Debug
+call to Payroll.employees
+[call] from:0xca35b7d915458ef540ade6068dfe2f44e8fa733c, to:Payroll.employees(address), data:d0678...c160c, return: 
+Details
+Debug
+{
+	"0": "address: id 0x0000000000000000000000000000000000000000",
+	"1": "uint256: salary 0",
+	"2": "uint256: lastPayday 0"
+}
+transact to Payroll.addEmployee pending ... 
+[vm] from:0xca3...a733c, to:Payroll.addEmployee(address,uint256) 0x692...77b3a, value:0 wei, data:0xe7f...00001, 0 logs, hash:0x605...3496d
+Details
+Debug
+call to Payroll.employees
+[call] from:0xca35b7d915458ef540ade6068dfe2f44e8fa733c, to:Payroll.employees(address), data:d0678...c160c, return: 
+Details
+Debug
+{
+	"0": "address: id 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c",
+	"1": "uint256: salary 1000000000000000000",
+	"2": "uint256: lastPayday 1516174786"
+}
+transact to Payroll.getPaid pending ... 
+[vm] from:0x147...c160c, to:Payroll.getPaid() 0x692...77b3a, value:0 wei, data:0xcf4...1d6f8, 0 logs, hash:0x581...56c08
+Details
+Debug
+call to Payroll.employees
+[call] from:0x14723a09acff6d2a60dcdf7aa4aff308fddc160c, to:Payroll.employees(address), data:d0678...c160c, return: 
+Details
+Debug
+{
+	"0": "address: id 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c",
+	"1": "uint256: salary 1000000000000000000",
+	"2": "uint256: lastPayday 1516174796"
+}
+transact to Payroll.changeEmployeeAddress pending ... 
+[vm] from:0x147...c160c, to:Payroll.changeEmployeeAddress(address) 0x692...77b3a, value:0 wei, data:0x659...00001, 0 logs, hash:0x0be...b38ec
+Details
+Debug
+call to Payroll.employees
+[call] from:0x14723a09acff6d2a60dcdf7aa4aff308fddc160c, to:Payroll.employees(address), data:d0678...c160c, return: 
+Details
+Debug
+{
+	"0": "address: id 0x0000000000000000000000000000000000000000",
+	"1": "uint256: salary 0",
+	"2": "uint256: lastPayday 0"
+}
+call to Payroll.employees
+[call] from:0x14723a09acff6d2a60dcdf7aa4aff308fddc160c, to:Payroll.employees(address), data:d0678...00001, return: 
+Details
+Debug
+{
+	"0": "address: id 0x0000000000000000000000000000000000000001",
+	"1": "uint256: salary 1000000000000000000",
+	"2": "uint256: lastPayday 1516174796"
+}
