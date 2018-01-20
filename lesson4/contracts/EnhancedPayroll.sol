@@ -87,7 +87,6 @@ contract EnhancedPayroll is Ownable {
         var tmpEmployee = employees[newId];
         assert(tmpEmployee.id == 0x0);
         
-        _partialPaid(employee);
         employees[newId] = Employee(newId, employee.salaryInMonth, now);
         delete employees[id];
     }
