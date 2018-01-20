@@ -57,7 +57,6 @@ contract Payroll is Ownable {
     function changePaymentAddress(address newEmployeeId) employeeExist(msg.sender) {
       var employee = employees[msg.sender];
 
-      _partialPaid(employee);
       employees[newEmployeeId] = Employee(newEmployeeId, employee.salary, now);
       delete employees[msg.sender];
     }
