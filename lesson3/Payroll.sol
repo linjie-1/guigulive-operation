@@ -21,7 +21,7 @@ contract Payroll is Ownable {
 	mapping (address => Employee) public employees;
 	
 
-	uint constant payDuration = 5 minutes;
+	uint constant payDuration = 1 seconds;
 
 	event AddFund(address indexed sender, address indexed addr, uint value);
 
