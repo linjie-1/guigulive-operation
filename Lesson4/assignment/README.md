@@ -13,7 +13,9 @@
 
 
 ### 作业提交：
-1. 测试源文件：payroll.js 包含六个测试函数：
+1. 测试源文件：payroll.js, test运行结果截屏：truffle_test_snapshot.jpg
+
+包含六个测试函数：
 
 - 1.0 add a new employee
 
