@@ -205,8 +205,8 @@
   ],
   "bytecode": "0x6060604052336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555061105e806100536000396000f3006060604052600436106100ba576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806323fed09e146100bf57806327bb5804146100ec5780634ec19512146101255780635e91d8ec1461014e5780637124d613146101905780638da5cb5b146101c9578063a2f09dfa1461021e578063cf41d6f81461023c578063d067894714610251578063d108177a146102d8578063e7fd9a1314610311578063f2fde38b14610353575b600080fd5b34156100ca57600080fd5b6100d261038c565b604051808215151515815260200191505060405180910390f35b34156100f757600080fd5b610123600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190505061039d565b005b341561013057600080fd5b61013861055a565b6040518082815260200191505060405180910390f35b341561015957600080fd5b61018e600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091908035906020019091905050610586565b005b341561019b57600080fd5b6101c7600480803573ffffffffffffffffffffffffffffffffffffffff169060200190919050506106f0565b005b34156101d457600080fd5b6101dc61090e565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b610226610933565b6040518082815260200191505060405180910390f35b341561024757600080fd5b61024f6109ad565b005b341561025c57600080fd5b610288600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091905050610b02565b604051808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001838152602001828152602001935050505060405180910390f35b34156102e357600080fd5b61030f600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091905050610b4c565b005b341561031c57600080fd5b610351600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091908035906020019091905050610d05565b005b341561035e57600080fd5b61038a600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091905050610edd565b005b60008061039761055a565b11905090565b6000806000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156103fb57600080fd5b826000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff161415151561048157fe5b600160008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000209250600a836002015442038460010154028115156104da57fe5b0491506000821115610554574283600201819055508260000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc839081150290604051600060405180830381858888f19350505050151561055357600080fd5b5b50505050565b60006002543073ffffffffffffffffffffffffffffffffffffffff163181151561058057fe5b04905090565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156105e357600080fd5b826000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff161415151561066957fe5b6106728461039d565b600160008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000209150670de0b6b3a7640000830282600101546002540301600281905550670de0b6b3a76400008302826001018190555042826002018190555050505050565b6000336000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff161415151561077857fe5b600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002091506060604051908101604052808473ffffffffffffffffffffffffffffffffffffffff168152602001836001015481526020018360020154815250600160008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008201518160000160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506020820151816001015560408201518160020155905050600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600080820160006101000a81549073ffffffffffffffffffffffffffffffffffffffff0219169055600182016000905560028201600090555050505050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614151561099057600080fd5b3073ffffffffffffffffffffffffffffffffffffffff1631905090565b600080336000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1614151515610a3657fe5b600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000209250600a83600201540191504282101515610a8c57fe5b8183600201819055508260000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc84600101549081150290604051600060405180830381858888f193505050501515610afd57600080fd5b505050565b60016020528060005260406000206000915090508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010154908060020154905083565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610ba757600080fd5b806000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1614151515610c2d57fe5b610c368261039d565b600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060010154600260008282540392505081905550600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600080820160006101000a81549073ffffffffffffffffffffffffffffffffffffffff02191690556001820160009055600282016000905550505050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610d6057600080fd5b816000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16141515610de557fe5b6060604051908101604052808473ffffffffffffffffffffffffffffffffffffffff168152602001670de0b6b3a76400008402815260200142815250600160008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008201518160000160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506020820151816001015560408201518160020155905050670de0b6b3a76400008202600260008282540192505081905550505050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610f3857600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff1614151515610f7457600080fd5b8073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a3806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550505600a165627a7a72305820fafc5dbe355f0a233573aa8a5cc469dd65e36c956a25181bda8f20f4b847b4950029",
   "deployedBytecode": "0x6060604052600436106100ba576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806323fed09e146100bf57806327bb5804146100ec5780634ec19512146101255780635e91d8ec1461014e5780637124d613146101905780638da5cb5b146101c9578063a2f09dfa1461021e578063cf41d6f81461023c578063d067894714610251578063d108177a146102d8578063e7fd9a1314610311578063f2fde38b14610353575b600080fd5b34156100ca57600080fd5b6100d261038c565b604051808215151515815260200191505060405180910390f35b34156100f757600080fd5b610123600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190505061039d565b005b341561013057600080fd5b61013861055a565b6040518082815260200191505060405180910390f35b341561015957600080fd5b61018e600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091908035906020019091905050610586565b005b341561019b57600080fd5b6101c7600480803573ffffffffffffffffffffffffffffffffffffffff169060200190919050506106f0565b005b34156101d457600080fd5b6101dc61090e565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b610226610933565b6040518082815260200191505060405180910390f35b341561024757600080fd5b61024f6109ad565b005b341561025c57600080fd5b610288600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091905050610b02565b604051808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001838152602001828152602001935050505060405180910390f35b34156102e357600080fd5b61030f600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091905050610b4c565b005b341561031c57600080fd5b610351600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091908035906020019091905050610d05565b005b341561035e57600080fd5b61038a600480803573ffffffffffffffffffffffffffffffffffffffff16906020019091905050610edd565b005b60008061039761055a565b11905090565b6000806000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156103fb57600080fd5b826000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff161415151561048157fe5b600160008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000209250600a836002015442038460010154028115156104da57fe5b0491506000821115610554574283600201819055508260000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc839081150290604051600060405180830381858888f19350505050151561055357600080fd5b5b50505050565b60006002543073ffffffffffffffffffffffffffffffffffffffff163181151561058057fe5b04905090565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156105e357600080fd5b826000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff161415151561066957fe5b6106728461039d565b600160008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000209150670de0b6b3a7640000830282600101546002540301600281905550670de0b6b3a76400008302826001018190555042826002018190555050505050565b6000336000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff161415151561077857fe5b600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002091506060604051908101604052808473ffffffffffffffffffffffffffffffffffffffff168152602001836001015481526020018360020154815250600160008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008201518160000160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506020820151816001015560408201518160020155905050600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600080820160006101000a81549073ffffffffffffffffffffffffffffffffffffffff0219169055600182016000905560028201600090555050505050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614151561099057600080fd5b3073ffffffffffffffffffffffffffffffffffffffff1631905090565b600080336000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1614151515610a3657fe5b600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000209250600a83600201540191504282101515610a8c57fe5b8183600201819055508260000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166108fc84600101549081150290604051600060405180830381858888f193505050501515610afd57600080fd5b505050565b60016020528060005260406000206000915090508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010154908060020154905083565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610ba757600080fd5b806000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1614151515610c2d57fe5b610c368261039d565b600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060010154600260008282540392505081905550600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600080820160006101000a81549073ffffffffffffffffffffffffffffffffffffffff02191690556001820160009055600282016000905550505050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610d6057600080fd5b816000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16141515610de557fe5b6060604051908101604052808473ffffffffffffffffffffffffffffffffffffffff168152602001670de0b6b3a76400008402815260200142815250600160008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008201518160000160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506020820151816001015560408201518160020155905050670de0b6b3a76400008202600260008282540192505081905550505050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610f3857600080fd5b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff1614151515610f7457600080fd5b8073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a3806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550505600a165627a7a72305820fafc5dbe355f0a233573aa8a5cc469dd65e36c956a25181bda8f20f4b847b4950029",
-  "sourceMap": "51:2237:2:-;;;509:10:1;501:5;;:18;;;;;;;;;;;;;;;;;;51:2237:2;;;;;;",
-  "deployedSourceMap": "51:2237:2:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1402:85;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1770:287;;;;;;;;;;;;;;;;;;;;;;;;;;;;1306:86;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;942:256;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2063:219;;;;;;;;;;;;;;;;;;;;;;;;;;;;238:20:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1208:88:2;;;;;;;;;;;;;;;;;;;;;;;1497:263;;;;;;;;;;;;;;229:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;764:172;;;;;;;;;;;;;;;;;;;;;;;;;;;;589:165;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;834:169:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;1402:85:2;1436:4;1479:1;1459:17;:15;:17::i;:::-;:21;1452:28;;1402:85;:::o;1770:287::-;1848:10;1885:12;352:5;;;;;;;;;;;338:19;;:10;:19;;;330:28;;;;;;;;1834:2;454:3;434:9;:13;444:2;434:13;;;;;;;;;;;;;;;:16;;;;;;;;;;;;:23;;;;427:31;;;;;;1861:9;:13;1871:2;1861:13;;;;;;;;;;;;;;;1848:26;;212:10;1918:1;:12;;;1912:3;:18;1900:1;:8;;;:31;:45;;;;;;;;1885:60;;1969:1;1959:7;:11;1955:96;;;2001:3;1986:1;:12;;:18;;;;2018:1;:4;;;;;;;;;;;;:13;;:22;2032:7;2018:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1955:96;368:1;1770:287;;;:::o;1306:86::-;1342:4;1380:5;;1365:4;:12;;;:20;;;;;;;;1358:27;;1306:86;:::o;942:256::-;1057:10;352:5;;;;;;;;;;;338:19;;:10;:19;;;330:28;;;;;;;;1010:2;454:3;434:9;:13;444:2;434:13;;;;;;;;;;;;;;;:16;;;;;;;;;;;;:23;;;;427:31;;;;;;1024:22;1043:2;1024:18;:22::i;:::-;1070:9;:13;1080:2;1070:13;;;;;;;;;;;;;;;1057:26;;1124:7;1120:1;:11;1109:1;:8;;;1101:5;;:16;:30;1093:5;:38;;;;1156:7;1152:1;:11;1141:1;:8;;:22;;;;1188:3;1173:1;:12;;:18;;;;368:1;942:256;;;:::o;2063:219::-;2141:10;2119;454:3;434:9;:13;444:2;434:13;;;;;;;;;;;;;;;:16;;;;;;;;;;;;:23;;;;427:31;;;;;;2154:9;:21;2164:10;2154:21;;;;;;;;;;;;;;;2141:34;;2201:36;;;;;;;;;2210:2;2201:36;;;;;;2214:1;:8;;;2201:36;;;;2224:1;:12;;;2201:36;;;2185:9;:13;2195:2;2185:13;;;;;;;;;;;;;;;:52;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2254:9;:21;2264:10;2254:21;;;;;;;;;;;;;;;;2247:28;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2063:219;;;:::o;238:20:1:-;;;;;;;;;;;;;:::o;1208:88:2:-;1254:4;352:5;;;;;;;;;;;338:19;;:10;:19;;;330:28;;;;;;;;1277:4;:12;;;1270:19;;1208:88;:::o;1497:263::-;1552:10;1597:15;1530:10;454:3;434:9;:13;444:2;434:13;;;;;;;;;;;;;;;:16;;;;;;;;;;;;:23;;;;427:31;;;;;;1565:9;:21;1575:10;1565:21;;;;;;;;;;;;;;;1552:34;;212:10;1615:1;:12;;;:26;1597:44;;1671:3;1658:10;:16;1651:24;;;;;;1701:10;1686:1;:12;;:25;;;;1730:1;:4;;;;;;;;;;;;:13;;:23;1744:1;:8;;;1730:23;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1497:263;;;:::o;229:45::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;764:172::-;352:5;;;;;;;;;;;338:19;;:10;:19;;;330:28;;;;;;;;824:2;454:3;434:9;:13;444:2;434:13;;;;;;;;;;;;;;;:16;;;;;;;;;;;;:23;;;;427:31;;;;;;838:22;857:2;838:18;:22::i;:::-;879:9;:13;889:2;879:13;;;;;;;;;;;;;;;:20;;;870:5;;:29;;;;;;;;;;;916:9;:13;926:2;916:13;;;;;;;;;;;;;;;;909:20;;;;;;;;;;;;;;;;;;;;;;;;;;;;;368:1;764:172;:::o;589:165::-;352:5;;;;;;;;;;;338:19;;:10;:19;;;330:28;;;;;;;;657:2;561:3;541:9;:13;551:2;541:13;;;;;;;;;;;;;;;:16;;;;;;;;;;;;:23;;;534:31;;;;;;687:30;;;;;;;;;696:2;687:30;;;;;;704:7;700:1;:11;687:30;;;;713:3;687:30;;;671:9;:13;681:2;671:13;;;;;;;;;;;;;;;:46;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;740:7;736:1;:11;727:5;;:20;;;;;;;;;;;368:1;589:165;;:::o;834:169:1:-;352:5:2;;;;;;;;;;;338:19;;:10;:19;;;330:28;;;;;;;;930:1:1;910:22;;:8;:22;;;;902:31;;;;;;;;967:8;939:37;;960:5;;;;;;;;;;;939:37;;;;;;;;;;;;990:8;982:5;;:16;;;;;;;;;;;;;;;;;;834:169;:::o",
+  "sourceMap": "51:2237:1:-;;;509:10:0;501:5;;:18;;;;;;;;;;;;;;;;;;51:2237:1;;;;;;",
+  "deployedSourceMap": "51:2237:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1402:85;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1770:287;;;;;;;;;;;;;;;;;;;;;;;;;;;;1306:86;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;942:256;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2063:219;;;;;;;;;;;;;;;;;;;;;;;;;;;;238:20:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1208:88:1;;;;;;;;;;;;;;;;;;;;;;;1497:263;;;;;;;;;;;;;;229:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;764:172;;;;;;;;;;;;;;;;;;;;;;;;;;;;589:165;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;834:169:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;1402:85:1;1436:4;1479:1;1459:17;:15;:17::i;:::-;:21;1452:28;;1402:85;:::o;1770:287::-;1848:10;1885:12;352:5;;;;;;;;;;;338:19;;:10;:19;;;330:28;;;;;;;;1834:2;454:3;434:9;:13;444:2;434:13;;;;;;;;;;;;;;;:16;;;;;;;;;;;;:23;;;;427:31;;;;;;1861:9;:13;1871:2;1861:13;;;;;;;;;;;;;;;1848:26;;212:10;1918:1;:12;;;1912:3;:18;1900:1;:8;;;:31;:45;;;;;;;;1885:60;;1969:1;1959:7;:11;1955:96;;;2001:3;1986:1;:12;;:18;;;;2018:1;:4;;;;;;;;;;;;:13;;:22;2032:7;2018:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1955:96;368:1;1770:287;;;:::o;1306:86::-;1342:4;1380:5;;1365:4;:12;;;:20;;;;;;;;1358:27;;1306:86;:::o;942:256::-;1057:10;352:5;;;;;;;;;;;338:19;;:10;:19;;;330:28;;;;;;;;1010:2;454:3;434:9;:13;444:2;434:13;;;;;;;;;;;;;;;:16;;;;;;;;;;;;:23;;;;427:31;;;;;;1024:22;1043:2;1024:18;:22::i;:::-;1070:9;:13;1080:2;1070:13;;;;;;;;;;;;;;;1057:26;;1124:7;1120:1;:11;1109:1;:8;;;1101:5;;:16;:30;1093:5;:38;;;;1156:7;1152:1;:11;1141:1;:8;;:22;;;;1188:3;1173:1;:12;;:18;;;;368:1;942:256;;;:::o;2063:219::-;2141:10;2119;454:3;434:9;:13;444:2;434:13;;;;;;;;;;;;;;;:16;;;;;;;;;;;;:23;;;;427:31;;;;;;2154:9;:21;2164:10;2154:21;;;;;;;;;;;;;;;2141:34;;2201:36;;;;;;;;;2210:2;2201:36;;;;;;2214:1;:8;;;2201:36;;;;2224:1;:12;;;2201:36;;;2185:9;:13;2195:2;2185:13;;;;;;;;;;;;;;;:52;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2254:9;:21;2264:10;2254:21;;;;;;;;;;;;;;;;2247:28;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2063:219;;;:::o;238:20:0:-;;;;;;;;;;;;;:::o;1208:88:1:-;1254:4;352:5;;;;;;;;;;;338:19;;:10;:19;;;330:28;;;;;;;;1277:4;:12;;;1270:19;;1208:88;:::o;1497:263::-;1552:10;1597:15;1530:10;454:3;434:9;:13;444:2;434:13;;;;;;;;;;;;;;;:16;;;;;;;;;;;;:23;;;;427:31;;;;;;1565:9;:21;1575:10;1565:21;;;;;;;;;;;;;;;1552:34;;212:10;1615:1;:12;;;:26;1597:44;;1671:3;1658:10;:16;1651:24;;;;;;1701:10;1686:1;:12;;:25;;;;1730:1;:4;;;;;;;;;;;;:13;;:23;1744:1;:8;;;1730:23;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1497:263;;;:::o;229:45::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;764:172::-;352:5;;;;;;;;;;;338:19;;:10;:19;;;330:28;;;;;;;;824:2;454:3;434:9;:13;444:2;434:13;;;;;;;;;;;;;;;:16;;;;;;;;;;;;:23;;;;427:31;;;;;;838:22;857:2;838:18;:22::i;:::-;879:9;:13;889:2;879:13;;;;;;;;;;;;;;;:20;;;870:5;;:29;;;;;;;;;;;916:9;:13;926:2;916:13;;;;;;;;;;;;;;;;909:20;;;;;;;;;;;;;;;;;;;;;;;;;;;;;368:1;764:172;:::o;589:165::-;352:5;;;;;;;;;;;338:19;;:10;:19;;;330:28;;;;;;;;657:2;561:3;541:9;:13;551:2;541:13;;;;;;;;;;;;;;;:16;;;;;;;;;;;;:23;;;534:31;;;;;;687:30;;;;;;;;;696:2;687:30;;;;;;704:7;700:1;:11;687:30;;;;713:3;687:30;;;671:9;:13;681:2;671:13;;;;;;;;;;;;;;;:46;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;740:7;736:1;:11;727:5;;:20;;;;;;;;;;;368:1;589:165;;:::o;834:169:0:-;352:5:1;;;;;;;;;;;338:19;;:10;:19;;;330:28;;;;;;;;930:1:0;910:22;;:8;:22;;;;902:31;;;;;;;;967:8;939:37;;960:5;;;;;;;;;;;939:37;;;;;;;;;;;;990:8;982:5;;:16;;;;;;;;;;;;;;;;;;834:169;:::o",
   "source": "pragma solidity ^0.4.14;\n\nimport './Ownable.sol';\n\ncontract Payroll is Ownable {\n    struct Employee {\n        address id;\n        uint salary;\n        uint lastPayday;\n    }\n    \n    uint constant payDuration = 10 seconds;\n\n    mapping(address => Employee) public employees;\n    uint total;\n    \n    modifier onlyOwner {\n        require(msg.sender == owner);\n        _;\n    }\n\n    modifier employeeExist(address id) {\n        assert(employees[id].id != 0x0);\n        _;\n    }\n    \n    modifier employeeNotExist(address id) {\n        assert(employees[id].id == 0x0);\n        _;\n    }\n\n    function addEmployee(address id, uint s) onlyOwner employeeNotExist(id) {\n        employees[id] = Employee(id, s * 1 ether, now);\n        total += s * 1 ether;\n    }\n    \n    function removeEmployee(address id) onlyOwner employeeExist(id) {\n        payRemainingSalary(id);\n        total -= employees[id].salary;\n        delete employees[id];\n    }\n\n    function updateEmployee(address id, uint s) onlyOwner employeeExist(id) {\n        payRemainingSalary(id);\n\n        Employee e = employees[id];\n        total = total - e.salary + s * 1 ether;\n        e.salary = s * 1 ether;\n        e.lastPayday = now;\n    }\n    \n    function addFund() onlyOwner payable returns (uint) {\n        return this.balance;\n    }\n    \n    function calculateRunway() returns (uint) {\n        return this.balance / total;\n    }\n    \n    function hasEnoughFund() returns (bool) {\n        return calculateRunway() > 0;\n    }\n    \n    function getPaid() employeeExist(msg.sender) {\n        Employee e = employees[msg.sender];\n\n        uint nextPayday = e.lastPayday + payDuration;\n        assert(nextPayday < now);\n\n        e.lastPayday = nextPayday;\n        \n        e.id.transfer(e.salary);\n    }\n    \n    function payRemainingSalary(address id) onlyOwner employeeExist(id) {\n        Employee e = employees[id];\n\n        uint payment = e.salary * (now - e.lastPayday) / payDuration;\n        if (payment > 0) {\n            e.lastPayday = now;\n            e.id.transfer(payment);\n        }\n    }\n\n    function changePaymentAddress(address id) employeeExist(msg.sender) {\n        Employee e = employees[msg.sender];\n        employees[id] = Employee(id, e.salary, e.lastPayday);\n        delete employees[msg.sender];\n    }    \n}",
   "sourcePath": "D:\\Code\\Coin\\guigulive-operation\\lesson4\\assignment\\contracts\\Payroll.sol",
   "ast": {
@@ -214,7 +214,7 @@
       "absolutePath": "/D/Code/Coin/guigulive-operation/lesson4/assignment/contracts/Payroll.sol",
       "exportedSymbols": {
         "Payroll": [
-          441
+          384
         ]
       }
     },
@@ -228,39 +228,39 @@
             ".14"
           ]
         },
-        "id": 114,
+        "id": 57,
         "name": "PragmaDirective",
-        "src": "0:24:2"
+        "src": "0:24:1"
       },
       {
         "attributes": {
-          "SourceUnit": 113,
+          "SourceUnit": 56,
           "absolutePath": "/D/Code/Coin/guigulive-operation/lesson4/assignment/contracts/Ownable.sol",
           "file": "./Ownable.sol",
-          "scope": 442,
+          "scope": 385,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 115,
+        "id": 58,
         "name": "ImportDirective",
-        "src": "26:23:2"
+        "src": "26:23:1"
       },
       {
         "attributes": {
           "contractDependencies": [
-            112
+            55
           ],
           "contractKind": "contract",
           "documentation": null,
           "fullyImplemented": true,
           "linearizedBaseContracts": [
-            441,
-            112
+            384,
+            55
           ],
           "name": "Payroll",
-          "scope": 442
+          "scope": 385
         },
         "children": [
           {
@@ -274,23 +274,23 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "Ownable",
-                  "referencedDeclaration": 112,
+                  "referencedDeclaration": 55,
                   "type": "contract Ownable"
                 },
-                "id": 116,
+                "id": 59,
                 "name": "UserDefinedTypeName",
-                "src": "71:7:2"
+                "src": "71:7:1"
               }
             ],
-            "id": 117,
+            "id": 60,
             "name": "InheritanceSpecifier",
-            "src": "71:7:2"
+            "src": "71:7:1"
           },
           {
             "attributes": {
               "canonicalName": "Payroll.Employee",
               "name": "Employee",
-              "scope": 441,
+              "scope": 384,
               "visibility": "public"
             },
             "children": [
@@ -298,7 +298,7 @@
                 "attributes": {
                   "constant": false,
                   "name": "id",
-                  "scope": 124,
+                  "scope": 67,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "address",
@@ -311,20 +311,20 @@
                       "name": "address",
                       "type": "address"
                     },
-                    "id": 118,
+                    "id": 61,
                     "name": "ElementaryTypeName",
-                    "src": "111:7:2"
+                    "src": "111:7:1"
                   }
                 ],
-                "id": 119,
+                "id": 62,
                 "name": "VariableDeclaration",
-                "src": "111:10:2"
+                "src": "111:10:1"
               },
               {
                 "attributes": {
                   "constant": false,
                   "name": "salary",
-                  "scope": 124,
+                  "scope": 67,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "uint256",
@@ -337,20 +337,20 @@
                       "name": "uint",
                       "type": "uint256"
                     },
-                    "id": 120,
+                    "id": 63,
                     "name": "ElementaryTypeName",
-                    "src": "131:4:2"
+                    "src": "131:4:1"
                   }
                 ],
-                "id": 121,
+                "id": 64,
                 "name": "VariableDeclaration",
-                "src": "131:11:2"
+                "src": "131:11:1"
               },
               {
                 "attributes": {
                   "constant": false,
                   "name": "lastPayday",
-                  "scope": 124,
+                  "scope": 67,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "uint256",
@@ -363,25 +363,25 @@
                       "name": "uint",
                       "type": "uint256"
                     },
-                    "id": 122,
+                    "id": 65,
                     "name": "ElementaryTypeName",
-                    "src": "152:4:2"
+                    "src": "152:4:1"
                   }
                 ],
-                "id": 123,
+                "id": 66,
                 "name": "VariableDeclaration",
-                "src": "152:15:2"
+                "src": "152:15:1"
               }
             ],
-            "id": 124,
+            "id": 67,
             "name": "StructDefinition",
-            "src": "85:89:2"
+            "src": "85:89:1"
           },
           {
             "attributes": {
               "constant": true,
               "name": "payDuration",
-              "scope": 441,
+              "scope": 384,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "uint256",
@@ -393,9 +393,9 @@
                   "name": "uint",
                   "type": "uint256"
                 },
-                "id": 125,
+                "id": 68,
                 "name": "ElementaryTypeName",
-                "src": "184:4:2"
+                "src": "184:4:1"
               },
               {
                 "attributes": {
@@ -410,20 +410,20 @@
                   "type": "int_const 10",
                   "value": "10"
                 },
-                "id": 126,
+                "id": 69,
                 "name": "Literal",
-                "src": "212:10:2"
+                "src": "212:10:1"
               }
             ],
-            "id": 127,
+            "id": 70,
             "name": "VariableDeclaration",
-            "src": "184:38:2"
+            "src": "184:38:1"
           },
           {
             "attributes": {
               "constant": false,
               "name": "employees",
-              "scope": 441,
+              "scope": 384,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "mapping(address => struct Payroll.Employee storage ref)",
@@ -441,36 +441,36 @@
                       "name": "address",
                       "type": "address"
                     },
-                    "id": 128,
+                    "id": 71,
                     "name": "ElementaryTypeName",
-                    "src": "237:7:2"
+                    "src": "237:7:1"
                   },
                   {
                     "attributes": {
                       "contractScope": null,
                       "name": "Employee",
-                      "referencedDeclaration": 124,
+                      "referencedDeclaration": 67,
                       "type": "struct Payroll.Employee storage pointer"
                     },
-                    "id": 129,
+                    "id": 72,
                     "name": "UserDefinedTypeName",
-                    "src": "248:8:2"
+                    "src": "248:8:1"
                   }
                 ],
-                "id": 130,
+                "id": 73,
                 "name": "Mapping",
-                "src": "229:28:2"
+                "src": "229:28:1"
               }
             ],
-            "id": 131,
+            "id": 74,
             "name": "VariableDeclaration",
-            "src": "229:45:2"
+            "src": "229:45:1"
           },
           {
             "attributes": {
               "constant": false,
               "name": "total",
-              "scope": 441,
+              "scope": 384,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "uint256",
@@ -483,14 +483,14 @@
                   "name": "uint",
                   "type": "uint256"
                 },
-                "id": 132,
+                "id": 75,
                 "name": "ElementaryTypeName",
-                "src": "280:4:2"
+                "src": "280:4:1"
               }
             ],
-            "id": 133,
+            "id": 76,
             "name": "VariableDeclaration",
-            "src": "280:10:2"
+            "src": "280:10:1"
           },
           {
             "attributes": {
@@ -505,9 +505,9 @@
                   ]
                 },
                 "children": [],
-                "id": 134,
+                "id": 77,
                 "name": "ParameterList",
-                "src": "320:0:2"
+                "src": "320:0:1"
               },
               {
                 "children": [
@@ -539,13 +539,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 456,
+                              "referencedDeclaration": 399,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
-                            "id": 135,
+                            "id": 78,
                             "name": "Identifier",
-                            "src": "330:7:2"
+                            "src": "330:7:1"
                           },
                           {
                             "attributes": {
@@ -580,18 +580,18 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 453,
+                                      "referencedDeclaration": 396,
                                       "type": "msg",
                                       "value": "msg"
                                     },
-                                    "id": 136,
+                                    "id": 79,
                                     "name": "Identifier",
-                                    "src": "338:3:2"
+                                    "src": "338:3:1"
                                   }
                                 ],
-                                "id": 137,
+                                "id": 80,
                                 "name": "MemberAccess",
-                                "src": "338:10:2"
+                                "src": "338:10:1"
                               },
                               {
                                 "attributes": {
@@ -599,43 +599,43 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 60,
+                                  "referencedDeclaration": 3,
                                   "type": "address",
                                   "value": "owner"
                                 },
-                                "id": 138,
+                                "id": 81,
                                 "name": "Identifier",
-                                "src": "352:5:2"
+                                "src": "352:5:1"
                               }
                             ],
-                            "id": 139,
+                            "id": 82,
                             "name": "BinaryOperation",
-                            "src": "338:19:2"
+                            "src": "338:19:1"
                           }
                         ],
-                        "id": 140,
+                        "id": 83,
                         "name": "FunctionCall",
-                        "src": "330:28:2"
+                        "src": "330:28:1"
                       }
                     ],
-                    "id": 141,
+                    "id": 84,
                     "name": "ExpressionStatement",
-                    "src": "330:28:2"
+                    "src": "330:28:1"
                   },
                   {
-                    "id": 142,
+                    "id": 85,
                     "name": "PlaceholderStatement",
-                    "src": "368:1:2"
+                    "src": "368:1:1"
                   }
                 ],
-                "id": 143,
+                "id": 86,
                 "name": "Block",
-                "src": "320:56:2"
+                "src": "320:56:1"
               }
             ],
-            "id": 144,
+            "id": 87,
             "name": "ModifierDefinition",
-            "src": "301:75:2"
+            "src": "301:75:1"
           },
           {
             "attributes": {
@@ -649,7 +649,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "id",
-                      "scope": 159,
+                      "scope": 102,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -662,19 +662,19 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 145,
+                        "id": 88,
                         "name": "ElementaryTypeName",
-                        "src": "405:7:2"
+                        "src": "405:7:1"
                       }
                     ],
-                    "id": 146,
+                    "id": 89,
                     "name": "VariableDeclaration",
-                    "src": "405:10:2"
+                    "src": "405:10:1"
                   }
                 ],
-                "id": 147,
+                "id": 90,
                 "name": "ParameterList",
-                "src": "404:12:2"
+                "src": "404:12:1"
               },
               {
                 "children": [
@@ -706,13 +706,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 444,
+                              "referencedDeclaration": 387,
                               "type": "function (bool) pure",
                               "value": "assert"
                             },
-                            "id": 148,
+                            "id": 91,
                             "name": "Identifier",
-                            "src": "427:6:2"
+                            "src": "427:6:1"
                           },
                           {
                             "attributes": {
@@ -737,7 +737,7 @@
                                   "isPure": false,
                                   "lValueRequested": false,
                                   "member_name": "id",
-                                  "referencedDeclaration": 119,
+                                  "referencedDeclaration": 62,
                                   "type": "address"
                                 },
                                 "children": [
@@ -757,13 +757,13 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 131,
+                                          "referencedDeclaration": 74,
                                           "type": "mapping(address => struct Payroll.Employee storage ref)",
                                           "value": "employees"
                                         },
-                                        "id": 149,
+                                        "id": 92,
                                         "name": "Identifier",
-                                        "src": "434:9:2"
+                                        "src": "434:9:1"
                                       },
                                       {
                                         "attributes": {
@@ -771,23 +771,23 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 146,
+                                          "referencedDeclaration": 89,
                                           "type": "address",
                                           "value": "id"
                                         },
-                                        "id": 150,
+                                        "id": 93,
                                         "name": "Identifier",
-                                        "src": "444:2:2"
+                                        "src": "444:2:1"
                                       }
                                     ],
-                                    "id": 151,
+                                    "id": 94,
                                     "name": "IndexAccess",
-                                    "src": "434:13:2"
+                                    "src": "434:13:1"
                                   }
                                 ],
-                                "id": 152,
+                                "id": 95,
                                 "name": "MemberAccess",
-                                "src": "434:16:2"
+                                "src": "434:16:1"
                               },
                               {
                                 "attributes": {
@@ -802,39 +802,39 @@
                                   "type": "int_const 0",
                                   "value": "0x0"
                                 },
-                                "id": 153,
+                                "id": 96,
                                 "name": "Literal",
-                                "src": "454:3:2"
+                                "src": "454:3:1"
                               }
                             ],
-                            "id": 154,
+                            "id": 97,
                             "name": "BinaryOperation",
-                            "src": "434:23:2"
+                            "src": "434:23:1"
                           }
                         ],
-                        "id": 155,
+                        "id": 98,
                         "name": "FunctionCall",
-                        "src": "427:31:2"
+                        "src": "427:31:1"
                       }
                     ],
-                    "id": 156,
+                    "id": 99,
                     "name": "ExpressionStatement",
-                    "src": "427:31:2"
+                    "src": "427:31:1"
                   },
                   {
-                    "id": 157,
+                    "id": 100,
                     "name": "PlaceholderStatement",
-                    "src": "468:1:2"
+                    "src": "468:1:1"
                   }
                 ],
-                "id": 158,
+                "id": 101,
                 "name": "Block",
-                "src": "417:59:2"
+                "src": "417:59:1"
               }
             ],
-            "id": 159,
+            "id": 102,
             "name": "ModifierDefinition",
-            "src": "382:94:2"
+            "src": "382:94:1"
           },
           {
             "attributes": {
@@ -848,7 +848,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "id",
-                      "scope": 174,
+                      "scope": 117,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -861,19 +861,19 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 160,
+                        "id": 103,
                         "name": "ElementaryTypeName",
-                        "src": "512:7:2"
+                        "src": "512:7:1"
                       }
                     ],
-                    "id": 161,
+                    "id": 104,
                     "name": "VariableDeclaration",
-                    "src": "512:10:2"
+                    "src": "512:10:1"
                   }
                 ],
-                "id": 162,
+                "id": 105,
                 "name": "ParameterList",
-                "src": "511:12:2"
+                "src": "511:12:1"
               },
               {
                 "children": [
@@ -905,13 +905,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 444,
+                              "referencedDeclaration": 387,
                               "type": "function (bool) pure",
                               "value": "assert"
                             },
-                            "id": 163,
+                            "id": 106,
                             "name": "Identifier",
-                            "src": "534:6:2"
+                            "src": "534:6:1"
                           },
                           {
                             "attributes": {
@@ -936,7 +936,7 @@
                                   "isPure": false,
                                   "lValueRequested": false,
                                   "member_name": "id",
-                                  "referencedDeclaration": 119,
+                                  "referencedDeclaration": 62,
                                   "type": "address"
                                 },
                                 "children": [
@@ -956,13 +956,13 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 131,
+                                          "referencedDeclaration": 74,
                                           "type": "mapping(address => struct Payroll.Employee storage ref)",
                                           "value": "employees"
                                         },
-                                        "id": 164,
+                                        "id": 107,
                                         "name": "Identifier",
-                                        "src": "541:9:2"
+                                        "src": "541:9:1"
                                       },
                                       {
                                         "attributes": {
@@ -970,23 +970,23 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 161,
+                                          "referencedDeclaration": 104,
                                           "type": "address",
                                           "value": "id"
                                         },
-                                        "id": 165,
+                                        "id": 108,
                                         "name": "Identifier",
-                                        "src": "551:2:2"
+                                        "src": "551:2:1"
                                       }
                                     ],
-                                    "id": 166,
+                                    "id": 109,
                                     "name": "IndexAccess",
-                                    "src": "541:13:2"
+                                    "src": "541:13:1"
                                   }
                                 ],
-                                "id": 167,
+                                "id": 110,
                                 "name": "MemberAccess",
-                                "src": "541:16:2"
+                                "src": "541:16:1"
                               },
                               {
                                 "attributes": {
@@ -1001,39 +1001,39 @@
                                   "type": "int_const 0",
                                   "value": "0x0"
                                 },
-                                "id": 168,
+                                "id": 111,
                                 "name": "Literal",
-                                "src": "561:3:2"
+                                "src": "561:3:1"
                               }
                             ],
-                            "id": 169,
+                            "id": 112,
                             "name": "BinaryOperation",
-                            "src": "541:23:2"
+                            "src": "541:23:1"
                           }
                         ],
-                        "id": 170,
+                        "id": 113,
                         "name": "FunctionCall",
-                        "src": "534:31:2"
+                        "src": "534:31:1"
                       }
                     ],
-                    "id": 171,
+                    "id": 114,
                     "name": "ExpressionStatement",
-                    "src": "534:31:2"
+                    "src": "534:31:1"
                   },
                   {
-                    "id": 172,
+                    "id": 115,
                     "name": "PlaceholderStatement",
-                    "src": "575:1:2"
+                    "src": "575:1:1"
                   }
                 ],
-                "id": 173,
+                "id": 116,
                 "name": "Block",
-                "src": "524:59:2"
+                "src": "524:59:1"
               }
             ],
-            "id": 174,
+            "id": 117,
             "name": "ModifierDefinition",
-            "src": "486:97:2"
+            "src": "486:97:1"
           },
           {
             "attributes": {
@@ -1042,7 +1042,7 @@
               "isConstructor": false,
               "name": "addEmployee",
               "payable": false,
-              "scope": 441,
+              "scope": 384,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -1054,7 +1054,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "id",
-                      "scope": 205,
+                      "scope": 148,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -1067,20 +1067,20 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 175,
+                        "id": 118,
                         "name": "ElementaryTypeName",
-                        "src": "610:7:2"
+                        "src": "610:7:1"
                       }
                     ],
-                    "id": 176,
+                    "id": 119,
                     "name": "VariableDeclaration",
-                    "src": "610:10:2"
+                    "src": "610:10:1"
                   },
                   {
                     "attributes": {
                       "constant": false,
                       "name": "s",
-                      "scope": 205,
+                      "scope": 148,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -1093,19 +1093,19 @@
                           "name": "uint",
                           "type": "uint256"
                         },
-                        "id": 177,
+                        "id": 120,
                         "name": "ElementaryTypeName",
-                        "src": "622:4:2"
+                        "src": "622:4:1"
                       }
                     ],
-                    "id": 178,
+                    "id": 121,
                     "name": "VariableDeclaration",
-                    "src": "622:6:2"
+                    "src": "622:6:1"
                   }
                 ],
-                "id": 179,
+                "id": 122,
                 "name": "ParameterList",
-                "src": "609:20:2"
+                "src": "609:20:1"
               },
               {
                 "attributes": {
@@ -1114,9 +1114,9 @@
                   ]
                 },
                 "children": [],
-                "id": 185,
+                "id": 128,
                 "name": "ParameterList",
-                "src": "661:0:2"
+                "src": "661:0:1"
               },
               {
                 "attributes": {
@@ -1131,18 +1131,18 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 144,
+                      "referencedDeclaration": 87,
                       "type": "modifier ()",
                       "value": "onlyOwner"
                     },
-                    "id": 180,
+                    "id": 123,
                     "name": "Identifier",
-                    "src": "630:9:2"
+                    "src": "630:9:1"
                   }
                 ],
-                "id": 181,
+                "id": 124,
                 "name": "ModifierInvocation",
-                "src": "630:9:2"
+                "src": "630:9:1"
               },
               {
                 "children": [
@@ -1152,13 +1152,13 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 174,
+                      "referencedDeclaration": 117,
                       "type": "modifier (address)",
                       "value": "employeeNotExist"
                     },
-                    "id": 182,
+                    "id": 125,
                     "name": "Identifier",
-                    "src": "640:16:2"
+                    "src": "640:16:1"
                   },
                   {
                     "attributes": {
@@ -1166,18 +1166,18 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 176,
+                      "referencedDeclaration": 119,
                       "type": "address",
                       "value": "id"
                     },
-                    "id": 183,
+                    "id": 126,
                     "name": "Identifier",
-                    "src": "657:2:2"
+                    "src": "657:2:1"
                   }
                 ],
-                "id": 184,
+                "id": 127,
                 "name": "ModifierInvocation",
-                "src": "640:20:2"
+                "src": "640:20:1"
               },
               {
                 "children": [
@@ -1210,13 +1210,13 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 131,
+                                  "referencedDeclaration": 74,
                                   "type": "mapping(address => struct Payroll.Employee storage ref)",
                                   "value": "employees"
                                 },
-                                "id": 186,
+                                "id": 129,
                                 "name": "Identifier",
-                                "src": "671:9:2"
+                                "src": "671:9:1"
                               },
                               {
                                 "attributes": {
@@ -1224,18 +1224,18 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 176,
+                                  "referencedDeclaration": 119,
                                   "type": "address",
                                   "value": "id"
                                 },
-                                "id": 187,
+                                "id": 130,
                                 "name": "Identifier",
-                                "src": "681:2:2"
+                                "src": "681:2:1"
                               }
                             ],
-                            "id": 188,
+                            "id": 131,
                             "name": "IndexAccess",
-                            "src": "671:13:2"
+                            "src": "671:13:1"
                           },
                           {
                             "attributes": {
@@ -1271,13 +1271,13 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 124,
+                                  "referencedDeclaration": 67,
                                   "type": "type(struct Payroll.Employee storage pointer)",
                                   "value": "Employee"
                                 },
-                                "id": 189,
+                                "id": 132,
                                 "name": "Identifier",
-                                "src": "687:8:2"
+                                "src": "687:8:1"
                               },
                               {
                                 "attributes": {
@@ -1285,13 +1285,13 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 176,
+                                  "referencedDeclaration": 119,
                                   "type": "address",
                                   "value": "id"
                                 },
-                                "id": 190,
+                                "id": 133,
                                 "name": "Identifier",
-                                "src": "696:2:2"
+                                "src": "696:2:1"
                               },
                               {
                                 "attributes": {
@@ -1314,13 +1314,13 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 178,
+                                      "referencedDeclaration": 121,
                                       "type": "uint256",
                                       "value": "s"
                                     },
-                                    "id": 191,
+                                    "id": 134,
                                     "name": "Identifier",
-                                    "src": "700:1:2"
+                                    "src": "700:1:1"
                                   },
                                   {
                                     "attributes": {
@@ -1335,14 +1335,14 @@
                                       "type": "int_const 1000000000000000000",
                                       "value": "1"
                                     },
-                                    "id": 192,
+                                    "id": 135,
                                     "name": "Literal",
-                                    "src": "704:7:2"
+                                    "src": "704:7:1"
                                   }
                                 ],
-                                "id": 193,
+                                "id": 136,
                                 "name": "BinaryOperation",
-                                "src": "700:11:2"
+                                "src": "700:11:1"
                               },
                               {
                                 "attributes": {
@@ -1350,28 +1350,28 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 455,
+                                  "referencedDeclaration": 398,
                                   "type": "uint256",
                                   "value": "now"
                                 },
-                                "id": 194,
+                                "id": 137,
                                 "name": "Identifier",
-                                "src": "713:3:2"
+                                "src": "713:3:1"
                               }
                             ],
-                            "id": 195,
+                            "id": 138,
                             "name": "FunctionCall",
-                            "src": "687:30:2"
+                            "src": "687:30:1"
                           }
                         ],
-                        "id": 196,
+                        "id": 139,
                         "name": "Assignment",
-                        "src": "671:46:2"
+                        "src": "671:46:1"
                       }
                     ],
-                    "id": 197,
+                    "id": 140,
                     "name": "ExpressionStatement",
-                    "src": "671:46:2"
+                    "src": "671:46:1"
                   },
                   {
                     "children": [
@@ -1392,13 +1392,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 133,
+                              "referencedDeclaration": 76,
                               "type": "uint256",
                               "value": "total"
                             },
-                            "id": 198,
+                            "id": 141,
                             "name": "Identifier",
-                            "src": "727:5:2"
+                            "src": "727:5:1"
                           },
                           {
                             "attributes": {
@@ -1421,13 +1421,13 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 178,
+                                  "referencedDeclaration": 121,
                                   "type": "uint256",
                                   "value": "s"
                                 },
-                                "id": 199,
+                                "id": 142,
                                 "name": "Identifier",
-                                "src": "736:1:2"
+                                "src": "736:1:1"
                               },
                               {
                                 "attributes": {
@@ -1442,34 +1442,34 @@
                                   "type": "int_const 1000000000000000000",
                                   "value": "1"
                                 },
-                                "id": 200,
+                                "id": 143,
                                 "name": "Literal",
-                                "src": "740:7:2"
+                                "src": "740:7:1"
                               }
                             ],
-                            "id": 201,
+                            "id": 144,
                             "name": "BinaryOperation",
-                            "src": "736:11:2"
+                            "src": "736:11:1"
                           }
                         ],
-                        "id": 202,
+                        "id": 145,
                         "name": "Assignment",
-                        "src": "727:20:2"
+                        "src": "727:20:1"
                       }
                     ],
-                    "id": 203,
+                    "id": 146,
                     "name": "ExpressionStatement",
-                    "src": "727:20:2"
+                    "src": "727:20:1"
                   }
                 ],
-                "id": 204,
+                "id": 147,
                 "name": "Block",
-                "src": "661:93:2"
+                "src": "661:93:1"
               }
             ],
-            "id": 205,
+            "id": 148,
             "name": "FunctionDefinition",
-            "src": "589:165:2"
+            "src": "589:165:1"
           },
           {
             "attributes": {
@@ -1478,7 +1478,7 @@
               "isConstructor": false,
               "name": "removeEmployee",
               "payable": false,
-              "scope": 441,
+              "scope": 384,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -1490,7 +1490,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "id",
-                      "scope": 232,
+                      "scope": 175,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -1503,19 +1503,19 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 206,
+                        "id": 149,
                         "name": "ElementaryTypeName",
-                        "src": "788:7:2"
+                        "src": "788:7:1"
                       }
                     ],
-                    "id": 207,
+                    "id": 150,
                     "name": "VariableDeclaration",
-                    "src": "788:10:2"
+                    "src": "788:10:1"
                   }
                 ],
-                "id": 208,
+                "id": 151,
                 "name": "ParameterList",
-                "src": "787:12:2"
+                "src": "787:12:1"
               },
               {
                 "attributes": {
@@ -1524,9 +1524,9 @@
                   ]
                 },
                 "children": [],
-                "id": 214,
+                "id": 157,
                 "name": "ParameterList",
-                "src": "828:0:2"
+                "src": "828:0:1"
               },
               {
                 "attributes": {
@@ -1541,18 +1541,18 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 144,
+                      "referencedDeclaration": 87,
                       "type": "modifier ()",
                       "value": "onlyOwner"
                     },
-                    "id": 209,
+                    "id": 152,
                     "name": "Identifier",
-                    "src": "800:9:2"
+                    "src": "800:9:1"
                   }
                 ],
-                "id": 210,
+                "id": 153,
                 "name": "ModifierInvocation",
-                "src": "800:9:2"
+                "src": "800:9:1"
               },
               {
                 "children": [
@@ -1562,13 +1562,13 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 159,
+                      "referencedDeclaration": 102,
                       "type": "modifier (address)",
                       "value": "employeeExist"
                     },
-                    "id": 211,
+                    "id": 154,
                     "name": "Identifier",
-                    "src": "810:13:2"
+                    "src": "810:13:1"
                   },
                   {
                     "attributes": {
@@ -1576,18 +1576,18 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 207,
+                      "referencedDeclaration": 150,
                       "type": "address",
                       "value": "id"
                     },
-                    "id": 212,
+                    "id": 155,
                     "name": "Identifier",
-                    "src": "824:2:2"
+                    "src": "824:2:1"
                   }
                 ],
-                "id": 213,
+                "id": 156,
                 "name": "ModifierInvocation",
-                "src": "810:17:2"
+                "src": "810:17:1"
               },
               {
                 "children": [
@@ -1619,13 +1619,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 405,
+                              "referencedDeclaration": 348,
                               "type": "function (address)",
                               "value": "payRemainingSalary"
                             },
-                            "id": 215,
+                            "id": 158,
                             "name": "Identifier",
-                            "src": "838:18:2"
+                            "src": "838:18:1"
                           },
                           {
                             "attributes": {
@@ -1633,23 +1633,23 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 207,
+                              "referencedDeclaration": 150,
                               "type": "address",
                               "value": "id"
                             },
-                            "id": 216,
+                            "id": 159,
                             "name": "Identifier",
-                            "src": "857:2:2"
+                            "src": "857:2:1"
                           }
                         ],
-                        "id": 217,
+                        "id": 160,
                         "name": "FunctionCall",
-                        "src": "838:22:2"
+                        "src": "838:22:1"
                       }
                     ],
-                    "id": 218,
+                    "id": 161,
                     "name": "ExpressionStatement",
-                    "src": "838:22:2"
+                    "src": "838:22:1"
                   },
                   {
                     "children": [
@@ -1670,13 +1670,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 133,
+                              "referencedDeclaration": 76,
                               "type": "uint256",
                               "value": "total"
                             },
-                            "id": 219,
+                            "id": 162,
                             "name": "Identifier",
-                            "src": "870:5:2"
+                            "src": "870:5:1"
                           },
                           {
                             "attributes": {
@@ -1686,7 +1686,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "salary",
-                              "referencedDeclaration": 121,
+                              "referencedDeclaration": 64,
                               "type": "uint256"
                             },
                             "children": [
@@ -1706,13 +1706,13 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 131,
+                                      "referencedDeclaration": 74,
                                       "type": "mapping(address => struct Payroll.Employee storage ref)",
                                       "value": "employees"
                                     },
-                                    "id": 220,
+                                    "id": 163,
                                     "name": "Identifier",
-                                    "src": "879:9:2"
+                                    "src": "879:9:1"
                                   },
                                   {
                                     "attributes": {
@@ -1720,33 +1720,33 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 207,
+                                      "referencedDeclaration": 150,
                                       "type": "address",
                                       "value": "id"
                                     },
-                                    "id": 221,
+                                    "id": 164,
                                     "name": "Identifier",
-                                    "src": "889:2:2"
+                                    "src": "889:2:1"
                                   }
                                 ],
-                                "id": 222,
+                                "id": 165,
                                 "name": "IndexAccess",
-                                "src": "879:13:2"
+                                "src": "879:13:1"
                               }
                             ],
-                            "id": 223,
+                            "id": 166,
                             "name": "MemberAccess",
-                            "src": "879:20:2"
+                            "src": "879:20:1"
                           }
                         ],
-                        "id": 224,
+                        "id": 167,
                         "name": "Assignment",
-                        "src": "870:29:2"
+                        "src": "870:29:1"
                       }
                     ],
-                    "id": 225,
+                    "id": 168,
                     "name": "ExpressionStatement",
-                    "src": "870:29:2"
+                    "src": "870:29:1"
                   },
                   {
                     "children": [
@@ -1778,13 +1778,13 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 131,
+                                  "referencedDeclaration": 74,
                                   "type": "mapping(address => struct Payroll.Employee storage ref)",
                                   "value": "employees"
                                 },
-                                "id": 226,
+                                "id": 169,
                                 "name": "Identifier",
-                                "src": "916:9:2"
+                                "src": "916:9:1"
                               },
                               {
                                 "attributes": {
@@ -1792,38 +1792,38 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 207,
+                                  "referencedDeclaration": 150,
                                   "type": "address",
                                   "value": "id"
                                 },
-                                "id": 227,
+                                "id": 170,
                                 "name": "Identifier",
-                                "src": "926:2:2"
+                                "src": "926:2:1"
                               }
                             ],
-                            "id": 228,
+                            "id": 171,
                             "name": "IndexAccess",
-                            "src": "916:13:2"
+                            "src": "916:13:1"
                           }
                         ],
-                        "id": 229,
+                        "id": 172,
                         "name": "UnaryOperation",
-                        "src": "909:20:2"
+                        "src": "909:20:1"
                       }
                     ],
-                    "id": 230,
+                    "id": 173,
                     "name": "ExpressionStatement",
-                    "src": "909:20:2"
+                    "src": "909:20:1"
                   }
                 ],
-                "id": 231,
+                "id": 174,
                 "name": "Block",
-                "src": "828:108:2"
+                "src": "828:108:1"
               }
             ],
-            "id": 232,
+            "id": 175,
             "name": "FunctionDefinition",
-            "src": "764:172:2"
+            "src": "764:172:1"
           },
           {
             "attributes": {
@@ -1832,7 +1832,7 @@
               "isConstructor": false,
               "name": "updateEmployee",
               "payable": false,
-              "scope": 441,
+              "scope": 384,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -1844,7 +1844,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "id",
-                      "scope": 280,
+                      "scope": 223,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -1857,20 +1857,20 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 233,
+                        "id": 176,
                         "name": "ElementaryTypeName",
-                        "src": "966:7:2"
+                        "src": "966:7:1"
                       }
                     ],
-                    "id": 234,
+                    "id": 177,
                     "name": "VariableDeclaration",
-                    "src": "966:10:2"
+                    "src": "966:10:1"
                   },
                   {
                     "attributes": {
                       "constant": false,
                       "name": "s",
-                      "scope": 280,
+                      "scope": 223,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -1883,19 +1883,19 @@
                           "name": "uint",
                           "type": "uint256"
                         },
-                        "id": 235,
+                        "id": 178,
                         "name": "ElementaryTypeName",
-                        "src": "978:4:2"
+                        "src": "978:4:1"
                       }
                     ],
-                    "id": 236,
+                    "id": 179,
                     "name": "VariableDeclaration",
-                    "src": "978:6:2"
+                    "src": "978:6:1"
                   }
                 ],
-                "id": 237,
+                "id": 180,
                 "name": "ParameterList",
-                "src": "965:20:2"
+                "src": "965:20:1"
               },
               {
                 "attributes": {
@@ -1904,9 +1904,9 @@
                   ]
                 },
                 "children": [],
-                "id": 243,
+                "id": 186,
                 "name": "ParameterList",
-                "src": "1014:0:2"
+                "src": "1014:0:1"
               },
               {
                 "attributes": {
@@ -1921,18 +1921,18 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 144,
+                      "referencedDeclaration": 87,
                       "type": "modifier ()",
                       "value": "onlyOwner"
                     },
-                    "id": 238,
+                    "id": 181,
                     "name": "Identifier",
-                    "src": "986:9:2"
+                    "src": "986:9:1"
                   }
                 ],
-                "id": 239,
+                "id": 182,
                 "name": "ModifierInvocation",
-                "src": "986:9:2"
+                "src": "986:9:1"
               },
               {
                 "children": [
@@ -1942,13 +1942,13 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 159,
+                      "referencedDeclaration": 102,
                       "type": "modifier (address)",
                       "value": "employeeExist"
                     },
-                    "id": 240,
+                    "id": 183,
                     "name": "Identifier",
-                    "src": "996:13:2"
+                    "src": "996:13:1"
                   },
                   {
                     "attributes": {
@@ -1956,18 +1956,18 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 234,
+                      "referencedDeclaration": 177,
                       "type": "address",
                       "value": "id"
                     },
-                    "id": 241,
+                    "id": 184,
                     "name": "Identifier",
-                    "src": "1010:2:2"
+                    "src": "1010:2:1"
                   }
                 ],
-                "id": 242,
+                "id": 185,
                 "name": "ModifierInvocation",
-                "src": "996:17:2"
+                "src": "996:17:1"
               },
               {
                 "children": [
@@ -1999,13 +1999,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 405,
+                              "referencedDeclaration": 348,
                               "type": "function (address)",
                               "value": "payRemainingSalary"
                             },
-                            "id": 244,
+                            "id": 187,
                             "name": "Identifier",
-                            "src": "1024:18:2"
+                            "src": "1024:18:1"
                           },
                           {
                             "attributes": {
@@ -2013,28 +2013,28 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 234,
+                              "referencedDeclaration": 177,
                               "type": "address",
                               "value": "id"
                             },
-                            "id": 245,
+                            "id": 188,
                             "name": "Identifier",
-                            "src": "1043:2:2"
+                            "src": "1043:2:1"
                           }
                         ],
-                        "id": 246,
+                        "id": 189,
                         "name": "FunctionCall",
-                        "src": "1024:22:2"
+                        "src": "1024:22:1"
                       }
                     ],
-                    "id": 247,
+                    "id": 190,
                     "name": "ExpressionStatement",
-                    "src": "1024:22:2"
+                    "src": "1024:22:1"
                   },
                   {
                     "attributes": {
                       "assignments": [
-                        249
+                        192
                       ]
                     },
                     "children": [
@@ -2042,7 +2042,7 @@
                         "attributes": {
                           "constant": false,
                           "name": "e",
-                          "scope": 280,
+                          "scope": 223,
                           "stateVariable": false,
                           "storageLocation": "default",
                           "type": "struct Payroll.Employee storage pointer",
@@ -2054,17 +2054,17 @@
                             "attributes": {
                               "contractScope": null,
                               "name": "Employee",
-                              "referencedDeclaration": 124,
+                              "referencedDeclaration": 67,
                               "type": "struct Payroll.Employee storage pointer"
                             },
-                            "id": 248,
+                            "id": 191,
                             "name": "UserDefinedTypeName",
-                            "src": "1057:8:2"
+                            "src": "1057:8:1"
                           }
                         ],
-                        "id": 249,
+                        "id": 192,
                         "name": "VariableDeclaration",
-                        "src": "1057:10:2"
+                        "src": "1057:10:1"
                       },
                       {
                         "attributes": {
@@ -2082,13 +2082,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 131,
+                              "referencedDeclaration": 74,
                               "type": "mapping(address => struct Payroll.Employee storage ref)",
                               "value": "employees"
                             },
-                            "id": 250,
+                            "id": 193,
                             "name": "Identifier",
-                            "src": "1070:9:2"
+                            "src": "1070:9:1"
                           },
                           {
                             "attributes": {
@@ -2096,23 +2096,23 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 234,
+                              "referencedDeclaration": 177,
                               "type": "address",
                               "value": "id"
                             },
-                            "id": 251,
+                            "id": 194,
                             "name": "Identifier",
-                            "src": "1080:2:2"
+                            "src": "1080:2:1"
                           }
                         ],
-                        "id": 252,
+                        "id": 195,
                         "name": "IndexAccess",
-                        "src": "1070:13:2"
+                        "src": "1070:13:1"
                       }
                     ],
-                    "id": 253,
+                    "id": 196,
                     "name": "VariableDeclarationStatement",
-                    "src": "1057:26:2"
+                    "src": "1057:26:1"
                   },
                   {
                     "children": [
@@ -2133,13 +2133,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 133,
+                              "referencedDeclaration": 76,
                               "type": "uint256",
                               "value": "total"
                             },
-                            "id": 254,
+                            "id": 197,
                             "name": "Identifier",
-                            "src": "1093:5:2"
+                            "src": "1093:5:1"
                           },
                           {
                             "attributes": {
@@ -2177,13 +2177,13 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 133,
+                                      "referencedDeclaration": 76,
                                       "type": "uint256",
                                       "value": "total"
                                     },
-                                    "id": 255,
+                                    "id": 198,
                                     "name": "Identifier",
-                                    "src": "1101:5:2"
+                                    "src": "1101:5:1"
                                   },
                                   {
                                     "attributes": {
@@ -2193,7 +2193,7 @@
                                       "isPure": false,
                                       "lValueRequested": false,
                                       "member_name": "salary",
-                                      "referencedDeclaration": 121,
+                                      "referencedDeclaration": 64,
                                       "type": "uint256"
                                     },
                                     "children": [
@@ -2203,23 +2203,23 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 249,
+                                          "referencedDeclaration": 192,
                                           "type": "struct Payroll.Employee storage pointer",
                                           "value": "e"
                                         },
-                                        "id": 256,
+                                        "id": 199,
                                         "name": "Identifier",
-                                        "src": "1109:1:2"
+                                        "src": "1109:1:1"
                                       }
                                     ],
-                                    "id": 257,
+                                    "id": 200,
                                     "name": "MemberAccess",
-                                    "src": "1109:8:2"
+                                    "src": "1109:8:1"
                                   }
                                 ],
-                                "id": 258,
+                                "id": 201,
                                 "name": "BinaryOperation",
-                                "src": "1101:16:2"
+                                "src": "1101:16:1"
                               },
                               {
                                 "attributes": {
@@ -2242,13 +2242,13 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 236,
+                                      "referencedDeclaration": 179,
                                       "type": "uint256",
                                       "value": "s"
                                     },
-                                    "id": 259,
+                                    "id": 202,
                                     "name": "Identifier",
-                                    "src": "1120:1:2"
+                                    "src": "1120:1:1"
                                   },
                                   {
                                     "attributes": {
@@ -2263,29 +2263,29 @@
                                       "type": "int_const 1000000000000000000",
                                       "value": "1"
                                     },
-                                    "id": 260,
+                                    "id": 203,
                                     "name": "Literal",
-                                    "src": "1124:7:2"
+                                    "src": "1124:7:1"
                                   }
                                 ],
-                                "id": 261,
+                                "id": 204,
                                 "name": "BinaryOperation",
-                                "src": "1120:11:2"
+                                "src": "1120:11:1"
                               }
                             ],
-                            "id": 262,
+                            "id": 205,
                             "name": "BinaryOperation",
-                            "src": "1101:30:2"
+                            "src": "1101:30:1"
                           }
                         ],
-                        "id": 263,
+                        "id": 206,
                         "name": "Assignment",
-                        "src": "1093:38:2"
+                        "src": "1093:38:1"
                       }
                     ],
-                    "id": 264,
+                    "id": 207,
                     "name": "ExpressionStatement",
-                    "src": "1093:38:2"
+                    "src": "1093:38:1"
                   },
                   {
                     "children": [
@@ -2308,7 +2308,7 @@
                               "isPure": false,
                               "lValueRequested": true,
                               "member_name": "salary",
-                              "referencedDeclaration": 121,
+                              "referencedDeclaration": 64,
                               "type": "uint256"
                             },
                             "children": [
@@ -2318,18 +2318,18 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 249,
+                                  "referencedDeclaration": 192,
                                   "type": "struct Payroll.Employee storage pointer",
                                   "value": "e"
                                 },
-                                "id": 265,
+                                "id": 208,
                                 "name": "Identifier",
-                                "src": "1141:1:2"
+                                "src": "1141:1:1"
                               }
                             ],
-                            "id": 267,
+                            "id": 210,
                             "name": "MemberAccess",
-                            "src": "1141:8:2"
+                            "src": "1141:8:1"
                           },
                           {
                             "attributes": {
@@ -2352,13 +2352,13 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 236,
+                                  "referencedDeclaration": 179,
                                   "type": "uint256",
                                   "value": "s"
                                 },
-                                "id": 268,
+                                "id": 211,
                                 "name": "Identifier",
-                                "src": "1152:1:2"
+                                "src": "1152:1:1"
                               },
                               {
                                 "attributes": {
@@ -2373,24 +2373,24 @@
                                   "type": "int_const 1000000000000000000",
                                   "value": "1"
                                 },
-                                "id": 269,
+                                "id": 212,
                                 "name": "Literal",
-                                "src": "1156:7:2"
+                                "src": "1156:7:1"
                               }
                             ],
-                            "id": 270,
+                            "id": 213,
                             "name": "BinaryOperation",
-                            "src": "1152:11:2"
+                            "src": "1152:11:1"
                           }
                         ],
-                        "id": 271,
+                        "id": 214,
                         "name": "Assignment",
-                        "src": "1141:22:2"
+                        "src": "1141:22:1"
                       }
                     ],
-                    "id": 272,
+                    "id": 215,
                     "name": "ExpressionStatement",
-                    "src": "1141:22:2"
+                    "src": "1141:22:1"
                   },
                   {
                     "children": [
@@ -2413,7 +2413,7 @@
                               "isPure": false,
                               "lValueRequested": true,
                               "member_name": "lastPayday",
-                              "referencedDeclaration": 123,
+                              "referencedDeclaration": 66,
                               "type": "uint256"
                             },
                             "children": [
@@ -2423,18 +2423,18 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 249,
+                                  "referencedDeclaration": 192,
                                   "type": "struct Payroll.Employee storage pointer",
                                   "value": "e"
                                 },
-                                "id": 273,
+                                "id": 216,
                                 "name": "Identifier",
-                                "src": "1173:1:2"
+                                "src": "1173:1:1"
                               }
                             ],
-                            "id": 275,
+                            "id": 218,
                             "name": "MemberAccess",
-                            "src": "1173:12:2"
+                            "src": "1173:12:1"
                           },
                           {
                             "attributes": {
@@ -2442,33 +2442,33 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 455,
+                              "referencedDeclaration": 398,
                               "type": "uint256",
                               "value": "now"
                             },
-                            "id": 276,
+                            "id": 219,
                             "name": "Identifier",
-                            "src": "1188:3:2"
+                            "src": "1188:3:1"
                           }
                         ],
-                        "id": 277,
+                        "id": 220,
                         "name": "Assignment",
-                        "src": "1173:18:2"
+                        "src": "1173:18:1"
                       }
                     ],
-                    "id": 278,
+                    "id": 221,
                     "name": "ExpressionStatement",
-                    "src": "1173:18:2"
+                    "src": "1173:18:1"
                   }
                 ],
-                "id": 279,
+                "id": 222,
                 "name": "Block",
-                "src": "1014:184:2"
+                "src": "1014:184:1"
               }
             ],
-            "id": 280,
+            "id": 223,
             "name": "FunctionDefinition",
-            "src": "942:256:2"
+            "src": "942:256:1"
           },
           {
             "attributes": {
@@ -2477,7 +2477,7 @@
               "isConstructor": false,
               "name": "addFund",
               "payable": true,
-              "scope": 441,
+              "scope": 384,
               "stateMutability": "payable",
               "superFunction": null,
               "visibility": "public"
@@ -2490,9 +2490,9 @@
                   ]
                 },
                 "children": [],
-                "id": 281,
+                "id": 224,
                 "name": "ParameterList",
-                "src": "1224:2:2"
+                "src": "1224:2:1"
               },
               {
                 "children": [
@@ -2500,7 +2500,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "",
-                      "scope": 291,
+                      "scope": 234,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -2513,19 +2513,19 @@
                           "name": "uint",
                           "type": "uint256"
                         },
-                        "id": 284,
+                        "id": 227,
                         "name": "ElementaryTypeName",
-                        "src": "1254:4:2"
+                        "src": "1254:4:1"
                       }
                     ],
-                    "id": 285,
+                    "id": 228,
                     "name": "VariableDeclaration",
-                    "src": "1254:4:2"
+                    "src": "1254:4:1"
                   }
                 ],
-                "id": 286,
+                "id": 229,
                 "name": "ParameterList",
-                "src": "1253:6:2"
+                "src": "1253:6:1"
               },
               {
                 "attributes": {
@@ -2540,24 +2540,24 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 144,
+                      "referencedDeclaration": 87,
                       "type": "modifier ()",
                       "value": "onlyOwner"
                     },
-                    "id": 282,
+                    "id": 225,
                     "name": "Identifier",
-                    "src": "1227:9:2"
+                    "src": "1227:9:1"
                   }
                 ],
-                "id": 283,
+                "id": 226,
                 "name": "ModifierInvocation",
-                "src": "1227:9:2"
+                "src": "1227:9:1"
               },
               {
                 "children": [
                   {
                     "attributes": {
-                      "functionReturnParameters": 286
+                      "functionReturnParameters": 229
                     },
                     "children": [
                       {
@@ -2578,33 +2578,33 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 468,
+                              "referencedDeclaration": 409,
                               "type": "contract Payroll",
                               "value": "this"
                             },
-                            "id": 287,
+                            "id": 230,
                             "name": "Identifier",
-                            "src": "1277:4:2"
+                            "src": "1277:4:1"
                           }
                         ],
-                        "id": 288,
+                        "id": 231,
                         "name": "MemberAccess",
-                        "src": "1277:12:2"
+                        "src": "1277:12:1"
                       }
                     ],
-                    "id": 289,
+                    "id": 232,
                     "name": "Return",
-                    "src": "1270:19:2"
+                    "src": "1270:19:1"
                   }
                 ],
-                "id": 290,
+                "id": 233,
                 "name": "Block",
-                "src": "1260:36:2"
+                "src": "1260:36:1"
               }
             ],
-            "id": 291,
+            "id": 234,
             "name": "FunctionDefinition",
-            "src": "1208:88:2"
+            "src": "1208:88:1"
           },
           {
             "attributes": {
@@ -2616,7 +2616,7 @@
               ],
               "name": "calculateRunway",
               "payable": false,
-              "scope": 441,
+              "scope": 384,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -2629,9 +2629,9 @@
                   ]
                 },
                 "children": [],
-                "id": 292,
+                "id": 235,
                 "name": "ParameterList",
-                "src": "1330:2:2"
+                "src": "1330:2:1"
               },
               {
                 "children": [
@@ -2639,7 +2639,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "",
-                      "scope": 302,
+                      "scope": 245,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -2652,25 +2652,25 @@
                           "name": "uint",
                           "type": "uint256"
                         },
-                        "id": 293,
+                        "id": 236,
                         "name": "ElementaryTypeName",
-                        "src": "1342:4:2"
+                        "src": "1342:4:1"
                       }
                     ],
-                    "id": 294,
+                    "id": 237,
                     "name": "VariableDeclaration",
-                    "src": "1342:4:2"
+                    "src": "1342:4:1"
                   }
                 ],
-                "id": 295,
+                "id": 238,
                 "name": "ParameterList",
-                "src": "1341:6:2"
+                "src": "1341:6:1"
               },
               {
                 "children": [
                   {
                     "attributes": {
-                      "functionReturnParameters": 295
+                      "functionReturnParameters": 238
                     },
                     "children": [
                       {
@@ -2706,18 +2706,18 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 468,
+                                  "referencedDeclaration": 409,
                                   "type": "contract Payroll",
                                   "value": "this"
                                 },
-                                "id": 296,
+                                "id": 239,
                                 "name": "Identifier",
-                                "src": "1365:4:2"
+                                "src": "1365:4:1"
                               }
                             ],
-                            "id": 297,
+                            "id": 240,
                             "name": "MemberAccess",
-                            "src": "1365:12:2"
+                            "src": "1365:12:1"
                           },
                           {
                             "attributes": {
@@ -2725,33 +2725,33 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 133,
+                              "referencedDeclaration": 76,
                               "type": "uint256",
                               "value": "total"
                             },
-                            "id": 298,
+                            "id": 241,
                             "name": "Identifier",
-                            "src": "1380:5:2"
+                            "src": "1380:5:1"
                           }
                         ],
-                        "id": 299,
+                        "id": 242,
                         "name": "BinaryOperation",
-                        "src": "1365:20:2"
+                        "src": "1365:20:1"
                       }
                     ],
-                    "id": 300,
+                    "id": 243,
                     "name": "Return",
-                    "src": "1358:27:2"
+                    "src": "1358:27:1"
                   }
                 ],
-                "id": 301,
+                "id": 244,
                 "name": "Block",
-                "src": "1348:44:2"
+                "src": "1348:44:1"
               }
             ],
-            "id": 302,
+            "id": 245,
             "name": "FunctionDefinition",
-            "src": "1306:86:2"
+            "src": "1306:86:1"
           },
           {
             "attributes": {
@@ -2763,7 +2763,7 @@
               ],
               "name": "hasEnoughFund",
               "payable": false,
-              "scope": 441,
+              "scope": 384,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -2776,9 +2776,9 @@
                   ]
                 },
                 "children": [],
-                "id": 303,
+                "id": 246,
                 "name": "ParameterList",
-                "src": "1424:2:2"
+                "src": "1424:2:1"
               },
               {
                 "children": [
@@ -2786,7 +2786,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "",
-                      "scope": 313,
+                      "scope": 256,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "bool",
@@ -2799,25 +2799,25 @@
                           "name": "bool",
                           "type": "bool"
                         },
-                        "id": 304,
+                        "id": 247,
                         "name": "ElementaryTypeName",
-                        "src": "1436:4:2"
+                        "src": "1436:4:1"
                       }
                     ],
-                    "id": 305,
+                    "id": 248,
                     "name": "VariableDeclaration",
-                    "src": "1436:4:2"
+                    "src": "1436:4:1"
                   }
                 ],
-                "id": 306,
+                "id": 249,
                 "name": "ParameterList",
-                "src": "1435:6:2"
+                "src": "1435:6:1"
               },
               {
                 "children": [
                   {
                     "attributes": {
-                      "functionReturnParameters": 306
+                      "functionReturnParameters": 249
                     },
                     "children": [
                       {
@@ -2861,18 +2861,18 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 302,
+                                  "referencedDeclaration": 245,
                                   "type": "function () returns (uint256)",
                                   "value": "calculateRunway"
                                 },
-                                "id": 307,
+                                "id": 250,
                                 "name": "Identifier",
-                                "src": "1459:15:2"
+                                "src": "1459:15:1"
                               }
                             ],
-                            "id": 308,
+                            "id": 251,
                             "name": "FunctionCall",
-                            "src": "1459:17:2"
+                            "src": "1459:17:1"
                           },
                           {
                             "attributes": {
@@ -2887,29 +2887,29 @@
                               "type": "int_const 0",
                               "value": "0"
                             },
-                            "id": 309,
+                            "id": 252,
                             "name": "Literal",
-                            "src": "1479:1:2"
+                            "src": "1479:1:1"
                           }
                         ],
-                        "id": 310,
+                        "id": 253,
                         "name": "BinaryOperation",
-                        "src": "1459:21:2"
+                        "src": "1459:21:1"
                       }
                     ],
-                    "id": 311,
+                    "id": 254,
                     "name": "Return",
-                    "src": "1452:28:2"
+                    "src": "1452:28:1"
                   }
                 ],
-                "id": 312,
+                "id": 255,
                 "name": "Block",
-                "src": "1442:45:2"
+                "src": "1442:45:1"
               }
             ],
-            "id": 313,
+            "id": 256,
             "name": "FunctionDefinition",
-            "src": "1402:85:2"
+            "src": "1402:85:1"
           },
           {
             "attributes": {
@@ -2918,7 +2918,7 @@
               "isConstructor": false,
               "name": "getPaid",
               "payable": false,
-              "scope": 441,
+              "scope": 384,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -2931,9 +2931,9 @@
                   ]
                 },
                 "children": [],
-                "id": 314,
+                "id": 257,
                 "name": "ParameterList",
-                "src": "1513:2:2"
+                "src": "1513:2:1"
               },
               {
                 "attributes": {
@@ -2942,9 +2942,9 @@
                   ]
                 },
                 "children": [],
-                "id": 319,
+                "id": 262,
                 "name": "ParameterList",
-                "src": "1542:0:2"
+                "src": "1542:0:1"
               },
               {
                 "children": [
@@ -2954,13 +2954,13 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 159,
+                      "referencedDeclaration": 102,
                       "type": "modifier (address)",
                       "value": "employeeExist"
                     },
-                    "id": 315,
+                    "id": 258,
                     "name": "Identifier",
-                    "src": "1516:13:2"
+                    "src": "1516:13:1"
                   },
                   {
                     "attributes": {
@@ -2980,30 +2980,30 @@
                           "overloadedDeclarations": [
                             null
                           ],
-                          "referencedDeclaration": 453,
+                          "referencedDeclaration": 396,
                           "type": "msg",
                           "value": "msg"
                         },
-                        "id": 316,
+                        "id": 259,
                         "name": "Identifier",
-                        "src": "1530:3:2"
+                        "src": "1530:3:1"
                       }
                     ],
-                    "id": 317,
+                    "id": 260,
                     "name": "MemberAccess",
-                    "src": "1530:10:2"
+                    "src": "1530:10:1"
                   }
                 ],
-                "id": 318,
+                "id": 261,
                 "name": "ModifierInvocation",
-                "src": "1516:25:2"
+                "src": "1516:25:1"
               },
               {
                 "children": [
                   {
                     "attributes": {
                       "assignments": [
-                        321
+                        264
                       ]
                     },
                     "children": [
@@ -3011,7 +3011,7 @@
                         "attributes": {
                           "constant": false,
                           "name": "e",
-                          "scope": 356,
+                          "scope": 299,
                           "stateVariable": false,
                           "storageLocation": "default",
                           "type": "struct Payroll.Employee storage pointer",
@@ -3023,17 +3023,17 @@
                             "attributes": {
                               "contractScope": null,
                               "name": "Employee",
-                              "referencedDeclaration": 124,
+                              "referencedDeclaration": 67,
                               "type": "struct Payroll.Employee storage pointer"
                             },
-                            "id": 320,
+                            "id": 263,
                             "name": "UserDefinedTypeName",
-                            "src": "1552:8:2"
+                            "src": "1552:8:1"
                           }
                         ],
-                        "id": 321,
+                        "id": 264,
                         "name": "VariableDeclaration",
-                        "src": "1552:10:2"
+                        "src": "1552:10:1"
                       },
                       {
                         "attributes": {
@@ -3051,13 +3051,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 131,
+                              "referencedDeclaration": 74,
                               "type": "mapping(address => struct Payroll.Employee storage ref)",
                               "value": "employees"
                             },
-                            "id": 322,
+                            "id": 265,
                             "name": "Identifier",
-                            "src": "1565:9:2"
+                            "src": "1565:9:1"
                           },
                           {
                             "attributes": {
@@ -3077,33 +3077,33 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 453,
+                                  "referencedDeclaration": 396,
                                   "type": "msg",
                                   "value": "msg"
                                 },
-                                "id": 323,
+                                "id": 266,
                                 "name": "Identifier",
-                                "src": "1575:3:2"
+                                "src": "1575:3:1"
                               }
                             ],
-                            "id": 324,
+                            "id": 267,
                             "name": "MemberAccess",
-                            "src": "1575:10:2"
+                            "src": "1575:10:1"
                           }
                         ],
-                        "id": 325,
+                        "id": 268,
                         "name": "IndexAccess",
-                        "src": "1565:21:2"
+                        "src": "1565:21:1"
                       }
                     ],
-                    "id": 326,
+                    "id": 269,
                     "name": "VariableDeclarationStatement",
-                    "src": "1552:34:2"
+                    "src": "1552:34:1"
                   },
                   {
                     "attributes": {
                       "assignments": [
-                        328
+                        271
                       ]
                     },
                     "children": [
@@ -3111,7 +3111,7 @@
                         "attributes": {
                           "constant": false,
                           "name": "nextPayday",
-                          "scope": 356,
+                          "scope": 299,
                           "stateVariable": false,
                           "storageLocation": "default",
                           "type": "uint256",
@@ -3124,14 +3124,14 @@
                               "name": "uint",
                               "type": "uint256"
                             },
-                            "id": 327,
+                            "id": 270,
                             "name": "ElementaryTypeName",
-                            "src": "1597:4:2"
+                            "src": "1597:4:1"
                           }
                         ],
-                        "id": 328,
+                        "id": 271,
                         "name": "VariableDeclaration",
-                        "src": "1597:15:2"
+                        "src": "1597:15:1"
                       },
                       {
                         "attributes": {
@@ -3156,7 +3156,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "lastPayday",
-                              "referencedDeclaration": 123,
+                              "referencedDeclaration": 66,
                               "type": "uint256"
                             },
                             "children": [
@@ -3166,18 +3166,18 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 321,
+                                  "referencedDeclaration": 264,
                                   "type": "struct Payroll.Employee storage pointer",
                                   "value": "e"
                                 },
-                                "id": 329,
+                                "id": 272,
                                 "name": "Identifier",
-                                "src": "1615:1:2"
+                                "src": "1615:1:1"
                               }
                             ],
-                            "id": 330,
+                            "id": 273,
                             "name": "MemberAccess",
-                            "src": "1615:12:2"
+                            "src": "1615:12:1"
                           },
                           {
                             "attributes": {
@@ -3185,23 +3185,23 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 127,
+                              "referencedDeclaration": 70,
                               "type": "uint256",
                               "value": "payDuration"
                             },
-                            "id": 331,
+                            "id": 274,
                             "name": "Identifier",
-                            "src": "1630:11:2"
+                            "src": "1630:11:1"
                           }
                         ],
-                        "id": 332,
+                        "id": 275,
                         "name": "BinaryOperation",
-                        "src": "1615:26:2"
+                        "src": "1615:26:1"
                       }
                     ],
-                    "id": 333,
+                    "id": 276,
                     "name": "VariableDeclarationStatement",
-                    "src": "1597:44:2"
+                    "src": "1597:44:1"
                   },
                   {
                     "children": [
@@ -3231,13 +3231,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 444,
+                              "referencedDeclaration": 387,
                               "type": "function (bool) pure",
                               "value": "assert"
                             },
-                            "id": 334,
+                            "id": 277,
                             "name": "Identifier",
-                            "src": "1651:6:2"
+                            "src": "1651:6:1"
                           },
                           {
                             "attributes": {
@@ -3260,13 +3260,13 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 328,
+                                  "referencedDeclaration": 271,
                                   "type": "uint256",
                                   "value": "nextPayday"
                                 },
-                                "id": 335,
+                                "id": 278,
                                 "name": "Identifier",
-                                "src": "1658:10:2"
+                                "src": "1658:10:1"
                               },
                               {
                                 "attributes": {
@@ -3274,28 +3274,28 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 455,
+                                  "referencedDeclaration": 398,
                                   "type": "uint256",
                                   "value": "now"
                                 },
-                                "id": 336,
+                                "id": 279,
                                 "name": "Identifier",
-                                "src": "1671:3:2"
+                                "src": "1671:3:1"
                               }
                             ],
-                            "id": 337,
+                            "id": 280,
                             "name": "BinaryOperation",
-                            "src": "1658:16:2"
+                            "src": "1658:16:1"
                           }
                         ],
-                        "id": 338,
+                        "id": 281,
                         "name": "FunctionCall",
-                        "src": "1651:24:2"
+                        "src": "1651:24:1"
                       }
                     ],
-                    "id": 339,
+                    "id": 282,
                     "name": "ExpressionStatement",
-                    "src": "1651:24:2"
+                    "src": "1651:24:1"
                   },
                   {
                     "children": [
@@ -3318,7 +3318,7 @@
                               "isPure": false,
                               "lValueRequested": true,
                               "member_name": "lastPayday",
-                              "referencedDeclaration": 123,
+                              "referencedDeclaration": 66,
                               "type": "uint256"
                             },
                             "children": [
@@ -3328,18 +3328,18 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 321,
+                                  "referencedDeclaration": 264,
                                   "type": "struct Payroll.Employee storage pointer",
                                   "value": "e"
                                 },
-                                "id": 340,
+                                "id": 283,
                                 "name": "Identifier",
-                                "src": "1686:1:2"
+                                "src": "1686:1:1"
                               }
                             ],
-                            "id": 342,
+                            "id": 285,
                             "name": "MemberAccess",
-                            "src": "1686:12:2"
+                            "src": "1686:12:1"
                           },
                           {
                             "attributes": {
@@ -3347,23 +3347,23 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 328,
+                              "referencedDeclaration": 271,
                               "type": "uint256",
                               "value": "nextPayday"
                             },
-                            "id": 343,
+                            "id": 286,
                             "name": "Identifier",
-                            "src": "1701:10:2"
+                            "src": "1701:10:1"
                           }
                         ],
-                        "id": 344,
+                        "id": 287,
                         "name": "Assignment",
-                        "src": "1686:25:2"
+                        "src": "1686:25:1"
                       }
                     ],
-                    "id": 345,
+                    "id": 288,
                     "name": "ExpressionStatement",
-                    "src": "1686:25:2"
+                    "src": "1686:25:1"
                   },
                   {
                     "children": [
@@ -3407,7 +3407,7 @@
                                   "isPure": false,
                                   "lValueRequested": false,
                                   "member_name": "id",
-                                  "referencedDeclaration": 119,
+                                  "referencedDeclaration": 62,
                                   "type": "address"
                                 },
                                 "children": [
@@ -3417,23 +3417,23 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 321,
+                                      "referencedDeclaration": 264,
                                       "type": "struct Payroll.Employee storage pointer",
                                       "value": "e"
                                     },
-                                    "id": 346,
+                                    "id": 289,
                                     "name": "Identifier",
-                                    "src": "1730:1:2"
+                                    "src": "1730:1:1"
                                   }
                                 ],
-                                "id": 349,
+                                "id": 292,
                                 "name": "MemberAccess",
-                                "src": "1730:4:2"
+                                "src": "1730:4:1"
                               }
                             ],
-                            "id": 350,
+                            "id": 293,
                             "name": "MemberAccess",
-                            "src": "1730:13:2"
+                            "src": "1730:13:1"
                           },
                           {
                             "attributes": {
@@ -3443,7 +3443,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "salary",
-                              "referencedDeclaration": 121,
+                              "referencedDeclaration": 64,
                               "type": "uint256"
                             },
                             "children": [
@@ -3453,38 +3453,38 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 321,
+                                  "referencedDeclaration": 264,
                                   "type": "struct Payroll.Employee storage pointer",
                                   "value": "e"
                                 },
-                                "id": 351,
+                                "id": 294,
                                 "name": "Identifier",
-                                "src": "1744:1:2"
+                                "src": "1744:1:1"
                               }
                             ],
-                            "id": 352,
+                            "id": 295,
                             "name": "MemberAccess",
-                            "src": "1744:8:2"
+                            "src": "1744:8:1"
                           }
                         ],
-                        "id": 353,
+                        "id": 296,
                         "name": "FunctionCall",
-                        "src": "1730:23:2"
+                        "src": "1730:23:1"
                       }
                     ],
-                    "id": 354,
+                    "id": 297,
                     "name": "ExpressionStatement",
-                    "src": "1730:23:2"
+                    "src": "1730:23:1"
                   }
                 ],
-                "id": 355,
+                "id": 298,
                 "name": "Block",
-                "src": "1542:218:2"
+                "src": "1542:218:1"
               }
             ],
-            "id": 356,
+            "id": 299,
             "name": "FunctionDefinition",
-            "src": "1497:263:2"
+            "src": "1497:263:1"
           },
           {
             "attributes": {
@@ -3493,7 +3493,7 @@
               "isConstructor": false,
               "name": "payRemainingSalary",
               "payable": false,
-              "scope": 441,
+              "scope": 384,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -3505,7 +3505,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "id",
-                      "scope": 405,
+                      "scope": 348,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -3518,19 +3518,19 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 357,
+                        "id": 300,
                         "name": "ElementaryTypeName",
-                        "src": "1798:7:2"
+                        "src": "1798:7:1"
                       }
                     ],
-                    "id": 358,
+                    "id": 301,
                     "name": "VariableDeclaration",
-                    "src": "1798:10:2"
+                    "src": "1798:10:1"
                   }
                 ],
-                "id": 359,
+                "id": 302,
                 "name": "ParameterList",
-                "src": "1797:12:2"
+                "src": "1797:12:1"
               },
               {
                 "attributes": {
@@ -3539,9 +3539,9 @@
                   ]
                 },
                 "children": [],
-                "id": 365,
+                "id": 308,
                 "name": "ParameterList",
-                "src": "1838:0:2"
+                "src": "1838:0:1"
               },
               {
                 "attributes": {
@@ -3556,18 +3556,18 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 144,
+                      "referencedDeclaration": 87,
                       "type": "modifier ()",
                       "value": "onlyOwner"
                     },
-                    "id": 360,
+                    "id": 303,
                     "name": "Identifier",
-                    "src": "1810:9:2"
+                    "src": "1810:9:1"
                   }
                 ],
-                "id": 361,
+                "id": 304,
                 "name": "ModifierInvocation",
-                "src": "1810:9:2"
+                "src": "1810:9:1"
               },
               {
                 "children": [
@@ -3577,13 +3577,13 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 159,
+                      "referencedDeclaration": 102,
                       "type": "modifier (address)",
                       "value": "employeeExist"
                     },
-                    "id": 362,
+                    "id": 305,
                     "name": "Identifier",
-                    "src": "1820:13:2"
+                    "src": "1820:13:1"
                   },
                   {
                     "attributes": {
@@ -3591,25 +3591,25 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 358,
+                      "referencedDeclaration": 301,
                       "type": "address",
                       "value": "id"
                     },
-                    "id": 363,
+                    "id": 306,
                     "name": "Identifier",
-                    "src": "1834:2:2"
+                    "src": "1834:2:1"
                   }
                 ],
-                "id": 364,
+                "id": 307,
                 "name": "ModifierInvocation",
-                "src": "1820:17:2"
+                "src": "1820:17:1"
               },
               {
                 "children": [
                   {
                     "attributes": {
                       "assignments": [
-                        367
+                        310
                       ]
                     },
                     "children": [
@@ -3617,7 +3617,7 @@
                         "attributes": {
                           "constant": false,
                           "name": "e",
-                          "scope": 405,
+                          "scope": 348,
                           "stateVariable": false,
                           "storageLocation": "default",
                           "type": "struct Payroll.Employee storage pointer",
@@ -3629,17 +3629,17 @@
                             "attributes": {
                               "contractScope": null,
                               "name": "Employee",
-                              "referencedDeclaration": 124,
+                              "referencedDeclaration": 67,
                               "type": "struct Payroll.Employee storage pointer"
                             },
-                            "id": 366,
+                            "id": 309,
                             "name": "UserDefinedTypeName",
-                            "src": "1848:8:2"
+                            "src": "1848:8:1"
                           }
                         ],
-                        "id": 367,
+                        "id": 310,
                         "name": "VariableDeclaration",
-                        "src": "1848:10:2"
+                        "src": "1848:10:1"
                       },
                       {
                         "attributes": {
@@ -3657,13 +3657,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 131,
+                              "referencedDeclaration": 74,
                               "type": "mapping(address => struct Payroll.Employee storage ref)",
                               "value": "employees"
                             },
-                            "id": 368,
+                            "id": 311,
                             "name": "Identifier",
-                            "src": "1861:9:2"
+                            "src": "1861:9:1"
                           },
                           {
                             "attributes": {
@@ -3671,28 +3671,28 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 358,
+                              "referencedDeclaration": 301,
                               "type": "address",
                               "value": "id"
                             },
-                            "id": 369,
+                            "id": 312,
                             "name": "Identifier",
-                            "src": "1871:2:2"
+                            "src": "1871:2:1"
                           }
                         ],
-                        "id": 370,
+                        "id": 313,
                         "name": "IndexAccess",
-                        "src": "1861:13:2"
+                        "src": "1861:13:1"
                       }
                     ],
-                    "id": 371,
+                    "id": 314,
                     "name": "VariableDeclarationStatement",
-                    "src": "1848:26:2"
+                    "src": "1848:26:1"
                   },
                   {
                     "attributes": {
                       "assignments": [
-                        373
+                        316
                       ]
                     },
                     "children": [
@@ -3700,7 +3700,7 @@
                         "attributes": {
                           "constant": false,
                           "name": "payment",
-                          "scope": 405,
+                          "scope": 348,
                           "stateVariable": false,
                           "storageLocation": "default",
                           "type": "uint256",
@@ -3713,14 +3713,14 @@
                               "name": "uint",
                               "type": "uint256"
                             },
-                            "id": 372,
+                            "id": 315,
                             "name": "ElementaryTypeName",
-                            "src": "1885:4:2"
+                            "src": "1885:4:1"
                           }
                         ],
-                        "id": 373,
+                        "id": 316,
                         "name": "VariableDeclaration",
-                        "src": "1885:12:2"
+                        "src": "1885:12:1"
                       },
                       {
                         "attributes": {
@@ -3760,7 +3760,7 @@
                                   "isPure": false,
                                   "lValueRequested": false,
                                   "member_name": "salary",
-                                  "referencedDeclaration": 121,
+                                  "referencedDeclaration": 64,
                                   "type": "uint256"
                                 },
                                 "children": [
@@ -3770,18 +3770,18 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 367,
+                                      "referencedDeclaration": 310,
                                       "type": "struct Payroll.Employee storage pointer",
                                       "value": "e"
                                     },
-                                    "id": 374,
+                                    "id": 317,
                                     "name": "Identifier",
-                                    "src": "1900:1:2"
+                                    "src": "1900:1:1"
                                   }
                                 ],
-                                "id": 375,
+                                "id": 318,
                                 "name": "MemberAccess",
-                                "src": "1900:8:2"
+                                "src": "1900:8:1"
                               },
                               {
                                 "attributes": {
@@ -3815,13 +3815,13 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 455,
+                                          "referencedDeclaration": 398,
                                           "type": "uint256",
                                           "value": "now"
                                         },
-                                        "id": 376,
+                                        "id": 319,
                                         "name": "Identifier",
-                                        "src": "1912:3:2"
+                                        "src": "1912:3:1"
                                       },
                                       {
                                         "attributes": {
@@ -3831,7 +3831,7 @@
                                           "isPure": false,
                                           "lValueRequested": false,
                                           "member_name": "lastPayday",
-                                          "referencedDeclaration": 123,
+                                          "referencedDeclaration": 66,
                                           "type": "uint256"
                                         },
                                         "children": [
@@ -3841,33 +3841,33 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 367,
+                                              "referencedDeclaration": 310,
                                               "type": "struct Payroll.Employee storage pointer",
                                               "value": "e"
                                             },
-                                            "id": 377,
+                                            "id": 320,
                                             "name": "Identifier",
-                                            "src": "1918:1:2"
+                                            "src": "1918:1:1"
                                           }
                                         ],
-                                        "id": 378,
+                                        "id": 321,
                                         "name": "MemberAccess",
-                                        "src": "1918:12:2"
+                                        "src": "1918:12:1"
                                       }
                                     ],
-                                    "id": 379,
+                                    "id": 322,
                                     "name": "BinaryOperation",
-                                    "src": "1912:18:2"
+                                    "src": "1912:18:1"
                                   }
                                 ],
-                                "id": 380,
+                                "id": 323,
                                 "name": "TupleExpression",
-                                "src": "1911:20:2"
+                                "src": "1911:20:1"
                               }
                             ],
-                            "id": 381,
+                            "id": 324,
                             "name": "BinaryOperation",
-                            "src": "1900:31:2"
+                            "src": "1900:31:1"
                           },
                           {
                             "attributes": {
@@ -3875,23 +3875,23 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 127,
+                              "referencedDeclaration": 70,
                               "type": "uint256",
                               "value": "payDuration"
                             },
-                            "id": 382,
+                            "id": 325,
                             "name": "Identifier",
-                            "src": "1934:11:2"
+                            "src": "1934:11:1"
                           }
                         ],
-                        "id": 383,
+                        "id": 326,
                         "name": "BinaryOperation",
-                        "src": "1900:45:2"
+                        "src": "1900:45:1"
                       }
                     ],
-                    "id": 384,
+                    "id": 327,
                     "name": "VariableDeclarationStatement",
-                    "src": "1885:60:2"
+                    "src": "1885:60:1"
                   },
                   {
                     "attributes": {
@@ -3919,13 +3919,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 373,
+                              "referencedDeclaration": 316,
                               "type": "uint256",
                               "value": "payment"
                             },
-                            "id": 385,
+                            "id": 328,
                             "name": "Identifier",
-                            "src": "1959:7:2"
+                            "src": "1959:7:1"
                           },
                           {
                             "attributes": {
@@ -3940,14 +3940,14 @@
                               "type": "int_const 0",
                               "value": "0"
                             },
-                            "id": 386,
+                            "id": 329,
                             "name": "Literal",
-                            "src": "1969:1:2"
+                            "src": "1969:1:1"
                           }
                         ],
-                        "id": 387,
+                        "id": 330,
                         "name": "BinaryOperation",
-                        "src": "1959:11:2"
+                        "src": "1959:11:1"
                       },
                       {
                         "children": [
@@ -3972,7 +3972,7 @@
                                       "isPure": false,
                                       "lValueRequested": true,
                                       "member_name": "lastPayday",
-                                      "referencedDeclaration": 123,
+                                      "referencedDeclaration": 66,
                                       "type": "uint256"
                                     },
                                     "children": [
@@ -3982,18 +3982,18 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 367,
+                                          "referencedDeclaration": 310,
                                           "type": "struct Payroll.Employee storage pointer",
                                           "value": "e"
                                         },
-                                        "id": 388,
+                                        "id": 331,
                                         "name": "Identifier",
-                                        "src": "1986:1:2"
+                                        "src": "1986:1:1"
                                       }
                                     ],
-                                    "id": 390,
+                                    "id": 333,
                                     "name": "MemberAccess",
-                                    "src": "1986:12:2"
+                                    "src": "1986:12:1"
                                   },
                                   {
                                     "attributes": {
@@ -4001,23 +4001,23 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 455,
+                                      "referencedDeclaration": 398,
                                       "type": "uint256",
                                       "value": "now"
                                     },
-                                    "id": 391,
+                                    "id": 334,
                                     "name": "Identifier",
-                                    "src": "2001:3:2"
+                                    "src": "2001:3:1"
                                   }
                                 ],
-                                "id": 392,
+                                "id": 335,
                                 "name": "Assignment",
-                                "src": "1986:18:2"
+                                "src": "1986:18:1"
                               }
                             ],
-                            "id": 393,
+                            "id": 336,
                             "name": "ExpressionStatement",
-                            "src": "1986:18:2"
+                            "src": "1986:18:1"
                           },
                           {
                             "children": [
@@ -4061,7 +4061,7 @@
                                           "isPure": false,
                                           "lValueRequested": false,
                                           "member_name": "id",
-                                          "referencedDeclaration": 119,
+                                          "referencedDeclaration": 62,
                                           "type": "address"
                                         },
                                         "children": [
@@ -4071,23 +4071,23 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 367,
+                                              "referencedDeclaration": 310,
                                               "type": "struct Payroll.Employee storage pointer",
                                               "value": "e"
                                             },
-                                            "id": 394,
+                                            "id": 337,
                                             "name": "Identifier",
-                                            "src": "2018:1:2"
+                                            "src": "2018:1:1"
                                           }
                                         ],
-                                        "id": 397,
+                                        "id": 340,
                                         "name": "MemberAccess",
-                                        "src": "2018:4:2"
+                                        "src": "2018:4:1"
                                       }
                                     ],
-                                    "id": 398,
+                                    "id": 341,
                                     "name": "MemberAccess",
-                                    "src": "2018:13:2"
+                                    "src": "2018:13:1"
                                   },
                                   {
                                     "attributes": {
@@ -4095,43 +4095,43 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 373,
+                                      "referencedDeclaration": 316,
                                       "type": "uint256",
                                       "value": "payment"
                                     },
-                                    "id": 399,
+                                    "id": 342,
                                     "name": "Identifier",
-                                    "src": "2032:7:2"
+                                    "src": "2032:7:1"
                                   }
                                 ],
-                                "id": 400,
+                                "id": 343,
                                 "name": "FunctionCall",
-                                "src": "2018:22:2"
+                                "src": "2018:22:1"
                               }
                             ],
-                            "id": 401,
+                            "id": 344,
                             "name": "ExpressionStatement",
-                            "src": "2018:22:2"
+                            "src": "2018:22:1"
                           }
                         ],
-                        "id": 402,
+                        "id": 345,
                         "name": "Block",
-                        "src": "1972:79:2"
+                        "src": "1972:79:1"
                       }
                     ],
-                    "id": 403,
+                    "id": 346,
                     "name": "IfStatement",
-                    "src": "1955:96:2"
+                    "src": "1955:96:1"
                   }
                 ],
-                "id": 404,
+                "id": 347,
                 "name": "Block",
-                "src": "1838:219:2"
+                "src": "1838:219:1"
               }
             ],
-            "id": 405,
+            "id": 348,
             "name": "FunctionDefinition",
-            "src": "1770:287:2"
+            "src": "1770:287:1"
           },
           {
             "attributes": {
@@ -4140,7 +4140,7 @@
               "isConstructor": false,
               "name": "changePaymentAddress",
               "payable": false,
-              "scope": 441,
+              "scope": 384,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -4152,7 +4152,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "id",
-                      "scope": 440,
+                      "scope": 383,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -4165,19 +4165,19 @@
                           "name": "address",
                           "type": "address"
                         },
-                        "id": 406,
+                        "id": 349,
                         "name": "ElementaryTypeName",
-                        "src": "2093:7:2"
+                        "src": "2093:7:1"
                       }
                     ],
-                    "id": 407,
+                    "id": 350,
                     "name": "VariableDeclaration",
-                    "src": "2093:10:2"
+                    "src": "2093:10:1"
                   }
                 ],
-                "id": 408,
+                "id": 351,
                 "name": "ParameterList",
-                "src": "2092:12:2"
+                "src": "2092:12:1"
               },
               {
                 "attributes": {
@@ -4186,9 +4186,9 @@
                   ]
                 },
                 "children": [],
-                "id": 413,
+                "id": 356,
                 "name": "ParameterList",
-                "src": "2131:0:2"
+                "src": "2131:0:1"
               },
               {
                 "children": [
@@ -4198,13 +4198,13 @@
                       "overloadedDeclarations": [
                         null
                       ],
-                      "referencedDeclaration": 159,
+                      "referencedDeclaration": 102,
                       "type": "modifier (address)",
                       "value": "employeeExist"
                     },
-                    "id": 409,
+                    "id": 352,
                     "name": "Identifier",
-                    "src": "2105:13:2"
+                    "src": "2105:13:1"
                   },
                   {
                     "attributes": {
@@ -4224,30 +4224,30 @@
                           "overloadedDeclarations": [
                             null
                           ],
-                          "referencedDeclaration": 453,
+                          "referencedDeclaration": 396,
                           "type": "msg",
                           "value": "msg"
                         },
-                        "id": 410,
+                        "id": 353,
                         "name": "Identifier",
-                        "src": "2119:3:2"
+                        "src": "2119:3:1"
                       }
                     ],
-                    "id": 411,
+                    "id": 354,
                     "name": "MemberAccess",
-                    "src": "2119:10:2"
+                    "src": "2119:10:1"
                   }
                 ],
-                "id": 412,
+                "id": 355,
                 "name": "ModifierInvocation",
-                "src": "2105:25:2"
+                "src": "2105:25:1"
               },
               {
                 "children": [
                   {
                     "attributes": {
                       "assignments": [
-                        415
+                        358
                       ]
                     },
                     "children": [
@@ -4255,7 +4255,7 @@
                         "attributes": {
                           "constant": false,
                           "name": "e",
-                          "scope": 440,
+                          "scope": 383,
                           "stateVariable": false,
                           "storageLocation": "default",
                           "type": "struct Payroll.Employee storage pointer",
@@ -4267,17 +4267,17 @@
                             "attributes": {
                               "contractScope": null,
                               "name": "Employee",
-                              "referencedDeclaration": 124,
+                              "referencedDeclaration": 67,
                               "type": "struct Payroll.Employee storage pointer"
                             },
-                            "id": 414,
+                            "id": 357,
                             "name": "UserDefinedTypeName",
-                            "src": "2141:8:2"
+                            "src": "2141:8:1"
                           }
                         ],
-                        "id": 415,
+                        "id": 358,
                         "name": "VariableDeclaration",
-                        "src": "2141:10:2"
+                        "src": "2141:10:1"
                       },
                       {
                         "attributes": {
@@ -4295,13 +4295,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 131,
+                              "referencedDeclaration": 74,
                               "type": "mapping(address => struct Payroll.Employee storage ref)",
                               "value": "employees"
                             },
-                            "id": 416,
+                            "id": 359,
                             "name": "Identifier",
-                            "src": "2154:9:2"
+                            "src": "2154:9:1"
                           },
                           {
                             "attributes": {
@@ -4321,28 +4321,28 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 453,
+                                  "referencedDeclaration": 396,
                                   "type": "msg",
                                   "value": "msg"
                                 },
-                                "id": 417,
+                                "id": 360,
                                 "name": "Identifier",
-                                "src": "2164:3:2"
+                                "src": "2164:3:1"
                               }
                             ],
-                            "id": 418,
+                            "id": 361,
                             "name": "MemberAccess",
-                            "src": "2164:10:2"
+                            "src": "2164:10:1"
                           }
                         ],
-                        "id": 419,
+                        "id": 362,
                         "name": "IndexAccess",
-                        "src": "2154:21:2"
+                        "src": "2154:21:1"
                       }
                     ],
-                    "id": 420,
+                    "id": 363,
                     "name": "VariableDeclarationStatement",
-                    "src": "2141:34:2"
+                    "src": "2141:34:1"
                   },
                   {
                     "children": [
@@ -4373,13 +4373,13 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 131,
+                                  "referencedDeclaration": 74,
                                   "type": "mapping(address => struct Payroll.Employee storage ref)",
                                   "value": "employees"
                                 },
-                                "id": 421,
+                                "id": 364,
                                 "name": "Identifier",
-                                "src": "2185:9:2"
+                                "src": "2185:9:1"
                               },
                               {
                                 "attributes": {
@@ -4387,18 +4387,18 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 407,
+                                  "referencedDeclaration": 350,
                                   "type": "address",
                                   "value": "id"
                                 },
-                                "id": 422,
+                                "id": 365,
                                 "name": "Identifier",
-                                "src": "2195:2:2"
+                                "src": "2195:2:1"
                               }
                             ],
-                            "id": 423,
+                            "id": 366,
                             "name": "IndexAccess",
-                            "src": "2185:13:2"
+                            "src": "2185:13:1"
                           },
                           {
                             "attributes": {
@@ -4434,13 +4434,13 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 124,
+                                  "referencedDeclaration": 67,
                                   "type": "type(struct Payroll.Employee storage pointer)",
                                   "value": "Employee"
                                 },
-                                "id": 424,
+                                "id": 367,
                                 "name": "Identifier",
-                                "src": "2201:8:2"
+                                "src": "2201:8:1"
                               },
                               {
                                 "attributes": {
@@ -4448,13 +4448,13 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 407,
+                                  "referencedDeclaration": 350,
                                   "type": "address",
                                   "value": "id"
                                 },
-                                "id": 425,
+                                "id": 368,
                                 "name": "Identifier",
-                                "src": "2210:2:2"
+                                "src": "2210:2:1"
                               },
                               {
                                 "attributes": {
@@ -4464,7 +4464,7 @@
                                   "isPure": false,
                                   "lValueRequested": false,
                                   "member_name": "salary",
-                                  "referencedDeclaration": 121,
+                                  "referencedDeclaration": 64,
                                   "type": "uint256"
                                 },
                                 "children": [
@@ -4474,18 +4474,18 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 415,
+                                      "referencedDeclaration": 358,
                                       "type": "struct Payroll.Employee storage pointer",
                                       "value": "e"
                                     },
-                                    "id": 426,
+                                    "id": 369,
                                     "name": "Identifier",
-                                    "src": "2214:1:2"
+                                    "src": "2214:1:1"
                                   }
                                 ],
-                                "id": 427,
+                                "id": 370,
                                 "name": "MemberAccess",
-                                "src": "2214:8:2"
+                                "src": "2214:8:1"
                               },
                               {
                                 "attributes": {
@@ -4495,7 +4495,7 @@
                                   "isPure": false,
                                   "lValueRequested": false,
                                   "member_name": "lastPayday",
-                                  "referencedDeclaration": 123,
+                                  "referencedDeclaration": 66,
                                   "type": "uint256"
                                 },
                                 "children": [
@@ -4505,33 +4505,33 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 415,
+                                      "referencedDeclaration": 358,
                                       "type": "struct Payroll.Employee storage pointer",
                                       "value": "e"
                                     },
-                                    "id": 428,
+                                    "id": 371,
                                     "name": "Identifier",
-                                    "src": "2224:1:2"
+                                    "src": "2224:1:1"
                                   }
                                 ],
-                                "id": 429,
+                                "id": 372,
                                 "name": "MemberAccess",
-                                "src": "2224:12:2"
+                                "src": "2224:12:1"
                               }
                             ],
-                            "id": 430,
+                            "id": 373,
                             "name": "FunctionCall",
-                            "src": "2201:36:2"
+                            "src": "2201:36:1"
                           }
                         ],
-                        "id": 431,
+                        "id": 374,
                         "name": "Assignment",
-                        "src": "2185:52:2"
+                        "src": "2185:52:1"
                       }
                     ],
-                    "id": 432,
+                    "id": 375,
                     "name": "ExpressionStatement",
-                    "src": "2185:52:2"
+                    "src": "2185:52:1"
                   },
                   {
                     "children": [
@@ -4563,13 +4563,13 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 131,
+                                  "referencedDeclaration": 74,
                                   "type": "mapping(address => struct Payroll.Employee storage ref)",
                                   "value": "employees"
                                 },
-                                "id": 433,
+                                "id": 376,
                                 "name": "Identifier",
-                                "src": "2254:9:2"
+                                "src": "2254:9:1"
                               },
                               {
                                 "attributes": {
@@ -4589,53 +4589,53 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 453,
+                                      "referencedDeclaration": 396,
                                       "type": "msg",
                                       "value": "msg"
                                     },
-                                    "id": 434,
+                                    "id": 377,
                                     "name": "Identifier",
-                                    "src": "2264:3:2"
+                                    "src": "2264:3:1"
                                   }
                                 ],
-                                "id": 435,
+                                "id": 378,
                                 "name": "MemberAccess",
-                                "src": "2264:10:2"
+                                "src": "2264:10:1"
                               }
                             ],
-                            "id": 436,
+                            "id": 379,
                             "name": "IndexAccess",
-                            "src": "2254:21:2"
+                            "src": "2254:21:1"
                           }
                         ],
-                        "id": 437,
+                        "id": 380,
                         "name": "UnaryOperation",
-                        "src": "2247:28:2"
+                        "src": "2247:28:1"
                       }
                     ],
-                    "id": 438,
+                    "id": 381,
                     "name": "ExpressionStatement",
-                    "src": "2247:28:2"
+                    "src": "2247:28:1"
                   }
                 ],
-                "id": 439,
+                "id": 382,
                 "name": "Block",
-                "src": "2131:151:2"
+                "src": "2131:151:1"
               }
             ],
-            "id": 440,
+            "id": 383,
             "name": "FunctionDefinition",
-            "src": "2063:219:2"
+            "src": "2063:219:1"
           }
         ],
-        "id": 441,
+        "id": 384,
         "name": "ContractDefinition",
-        "src": "51:2237:2"
+        "src": "51:2237:1"
       }
     ],
-    "id": 442,
+    "id": 385,
     "name": "SourceUnit",
-    "src": "0:2288:2"
+    "src": "0:2288:1"
   },
   "compiler": {
     "name": "solc",
@@ -4655,9 +4655,9 @@
     "1516450027671": {
       "events": {},
       "links": {},
-      "address": "0x2c04fc90a151537486668b1cf685a8aa3c1855cf"
+      "address": "0x00a5c23527a1cdbe91a64a58285169cb7ad0dc2a"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-01-20T17:53:25.634Z"
+  "updatedAt": "2018-01-20T20:21:58.726Z"
 }
