@@ -1,6 +1,6 @@
 
-部署文件位于 ./payroll/migrations/下 _deploy_contracts.js需要部署相应的合约文件
-测试文件位于 ./payroll/test/下 分别为TestPayroll.js和TestPayroll.rol
+部署文件位于 ./payroll/migrations/下 _deploy_contracts.js需要部署相应的合约文件 \n
+测试文件位于 ./payroll/test/下 分别为TestPayroll.js和TestPayroll.rol 
 测试了payroll.sol的两个函数：addEmployee 和 removeEmployee
 测试截图位于本文件夹内
 基本上使用then().catch()或try{}catch(e){}捕捉异常
