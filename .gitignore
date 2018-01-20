@@ -1,0 +1,6 @@
+*.png
+*.ico
+Lesson4/node_modules/*
+Lesson4/build/*
+Lesson4/config/*
+Lesson4/src/fonts/*
