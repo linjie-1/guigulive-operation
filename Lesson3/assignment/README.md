@@ -69,30 +69,30 @@ L(C) := [C] + merge(L(O), [O])
 ```
 - contract K1 is A, B
 ```
-L[K1] := [K1] + merge(L[A], L[B], [A, B])
-= [K1] + merge([A, O], [B, O], [A, B])
-= [K1, A] + merge([O], [B, O], [B])
-= [K1, A, B] + merge([O], [O])
-= [K1, A, B, O]
+L[K1] := [K1] + merge(L[A], L[B], [B, A])
+= [K1] + merge([A, O], [B, O], [B, A])
+= [K1, B] + merge([A, O], [B, O], [A])
+= [K1, B, A] + merge([O], [O])
+= [K1, B, A, O]
 ```
 
 - contract K2 is A, C
 ```
-L[K2] := [K2] + merge(L[A], L[C], [A, C])
-= [K2] + merge([A, O], [C, O], [A, C])
-= [K2, A] + merge([O], [C, O], [C])
-= [K2, A, C] + merge([O], [O])
-= [K2, A, C, O]
+L[K2] := [K2] + merge(L[A], L[C], [C, A])
+= [K2] + merge([A, O], [C, O], [C, A])
+= [K2, C] + merge([A, O], [O], [A])
+= [K2, C, A] + merge([O], [O])
+= [K2, C, A, O]
 ```
 
 - contract Z is K1, K2
 ```
-L[Z] := [Z] + merge(L[K1], L[K2], [K1, K2])
-= [Z] + merge([K1, A, B, O], [K2, A, C, O], [K1, K2])
-= [Z, K1] + merge([A, B, O], [K2, A, C, O], [K2])
-= [Z, K1, K2] + merge([A, B, O], [A, C, 0])
-= [Z, K1, K2, A] + merge([B, O], [C, O])
-= [Z, K1, K2, A, B] + merge([O], [C, O])
-= [Z, K1, K2, A, B, C] + merge([O], [O])
-= [Z, K1, K2, A, B, C, O]
+L[Z] := [Z] + merge(L[K1], L[K2], [K2, K1])
+= [Z] + merge([K1, B, A, O], [K2, C, A, O], [K2, K1])
+= [Z, K2] + merge([K1, B, A, O], [C, A, O], [K1])
+= [Z, K2, K1] + merge([B, A, O], [C, A], [O])
+= [Z, K2, K1, B] + merge([A, O], [C, A], [O])
+= [Z, K2, K1, B, C] + merge([A, O], [A], [O])
+= [Z, K2, K1, B, C, A] + merge([O], [O], [O])
+= [Z, K2, K1, B, C, A, O]
 ```
