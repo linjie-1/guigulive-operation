@@ -18,7 +18,7 @@ contract('payroll', function(accounts) {
     }).then(function(employee) {
         assert(true);
         assert.equal(employee[0], employeeId, "check employee address");
-        assert.equal(employee[1].valueOf(), web3.toWei(salary, 'ether'), "check salary");
+        assert.equal(employee[2].valueOf(), web3.toWei(salary, 'ether'), "check salary");
     });
   });
 
@@ -64,23 +64,23 @@ contract('payroll', function(accounts) {
 
   // 2.0 remove employee with expected behavior: add employee first and then remove
   it("...should remove the target employee.", function() {
-    let employeeId = accounts[1];
+    let employeeId = accounts[3];
     let salary = 1;  
     let owner = accounts[0];
 
     return payroll.deployed().then(function(instance) {
       payrollInstance = instance;
-      // owner add employee first
+
       return payrollInstance.addEmployee(employeeId, salary, {from: owner});
     }).then(function() {
-        // then remove this employee
+         //then remove this employee
       return payrollInstance.removeEmployee(employeeId, {from: owner});
     }).then(function() {
         // access record of this removed employee
         return payrollInstance.employees.call(employeeId);
       }).then(function(employee) {
           // non-existed employee: address should be default value "0x0"
-          assert.equal(employee[0], "0x0", "non-existed employee");
+          assert.equal(employee[0], '0x0000000000000000000000000000000000000000', "non-existed employee");
           assert(true);
       });
   });
