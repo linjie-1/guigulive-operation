@@ -11,29 +11,11 @@ contract('Payroll', function(accounts) {
     payroll = await Payroll.new({from: creator});
   });
 
-  it("addEmployee() success", async function() {
-    // check employeeId has not been added yet
+  it("addEmployee() test owner adding new employee succeed", async function() {
+    await checkEmployeeNotExist(employeeId);
+    let result = await payroll.addEmployee(employeeId, salary, {from: creator});
+    checkTransactionSucceed(result);
     let employeeData = await payroll.employees(employeeId);
-    assert.equal(0x0, employeeData[0], "Employee should not be added yet");
-
-    // test non-owner of the contract cannot add employee
-    let result = await payroll.addEmployee(
-      employeeId,
-      salary,
-      {from: employeeId},
-    );
-    assert.equal(0x00, result.receipt.status, "Add employee should fail");
-    employeeData = await payroll.employees(employeeId);
-    assert.equal(
-      0x0,
-      employeeData[0],
-      "The employee should not be added by non-owner",
-    );
-
-    // test contract owner can add employee
-    result = await payroll.addEmployee(employeeId, salary, {from: creator});
-    assert.equal(0x01, result.receipt.status, "Add employee should succeed");
-    employeeData = await payroll.employees(employeeId);
     assert.equal(
       employeeId,
       employeeData[0],
@@ -50,4 +32,58 @@ contract('Payroll', function(accounts) {
       "LastPayday does not match"
     );
   });
+
+  it("addEmployee() test owner adding existing employee fail",
+    async function() {
+
+    await payroll.addEmployee(employeeId, salary, {from: creator});
+    await checkEmployeeExist(employeeId);
+    let result = await payroll.addEmployee(employeeId, salary, {from: creator});
+    checkTransactionFail(result);
+  });
+
+  it("addEmployee() test non-owner adding new employee fail", async function() {
+    await checkEmployeeNotExist(employeeId);
+    let result = await payroll.addEmployee(
+      employeeId,
+      salary,
+      {from: employeeId},
+    );
+    checkTransactionFail(result);
+  });
+
+  it("addEmployee() test non-owner adding existing employee fail",
+    async function() {
+
+    await payroll.addEmployee(employeeId, salary, {from: creator});
+    await checkEmployeeExist(employeeId);
+    let result = await payroll.addEmployee(
+      employeeId,
+      salary,
+      {from: employeeId},
+    );
+    checkTransactionFail(result);
+  });
+
+  async function checkEmployeeNotExist(employeeId) {
+    let employeeData = await payroll.employees(employeeId);
+    assert.equal(0x0, employeeData[0], "Employee should not exist");
+  }
+
+  async function checkEmployeeExist(employeeId) {
+    let employeeData = await payroll.employees(employeeId);
+    assert.equal(
+      employeeId,
+      employeeData[0],
+      "Employee should exist");
+  }
+
+  function checkTransactionFail(result) {
+    assert.equal(0x00, result.receipt.status, "Transaction should fail");
+  }
+
+  function checkTransactionSucceed(result) {
+    assert.equal(0x01, result.receipt.status, "Transaction should succeed");
+  }
+
 });
