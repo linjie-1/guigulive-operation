@@ -23,25 +23,18 @@ L(C):   <br />
 = [C, O]   <br /> 
 
 L(K1):   <br />
-= [K1] + merge(L(A), L(B), [A, B])   <br />
-= [K1] + merge([A, O], [B, O], [A, B])   <br />
-= [K1, A] + merge([O], [B, O], [B])   <br />
-= [K1, A, B] + merge([O], [O])   <br />
-= [K1, A, B, O]   <br />
+= [K1] + merge(L(B), L(A), [A, B])   <br />
+= [K1] + merge([A, O], [B, O], [B, A])   <br />
+= [K1, B] + merge([O], [B, O]A, [B])   <br />
+= [K1, B, A] + merge([O], [O])   <br />
+= [K1, B, A, O]   <br />
 
 L(K2):   <br />
-= [K2] + merge(L(A), L(C), [A, C])   <br />
-= [K2] + merge([A, O], [C, O], [A, C])   <br />
-= [K2, A] + merge([O], [C, O], [C])   <br />
-= [K2, A, C] + merge([O], [O])   <br />
-= [K2, A, C, O]   <br />
+= [K2, C, A, O]   <br />
 
 L(Z):   <br />
 = [Z] + merge(L(K1), L(K2), [K1, K2])   <br />
-= [Z] + merge([K1, A, B, O], [K2, A, C, O], [K1, K2])   <br />
-= [Z, K1] + merge([A, B, O], [K2, A, C, O], [K2])   <br />
-= [Z, K1, K2] + merge([A, B, O], [A, C, O])  <br />
-= [Z, K1, K2, A] + merge([B, O], [C, O])  <br />
-= [Z, K1, K2, A, B] + merge([O], [C, O])  <br />
-= [Z, K1, K2, A, B, C] + merge([O], [O])  <br />
-= [Z, K1, K2, A, B, C, O]  <br />
+= [Z] + merge( [K2, C, A, O], [K1, B, A, O],  [K2, K1])   <br />
+= [Z, K2, C] + merge([ A, O], [K1,B, A, O])  <br />
+= [Z, K2, C, K1, B] + merge([A, O], [A, O])  <br />
+= [Z,  K2, C, K1, B, A, O]  <br />
