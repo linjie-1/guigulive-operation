@@ -127,6 +127,10 @@ contract Payroll is Ownable {
         addEmployee(10,1);
         return  calculateRunway();
     }
+
+    function getEmployeeSalary(address employeeId) view public returns (uint) {
+        return employees[employeeId].salary;
+    }
     
     function Test2() returns (uint){
         addEmployee(0x14723a09acff6d2a60dcdf7aa4aff308fddc160c,1);

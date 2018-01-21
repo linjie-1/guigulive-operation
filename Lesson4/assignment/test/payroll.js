@@ -6,22 +6,22 @@ var Payroll = artifacts.require("./Payroll.sol");
 
 contract('Payroll', function(accounts) {
 
-  it("Add employee", function() {
+  it("Add employee now", function() {
     return Payroll.deployed().then(function(instance) {
 
       payrollInstance = instance;
-      console.log('Start adding employee...');
+      console.log('Adding employee...');
       payrollInstance.addEmployee(accounts[1], 1);
       return payrollInstance.getEmployeeSalary(accounts[1]);
 
     }).then((salary) => {
       
-      assert.equal(salary.valueOf(), web3.toWei(1, 'ether'), 'Fail to add employee');
+      assert.equal(salary.valueOf(), web3.toWei(1, 'ether'), 'Failed');
 
     })
   });
 
-  it("Add fund", function() {
+  it("Add fund now", function() {
     var constractAddress;
     return Payroll.deployed().then(function(instance) {
 
@@ -32,18 +32,19 @@ contract('Payroll', function(accounts) {
 
       balance = web3.eth.getBalance(constractAddress);
       console.log(balance);
-      assert.equal(balance.valueOf(), web3.toWei(10, 'ether'), 'Fail to add fund');
+      assert.equal(balance.valueOf(), web3.toWei(10, 'ether'), 'Failed');
     
     })
   })
 
-  it("Get paid", function() {
+  it("Get paid now", function() {
     var old_balance = 0;
     return Payroll.deployed().then(function(instance) {
 
       constractAddress = instance.address;
       old_balance = web3.eth.getBalance(constractAddress).valueOf();
       console.log(old_balance);
+      
       return instance.getPaid({from: accounts[1]});
 
     }).then(function() {
@@ -52,7 +53,7 @@ contract('Payroll', function(accounts) {
       console.log(new_balance);
       var for_salary = web3.fromWei(old_balance - new_balance, 'ether');
       console.log(for_salary);
-      assert.equal(1,for_salary,"Fail to get paid");
+      assert.equal(1,for_salary,"Failed");
 
     })
   })
@@ -65,7 +66,7 @@ contract('Payroll', function(accounts) {
 
     }).then((salary) => {
 
-      assert.equal(salary.valueOf(), 0, "Fail to remove employee");
+      assert.equal(salary.valueOf(), 0, "Failed");
 
     })
   });
