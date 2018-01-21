@@ -11,8 +11,10 @@ contract('Payroll', function(accounts) {
     payroll = await Payroll.new({from: creator});
   });
 
-  it("addEmployee() test owner adding new employee succeed", async function() {
+  it("addEmployee() test owner add new employee succeed", async function() {
     await checkEmployeeNotExist(employeeId);
+    let totalSalary = await payroll.totalSalary.call();
+    assert.equal(totalSalary, 0, "initial totalSalary should be 0");
     let result = await payroll.addEmployee(employeeId, salary, {from: creator});
     checkTransactionSucceed(result);
     let employeeData = await payroll.employees(employeeId);
@@ -31,18 +33,22 @@ contract('Payroll', function(accounts) {
       parseInt(employeeData[2], 10),
       "LastPayday does not match"
     );
+    totalSalary = await payroll.totalSalary.call();
+    assert.equal(
+      parseInt(web3.fromWei(totalSalary, 'ether'), 10),
+      salary,
+      "totalSalary should be changed",
+    );
   });
 
-  it("addEmployee() test owner adding existing employee fail",
-    async function() {
-
+  it("addEmployee() test owner add existing employee fail", async function() {
     await payroll.addEmployee(employeeId, salary, {from: creator});
     await checkEmployeeExist(employeeId);
     let result = await payroll.addEmployee(employeeId, salary, {from: creator});
     checkTransactionFail(result);
   });
 
-  it("addEmployee() test non-owner adding new employee fail", async function() {
+  it("addEmployee() test non-owner add new employee fail", async function() {
     await checkEmployeeNotExist(employeeId);
     let result = await payroll.addEmployee(
       employeeId,
@@ -52,7 +58,7 @@ contract('Payroll', function(accounts) {
     checkTransactionFail(result);
   });
 
-  it("addEmployee() test non-owner adding existing employee fail",
+  it("addEmployee() test non-owner add existing employee fail",
     async function() {
 
     await payroll.addEmployee(employeeId, salary, {from: creator});

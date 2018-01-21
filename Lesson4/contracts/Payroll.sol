@@ -16,7 +16,7 @@ contract Payroll is Ownable {
     uint constant payDuration = 10 seconds;
 
     mapping (address => Employee) public employees;
-    uint totalSalary;
+    uint public totalSalary;
 
     modifier employeeExist(address employeeId) {
         Employee storage employee = employees[employeeId];
