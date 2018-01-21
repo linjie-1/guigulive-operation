@@ -1,7 +1,3 @@
-/*作业请提交在这个目录下*/
-
-//q1
-
 pragma solidity ^0.4.14;
 
 contract payRoll{
@@ -14,8 +10,7 @@ contract payRoll{
     uint constant payDuration = 10 seconds;
     
     address owner;
-    uint totalSalary;
-    mapping(address => Employee) employees;
+    Employee[] employees;
     
     function Payroll(){
         owner = msg.sender;
@@ -26,38 +21,46 @@ contract payRoll{
         employee.id.transfer(payment);
     }
     
+    function _findEmployee(address employeeId) private returns (Employee, uint){
+        for(uint i=0; i<employees.length;i++){
+            if(employees[i].id == employeeId){
+                return (employees[i], i);
+            }
+        }         
+    }
+    
     function addEmployee(address employeeId, uint salary){
         require(msg.sender == owner);
         
-        var employee = employees[employeeId];
+        var (employee, index) = _findEmployee(employeeId);
         assert(employee.id == 0x0);
-        totalSalary += salary * 1 ether;
-        employees[employeeId] = (Employee(employeeId, salary * 1 ether, now));
+        
+        employees.push(Employee(employeeId, salary, now));
     }
     
     function removeEmployee(address employeeId){
         require(msg.sender == owner);
         
-        var employee = employees[employeeId];
+        var (employee, index) = _findEmployee(employeeId);
         
         assert(employee.id == 0x0);
         _partialPaid(employee);
-        totalSalary -= employees[employeeId].salary;
-        delete employees[employeeId];
+        
+        delete employees[index];
+        employees[index] = employees[employees.length -1];
+        employees.length -= 1;
         
     }
     
     function updateEmployee(address employeeId, uint salary) {
         require(msg.sender == owner);
         
-        var employee = employees[employeeId];
+        var (employee, index) = _findEmployee(employeeId);
         
         assert(employee.id == 0x0);
         _partialPaid(employee);
-        totalSalary -= employees[employeeId].salary;
-        employees[employeeId].salary = salary;
-        employees[employeeId].lastPayday = now;
-        totalSalary += employees[employeeId].salary;
+        employees[index].salary = salary;
+        employees[index].lastPayday = now;
         
     }
     
@@ -66,6 +69,10 @@ contract payRoll{
     }
     
     function calculateRunway() returns (uint) {
+        uint totalSalary = 0;
+        for(uint i=0; i<employees.length;i++){
+            totalSalary += employees[i].salary;
+        }
         return this.balance / totalSalary;
     }
     
@@ -73,32 +80,16 @@ contract payRoll{
         return calculateRunway() > 0;
     }
     
-    function checckEmployee(address employeeId) returns (uint salary, uint lastPayday){
-        var employee = employees[employeeId];
-        salary = employee.salary;
-        lastPayday = employee.lastPayday;
-    }
-    
     function getPaid() {
-        var employee = employees[msg.sender];
+        var (employee, index) = _findEmployee(msg.sender);
         assert(employee.id == 0x0);
         
         
         uint nextPayday = employee.lastPayday + payDuration;
         assert(nextPayday < now);
         
-        employee.lastPayday = nextPayday;
-        employee.id.transfer(employee.salary);
+        employees[index].lastPayday = nextPayday;
+        employees[index].id.transfer(employee.salary);
     }
     
-}
-
-
-/// q2
-function changePaymentAddress(address employeeId, address newEmployeeId) onlyOwner employeeExist(employeeId) {
-  var employee = employees[employeeId];
-  
-  _partialPaid(employee);
-  employees[employeeId].id = newEmployeeId;
-  employees[newEmployeeId].lastPayday = now;
 }
