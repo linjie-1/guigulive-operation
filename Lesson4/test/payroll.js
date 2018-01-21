@@ -4,23 +4,23 @@ contract('Payroll', function(accounts) {
 
   let payroll;
   const creator = accounts[0];
-  const employeeId = accounts[1];
-  const salary = 5;
-  const invalidSalary = -5;
+  const employeeOneId = accounts[1];
+  const salary = 1;
+  const invalidSalary = -1;
 
   beforeEach(async function() {
     payroll = await Payroll.new({from: creator});
   });
 
   it("addEmployee() test owner add new employee succeed", async function() {
-    await checkEmployeeNotExist(employeeId);
+    await checkEmployeeNotExist(employeeOneId);
     let totalSalary = await genTotalSalary();
     assert.equal(totalSalary, 0, "initial totalSalary should be 0");
-    let result = await payroll.addEmployee(employeeId, salary, {from: creator});
+    let result = await payroll.addEmployee(employeeOneId, salary, {from: creator});
     checkTransactionSucceed(result);
-    let employeeData = await payroll.employees(employeeId);
+    let employeeData = await payroll.employees(employeeOneId);
     assert.equal(
-      employeeId,
+      employeeOneId,
       employeeData[0],
       "Employee id does not match"
     );
@@ -43,9 +43,9 @@ contract('Payroll', function(accounts) {
   });
 
   it("addEmployee() test owner add existing employee fail", async function() {
-    await payroll.addEmployee(employeeId, salary, {from: creator});
-    await checkEmployeeExist(employeeId);
-    let result = await payroll.addEmployee(employeeId, salary, {from: creator});
+    await payroll.addEmployee(employeeOneId, salary, {from: creator});
+    await checkEmployeeExist(employeeOneId);
+    let result = await payroll.addEmployee(employeeOneId, salary, {from: creator});
     checkTransactionFail(result);
   });
 
@@ -58,7 +58,7 @@ contract('Payroll', function(accounts) {
     async function() {
 
     let result = await payroll.addEmployee(
-      employeeId,
+      employeeOneId,
       invalidSalary,
       {from: creator},
     );
@@ -66,11 +66,11 @@ contract('Payroll', function(accounts) {
   });
 
   it("addEmployee() test non-owner add new employee fail", async function() {
-    await checkEmployeeNotExist(employeeId);
+    await checkEmployeeNotExist(employeeOneId);
     let result = await payroll.addEmployee(
-      employeeId,
+      employeeOneId,
       salary,
-      {from: employeeId},
+      {from: employeeOneId},
     );
     checkTransactionFail(result);
   });
@@ -78,73 +78,141 @@ contract('Payroll', function(accounts) {
   it("addEmployee() test non-owner add existing employee fail",
     async function() {
 
-    await payroll.addEmployee(employeeId, salary, {from: creator});
-    await checkEmployeeExist(employeeId);
+    await payroll.addEmployee(employeeOneId, salary, {from: creator});
+    await checkEmployeeExist(employeeOneId);
     let result = await payroll.addEmployee(
-      employeeId,
+      employeeOneId,
       salary,
-      {from: employeeId},
+      {from: employeeOneId},
     );
     checkTransactionFail(result);
   });
 
   it("addEmployee() test non-owner add 0x0 address fail", async function() {
-    let result = await payroll.addEmployee(0x0, salary, {from: employeeId});
+    let result = await payroll.addEmployee(0x0, salary, {from: employeeOneId});
     checkTransactionFail(result);
   });
 
   it("removeEmployee() test owner remove existing employee succeed",
     async function() {
 
-    await payroll.addEmployee(employeeId, salary, {from: creator});
-    await checkEmployeeExist(employeeId);
+    let newEmployeeId = web3.personal.newAccount();
+
+    await payroll.addEmployee(newEmployeeId, salary, {from: creator});
+    await checkEmployeeExist(newEmployeeId);
     let totalSalary = await genTotalSalary();
 
-    let result = await payroll.removeEmployee(employeeId, {from: creator});
+    let addFundResult = await payroll.addFund({value: web3.toWei(salary * 2, "ether")});
+    checkTransactionSucceed(addFundResult);
+    let employeeOldBalance = parseFloat(
+      web3.fromWei(web3.eth.getBalance(newEmployeeId), 'ether'),
+      10,
+    );
+    let contractOldBalance = parseFloat(
+      web3.fromWei(web3.eth.getBalance(payroll.address), 'ether'),
+      10,
+    );
+    assert.isAbove(
+      contractOldBalance,
+      salary,
+      "contract should have enough balance to pay the employee",
+    );
+
+    // after one pay duration
+    let payDuration = await payroll.payDuration.call();
+    web3.currentProvider.sendAsync({
+      jsonrpc: '2.0',
+      method: 'evm_increaseTime',
+      params: [payDuration.toNumber() + 1], // amount of time to increase in seconds
+      id: 0
+    }, (err, resp) => {
+      if (!err) {
+        web3.currentProvider.send({
+          jsonrpc: '2.0',
+          method: 'evm_mine',
+          params: [],
+          id: 1
+        })
+      }
+    });
+
+    let result = await payroll.removeEmployee(newEmployeeId, {from: creator});
     checkTransactionSucceed(result);
-    await checkEmployeeNotExist(employeeId);
+    await checkEmployeeNotExist(newEmployeeId);
     let updatedTotalSalary = await genTotalSalary();
     assert.equal(
       updatedTotalSalary,
       totalSalary - salary,
       "totalSalary should be decreased",
     );
+
+    // verify employee balance
+    let employeeNewBalance = parseFloat(
+      web3.fromWei(web3.eth.getBalance(newEmployeeId), 'ether'),
+      10,
+    );
+    assert.isAbove(
+      employeeNewBalance - employeeOldBalance,
+      salary,
+      "Partial paid amount should be a little bit over one full payment cycle salary",
+    );
+    assert.isBelow(
+      employeeNewBalance - employeeOldBalance,
+      salary * 2,
+      "Partial paid amount should be less than two full payment cycle salary",
+    );
+
+    // verify contract balance
+    let contractNewBalance = parseFloat(
+      web3.fromWei(web3.eth.getBalance(payroll.address), 'ether'),
+      10,
+    );
+    assert.isAbove(
+      contractOldBalance - contractNewBalance,
+      salary,
+      "Paid amount should be a little bit over one full payment cycle salary",
+    );
+    assert.isBelow(
+      contractOldBalance - contractNewBalance,
+      salary * 2,
+      "Paid amount should be less than two full payment cycle salary",
+    );
   });
 
   it("removeEmployee() test owner remove non-existing employee fail",
     async function() {
 
-    await checkEmployeeNotExist(employeeId);
-    let result = await payroll.removeEmployee(employeeId, {from: creator});
+    await checkEmployeeNotExist(employeeOneId);
+    let result = await payroll.removeEmployee(employeeOneId, {from: creator});
     checkTransactionFail(result);
   });
 
   it("removeEmployee() test non-owner remove existing employee fail",
     async function() {
 
-    await payroll.addEmployee(employeeId, salary, {from: creator});
-    await checkEmployeeExist(employeeId);
-    let result = await payroll.removeEmployee(employeeId, {from: employeeId});
+    await payroll.addEmployee(employeeOneId, salary, {from: creator});
+    await checkEmployeeExist(employeeOneId);
+    let result = await payroll.removeEmployee(employeeOneId, {from: employeeOneId});
     checkTransactionFail(result);
   });
 
   it("removeEmployee() test non-owner remove non-existing employee fail",
     async function() {
 
-    await checkEmployeeNotExist(employeeId);
-    let result = await payroll.removeEmployee(employeeId, {from: employeeId});
+    await checkEmployeeNotExist(employeeOneId);
+    let result = await payroll.removeEmployee(employeeOneId, {from: employeeOneId});
     checkTransactionFail(result);
   });
 
-  async function checkEmployeeNotExist(employeeId) {
-    let employeeData = await payroll.employees(employeeId);
+  async function checkEmployeeNotExist(employeeOneId) {
+    let employeeData = await payroll.employees(employeeOneId);
     assert.equal(0x0, employeeData[0], "Employee should not exist");
   }
 
-  async function checkEmployeeExist(employeeId) {
-    let employeeData = await payroll.employees(employeeId);
+  async function checkEmployeeExist(employeeOneId) {
+    let employeeData = await payroll.employees(employeeOneId);
     assert.equal(
-      employeeId,
+      employeeOneId,
       employeeData[0],
       "Employee should exist");
   }
