@@ -12,7 +12,9 @@ contract('Payroll', function(accounts) {
     payroll = await Payroll.new({from: creator});
   });
 
-  it("addEmployee() test owner add new employee succeed", async function() {
+  it("addEmployee() test owner add new employee with valid salary succeed",
+    async function() {
+
     await checkEmployeeNotExist(employeeOneId);
     let totalSalary = await genTotalSalary();
     assert.equal(totalSalary, 0, "initial totalSalary should be 0");
@@ -42,6 +44,18 @@ contract('Payroll', function(accounts) {
     );
   });
 
+  it("addEmployee() test owner add new employee with invalid salary fail",
+    async function() {
+
+    await checkEmployeeNotExist(employeeOneId);
+    let result = await payroll.addEmployee(
+      employeeOneId,
+      invalidSalary,
+      {from: creator},
+    );
+    checkTransactionFail(result);
+  });
+
   it("addEmployee() test owner add existing employee fail", async function() {
     await payroll.addEmployee(employeeOneId, salary, {from: creator});
     await checkEmployeeExist(employeeOneId);
@@ -51,17 +65,6 @@ contract('Payroll', function(accounts) {
 
   it("addEmployee() test owner add 0x0 address fail", async function() {
     let result = await payroll.addEmployee(0x0, salary, {from: creator});
-    checkTransactionFail(result);
-  });
-
-  it("addEmployee() test owner add existing employee with invalid salary fail",
-    async function() {
-
-    let result = await payroll.addEmployee(
-      employeeOneId,
-      invalidSalary,
-      {from: creator},
-    );
     checkTransactionFail(result);
   });
 
@@ -93,7 +96,7 @@ contract('Payroll', function(accounts) {
     checkTransactionFail(result);
   });
 
-  it("removeEmployee() test owner remove existing employee succeed",
+  it("removeEmployee() test owner remove existing employee with enough balance succeed",
     async function() {
 
     let newEmployeeId = web3.personal.newAccount();
@@ -104,37 +107,15 @@ contract('Payroll', function(accounts) {
 
     let addFundResult = await payroll.addFund({value: web3.toWei(salary * 2, "ether")});
     checkTransactionSucceed(addFundResult);
-    let employeeOldBalance = parseFloat(
-      web3.fromWei(web3.eth.getBalance(newEmployeeId), 'ether'),
-      10,
-    );
-    let contractOldBalance = parseFloat(
-      web3.fromWei(web3.eth.getBalance(payroll.address), 'ether'),
-      10,
-    );
+    let employeeOldBalance = getAddressBalance(newEmployeeId);
+    let contractOldBalance = getAddressBalance(payroll.address);
     assert.isAbove(
       contractOldBalance,
       salary,
       "contract should have enough balance to pay the employee",
     );
 
-    // after one pay duration
-    let payDuration = await payroll.payDuration.call();
-    web3.currentProvider.sendAsync({
-      jsonrpc: '2.0',
-      method: 'evm_increaseTime',
-      params: [payDuration.toNumber() + 1], // amount of time to increase in seconds
-      id: 0
-    }, (err, resp) => {
-      if (!err) {
-        web3.currentProvider.send({
-          jsonrpc: '2.0',
-          method: 'evm_mine',
-          params: [],
-          id: 1
-        })
-      }
-    });
+    await genWaitForPayDuration(1);
 
     let result = await payroll.removeEmployee(newEmployeeId, {from: creator});
     checkTransactionSucceed(result);
@@ -147,10 +128,7 @@ contract('Payroll', function(accounts) {
     );
 
     // verify employee balance
-    let employeeNewBalance = parseFloat(
-      web3.fromWei(web3.eth.getBalance(newEmployeeId), 'ether'),
-      10,
-    );
+    let employeeNewBalance = getAddressBalance(newEmployeeId);
     assert.isAbove(
       employeeNewBalance - employeeOldBalance,
       salary,
@@ -163,10 +141,7 @@ contract('Payroll', function(accounts) {
     );
 
     // verify contract balance
-    let contractNewBalance = parseFloat(
-      web3.fromWei(web3.eth.getBalance(payroll.address), 'ether'),
-      10,
-    );
+    let contractNewBalance = getAddressBalance(payroll.address);
     assert.isAbove(
       contractOldBalance - contractNewBalance,
       salary,
@@ -177,6 +152,28 @@ contract('Payroll', function(accounts) {
       salary * 2,
       "Paid amount should be less than two full payment cycle salary",
     );
+  });
+
+  it("removeEmployee() test owner remove existing employee with not enough balance fail",
+    async function() {
+
+    let newEmployeeId = web3.personal.newAccount();
+
+    await payroll.addEmployee(newEmployeeId, salary, {from: creator});
+    await checkEmployeeExist(newEmployeeId);
+
+    let employeeOldBalance = getAddressBalance(newEmployeeId);
+    let contractOldBalance = getAddressBalance(payroll.address);
+    assert.isBelow(
+      contractOldBalance,
+      salary,
+      "contract should not have enough balance to pay the employee",
+    );
+
+    await genWaitForPayDuration(1);
+
+    let result = await payroll.removeEmployee(newEmployeeId, {from: creator});
+    checkTransactionFail(result);
   });
 
   it("removeEmployee() test owner remove non-existing employee fail",
@@ -228,6 +225,34 @@ contract('Payroll', function(accounts) {
   async function genTotalSalary() {
     let totalSalary = await payroll.totalSalary.call();
     return parseInt(web3.fromWei(totalSalary, 'ether'), 10);
+  }
+
+  function getAddressBalance(address) {
+    return parseFloat(
+      web3.fromWei(web3.eth.getBalance(address), 'ether'),
+      10,
+    );
+  }
+
+  async function genWaitForPayDuration(numberOfDuration) {
+    // after one pay duration
+    let payDuration = await payroll.payDuration.call();
+    let timeToIncrease = payDuration.toNumber() * numberOfDuration + 1;
+    web3.currentProvider.sendAsync({
+      jsonrpc: '2.0',
+      method: 'evm_increaseTime',
+      params: [timeToIncrease], // amount of time to increase in seconds
+      id: 0
+    }, (err, resp) => {
+      if (!err) {
+        web3.currentProvider.send({
+          jsonrpc: '2.0',
+          method: 'evm_mine',
+          params: [],
+          id: 1
+        })
+      }
+    });
   }
 
 });
