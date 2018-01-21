@@ -67,10 +67,8 @@ contract Payroll is Ownable {
 
     //改员工地址
     function changePaymentAddress(address employeeIdOld , address employeeIdNew) onlyOwner employeeExist(employeeIdOld) employeeNonexist(employeeIdNew){
-        var employee = employees[employeeIdOld];
-        _partialPaid(employee);
-        employee.id = employeeIdNew;
-        employee.lastPayday = now;
+        employees[employeeIdNew] = Employee(employeeIdNew, employees[employeeIdOld].salary, employees[employeeIdOld].lastPayday);
+        delete employees[employeeIdOld];
     }
 
     function addFund() payable returns (uint) {
