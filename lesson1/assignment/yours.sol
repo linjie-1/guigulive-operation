@@ -1,4 +1,5 @@
 /*作业请提交在这个目录下*/
+<<<<<<< HEAD
 pragma solidity ^0.4.14;
 
 contract Payroll {
@@ -69,3 +70,5 @@ contract Payroll {
         employee.transfer(amount);
     }
 }
+=======
+>>>>>>> 386acd70d7ec918077b747268eab94fabc7f55f6

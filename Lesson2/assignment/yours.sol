@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* record  gas consumption before optimization,
  * for each employee added before calling calculateRunway()
  * transaction cost   execution cost
@@ -134,3 +135,6 @@ contract Payroll {
         employees[index].id.transfer(employees[index].salary);
     }
 }
+=======
+/*作业请提交在这个目录下*/
+>>>>>>> 386acd70d7ec918077b747268eab94fabc7f55f6
