@@ -1,32 +1,27 @@
-/*作业请提交在这个目录下*/
 pragma solidity ^0.4.14;
 
 contract SinglePayeePayroll {
     struct Payee{
         address payeeAddress;
         string payeeName;
-
     }
-    address owner =  0xca35b7d915458ef540ade6068dfe2f44e8fa733c;
     uint salary = 0;
     uint constant payDuration = 30 days;
     uint lastPayday = now;
     Payee payee;
 
     function setPayee(string name, address addr) {
-        if(msg.sender != owner) {
-            revert();
-        }
-        if (payee.payeeAddress != address(0)) {
-            uint shouldPay = salary*(now - lastPayday) / payDuration;
-            lastPayday = now;
-            payee.payeeAddress.transfer(shouldPay);
-        }
-
         payee.payeeName = name;
         payee.payeeAddress = addr;
     }
     
+    function setPayeeName(string name) {
+        payee.payeeName = name;
+    }
+    
+    function setPayeeAddress(address addr) {
+        payee.payeeAddress = addr;        
+    }
     
     function getPayeeAddress() returns (address){
         return payee.payeeAddress;
@@ -37,9 +32,6 @@ contract SinglePayeePayroll {
     }
     
     function setSalary(uint sal) {
-        if(msg.sender != owner) {
-            revert();
-        }
         salary = sal;
     }
     
@@ -67,6 +59,15 @@ contract SinglePayeePayroll {
     }
     
 // tests    
+    function testGetPayeeName() returns (bool) {
+        setPayeeName("Frank");
+        return keccak256(getPayeeName()) == keccak256("Frank");
+    }
+    
+    function testGetPayee() returns(bool){
+        setPayee("Frank", 0xca35b7d915458ef540ade6068dfe2f44e8fa733c);
+        return keccak256(getPayeeName()) == keccak256("Frank") && getPayeeAddress() == 0xca35b7d915458ef540ade6068dfe2f44e8fa733c;
+    }
     
     function testGetSalary() returns (bool) {
         setSalary(10000);
@@ -77,4 +78,6 @@ contract SinglePayeePayroll {
     function test() returns (bool) {
         return 1 wei == 1;
     }
+    
+
 }

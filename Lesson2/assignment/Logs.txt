@@ -1,0 +1,115 @@
+Gas变化记录
+
+AddFund: 100
+
+Original calcRunway:
+10 Employees:
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160c",1
+
+transaction cost  22966 gas 
+ execution cost   1694 gas 
+
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160d",1
+
+  transaction cost  23747 gas 
+ execution cost   2475 gas 
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160e",1
+
+   transaction cost   24528 gas 
+ execution cost   3256 gas 
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160f",1
+
+  transaction cost  25309 gas 
+ execution cost   4037 gas 
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160g",1
+   transaction cost   26090 gas 
+ execution cost   4818 gas 
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160h",1
+
+   transaction cost   26871 gas 
+ execution cost   5599 gas 
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160i",1
+
+    transaction cost      27652 gas 
+ execution cost   6380 gas 
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160j",1
+
+  transaction cost  28433 gas 
+ execution cost   7161 gas 
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160k",1
+
+   transaction cost   29214 gas 
+ execution cost   7942 gas 
+
+  "0x583031d1113ad414f02576bd6afabfb302140225",1
+
+   transaction cost   30776 gas 
+ execution cost   9504 gas 
+
+New calcRunway:
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160c",1
+
+ transaction cost   22124 gas 
+ execution cost   852 gas 
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160d",1
+
+   transaction cost   22124 gas 
+ execution cost   852 gas 
+
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160e",1
+
+transaction cost  22124 gas 
+ execution cost   852 gas 
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160f",1
+ transaction cost   22124 gas 
+ execution cost   852 gas
+
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160g",1
+ transaction cost   22124 gas 
+ execution cost   852 gas 
+
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160h",1
+
+   transaction cost   22124 gas 
+ execution cost   852 gas 
+
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160i",1
+
+   transaction cost   22124 gas 
+ execution cost   852 gas 
+
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160j",1
+
+   transaction cost   22124 gas 
+ execution cost   852 gas 
+
+
+
+  "0x14723a09acff6d2a60dcdf7aa4aff308fddc160k",1
+     transaction cost   22124 gas 
+ execution cost   852 gas 
+
+
+
+  "0x583031d1113ad414f02576bd6afabfb302140225",1
+     transaction cost   22124 gas 
+ execution cost   852 gas 
+
+
+
+
+
