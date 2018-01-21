@@ -1,6 +1,6 @@
 pragma solidity ^0.4.14;
 
-contract Payroll {
+contract Payroll is Ownable{
     struct Employee {
         address id;
         uint salary;
