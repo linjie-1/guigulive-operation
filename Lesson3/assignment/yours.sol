@@ -1,5 +1,3 @@
-/*作业请提交在这个目录下*/
-
 pragma solidity ^0.4.14;
 
 import './SafeMath.sol';
@@ -14,7 +12,7 @@ contract Payroll is Ownable {
     }
     
     modifier employeeExist (address employeeId) {
-        var employee  = employees[msg.sender];
+        var employee  = employees[employeeId];
         assert(employee.id != 0x0);
         _;
     }
@@ -53,12 +51,18 @@ contract Payroll is Ownable {
     
     function updateEmployee(address employeeId, uint salary) onlyOwner employeeExist(employeeId) {
         var employee = employees[employeeId];
-        assert(employee.id != 0x0);
-        _partialPaid(employee);
         totalSalary = totalSalary.sub(employees[employeeId].salary);
         employees[employeeId].salary = salary * 1 ether;
         employees[employeeId].lastPayday = now;
         totalSalary = totalSalary.add(employees[employeeId].salary);
+        return;
+    }
+    
+    function changePaymentAddress(address oldEmployeeAddress, address newEmployeeAddress) onlyOwner employeeExist(oldEmployeeAddress) {
+        var employee = employees[oldEmployeeAddress];
+        assert(newEmployeeAddress != 0x0);
+        employees[newEmployeeAddress] = employee;
+        delete employees[oldEmployeeAddress];
         return;
     }
     
