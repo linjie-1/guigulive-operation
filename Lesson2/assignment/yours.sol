@@ -1,4 +1,4 @@
-/* record  gas consumption before optimization, 
+/* record  gas consumption before optimization,
  * for each employee added before calling calculateRunway()
  * transaction cost   execution cost
  *  22966 gas             1694 gas
@@ -17,7 +17,7 @@
  * That is because we iterate whole employee members on each functional call
  * ===============================================================
  * One optimization is to use state variable totalSalary to record sum of salaries,
- * when add or delete employee members 
+ * when add or delete employee members
  * Therefore, calculateRunway() only need constant computation resource
  * ===============================================================
  * After optimization
@@ -42,25 +42,23 @@ contract Payroll {
         uint salary;
         uint lastPayday;
     }
-    
+
     uint constant payDuration = 10 seconds;
-    uint totalSalary = 0; 
-    
+    uint totalSalary = 0;
+
     address owner;
     Employee[] employees;
 
     function Payroll() {
         owner = msg.sender;
     }
-    
+
     function _partialPaid(Employee employee) private {
         uint payment = employee.salary * (now - employee.lastPayday) / payDuration;
         assert(this.balance >= payment);
-        
-        employee.lastPayday = now; 
         employee.id.transfer(payment);
     }
-    
+
     function _findEmployee(address employeeId) private returns (Employee, uint) {
         for(uint i = 0; i < employees.length; i ++){
             if(employees[i].id == employeeId){
@@ -71,61 +69,63 @@ contract Payroll {
 
     function addEmployee(address employeeId, uint salary) {
         require(msg.sender == owner);
-        
+
         var(employee, index) = _findEmployee(employeeId);
-        assert(employee.id == 0x0); 
-        
+        assert(employee.id == 0x0);
+
         employees.push(Employee(employeeId, salary, now));
         totalSalary += salary;
     }
-    
+
     function removeEmployee(address employeeId) {
         require(msg.sender == owner);
-        
+
         var(employee, index) = _findEmployee(employeeId);
         assert(employee.id != 0x0);
-        
+
         _partialPaid(employees[index]);
         totalSalary -= employees[index].salary;
-        
+
         delete employees[index];
-        
+
         employees[index] = employees[employees.length - 1];
         employees.length --;
     }
-    
+
     function updateEmployee(address employeeId, uint salary) {
         require(msg.sender == owner);
-        
+
         var (employee, index) = _findEmployee(employeeId);
         require(employee.id != 0x0);
-        
+
         _partialPaid(employees[index]);
         uint newSalary = salary * 1 ether;
-        
+
         totalSalary += newSalary - employees[index].salary;
-        
+
         employees[index].salary = newSalary;
-        
+
+        employees[index].lastPayday = now;
+
     }
-    
+
     function addFund() payable returns (uint) {
         require(msg.sender == owner);
         return this.balance;
     }
-    
+
     function calculateRunway() returns (uint) {
         return this.balance / totalSalary;
     }
-    
+
     function hasEnoughFund() returns (bool) {
         return calculateRunway() > 0;
     }
-    
+
     function getPaid() {
         var(employee, index) = _findEmployee(msg.sender);
         require(employee.id != 0x0);
-        
+
         uint nextPayday = employees[index].lastPayday + payDuration;
         assert(nextPayday < now);
         assert(employee.salary <= this.balance);
