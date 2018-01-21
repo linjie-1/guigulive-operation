@@ -27,20 +27,20 @@ L(C) := [C] + merge(L(O), [O])
       = [C] + merge([O], [O])
       = [C, O]
 
-L(K1) := [K1] + merge(L(A), L(B))
-       = [K1] + merge([A, O], [B, O])
-       = [K1, A, B] + merge([O], [O])
-       = [K1, A, B, O]
+L(K1) := [K1] + merge(L(B), L(A))
+       = [K1] + merge([B, O], [A, O], [B, A])
+       = [K1, B, A] + merge([O], [O])
+       = [K1, B, A, O]
 
-L(K2) := [K2] + merge(L(A), L(C))
-       = [K2] + merge([A, O], [C, O])
-       = [K2, A, C] + merge([O], [O])
-       = [K2, A, C, O]
+L(K2) := [K2] + merge(L(C), L(A))
+       = [K2] + merge([C, O], [A, O], [C, A])
+       = [K2, C, A] + merge([O], [O])
+       = [K2, C, A, O]
 
-L(Z) = [Z] + merge(L(K1) + L(K2))
-     = [Z] + merge([K1, A, B, O], [K2, A, C, O])
-     = [Z, K1] + merge([A, B, O], [K2, A, C, O])
-     = [Z, K1, K2] + merge([A, B, O], [A, C, O])
-     = [Z, K1, K2, A] + merge([B, O], [C, O])
-     = [Z, K1, K2, A, B] + merge([O], [C, O])
-     = [Z, K1, K2, A, B, C, O]
+L(Z) := [Z] + merge(L(K2) + L(K1))
+      = [Z] + merge([K2, C, A, O], [K1, B, A, O], [K2, K1])
+      = [Z, K2] + merge([C, A, O], [K1, B, A, O], [K1])
+      = [Z, K2, K1] + merge([C, A, O], [B, A, O])
+      = [Z, K2, K1, C] + merge([A, O], [B, A, O])
+      = [Z, K2, K1, C, B] + merge([A, O], [A O])
+      = [Z, K2, K1, C, B, A, O]
