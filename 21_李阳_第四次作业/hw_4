@@ -18,7 +18,7 @@ contract('Payroll', function(accounts) {
     });
   });
 
-  it("add an employee", function() {
+  it("remove an employee", function() {
     return Payroll.deployed().then(function(instance) {
       payrollInstance = instance;
       return payrollInstance.removeEmployee(accounts[1], {from: accounts[0]});
