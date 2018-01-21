@@ -1,0 +1,45 @@
+## 硅谷live以太坊智能合约 第四课作业
+这里是同学提交作业的目录
+
+1. 在2_deploy_contracts.js 中添加 deploy Payroll
+
+2. 测试文件
+var Payroll = artifacts.require("./Payroll.sol");
+
+contract('Payroll', function(accounts) {
+
+  // test add an Employee
+  it("add an employee", function() {
+    return Payroll.deployed().then(function(instance) {
+      payrollInstance = instance;
+      return payrollInstance.addEmployee(accounts[1], 1, {from: accounts[0]});
+    }).then(function() {
+      assert(true,  "added an employee");      
+    });
+  });
+
+  it("add an employee", function() {
+    return Payroll.deployed().then(function(instance) {
+      payrollInstance = instance;
+      return payrollInstance.removeEmployee(accounts[1], {from: accounts[0]});
+    }).then(function() {
+      assert(true, "removed an employee");
+    });
+  });
+});
+
+
+思考：
+如何覆盖所有的测试路径，包括捕捉测试异常
+？？？不理解覆盖所有测试路径的意思
+捕捉测试异常：
+it("add an employee", function() {
+    return Payroll.deployed().then(function(instance) {
+      payrollInstance = instance;
+      return payrollInstance.removeEmployee(accounts[1], {from: accounts[1]});
+    }).catch(function(error) {
+      assert(error.toString().includes('invalid'), "add employee failed");
+    });
+  });
+
+
