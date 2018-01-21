@@ -1,0 +1,78 @@
+Before Optimization:
+
+1st Call of Add
+Transaction cost 103990 gas
+Execution cost 82334 gas
+1st Call of Runway
+Transaction cost 22966 gas
+Execution cost 1694 gas
+
+2nd Call of Add
+Transaction cost 89831 gas
+Execution cost 68175 gas
+2nd Call of Runway
+Transaction cost 23747 gas
+Execution cost 2475 gas
+
+3rd Call of Add
+Transaction cost 90672 gas
+Execution cost 69016 gas
+3rd Call of Runway
+Transaction cost 24528  gas
+Execution cost 3256 gas
+
+4th Call of Add
+Transaction cost 91513 gas
+Execution cost 69857 gas
+4th Call of Runway
+Transaction cost 25309  gas
+Execution cost 4037 gas
+
+5th Call of Add
+Transaction cost 92354 gas
+Execution cost 70698 gas
+5th Call of Runway
+Transaction cost 26090  gas
+Execution cost 4818 gas
+
+6th Call of Add
+Transaction cost 93195 gas
+Execution cost 71539 gas
+6th Call of Runway
+Transaction cost 26871  gas
+Execution cost 5599 gas
+
+7th Call of Add
+Transaction cost 94036 gas
+Execution cost 72380 gas
+7th Call of Runway
+Transaction cost 27652  gas
+Execution cost 6380 gas
+
+8th Call of Add
+Transaction cost 94877 gas
+Execution cost 73221 gas
+8th Call of Runway
+Transaction cost 28433  gas
+Execution cost 7161 gas
+
+9th Call of Add
+Transaction cost 95718 gas
+Execution cost 74062 gas
+9th Call of Runway
+Transaction cost 29214  gas
+Execution cost 7942 gas
+
+10th Call of Add
+Transaction cost 96559 gas
+Execution cost 74903 gas
+10th Call of Runway
+Transaction cost 29995  gas
+Execution cost 8723 gas
+
+Conclusion:
+在每一次call calculateRunway 之后 transaction cost 和 execution cost 都有增加 781 gas
+原因是在数组中又新增加了一个成员，遍历的时候增加了成本。
+
+如何优化：
+减少对内存的占用，可以把employee变成storage 类型变量
