@@ -58,7 +58,7 @@ contract Payroll is Ownable{
     employees[employeeAddr].salary = salary * 1 ether;
     employees[employeeAddr].lastPayday = now;
   }
-  
+
   function changePaymentAddr(address paymentAddr) public validEmployee {
       var employee = employees[msg.sender];
       employee.paymentAddr = paymentAddr;
@@ -95,5 +95,4 @@ contract Payroll is Ownable{
 
     employees[msg.sender].lastPayday = nextPayday;
     employees[msg.sender].paymentAddr.transfer(employee.salary);
-  }
 }
