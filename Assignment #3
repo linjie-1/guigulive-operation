@@ -13,7 +13,6 @@ contract Payroll is Ownable {
     uint constant payDuration = 10 seconds;
     
     uint totalSalary = 0 ether; 
-    address owner;
     mapping(address => Employee) public employees;
     
     modifier employeeExist (address employeeId){
