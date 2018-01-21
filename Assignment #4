@@ -1,0 +1,26 @@
+pragma solidity ^0.4.14;
+
+import "truffle/Assert.sol";
+import "truffle/DeployedAddresses.sol";
+import "../contracts/payroll.sol";
+
+contract TestPayroll {
+
+  function testTotalSalary() public {
+    payroll payrolltest = payroll(DeployedAddresses.payroll());
+
+    address employeeId = 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c;
+  
+    payrolltest.addEmployee(employeeId,1);
+
+    Assert.equal(employees[employeeId].id, employeeId, "The employee has been added.");
+    uint expectedSalary1 = 1 ether;
+    Assert.equal(totalSalary, expectedSalary1, "It should store the value 1.");
+
+    payrolltest.removeEmployee(employeeId);
+
+    Assert.equal(employees[employeeId].id, "0x0", "The employee has been removed.");
+    uint expectedSalary2 = 0 ether;
+    Assert.equal(totalSalary, expectedSalary2, "It should store the value 0.");
+  }
+
