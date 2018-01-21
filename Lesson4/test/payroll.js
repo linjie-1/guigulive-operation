@@ -5,6 +5,7 @@ contract('Payroll', function(accounts) {
   let payroll;
   const creator = accounts[0];
   const employeeOneId = accounts[1];
+  const employeeTwoId = accounts[2];
   const salary = 1;
   const invalidSalary = -1;
 
@@ -107,13 +108,11 @@ contract('Payroll', function(accounts) {
 
     let addFundResult = await payroll.addFund({value: web3.toWei(salary * 2, "ether")});
     checkTransactionSucceed(addFundResult);
+    let hasEnoughFund = await payroll.hasEnoughFund.call();
+    assert.equal(hasEnoughFund, true, "should have enough fund");
+
     let employeeOldBalance = getAddressBalance(newEmployeeId);
     let contractOldBalance = getAddressBalance(payroll.address);
-    assert.isAbove(
-      contractOldBalance,
-      salary,
-      "contract should have enough balance to pay the employee",
-    );
 
     await genWaitForPayDuration(1);
 
@@ -154,7 +153,7 @@ contract('Payroll', function(accounts) {
     );
   });
 
-  it("removeEmployee() test owner remove existing employee with not enough balance fail",
+  it("removeEmployee() test owner remove existing employee without enough balance fail",
     async function() {
 
     let newEmployeeId = web3.personal.newAccount();
@@ -162,13 +161,8 @@ contract('Payroll', function(accounts) {
     await payroll.addEmployee(newEmployeeId, salary, {from: creator});
     await checkEmployeeExist(newEmployeeId);
 
-    let employeeOldBalance = getAddressBalance(newEmployeeId);
-    let contractOldBalance = getAddressBalance(payroll.address);
-    assert.isBelow(
-      contractOldBalance,
-      salary,
-      "contract should not have enough balance to pay the employee",
-    );
+    let hasEnoughFund = await payroll.hasEnoughFund.call();
+    assert.equal(hasEnoughFund, false, "should not have enough fund");
 
     await genWaitForPayDuration(1);
 
@@ -198,6 +192,66 @@ contract('Payroll', function(accounts) {
 
     await checkEmployeeNotExist(employeeOneId);
     let result = await payroll.removeEmployee(employeeOneId, {from: employeeOneId});
+    checkTransactionFail(result);
+  });
+
+  it("getPaid() test employee exist and pay eligible with enough balance succeed",
+    async function() {
+
+    await payroll.addEmployee(employeeTwoId, salary, {from: creator});
+    await checkEmployeeExist(employeeTwoId);
+
+    await genWaitForPayDuration(1);
+
+    let addFundResult = await payroll.addFund({value: web3.toWei(salary * 2, "ether")});
+    checkTransactionSucceed(addFundResult);
+    let hasEnoughFund = await payroll.hasEnoughFund.call();
+    assert.equal(hasEnoughFund, true, "should have enough fund");
+
+    let employeeOldBalance = getAddressBalance(employeeTwoId);
+    let contractOldBalance = getAddressBalance(payroll.address);
+
+    let result = await payroll.getPaid({from: employeeTwoId});
+    checkTransactionSucceed(result);
+
+    // verify employee balance
+    let employeeNewBalance = getAddressBalance(employeeTwoId);
+    assert.isAbove(employeeNewBalance, employeeOldBalance, "Should get paid");
+
+    // verify contract balance
+    let contractNewBalance = getAddressBalance(payroll.address);
+    assert.isBelow(
+      contractNewBalance,
+      contractOldBalance,
+      "Contract balance should have decreased",
+    );
+  });
+
+  it("getPaid() test employee not exist fail", async function() {
+    await checkEmployeeNotExist(employeeOneId);
+    let result = await payroll.getPaid({from: employeeOneId});
+    checkTransactionFail(result);
+  });
+
+  it("getPaid() test employee exist but too early fail", async function() {
+    await payroll.addEmployee(employeeOneId, salary, {from: creator});
+    await checkEmployeeExist(employeeOneId);
+    let result = await payroll.getPaid({from: employeeOneId});
+    checkTransactionFail(result);
+  });
+
+  it("getPaid() test employee exist and pay eligible w/o enough balance fail",
+    async function() {
+
+    await payroll.addEmployee(employeeOneId, salary, {from: creator});
+    await checkEmployeeExist(employeeOneId);
+
+    await genWaitForPayDuration(1);
+
+    let hasEnoughFund = await payroll.hasEnoughFund.call();
+    assert.equal(hasEnoughFund, false, "should not have enough fund");
+
+    let result = await payroll.getPaid({from: employeeOneId});
     checkTransactionFail(result);
   });
 
@@ -234,6 +288,7 @@ contract('Payroll', function(accounts) {
     );
   }
 
+  // wait for numberOfDuration of duration plus 1 second
   async function genWaitForPayDuration(numberOfDuration) {
     // after one pay duration
     let payDuration = await payroll.payDuration.call();
