@@ -101,20 +101,29 @@ contract('Payroll', function(accounts) {
     async function() {
 
     let newEmployeeId = web3.personal.newAccount();
+    const workNumOfDuration = 1.5;
+    const epsilon = 0.2;
+    const initialFundPayNumOfDuration = workNumOfDuration + 0.5;
 
     await payroll.addEmployee(newEmployeeId, salary, {from: creator});
     await checkEmployeeExist(newEmployeeId);
     let totalSalary = await genTotalSalary();
 
-    let addFundResult = await payroll.addFund({value: web3.toWei(salary * 2, "ether")});
+    let addFundResult = await payroll.addFund(
+      {value: web3.toWei(salary * initialFundPayNumOfDuration, "ether")},
+    );
     checkTransactionSucceed(addFundResult);
-    let hasEnoughFund = await payroll.hasEnoughFund.call();
-    assert.equal(hasEnoughFund, true, "should have enough fund");
+    let initialRunway = await genCalculateRunway();
+    assert.equal(
+      initialRunway,
+      initialFundPayNumOfDuration,
+      "should have " + initialRunway + " runway",
+    );
 
     let employeeOldBalance = getAddressBalance(newEmployeeId);
     let contractOldBalance = getAddressBalance(payroll.address);
 
-    await genWaitForPayDuration(1);
+    await genWaitForNumOfPayDuration(workNumOfDuration);
 
     let result = await payroll.removeEmployee(newEmployeeId, {from: creator});
     checkTransactionSucceed(result);
@@ -126,30 +135,31 @@ contract('Payroll', function(accounts) {
       "totalSalary should be decreased",
     );
 
-    // verify employee balance
+    // verify employee balance should increase by a little bit less than
+    // [salary * workNumOfDuration]
+    // Note: newEmployeeId call getPaid() also cost some gas
+    // Note2: this test only works with the assumption that paid salary is
+    // much large than the gas cost
+    // Note 3: partial pay might lose precision in solidity for the division
+    // operation
     let employeeNewBalance = getAddressBalance(newEmployeeId);
     assert.isAbove(
       employeeNewBalance - employeeOldBalance,
-      salary,
-      "Partial paid amount should be a little bit over one full payment cycle salary",
+      salary * (workNumOfDuration - epsilon),
+      "Verify partial paid amount part 1 failed",
     );
     assert.isBelow(
       employeeNewBalance - employeeOldBalance,
-      salary * 2,
-      "Partial paid amount should be less than two full payment cycle salary",
+      salary * (workNumOfDuration + epsilon),
+      "Verify partial paid amount part 2 failed",
     );
 
     // verify contract balance
     let contractNewBalance = getAddressBalance(payroll.address);
-    assert.isAbove(
+    assert.equal(
       contractOldBalance - contractNewBalance,
-      salary,
+      salary * workNumOfDuration,
       "Paid amount should be a little bit over one full payment cycle salary",
-    );
-    assert.isBelow(
-      contractOldBalance - contractNewBalance,
-      salary * 2,
-      "Paid amount should be less than two full payment cycle salary",
     );
   });
 
@@ -164,7 +174,7 @@ contract('Payroll', function(accounts) {
     let hasEnoughFund = await payroll.hasEnoughFund.call();
     assert.equal(hasEnoughFund, false, "should not have enough fund");
 
-    await genWaitForPayDuration(1);
+    await genWaitForNumOfPayDuration(1);
 
     let result = await payroll.removeEmployee(newEmployeeId, {from: creator});
     checkTransactionFail(result);
@@ -198,15 +208,15 @@ contract('Payroll', function(accounts) {
   it("getPaid() test employee exist and pay eligible with enough balance succeed",
     async function() {
 
-    const payDuration = 2;
+    const workNumOfDuration = 2;
 
     await payroll.addEmployee(employeeTwoId, salary, {from: creator});
     await checkEmployeeExist(employeeTwoId);
 
-    await genWaitForPayDuration(payDuration);
+    await genWaitForNumOfPayDuration(workNumOfDuration);
 
     let addFundResult = await payroll.addFund(
-      {value: web3.toWei(salary * payDuration, "ether")},
+      {value: web3.toWei(salary * workNumOfDuration, "ether")},
     );
     checkTransactionSucceed(addFundResult);
     let hasEnoughFund = await payroll.hasEnoughFund.call();
@@ -288,7 +298,7 @@ contract('Payroll', function(accounts) {
     await payroll.addEmployee(employeeOneId, salary, {from: creator});
     await checkEmployeeExist(employeeOneId);
 
-    await genWaitForPayDuration(1);
+    await genWaitForNumOfPayDuration(1);
 
     let hasEnoughFund = await payroll.hasEnoughFund.call();
     assert.equal(hasEnoughFund, false, "should not have enough fund");
@@ -330,11 +340,10 @@ contract('Payroll', function(accounts) {
     );
   }
 
-  // wait for numberOfDuration of duration plus 1 second
-  async function genWaitForPayDuration(numberOfDuration) {
+  async function genWaitForNumOfPayDuration(numberOfDuration) {
     // after one pay duration
     let payDuration = await payroll.payDuration.call();
-    let timeToIncrease = payDuration.toNumber() * numberOfDuration + 1;
+    let timeToIncrease = payDuration.toNumber() * numberOfDuration;
     web3.currentProvider.sendAsync({
       jsonrpc: '2.0',
       method: 'evm_increaseTime',
@@ -350,6 +359,11 @@ contract('Payroll', function(accounts) {
         })
       }
     });
+  }
+
+  async function genCalculateRunway() {
+    let runway = await payroll.calculateRunway.call();
+    return runway.toNumber()
   }
 
 });
