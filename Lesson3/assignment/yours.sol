@@ -4,7 +4,7 @@ pragma solidity ^0.4.14;
 import './SafeMath.sol';
 import './Ownable.sol';
 
-contract tenemployees is Ownable{
+contract payroll is Ownable{
     
     using SafeMath for uint;
     
@@ -15,6 +15,7 @@ contract tenemployees is Ownable{
     }
     
     uint salarysum=0;
+    uint ta;
     uint payduration=10 seconds;
     address owner;
     mapping (address => employee) public es;
@@ -39,6 +40,7 @@ contract tenemployees is Ownable{
         es[newid] = e;
         
     }
+
     function _partialPaid(employee e) private {
          uint payment = e.salary.mul (now - e.lastpayday) .div(payduration);
          e.id.transfer(payment);
@@ -61,7 +63,11 @@ contract tenemployees is Ownable{
         salarysum = salarysum.sub(e.salary);
         delete(es[id]);
          }
-
+    
+  /*  function t(uint a){
+        ta = a;
+    }
+*/
     
     function calcruanaway() returns(uint){
       
@@ -72,10 +78,12 @@ contract tenemployees is Ownable{
     function showsum() returns (uint){
         return salarysum;
     }
-    function addemployee(address a) onlyOwner {
-        uint salary = 1  ether;
+    function addemployee(address a,uint s) onlyOwner returns (bool){
+        if (es[a].id != 0x0) return false;
+        uint salary = s*1  ether;
         es[a] = employee(a,salary ,now);
         salarysum = salarysum.add(es[a].salary);
+        return true;
         
     }
     
@@ -88,7 +96,7 @@ contract tenemployees is Ownable{
         
         
     }
- 
+/* 
     function adde() returns (uint){
         addemployee(0x583031d1113ad414f02576bd6afabfb302140221);
         addemployee(0x583031d1113ad415f02576bd6afabfb302140222);
@@ -105,4 +113,5 @@ contract tenemployees is Ownable{
         return salarysum;
         
     }
+    */
 }
