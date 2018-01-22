@@ -54,12 +54,17 @@ contract('TestPayroll', function(accounts) {
 
   //     let waitPaid = new Promise(function(resolve, reject) {
   //       setTimeout(function(PayrollInstance) {
-  //         PayrollInstance.addEmployee(accounts[3], testSalary, {from: owner});
+  //         PayrollInstance.getPaid({from: accounts[2]});
   //         resolve(PayrollInstance.employees(accounts[2]));
-  //       }, 5000)
+  //       }, 11000)
   //     });
   //     return waitPaid;
+  //     // return waitPaid;
+  //     // sleep(10);
+  //     //return PayrollInstance.employees(accounts[2]);
   //   }).then(function(employee) {
+  //     // assert.(deleteEmployee[0], 0x00);
+  //     assert( employee[1] > initBalance)
   //   }).catch(function(error) {
   //     console.log(error)
   //   });
