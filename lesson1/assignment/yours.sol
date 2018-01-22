@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-# homework1
->>>>>>> 15f22fd4ee2df7d6048b764d5794f999dc23a881
 pragma solidity ^0.4.14;
 
 contract Payroll {
@@ -9,22 +5,13 @@ contract Payroll {
 
     address owner;
     uint salary;
-<<<<<<< HEAD
     address employee = 0x0;
     uint lastPayday = now;
 
-=======
-    address employee;
-    uint lastPayday;
-    
-// use update employee function to update employee information, and also checking if the account is the owner.
-    
->>>>>>> 15f22fd4ee2df7d6048b764d5794f999dc23a881
     function Payroll() {
         owner = msg.sender;
     }
     
-<<<<<<< HEAD
     //update employee
     function updateEmployee(address e) {
         require(msg.sender == owner);
@@ -57,19 +44,6 @@ contract Payroll {
             employee.transfer(payment);
             lastPayday = now;
         }
-=======
-    function updateEmployee(address e, uint s) {
-        require(msg.sender == owner);
-        
-        if (employee != 0x0) {
-            uint payment = salary * (now - lastPayday) / payDuration;
-            employee.transfer(payment);
-        }
-        
-        employee = e;
-        salary = s * 1 ether;
-        lastPayday = now;
->>>>>>> 15f22fd4ee2df7d6048b764d5794f999dc23a881
     }
     
     function addFund() payable returns (uint) {
