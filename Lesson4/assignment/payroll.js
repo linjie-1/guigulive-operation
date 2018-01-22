@@ -14,6 +14,7 @@ contract('Payroll', function(accounts) {
             assert(true, "pass");
         })
     });
+    
     it("should prevent non-owner from calling addEmployee", function() {
         Payroll.deployed().then(function(instance) {
             return instance.addEmployee(accounts[2],2,{from:accounts[2]});
