@@ -156,10 +156,15 @@ contract('Payroll', function(accounts) {
 
     // verify contract balance
     let contractNewBalance = getAddressBalance(payroll.address);
-    assert.equal(
+    assert.isAbove(
       contractOldBalance - contractNewBalance,
-      salary * workNumOfDuration,
-      "Paid amount should be a little bit over one full payment cycle salary",
+      salary * (workNumOfDuration - epsilon),
+      "Verify contract balance part 1 failed ",
+    );
+    assert.isBelow(
+      contractOldBalance - contractNewBalance,
+      salary * (workNumOfDuration + epsilon),
+      "Verify contract balance part 2 failed",
     );
   });
 
