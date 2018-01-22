@@ -2,7 +2,8 @@
 *.json
 *.png
 *.zip
-Lesson4/node_modules/*
 Lesson4/build/*
 Lesson4/config/*
+Lesson4/node_modules/*
+Lesson4/scripts/*
 Lesson4/src/fonts/*
