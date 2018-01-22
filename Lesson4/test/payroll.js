@@ -198,32 +198,74 @@ contract('Payroll', function(accounts) {
   it("getPaid() test employee exist and pay eligible with enough balance succeed",
     async function() {
 
+    const payDuration = 2;
+
     await payroll.addEmployee(employeeTwoId, salary, {from: creator});
     await checkEmployeeExist(employeeTwoId);
 
-    await genWaitForPayDuration(1);
+    await genWaitForPayDuration(payDuration);
 
-    let addFundResult = await payroll.addFund({value: web3.toWei(salary * 2, "ether")});
+    let addFundResult = await payroll.addFund(
+      {value: web3.toWei(salary * payDuration, "ether")},
+    );
     checkTransactionSucceed(addFundResult);
     let hasEnoughFund = await payroll.hasEnoughFund.call();
     assert.equal(hasEnoughFund, true, "should have enough fund");
 
-    let employeeOldBalance = getAddressBalance(employeeTwoId);
-    let contractOldBalance = getAddressBalance(payroll.address);
+    // 1. first time get paid
+    let employeeInitialBalance = getAddressBalance(employeeTwoId);
+    let contractInitialBalance = getAddressBalance(payroll.address);
+    let getPaidFirstResult = await payroll.getPaid({from: employeeTwoId});
+    checkTransactionSucceed(getPaidFirstResult);
 
-    let result = await payroll.getPaid({from: employeeTwoId});
-    checkTransactionSucceed(result);
+    // verify employee balance increased
+    let employeeFirstBalance = getAddressBalance(employeeTwoId);
+    assert.isAbove(
+      employeeFirstBalance,
+      employeeInitialBalance,
+      "Should get paid first time",
+    );
+
+    // verify contract balance decreased by one salary
+    let contractFirstBalance = getAddressBalance(payroll.address);
+    assert.equal(
+      contractInitialBalance - salary,
+      contractFirstBalance,
+      "Contract balance should have decreased by one salary",
+    );
+
+    hasEnoughFund = await payroll.hasEnoughFund.call();
+    assert.equal(
+      hasEnoughFund,
+      true,
+      "should still have enough fund after first time get paid",
+    );
+
+    // 2. second time get paid
+    let getPaidSecondResult = await payroll.getPaid({from: employeeTwoId});
+    checkTransactionSucceed(getPaidSecondResult);
 
     // verify employee balance
-    let employeeNewBalance = getAddressBalance(employeeTwoId);
-    assert.isAbove(employeeNewBalance, employeeOldBalance, "Should get paid");
+    let employeeSecondBalance = getAddressBalance(employeeTwoId);
+    assert.isAbove(
+      employeeSecondBalance,
+      employeeFirstBalance,
+      "Should get paid second time",
+    );
 
-    // verify contract balance
-    let contractNewBalance = getAddressBalance(payroll.address);
-    assert.isBelow(
-      contractNewBalance,
-      contractOldBalance,
+    // verify contract balance decreased by one salary
+    let contractSecondBalance = getAddressBalance(payroll.address);
+    assert.equal(
+      contractFirstBalance - salary,
+      contractSecondBalance,
       "Contract balance should have decreased",
+    );
+
+    hasEnoughFund = await payroll.hasEnoughFund.call();
+    assert.equal(
+      hasEnoughFund,
+      false,
+      "should not have enough fund after second time get paid",
     );
   });
 
