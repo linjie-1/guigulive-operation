@@ -79,7 +79,7 @@ class EmployeeList extends Component {
                 salary: web3.fromWei(value[1].toNumber()),
                 lastPaidDay: new Date(value[2].toNumber() * 1000).toString()
             }));
-            console.log(employees);
+
             this.setState({
                 employees, 
                 loading: false
