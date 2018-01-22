@@ -5,14 +5,14 @@ import "truffle/DeployedAddresses.sol";
 import "../contracts/Payroll.sol";
 import "../contracts/Owner.sol";
 
-contract TestSimpleStorage is Payroll {
+contract TestPayroll is Payroll {
   address testEmployeeId = 0x1166fdf965cdd024bf6e7c520dc0f3ff3ec94d19;
   uint testSalary = 1 ether;
 
   function testAddEmployeeFunc() public {
     addEmployee(testEmployeeId, 1);
 
-    Assert.equal(employees[testEmployeeId].salary, testSalary, "It should scary the value 1.");
+    Assert.equal(employees[testEmployeeId].salary, testSalary, "It should scary the value 1 ether.(.sol)");
   }
 
   function testRemoveEmployeeFunc() public {

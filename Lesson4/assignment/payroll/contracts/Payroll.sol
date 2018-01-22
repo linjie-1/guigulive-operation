@@ -13,7 +13,7 @@ contract Payroll is Owner {
 
     uint constant payDuration = 10 seconds;
     address owner;
-    mapping (address => Employee) employees;
+    mapping (address => Employee) public employees;
     uint totalSalary = 0;
 
     modifier employeeExist(address employeeId) {
@@ -73,7 +73,7 @@ contract Payroll is Owner {
       return calculateRunway() > 0;
     }
 
-    function getPaid() employeeExist(msg.sender) {
+    function getPaid() public employeeExist(msg.sender) {
       var employee = employees[msg.sender];
 
       uint nextPayday = employee.lastPayday + payDuration;
