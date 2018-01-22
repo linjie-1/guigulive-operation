@@ -3,7 +3,8 @@ pragma solidity ^0.4.14;
 import "github.com/OpenZeppelin/zeppelin-solidity/contracts/math/SafeMath.sol"
 import "github.com/OpenZeppelin/zeppelin-solidity/contracts/ownership/Ownable.sol"
 
-contract Payroll {
+contract Payroll is Ownable{
+    using SafeMath for uint;
     uint constant payDuration = 10 seconds;
     struct Employee {
         address id;
@@ -20,7 +21,7 @@ contract Payroll {
     }
     
     function _partialPaid(Employee employee) private {
-        uint leftPayment = employee.salary.mul((now.sub(employee.lastPayday)).div(payDuration))
+        uint leftPayment = employee.salary.mul(now.sub(employee.lastPayday).div(payDuration));
         employee.id.transfer(leftPayment);
     }
 
@@ -37,18 +38,18 @@ contract Payroll {
         require(employee.id != 0x0);
         _partialPaid(employee);
         delete(employees[employeeId]);
-        totalSalary = SafeMath.sub(totalSalary, employee.salary); 
+        totalSalary = totalSalary.sub(employee.salary); 
     }
     
     function updateEmployee(address employeeId, uint salary) onlyOwner {
         Employee employee = employees[employeeId];
         require(employee.id != 0x0);
         _partialPaid(employee);
-        totalSalary = SafeMath.sub(totalSalary, employee.salary); 
+        totalSalary = totalSalary.sub(employee.salary); 
         employees[employeeId].lastPayday = now;
         employees[employeeId].id = employeeId;
         employees[employeeId].salary = salary * 1 ether;
-        totalSalary = SafeMath.add(totalSalary, employees[employeeId].salary); 
+        totalSalary = totalSalary.add(employees[employeeId].salary); 
     }
     
     function addFund() payable returns (uint) {
@@ -67,7 +68,7 @@ contract Payroll {
         Employee employee = employees[msg.sender];
         require(employee.id != 0x0);
         
-        uint nextPayDay = SafeMath.add(employee.lastPayday, payDuration);
+        uint nextPayDay = employee.lastPayday.add(payDuration);
         require(nextPayDay <= now);
         employees[msg.sender].lastPayday = nextPayDay;
         employee.id.transfer(employee.salary);
