@@ -6,6 +6,7 @@
 - 在test文件夹中，写出对如下两个函数的单元测试：
 - function addEmployee(address employeeId, uint salary) onlyOwner
 - function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId)
+  * please see [payroll/test/payroll.js](payroll/test/payroll.js)
 - 思考一下我们如何能覆盖所有的测试路径，包括函数异常的捕捉
 - (加分题,选作）
 - 写出对以下函数的基于solidity或javascript的单元测试 function getPaid() employeeExist(msg.sender)
