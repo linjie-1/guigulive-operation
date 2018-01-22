@@ -72,5 +72,4 @@ contract('Payroll', (accounts) => {
 
   });
 
-
 });
