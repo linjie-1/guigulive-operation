@@ -8,10 +8,12 @@ contract Testpayroll is  payroll{
   function testaddEmployee() public {
     payroll payRoll = payroll(DeployedAddresses.payroll());
 
-    addemployee(0x583031d1113ad415f02576bd6afabfb302140223,1);
+    bool addcheck = addemployee(0x583031d1113ad415f02576bd6afabfb302140223,1);
 
     uint expectedsalary = 1 ether ;
     address expectedid = 0x583031d1113ad415f02576bd6afabfb302140223;
+    
+    Assert.equal(addcheck, true, "the employee is already added.");
 
     Assert.equal(es[expectedid].salary, expectedsalary, "the employee added and the salary is 1 ether.");
   }
