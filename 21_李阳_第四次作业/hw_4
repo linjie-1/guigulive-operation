@@ -1,7 +1,7 @@
 ## 硅谷live以太坊智能合约 第四课作业
 这里是同学提交作业的目录
 
-1. 在2_deploy_contracts.js 中添加 deploy Payroll
+1. 在2_deploy_contracts.js 中添加内容
 
 2. 测试文件
 var Payroll = artifacts.require("./Payroll.sol");
