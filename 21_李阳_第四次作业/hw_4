@@ -8,6 +8,16 @@ var Payroll = artifacts.require("./Payroll.sol");
 
 contract('Payroll', function(accounts) {
 
+  // test add fund
+  it("add fund to contract", function() {
+    return Payroll.deployed().then(function (instance) {
+      payrollInstance = instance;
+      return payrollInstance.addFund({value: web3.toWei(10)});
+    }).then(function(){
+      assert(true, "add fund successfully");
+    });
+  });
+
   // test add an Employee
   it("add an employee", function() {
     return Payroll.deployed().then(function(instance) {
@@ -21,7 +31,7 @@ contract('Payroll', function(accounts) {
   it("remove an employee", function() {
     return Payroll.deployed().then(function(instance) {
       payrollInstance = instance;
-      return payrollInstance.removeEmployee(accounts[1], {from: accounts[0]});
+      return payrollInstance.removeEmployee(accounts[1]);
     }).then(function() {
       assert(true, "removed an employee");
     });
