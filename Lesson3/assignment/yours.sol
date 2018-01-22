@@ -33,10 +33,12 @@ contract tenemployees is Ownable{
     }
     
     function changePaymentAddress(address oldid,address newid) onlyOwner notVoid(oldid) notVoid(newid) {
-        es[oldid].id = newid;
+        employee e = es[oldid];
+        e.id = newid;
+        delete (es[oldid]);
+        es[newid] = e;
         
     }
-
     function _partialPaid(employee e) private {
          uint payment = e.salary.mul (now - e.lastpayday) .div(payduration);
          e.id.transfer(payment);
