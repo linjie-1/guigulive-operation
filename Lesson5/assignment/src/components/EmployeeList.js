@@ -91,21 +91,21 @@ class EmployeeList extends Component {
     const address = this.state.address
     const salary = this.state.salary
     payroll.addEmployee(address, salary, {from: account, gas: 1000000}).then(result => {
-      this.forceUpdate()
+      alert("addEmployee success")
     })
   }
 
   updateEmployee = (address, salary) => {
     const { payroll, account, web3} = this.props;
     payroll.updateEmployee(address, salary, {from: account, gas: 1000000}).then(result => {
-      this.forceUpdate()
+      alert("updateEmployee success")
     })
   }
 
   removeEmployee = (employeeIndex) => {
     const { payroll, account, web3} = this.props;
     payroll.removeEmployee(employeeIndex, {from: account, gas: 1000000}).then(result => {
-      this.forceUpdate()
+      alert("removeEmployee success")
     })
   }
 
