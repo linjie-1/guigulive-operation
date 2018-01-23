@@ -71,7 +71,7 @@ class Employer extends Component {
                         <input type="text" placeholder="salary" ref={(input) => { this.salaryInput = input; }} />
 
                         <button type="button" className="pure-button" onClick={this.addEmployee}>Add</button>
-                        <button type="button" className="pure-button" onClick={this.updateEmployee}>Update</button>
+                        <button type="button" className="pure-button" onClick={this.updateSalary}>Update</button>
                     </fieldset>
                 </form>
 
