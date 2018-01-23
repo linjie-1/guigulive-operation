@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Card, Col, Row } from 'antd'
 
 class Common extends Component {
     constructor(props) {
@@ -8,6 +9,31 @@ class Common extends Component {
     }
 
     componentDidMount() {
+        const { payroll, web3 } = this.props;
+        //const updateInfo = (error, result) => {
+        //    if (!error) {
+        //        this.checkInfo();
+        //    }
+        //}
+
+        //this.addFund        = payroll.addFund(updateInfo);
+        //this.getPaid        = payroll.getPaid(updateInfo);
+        //this.newEmployee    = payroll.addEmployee(updateInfo);
+        //this.updateEmployee = payroll.updateEmployee(updateInfo);
+        //this.removeEmployee = payroll.removeEmployee(updateInfo);
+
+        this.checkInfo();
+    }
+
+    componentWillUnmount() {
+        //this.addFund.stopWatching();
+        //this.getPaid.stopWatching();
+        //this.newEmployee.stopWatching();
+        //this.updateEmployee.stopWatching();
+        //this.removeEmployee.stopWatching();
+    }
+
+    checkInfo = () => {
         const { payroll, account, web3 } = this.props;
         payroll.checkInfo.call({
             from: account,
@@ -24,10 +50,18 @@ class Common extends Component {
         const { runway, balance, employeeCount } = this.state;
         return (
             <div>
-                <h2>common information</h2>
-                <p>Balance: {balance}</p>
-                <p>employeeCount: {employeeCount}</p>
-                <p>runway: {runway}</p>
+                <h2>通用信息</h2>
+                <Row gutter={16}>
+                    <Col span={8}>
+                        <Card title="合约金额">{balance} Ether</Card>
+                    </Col>
+                    <Col span={8}>
+                        <Card title="员工人数">{employeeCount}</Card>
+                    </Col>
+                    <Col span={8}>
+                        <Card title="可支付次数">{runway}</Card>
+                    </Col>
+                </Row>
             </div>
         );
     }
