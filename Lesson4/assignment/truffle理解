@@ -1,0 +1,34 @@
+1.
+Truffle 的command line 功能
+为什么要用Truffle，Truffle的基本概念
+首先对客户端做了深度集成。开发，测试，部署一行命令都可以搞定。不用再记那么多环境地址，繁重的配置更改，及记住诸多的命令。
+它提供了一套类似maven或gradle这样的项目构建机制，能自动生成相关目录，默认是基于Web的。当前这个打包机制是自定义的，比较简陋，不与当前流行打包方案兼容。但自已称会弃用，与主流兼容，好在它也支持自定义打包流程。
+提供了合约抽象接口，可以直接通过var meta = MetaCoin.deployed();拿到合约对象后，在Javascript中直接操作对应的合约函数。原理是使用了基于web3.js封装的Ether Pudding工具包。简化开发流程。
+提供了控制台，使用框架构建后，可以直接在命令行调用输出结果，可极大方便开发调试。
+提供了监控合约，配置变化的自动发布，部署流程。不用每个修改后都重走整个流程。
+2.Truffle 的command line 功能
+A.可以部署合约
+B.调用合约
+C.查看账户
+D.查看账户余额
+E.创建账户
+F.以太坊钱包转账等等。。。
+3.初始化项目与Truffle项目目录结构
+运行初始化命令:truffle init
+目录生成如下文件：
+drwxrwxr-x  2 juicebox juicebox 4096 Jan 23 03:15 contracts/
+drwxrwxr-x  2 juicebox juicebox 4096 Jan 23 03:15 migrations/
+drwxrwxr-x  2 juicebox juicebox 4096 Jan 23 03:15 test/
+-rw-rw-r--  1 juicebox juicebox  135 Jan 23 03:15 truffle-config.js
+-rw-rw-r--  1 juicebox juicebox  135 Jan 23 03:15 truffle.js
+4.编译部署合约到testrpc
+1.安装testrpc npm install -g ethereumjs-testrpc
+编译文件
+truffle complier
+部署合约
+truffle migration
+启动程序
+npm run start
+localhost:3000查看程序启动页面
+
+
