@@ -17,9 +17,11 @@ class App extends Component {
     super(props)
 
     this.state = {
-      storageValue: 0,
+      storageValue: 0, // todo: this state seems useless
       web3: null,
-      mode: 'employer'
+      mode: 'employer',
+      account: [],
+      payroll: null,
     }
   }
 
@@ -96,7 +98,7 @@ class App extends Component {
   render() {
     return (
       <Layout>
-        <Header className="header">
+        <Header>
           <div className="logo">老董区块链干货铺员工系统</div>
           <Menu
             theme="dark"

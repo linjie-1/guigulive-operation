@@ -30,7 +30,9 @@ class EmployeeList extends Component {
     this.state = {
       loading: true,
       employees: [],
-      showModal: false
+      showModal: false,
+      address: null,
+      salary: null
     };
 
     columns[1].render = (text, record) => (
@@ -53,21 +55,59 @@ class EmployeeList extends Component {
       from: account
     }).then((result) => {
       const employeeCount = result[2].toNumber();
-
       if (employeeCount === 0) {
         this.setState({loading: false});
         return;
       }
-
       this.loadEmployees(employeeCount);
     });
-
   }
 
   loadEmployees(employeeCount) {
+    const { payroll, account } = this.props;
+    for (let i = 0; i < employeeCount; i++) {
+      payroll.checkEmployee.call(
+        i,
+        {from: account}
+      ).then((result) => {
+        let employee = {
+          'address': result[0],
+          'salary': result[1].toNumber(),
+          'lastPaidDay': result[2].toNumber(),
+        };
+        this.setState(prevState => ({
+          employees: [...prevState.employees, employee],
+          loading: false, // todo: only set loading after all employees loaded
+        }));
+      });
+    }
   }
 
   addEmployee = () => {
+    const { payroll, account } = this.props;
+    payroll.addEmployee(
+      this.state.address,
+      this.state.salary,
+      {from: account, gas: 1000000}
+    ).then((result) => {
+      this.setState({
+        loading: false, // todo: only set loading after all employees loaded
+        showModal: false,
+      });
+      return payroll.employees.call(
+        this.state.address,
+        {from: account},
+      );
+    }).then((result) => {
+      let employee = {
+        'address': result[0],
+        'salary': result[1].toNumber(),
+        'lastPaidDay': result[2].toNumber(),
+      };
+      this.setState(prevState => ({
+        employees: [...prevState.employees, employee],
+      }));
+    });
   }
 
   updateEmployee = (address, salary) => {
