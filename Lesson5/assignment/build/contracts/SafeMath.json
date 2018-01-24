@@ -1322,8 +1322,13 @@
       "events": {},
       "links": {},
       "address": "0xc54781d8fe98d44318da5577b6eb0632fa4546e2"
+    },
+    "1516788345989": {
+      "events": {},
+      "links": {},
+      "address": "0xc5488e0c40854af505aee07b72051c7765308a01"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-01-23T10:44:46.717Z"
+  "updatedAt": "2018-01-24T10:09:44.002Z"
 }
