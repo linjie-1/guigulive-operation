@@ -1,0 +1,158 @@
+pragma solidity ^0.4.14;
+
+import "zeppelin-solidity/contracts/math/SafeMath.sol";
+
+contract Payroll {
+    struct Employee {
+        address id;
+        uint salary;
+        uint lastPayday;
+    }
+    using SafeMath for uint;
+    uint constant payDuration = 10 seconds;
+    uint totalSalary ;
+    address owner;
+    mapping  (address=>Employee)  public employees;
+
+
+    event aaa(address a);
+
+    function Payroll() {
+        owner = msg.sender;
+    }
+    modifier onlyowner {
+         require (msg.sender == owner);
+         _;
+    }
+
+     modifier employeeExist(address employeeId) {
+         var employee = employees[employeeId];
+         assert(employee.id != 0x0);
+         _;
+    }
+
+    function _partialPaid(Employee employee) private {
+        uint payment = employee.salary * (now - employee.lastPayday)/payDuration;
+        employee.id.transfer(payment);
+    }
+
+    function _findEmployee(address employeeId) private returns (Employee , uint) {
+    }
+
+    function addEmployee(address employeeId, uint salary) public
+       onlyowner {
+       var employee = employees[employeeId];
+       assert(employee.id == 0x0);
+       employees[employeeId] = Employee(employeeId,salary * 1 ether, now);
+       totalSalary = totalSalary.add(salary* 1 ether);
+    }
+
+    function removeEmployee(address employeeId)public
+    onlyowner employeeExist(employeeId){
+         var employee = employees[employeeId];
+         _partialPaid(employee);
+         totalSalary = totalSalary.sub(employee.salary);
+         delete employees[employeeId];
+    }
+
+    function updateEmployee(address employeeId, uint salary)public
+    onlyowner employeeExist(employeeId){
+         var employee = employees[employeeId];
+         _partialPaid(employee);
+         employees[employeeId].salary = salary * 1 ether;
+         employees[employeeId].lastPayday = now;
+         totalSalary=totalSalary-employee.salary+salary * 1 ether;
+
+    }
+
+    function changePaymentAddress(address newAddress)public
+         employeeExist(msg.sender){
+         var emp = employees[msg.sender];
+         _partialPaid(emp);
+         employees[newAddress] = Employee(newAddress, emp.salary, emp.lastPayday);
+         delete employees[msg.sender];
+     }
+
+
+    function addFund()onlyowner payable returns (uint) {
+         return this.balance;
+    }
+
+    function calculateRunway()public view returns (uint) {
+     //   return totalSalary;
+        return this.balance / totalSalary;
+    }
+
+
+    function balanceOf() public view returns(uint)
+    {
+        return this.balance;
+    }
+    function hasEnoughFund() returns (bool) {
+        return calculateRunway() > 0;
+    }
+
+    function getPaid() employeeExist(msg.sender){
+          aaa(msg.sender);
+          var employee = employees[msg.sender];
+          uint nextPayday = employee.lastPayday + payDuration;
+          assert(now>nextPayday);
+          employees[msg.sender].lastPayday = nextPayday;
+          employee.id.transfer(employee.salary);
+    }
+}
+
+
+
+
+
+
+
+var Payroll = artifacts.require("./Payroll.sol");
+
+module.exports = function(deployer) {
+  deployer.deploy(Payroll);
+};
+
+
+
+
+
+
+pragma solidity ^0.4.2;
+
+import "truffle/Assert.sol";
+import "truffle/DeployedAddresses.sol";
+import "../contracts/Payroll.sol";
+
+contract TestPaysoll is Payroll{
+
+function testAddEmployee() public{
+     address id =  0x8bcd5c5d1fcff75ca8b03b53d5f3f95bfb5cc137;
+     addEmployee(0x8bcd5c5d1fcff75ca8b03b53d5f3f95bfb5cc137,1);
+     uint salary = 1 ether;
+     Assert.equal(employees[id].salary, salary, "the employee added and the salary is 1 ether.");
+ }
+ function testremoveEmployee() public{
+     var employee = employees[0x8bcd5c5d1fcff75ca8b03b53d5f3f95bfb5cc137];
+     removeEmployee(employee.id);
+     Assert.equal(employees[employee.id].id, 0x0, "the employee is not exist");
+ }
+
+}
+
+
+
+module.exports = {
+  networks: {
+    development: {
+      host: "localhost",
+      port: 8545,
+      network_id: "*" ,// Match any network id
+    }
+  }
+};
+
+
+
+
