@@ -65,15 +65,66 @@ class EmployeeList extends Component {
   }
 
   loadEmployees(employeeCount) {
+    const { payroll, account, web3 } = this.props;
+
+    const ps = Array(employeeCount).keys().map(k => payroll.checkEmployee.call(k, { from: account }));
+    Promise.all(ps)
+      .then(es => this.setState({
+        employees: es.map(e => ({
+          key: e[0],
+          address: e[0],
+          salary: web3.fromWei(+e[1]),
+          lastPaidDay: new Date(+e[2] * 1000).toString()
+        })),
+        loading: false
+      }))
   }
 
   addEmployee = () => {
+    const { payroll, account, web3 } = this.props;
+    const { address, salary, employees } = this.state;
+
+    payroll.addEmployee(address, salary, {
+      from: account,
+      gas: 1000000
+    }).then(() => this.setState({
+      address: '',
+      salary: '',
+      showModal: false,
+      employees: employees.concat([{
+        address,
+        salary,
+        key: address,
+        lastPaidDay: new Date().toString()
+      }])
+    }));
   }
 
   updateEmployee = (address, salary) => {
+    const { payroll, account, web3 } = this.props;
+    const { employees } = this.state;
+
+    payroll.updateEmployee(address, salary, {
+      from: account,
+      gas: 1000000
+    }).then(() => this.setState({
+      employees: employees.map(e => {
+        if (e.address === address) e.salary = salary;
+        return e;
+      })
+    })).catch(e => message.error('not enough fund'));
   }
 
   removeEmployee = (employeeId) => {
+    const { payroll, account, web3 } = this.props;
+    const { employees } = this.state;
+
+    payroll.removeEmployee(employeeId, {
+      from: account,
+      gas: 1000000
+    }).then(() => this.setState({
+      employees: employees.filter(e => e.address !== employees)
+    })).catch(e => message.error('not enough fund'));
   }
 
   renderModal() {
