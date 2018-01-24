@@ -13,32 +13,36 @@ contract Payroll is Ownable {
     
     uint constant payDuration = 10 seconds;
 
+    // 薪水总额
     uint totalSalary;
+    // 员工数
     uint totalEmployee;
     address[] employeeList;
     mapping(address => Employee) public employees;
 
-
+    //合约是否存在
     modifier employeeExit(address employeeId) {
         var employee = employees[employeeId];
         assert(employee.id != 0x0);
         _;
     }
     
+    // 支付
     function _partialPaid(Employee employee) private {
         uint payment = employee.salary
             .mul(now.sub(employee.lastPayday))
             .div(payDuration);
         employee.id.transfer(payment);
     }
-
+    
+    //检查 
     function checkEmployee(uint index) returns (address employeeId, uint salary, uint lastPayday) {
         employeeId = employeeList[index];
         var employee = employees[employeeId];
         salary = employee.salary;
         lastPayday = employee.lastPayday;
     }
-    
+    //添加员工
     function addEmployee(address employeeId, uint salary) onlyOwner {
         var employee = employees[employeeId];
         assert(employee.id == 0x0);
@@ -49,6 +53,7 @@ contract Payroll is Ownable {
         employeeList.push(employeeId);
     }
     
+    //删除 
     function removeEmployee(address employeeId) onlyOwner employeeExit(employeeId) {
         var employee = employees[employeeId];
 
@@ -58,6 +63,7 @@ contract Payroll is Ownable {
         totalEmployee = totalEmployee.sub(1);
     }
     
+    //更新
     function updateEmployee(address employeeId, uint salary) onlyOwner employeeExit(employeeId) {
         var employee = employees[employeeId];
 
@@ -68,10 +74,12 @@ contract Payroll is Ownable {
         totalSalary = totalSalary.add(employee.salary);
     }
     
+    // 添加钱 
     function addFund() payable returns (uint) {
         return this.balance;
     }
     
+    // 
     function calculateRunway() returns (uint) {
         return this.balance.div(totalSalary);
     }
@@ -89,11 +97,10 @@ contract Payroll is Ownable {
         employee.lastPayday = nextPayday;
         employee.id.transfer(employee.salary);
     }
-
+    //返回合约金额,合约可支付薪水额度,合约员工数
     function checkInfo() returns (uint balance, uint runway, uint employeeCount) {
         balance = this.balance;
         employeeCount = totalEmployee;
-
         if (totalSalary > 0) {
             runway = calculateRunway();
         }

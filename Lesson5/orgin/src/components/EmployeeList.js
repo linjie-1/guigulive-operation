@@ -58,22 +58,92 @@ class EmployeeList extends Component {
         this.setState({loading: false});
         return;
       }
-
+      // 载入员工信息
       this.loadEmployees(employeeCount);
     });
 
   }
 
+  //载入员工信息
   loadEmployees(employeeCount) {
+    const { payroll, account, web3 } = this.props;
+     const requests = [];
+ 
+     for (let index = 0; index < employeeCount; index++) {
+       requests.push(payroll.checkEmployee.call(index, {
+         from: account
+       }));
+     }
+ 
+     Promise.all(requests).then(values => {
+         const employees = values.map(value => ({
+           key: value[0],
+           address: value[0],
+           salary: web3.fromWei(value[1].toNumber()),
+           lastPaidDay: new Date(value[2].toNumber() * 1000).toString()
+         }));
+         
+         this.setState({
+           employees,
+           loading: false
+         })
+       });
   }
 
+  // 添加员工
   addEmployee = () => {
+    const { payroll, account } = this.props;
+     const { address, salary, employees } = this.state;
+     payroll.addEmployee(address, salary, {
+       from: account,
+     }).then(() => {
+       const newEmployee = {
+         address,
+         salary,
+         key: address,
+         lastPaidDay: new Date().toString()
+       }
+ 
+       this.setState({
+         address: '',
+         salary: '',
+         showModal: false,
+         employees: employees.concat([newEmployee])
+       });
+     });
   }
-
+  // 更新员工
   updateEmployee = (address, salary) => {
+    const { payroll, account } = this.props;
+     const { employees } = this.state;
+     payroll.updateEmployee(address, salary, {
+       from: account,
+     }).then(() => {
+       this.setState({
+         employees: employees.map((employee) => {
+          if (employee.address == address) {
+             employee.salary = salary;
+          }
+           return employee;
+         })
+       })
+     }).catch(() => {
+       message.error('没有足够的token!');
+     })
   }
-
+  // 删除员工
   removeEmployee = (employeeId) => {
+    const { payroll, account } = this.props;
+    const { employees } = this.state;
+    console.log(account);
+    console.log(employeeAddr);
+    payroll.removeEmployee(employeeAddr, {
+      from: account,
+    }).then((r,e) => {
+      this.setState({
+        employees: employees.filter(employee => employee.address != employeeAddr)
+      });
+    });
   }
 
   renderModal() {
