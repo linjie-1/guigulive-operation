@@ -86,4 +86,8 @@ contract Payroll is Ownable {
         employee.lastPayday = nextPayday;
         employee.id.transfer(employee.salary);
     }
+
+    function getPayDuration() returns(uint) {
+        return payDuration;
+    }
 }
