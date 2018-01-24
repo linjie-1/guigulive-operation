@@ -20,7 +20,9 @@ class App extends Component {
 
     this.state = {
       storageValue: 0,
-      web3: null
+      web3: null,
+      employerAccount:"",
+      mode:"employer"
     }
   }
 
@@ -56,6 +58,7 @@ class App extends Component {
 
       this.setState({
         account:accounts[0],
+        employerAccount:accounts[0]
       });
 
 
@@ -68,11 +71,11 @@ class App extends Component {
     })
   }
 
-  onSelectTab = ({key}) => {
-
+  onSelectTab = (obj) => {
+    console.log(obj)
     this.setState({
-      mode: key
-    });
+      mode: obj.key
+  });
   }
 
   onClickAddressLink=(address)=>{
@@ -84,7 +87,7 @@ class App extends Component {
 
 
   renderContent = () => {
-    const { account, payroll, web3, mode } = this.state;
+    const { account, payroll, web3, mode,employerAccount } = this.state;
 
     if (!payroll) {
       return <Spin tip="Loading..." />;
@@ -92,9 +95,9 @@ class App extends Component {
 
     switch(mode) {
       case 'employer':
-        return <Employer account={account} payroll={payroll} web3={web3} />
+        return <Employer account={employerAccount} payroll={payroll} web3={web3} onClickAddressLink={this.onClickAddressLink} />
       case 'employee':
-        return <Employee account={account} payroll={payroll} web3={web3} onClickAddressLink={this.onClickAddressLink} />
+        return <Employee account={account} payroll={payroll} web3={web3} />
       default:
         return <Alert message="请选一个模式" type="info" showIcon />
     }
@@ -102,6 +105,10 @@ class App extends Component {
 
 
   render() {
+    const {mode}=this.state;
+    let selkey=[];
+    selkey.push(mode);
+    console.log("mode:",mode);
     return (
       <Layout>
         <Header className="header">
@@ -109,6 +116,7 @@ class App extends Component {
           <Menu
             theme="dark"
             mode="horizontal"
+            selectedKeys={selkey}
             defaultSelectedKeys={['employer']}
             style={{ lineHeight: '64px' }}
             onSelect={this.onSelectTab}

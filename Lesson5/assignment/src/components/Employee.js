@@ -27,6 +27,9 @@ class Employee extends Component{
 
     getPaid=()=>{
         const {payroll, account, web3} =this.props;
+
+        console.log(account);
+
         payroll.getPaid({
             from:account,
             gas:1000000
@@ -34,6 +37,7 @@ class Employee extends Component{
             alert("You have been paid.");
 
         }).catch(e=>{
+            console.log("employeeId:",account);
             console.log("getPaid error:",e);
         });
 

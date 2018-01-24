@@ -34,7 +34,7 @@ class EmployeeList extends Component {
     };
 
     columns[0].render = (text, record) => (
-        <a href="#" onClick={this.props.onClickAddressLink(record.address)}
+        <a href="#" onClick={this.onClickAddressInCell.bind(this, record.address)}
         >{text}</a>
       );
 
@@ -51,6 +51,14 @@ class EmployeeList extends Component {
       </Popconfirm>
     );
   }
+
+
+  onClickAddressInCell=(address)=>{
+
+    this.props.onClickAddressLink(address);
+
+  }
+
 
   componentDidMount() {
     const { payroll, account, web3 } = this.props;

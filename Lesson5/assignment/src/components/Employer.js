@@ -33,6 +33,12 @@ class Employer extends Component{
         });
       }
 
+      onClickAddressLink=(address)=>{
+          this.props.onClickAddressLink(address);
+
+      }
+
+
       renderContent = () => {
         const { account, payroll, web3 } = this.props;
         const { mode, owner } = this.state;
@@ -45,7 +51,7 @@ class Employer extends Component{
           case 'fund':
             return <Fund account={account} payroll={payroll} web3={web3} />
           case 'employees':
-            return <EmployeeList account={account} payroll={payroll} web3={web3} onClickAddressLink={this.props.onClickAddressLink} />
+            return <EmployeeList account={account} payroll={payroll} web3={web3} onClickAddressLink={this.onClickAddressLink} />
         }
       }
 
