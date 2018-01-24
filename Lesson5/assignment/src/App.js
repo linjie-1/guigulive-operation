@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import PayrollContract from '../build/contracts/Payroll.json'
 import getWeb3 from './utils/getWeb3'
 
-import Common from './components/Common';
-import Employee from './components/Employee';
-import Employer from './components/Employer';
-import Accounts from './components/Accounts';
+import { Layout, Menu, Spin, Alert } from 'antd';
 
-import './css/oswald.css'
-import './css/open-sans.css'
-import './css/pure-min.css'
-import './App.css'
+import Employer from './components/Employer';
+import Employee from './components/Employee';
+
+import 'antd/dist/antd.css';
+import './App.css';
+
+const { Header, Content, Footer } = Layout;
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class App extends Component {
     this.state = {
       storageValue: 0,
       web3: null,
-      payroll: null
+      mode: 'employer'
     }
   }
 
@@ -53,70 +53,71 @@ class App extends Component {
     const Payroll = contract(PayrollContract)
     Payroll.setProvider(this.state.web3.currentProvider)
 
-    console.log(Payroll)
-
-    // Declaring this for later so we can chain functions on SimpleStorage.
+    // Declaring this for later so we can chain functions on Payroll.
     var PayrollInstance
 
     // Get accounts.
     this.state.web3.eth.getAccounts((error, accounts) => {
       this.setState({
-        accounts,
-        selectedAccount: accounts[0]
+        account: accounts[0],
       });
-      console.log("aaa")
-      console.log(Payroll)
-      let payroll
-      console.log(Payroll.deployed().then(instance => payroll = instance))
-      console.log(payroll)
-      Payroll.deployed().then(function(instance) {
+      Payroll.deployed().then((instance) => {
         PayrollInstance = instance
-        console.log("aaa")
         this.setState({
           payroll: instance
         });
       })
     })
   }
-  
-  onSelectAccount = (ev) => {
+
+  onSelectTab = ({key}) => {
     this.setState({
-      selectedAccount: ev.target.text
+      mode: key
     });
   }
 
-  render() {
-    const { selectedAccount, accounts, payroll, web3 } = this.state;
-    // console.log(selectedAccount)
-    // console.log(accounts)
-    // console.log(payroll)
-    // console.log(web3)
-    if (!accounts) {
-      return <div>Loading</div>;
+  renderContent = () => {
+    const { account, payroll, web3, mode } = this.state;
+
+    if (!payroll) {
+      return <Spin tip="Loading..." />;
     }
 
-    return (
-      <div className="App">
-        <nav className="navbar pure-menu pure-menu-horizontal">
-            <a href="#" className="pure-menu-heading pure-menu-link">Truffle Box</a>
-        </nav>
+    switch(mode) {
+      case 'employer':
+        return <Employer account={account} payroll={payroll} web3={web3} />
+      case 'employee':
+        return <Employee account={account} payroll={payroll} web3={web3} />
+      default:
+        return <Alert message="请选一个模式" type="info" showIcon />
+    }
+  }
 
-        <main className="container">
-          <div className="pure-g">
-            <div className="pure-u-1-3">
-              <Accounts accounts={accounts} onSelectAccount={this.onSelectAccount} />
-            </div>
-            <div className="pure-u-2-3">
-              {
-                selectedAccount === accounts[0] ?
-                <Employer employer={selectedAccount} payroll={payroll} web3={web3} /> :
-                <Employee employee={selectedAccount} payroll={payroll} web3={web3} />
-              }
-              {payroll && <Common accounts={selectedAccount} payroll={payroll} web3={web3} />}
-            </div>
-          </div>
-        </main>
-      </div>
+  render() {
+    return (
+      <Layout>
+        <Header className="header">
+          <div className="logo">老董区块链干货铺员工系统</div>
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={['employer']}
+            style={{ lineHeight: '64px' }}
+            onSelect={this.onSelectTab}
+          >
+            <Menu.Item key="employer">雇主</Menu.Item>
+            <Menu.Item key="employee">雇员</Menu.Item>
+          </Menu>
+        </Header>
+        <Content style={{ padding: '0 50px' }}>
+          <Layout style={{ padding: '24px 0', background: '#fff', minHeight: '600px' }}>
+            {this.renderContent()}
+          </Layout>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          Payroll ©2017 老董区块链干货铺
+        </Footer>
+      </Layout>
     );
   }
 }

@@ -1,4 +1,4 @@
-var Ownable = artifacts.require("./Ownable.sol"); 
+var Ownable = artifacts.require("./Ownable.sol");
 var SafeMath = artifacts.require("./SafeMath.sol");
 var Payroll = artifacts.require("./Payroll.sol");
 
