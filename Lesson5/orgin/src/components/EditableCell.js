@@ -39,7 +39,7 @@ class EditableCell extends React.Component {
             </div>
             :
             <div className="editable-cell-text-wrapper">
-              {value || ' '}
+              {value ? value + " Ether" : ' '}
               <Icon
                 type="edit"
                 className="editable-cell-icon"

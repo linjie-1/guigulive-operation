@@ -18,6 +18,7 @@ contract Payroll is Ownable {
     address[] employeeList;
     mapping(address => Employee) public employees;
 
+    event NewFund();
 
     modifier employeeExit(address employeeId) {
         var employee = employees[employeeId];
@@ -69,6 +70,7 @@ contract Payroll is Ownable {
     }
     
     function addFund() payable returns (uint) {
+        NewFund();
         return this.balance;
     }
     

@@ -35,8 +35,9 @@ class EmployeeList extends Component {
 
     columns[1].render = (text, record) => (
       <EditableCell
-        value={text}
+        value={this.props.web3.fromWei(text, "ether")}
         onChange={ this.updateEmployee.bind(this, record.address) }
+        web3={this.props.web3}
       />
     );
 
@@ -65,15 +66,67 @@ class EmployeeList extends Component {
   }
 
   loadEmployees(employeeCount) {
+    const { payroll, account } = this.props;
+    var requests = [];
+    for (var i = 0; i < employeeCount; ++i) {
+      requests.push(payroll.checkEmployee.call(i));
+    }
+
+    Promise.all(requests).then(values => {
+      const employees = values.map(value => ({
+        'address': value[0],
+        'salary': value[1].valueOf(),
+        'lastPaidDay': new Date(value[2].valueOf() * 1000).toString(),
+        'key': value[0],
+      }));
+
+      this.setState({
+        employees: employees,
+        loading: false
+      });
+    });
   }
 
   addEmployee = () => {
+    const { address, salary, employees } = this.state;
+    const { payroll, account, web3 } = this.props;
+    payroll.addEmployee(address, salary, {from: account}).then(() => {
+      this.setState({
+        address: '',
+        salary: '',
+        showModal: false,
+        employees: employees.concat({
+          address,
+          'salary': web3.toWei(salary, "ether"),
+          'lastPaidDay': new Date().toString(),
+          'key': address,
+        })
+      });
+    });
   }
 
   updateEmployee = (address, salary) => {
+    const { payroll, account } = this.props;
+    const employees = this.state.employees;
+    payroll.updateEmployee(address, salary, {from: account}).then((result) => {
+      this.setState({
+        employees: employees.map((employee) => {
+          if (employee.address == address) {
+            employee.salary = salary;
+          }
+        })
+      });
+    });
   }
 
   removeEmployee = (employeeId) => {
+    const { payroll, account } = this.props;
+    const employees = this.state.employees;
+    payroll.removeEmployee(employeeId, {from: account}).then((result) => {
+      this.setState({
+        employees: employees.filter((employee) => employee.address != employeeId)
+      });
+    });
   }
 
   renderModal() {
