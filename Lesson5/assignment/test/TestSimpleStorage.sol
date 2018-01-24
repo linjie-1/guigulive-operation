@@ -6,8 +6,9 @@ import "../contracts/SimpleStorage.sol";
 
 contract TestSimpleStorage is SimpleStorage{
 
-  function testItStoresAValue() {
+  function testItStoresAValue() public {
     setInternal(89);
+
     Assert.equal(get(), 89, "It should store the value 89.");
   }
 
