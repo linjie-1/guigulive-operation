@@ -19,11 +19,11 @@ contract Payroll is Ownable {
     uint lastPayday;
     address owner;
     uint totalSalary = 0 ether;
-    modifier onlyOwner{
-        require(msg.sender == owner);
-        _;
-    }
-
+    // Ownable已定义,不需要覆盖 onlyOwner
+    // modifier onlyOwner{
+    //     require(msg.sender == owner);
+    //     _;
+    // }
     modifier employeeExist(address employeeId) {
         var employee = employees[employeeId];
         assert(employee.id != 0x0);
@@ -61,10 +61,7 @@ contract Payroll is Ownable {
         employees[employeeId].lastPayday = now;
         totalSalary += salary * 1 ether;
         totalSalary -= employees[employeeId].salary;
-
     }
-
-   
 
      // 剩余支付次数
     function colculateRunway() returns (uint) {
@@ -81,7 +78,6 @@ contract Payroll is Ownable {
         var employee = employees[employeeId];
         salary = employee.salary;
         lastPayday = employee.lastPayday;
-        return (salary,  lastPayday);
     }
     
     function addFund() payable returns (uint) {
@@ -102,10 +98,10 @@ contract Payroll is Ownable {
     }
     
     // 修改钱包地址 参数:原地址.新地址
-    function changePaymentAddress(address employeeId, address nextAddr) {
-        var employee = employees[employeeId];
-        employees[nextAddr] = employee;
+    function changePaymentAddress(address employeeId, address nextAddr) employeeExist(employeeId) employeeExist(nextAddr) {
+        Employee employee = employees[employeeId];
+        _partialPaid(employee);
+        employees[nextAddr] = Employee(nextAddr, employee.salary, now);
         delete employees[employeeId];
     }
-
 }
