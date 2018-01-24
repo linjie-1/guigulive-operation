@@ -9,6 +9,7 @@ class Common extends Component {
   }
 
   componentDidMount() {
+    /*
     const { payroll, web3 } = this.props;
     const updateInfo = (error, result) => {
       if (!error) {
@@ -21,10 +22,10 @@ class Common extends Component {
     this.newEmployee = payroll.NewEmployee(updateInfo);
     this.updateEmployee = payroll.UpdateEmployee(updateInfo);
     this.removeEmployee = payroll.RemoveEmployee(updateInfo);
-
+    */
     this.checkInfo();
   }
-
+/*
   componentWillUnmount() {
     this.newFund.stopWatching();
     this.getPaid.stopWatching();
@@ -32,7 +33,7 @@ class Common extends Component {
     this.updateEmployee.stopWatching();
     this.removeEmployee.stopWatching();
   }
-
+*/
   checkInfo = () => {
     const { payroll, account, web3 } = this.props;
     payroll.checkInfo.call({
