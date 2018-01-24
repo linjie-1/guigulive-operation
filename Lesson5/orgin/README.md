@@ -11,3 +11,4 @@ A payroll system developed with React and Solidty for Ethereum Blockchain platfo
 1. Run `truffle compile` in the project directory
 1. `truffle migrate`
 1. `npm run start`
+
