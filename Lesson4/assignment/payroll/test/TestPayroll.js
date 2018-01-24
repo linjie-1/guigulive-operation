@@ -21,9 +21,9 @@ contract('Payroll', function(accounts) {
     it("check if the removed employee is actually in employees", function() {
         Payroll.deployed().then(function(instance) {
             payrollInstance = instance;
-            return payrollInstance.removeEmployee(accounts[1]);
-        }).then(function() {
-            assert(error.toString().includes('invalid opcode'), "exception !");
+            return payrollInstance.removeEmployee(accounts[6]);
+        }).catch(function(error) {
+            assert(error.toString().includes('invalid'), "exception !");
         })
     });
 
