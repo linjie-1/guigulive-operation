@@ -1,0 +1,146 @@
+/* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
+/* stylelint-disable declaration-bang-space-before */
+/* stylelint-disable declaration-bang-space-before */
+.ant-card {
+  background: #fff;
+  border-radius: 2px;
+  font-size: 12px;
+  position: relative;
+  transition: all .3s;
+}
+.ant-card:not(.ant-card-no-hovering):hover {
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+.ant-card-bordered {
+  border: 1px solid #e9e9e9;
+}
+.ant-card-head {
+  height: 48px;
+  line-height: 48px;
+  background: #fff;
+  border-bottom: 1px solid #e9e9e9;
+  padding: 0 24px;
+  border-radius: 2px 2px 0 0;
+  zoom: 1;
+  margin-bottom: -1px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.ant-card-head:before,
+.ant-card-head:after {
+  content: " ";
+  display: table;
+}
+.ant-card-head:after {
+  clear: both;
+  visibility: hidden;
+  font-size: 0;
+  height: 0;
+}
+.ant-card-head-title {
+  font-size: 14px;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  display: inline-block;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.ant-card-extra {
+  float: right;
+  text-align: right;
+  margin-left: auto;
+}
+.ant-card-body {
+  padding: 24px;
+  zoom: 1;
+}
+.ant-card-body:before,
+.ant-card-body:after {
+  content: " ";
+  display: table;
+}
+.ant-card-body:after {
+  clear: both;
+  visibility: hidden;
+  font-size: 0;
+  height: 0;
+}
+.ant-card-contain-grid .ant-card-body {
+  margin: -1px 0 0 -1px;
+  padding: 0;
+}
+.ant-card-grid {
+  border-radius: 0;
+  border: 0;
+  box-shadow: 1px 0 0 0 #e9e9e9, 0 1px 0 0 #e9e9e9, 1px 1px 0 0 #e9e9e9, 1px 0 0 0 #e9e9e9 inset, 0 1px 0 0 #e9e9e9 inset;
+  width: 33.33%;
+  float: left;
+  padding: 24px;
+  transition: all .3s;
+}
+.ant-card-grid:hover {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+}
+.ant-card-wider-padding .ant-card-head {
+  padding: 0 32px;
+}
+.ant-card-wider-padding .ant-card-body {
+  padding: 24px 32px;
+}
+.ant-card-wider-padding .ant-card-extra {
+  right: 32px;
+}
+.ant-card-padding-transition .ant-card-head,
+.ant-card-padding-transition .ant-card-body {
+  transition: padding .3s;
+}
+.ant-card-padding-transition .ant-card-extra {
+  transition: right .3s;
+}
+.ant-card-loading .ant-card-body {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  padding: 0;
+}
+.ant-card-loading-content {
+  padding: 24px;
+}
+.ant-card-loading-block {
+  display: inline-block;
+  margin: 5px 1% 0;
+  height: 14px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(207, 216, 220, 0.2), rgba(207, 216, 220, 0.4), rgba(207, 216, 220, 0.2));
+  -webkit-animation: card-loading 1.4s ease infinite;
+          animation: card-loading 1.4s ease infinite;
+  background-size: 600% 600%;
+}
+@-webkit-keyframes card-loading {
+  0%,
+  100% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+@keyframes card-loading {
+  0%,
+  100% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
