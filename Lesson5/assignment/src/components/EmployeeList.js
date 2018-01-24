@@ -65,6 +65,7 @@ class EmployeeList extends Component {
   }
 
   loadEmployees(employeeCount) {
+<<<<<<< HEAD
     const {payroll, account, web3} = this.props;
     const requests = [];
 
@@ -144,6 +145,17 @@ class EmployeeList extends Component {
     }).catch(() => {
       message.error('你没有足够的金额');
     });
+=======
+  }
+
+  addEmployee = () => {
+  }
+
+  updateEmployee = (address, salary) => {
+  }
+
+  removeEmployee = (employeeId) => {
+>>>>>>> 342e7b010cba8f8cd6eb1bbc6faddab31931e141
   }
 
   renderModal() {
