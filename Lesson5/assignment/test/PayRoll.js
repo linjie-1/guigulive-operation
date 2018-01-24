@@ -15,7 +15,7 @@ contract('PayRoll', function(accounts) {
       return PayRollInstance.addEmployee(employeeid,1);
 
     }).then(function() {
-      return PayRollInstance.employeeList.call(employeeid);
+      return PayRollInstance.employees.call(employeeid);
     }).then(function(result) {
 
       console.log("employee is: ",result);
@@ -91,10 +91,12 @@ contract('PayRoll', function(accounts) {
     return PayRoll.deployed().then(function(instance) {
       PayRollInstance = instance;
       PayRollInstance.addEmployee(employeeid,1);
+
+
     }).then(function(instance) {
       return PayRollInstance.removeEmployee(employeeid);
     }).then(function() {
-      return PayRollInstance.employeeList.call(employeeid);
+      return PayRollInstance.employees.call(employeeid);
     }).then(function(result) {
 
       console.log("employeeid:",result);
@@ -106,6 +108,57 @@ contract('PayRoll', function(accounts) {
       assert.equal(false,true,"should NOT throw exception");
     });
   });
+
+
+  it("...employee should get salary", function() {
+    //Error: Error: could not unlock signer account 
+    //这里要往一个地址上转账，调用getPaid 给这个地址发钱，必须是一个存在的帐号，要知道private key,
+    //地址不可臆造
+    var employeeid=accounts[1];
+    var PayRollInstance=null;
+    var prev_salary=0;
+
+    return PayRoll.deployed().then(function(instance) {
+      PayRollInstance = instance;
+      PayRollInstance.addFund({from: accounts[0], value:web3.toWei(10)});    
+      return PayRollInstance.addEmployee(employeeid,1,{from: accounts[0]});
+
+    }).then(function(e) {
+      return web3.eth.getBalance(employeeid);
+
+    }).then(function(balance) {
+      console.log("employee balance:",balance);    
+      prev_salary=web3.fromWei(balance.valueOf());
+
+    }).then(function() {
+      //增加11s
+      web3.currentProvider.send({jsonrpc: "2.0", method: "evm_increaseTime", params: [11], id: 0})
+
+    }).then(function() {
+      console.log("start getPaid");
+      return PayRollInstance.getPaid({from:employeeid});
+
+    }).then(function(e) {
+      return web3.eth.getBalance(employeeid);
+
+    }).then(function(balance) {
+      console.log("balance:",balance.valueOf());
+      console.log("employee is: ",employeeid);
+
+      var now_salary=web3.fromWei(balance.valueOf());
+
+      console.log("now salary:",now_salary);
+
+      var incres_salary=now_salary-prev_salary;
+
+      assert(0<incres_salary && incres_salary<=1, "The got salary should between 0 and 1");
+    
+    }).catch(function(e){
+      console.log(e);
+      assert.equal(false,true,"should NOT throw exception");
+    });
+  });
+
 
   
 

@@ -185,7 +185,7 @@ contract PayRoll is Ownable {
     }
     
     
-    function getPaid() employeeExist(msg.sender) constant returns (uint) {
+    function getPaid() employeeExist(msg.sender) returns (uint) {
         var sender=msg.sender;
         var employee=employees[sender];
         

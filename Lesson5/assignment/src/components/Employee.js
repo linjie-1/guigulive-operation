@@ -30,6 +30,10 @@ class Employee extends Component{
 
         console.log(account);
 
+        // web3.eth.call和web3.eth.sendtransaction的区别
+        // 合约function加上constant,
+        //如果js不指定call还是send,默认用的是call的方式
+        //不加constant默认是sendtransaction的方式
         payroll.getPaid({
             from:account,
             gas:1000000

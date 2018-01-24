@@ -14,10 +14,16 @@ const columns = [{
   dataIndex: 'salary',
   key: 'salary',
 }, {
+  title: '账户余额',
+  dataIndex: 'balance',
+  key: 'balance',
+}
+, {
   title: '上次支付',
   dataIndex: 'lastPaidDay',
   key: 'lastPaidDay',
-}, {
+}, 
+{
   title: '操作',
   dataIndex: '',
   key: 'action'
@@ -45,7 +51,7 @@ class EmployeeList extends Component {
       />
     );
 
-    columns[3].render = (text, record) => (
+    columns[4].render = (text, record) => (
       <Popconfirm title="你确定删除吗?" onConfirm={(e) =>{e.preventDefault(); this.removeEmployee(record.address)}}>
         <a href="#">Delete</a>
       </Popconfirm>
@@ -87,12 +93,20 @@ class EmployeeList extends Component {
 
         Promise.all(requests)
         .then(values=>{
-            const employees=values.map(value=>({
+            const employees=values.map(value=>{
+              var obj={
                 key:value[0],
                 address:value[0],
+                balance:null,
                 salary:web3.fromWei(value[1].toNumber()),
                 lastPaidDay:new Date(value[2].toNumber()*1000).toString()
-            }));
+            };
+
+            var balnce=web3.fromWei(web3.eth.getBalance(obj.address).valueOf());
+            obj.balance=balnce;
+
+            return obj;
+          });
 
 
             this.setState({
