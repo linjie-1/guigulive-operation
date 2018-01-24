@@ -3,7 +3,7 @@ pragma solidity ^0.4.14;
 import './Owner.sol';
 import './SafeMath.sol';
 
-contract Payroll is Ownable {
+contract Payroll is Owner {
     using SafeMath for uint;
     struct Employee {
       address id;
@@ -13,7 +13,7 @@ contract Payroll is Ownable {
 
     uint constant payDuration = 10 seconds;
     address owner;
-    mapping (address => Employee) employees;
+    mapping (address => Employee) public employees;
     uint totalSalary = 0;
 
     modifier employeeExist(address employeeId) {
@@ -73,7 +73,7 @@ contract Payroll is Ownable {
       return calculateRunway() > 0;
     }
 
-    function getPaid() employeeExist(msg.sender) {
+    function getPaid() public employeeExist(msg.sender) {
       var employee = employees[msg.sender];
 
       uint nextPayday = employee.lastPayday + payDuration;
