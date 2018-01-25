@@ -1,0 +1,5 @@
+
+[target.asmjs-unknown-emscripten]
+rustflags = [
+  "-Clink-args=-s NO_DYNAMIC_EXECUTION=1",
+]
