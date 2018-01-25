@@ -9,28 +9,20 @@ class Common extends Component {
   }
 
   componentDidMount() {
-    const { payroll, web3 } = this.props;
+    const { payroll } = this.props;
     const updateInfo = (error, result) => {
       if (!error) {
         this.checkInfo();
       }
     }
 
-    this.newFund = payroll.NewFund(updateInfo);
-    this.getPaid = payroll.GetPaid(updateInfo);
-    this.newEmployee = payroll.NewEmployee(updateInfo);
-    this.updateEmployee = payroll.UpdateEmployee(updateInfo);
-    this.removeEmployee = payroll.RemoveEmployee(updateInfo);
+    this.newFund = payroll.addFund(updateInfo);
+    this.getPaid = payroll.getPaid(updateInfo);
+    this.newEmployee = payroll.addEmployee(updateInfo);
+    this.updateEmployee = payroll.updateEmployee(updateInfo);
+    this.removeEmployee = payroll.removeEmployee(updateInfo);
 
     this.checkInfo();
-  }
-
-  componentWillUnmount() {
-    this.newFund.stopWatching();
-    this.getPaid.stopWatching();
-    this.newEmployee.stopWatching();
-    this.updateEmployee.stopWatching();
-    this.removeEmployee.stopWatching();
   }
 
   checkInfo = () => {

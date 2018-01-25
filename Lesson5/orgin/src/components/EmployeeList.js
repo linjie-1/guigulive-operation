@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Button, Modal, Form, InputNumber, Input, message, Popconfirm } from 'antd';
+import { Table, Button, Modal, Form, InputNumber, Input, Popconfirm } from 'antd';
 
 import EditableCell from './EditableCell';
 
@@ -50,7 +50,7 @@ class EmployeeList extends Component {
   }
 
   componentDidMount() {
-    const { payroll, account, web3 } = this.props;
+    const { payroll, account } = this.props;
     payroll.checkInfo.call({
       from: account
     }).then((result) => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Col, Row, Layout, Alert, message, Button } from 'antd';
+import { Card, Col, Row, Layout, Alert, Button } from 'antd';
 
 import Common from './Common';
 
@@ -14,16 +14,30 @@ class Employer extends Component {
   }
 
   checkEmployee = () => {
+    const { payroll, account, web3 } = this.props;
+    payroll.employees.call(
+      account,
+      {from: account, gas: 5000000}
+    ).then((result) => {
+      this.setState({
+        balance: web3.fromWei(web3.eth.getBalance(result[0]).toNumber(), 'ether'),
+        salary: web3.fromWei(result[1].toNumber(), 'ether'),
+        lastPaidDate: result[2].toNumber(),
+      });
+    });
   }
 
   getPaid = () => {
+    const { payroll, account } = this.props;
+    payroll.getPaid({from: account, gas: 5000000}).then((result) => {
+      this.checkEmployee();
+    });
   }
 
   renderContent() {
     const { salary, lastPaidDate, balance } = this.state;
-
     if (!salary || salary === '0') {
-      return   <Alert message="你不是员工" type="error" showIcon />;
+      return <Alert message="你不是员工" type="error" showIcon />;
     }
 
     return (
@@ -53,7 +67,6 @@ class Employer extends Component {
 
   render() {
     const { account, payroll, web3 } = this.props;
-
     return (
       <Layout style={{ padding: '0 24px', background: '#fff' }}>
         <Common account={account} payroll={payroll} web3={web3} />
