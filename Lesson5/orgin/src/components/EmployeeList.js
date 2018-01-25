@@ -114,6 +114,16 @@ class EmployeeList extends Component {
   }
 
   removeEmployee = (employeeId) => {
+    const { payroll, account } = this.props;
+    payroll.removeEmployee(
+      employeeId,
+      {from: account, gas: 1000000}
+    ).then((result) => {
+      this.setState({
+        showModal: false,
+        employees: this.state.employees.filter((x) => x.address !== employeeId)
+      });
+    });
   }
 
   renderModal() {
