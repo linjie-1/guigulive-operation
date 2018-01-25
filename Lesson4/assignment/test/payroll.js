@@ -4,70 +4,80 @@
 
 var Payroll = artifacts.require("./Payroll.sol");
 
-contract('Payroll', function(accounts) {
+contract('Payroll_1', function(accounts) {
 
-  it("Add employee", function() {
-    return Payroll.deployed().then(function(instance) {
-
+  it("...should add employee by owner", function(done) {
+    Payroll.deployed().then((instance) => {
       payrollInstance = instance;
-      console.log('Start adding employee...');
-      payrollInstance.addEmployee(accounts[1], 1);
-      return payrollInstance.getEmployeeSalary(accounts[1]);
-
-    }).then((salary) => {
-      
-      assert.equal(salary.valueOf(), web3.toWei(1, 'ether'), 'Fail to add employee');
-
-    })
+      payrollInstance.addEmployee(accounts[0], 1, {from: accounts[0]});
+      return payrollInstance.employees.call(accounts[0]);
+    }).then((employee) => {
+      employeeid = employee[0]
+      salary = employee[1]
+      assert.equal(employeeid.toString(), accounts[0], 'Address not created correctly');
+      assert.equal(salary.valueOf(), web3.toWei(1, 'ether'), 'Salary not created correctly');
+      done();
+    });
   });
 
-  it("Add fund", function() {
-    var constractAddress;
-    return Payroll.deployed().then(function(instance) {
+  it("...should not add employee by others except owner", function(done) {
+    Payroll.deployed().then((instance) => {
+      instance.addEmployee(accounts[1], 1, {from: accounts[1]}).catch(error =>{
+        assert.include(error.toString(), "invalid opcode", "owner should be checked")
+        done();
+      });
+    });
+  });
 
-      constractAddress = instance.address;
-      return instance.addFund({value:web3.toWei(10, 'ether')});
+  it("...should not add an existed employee by owner", function(done) {
+    Payroll.deployed().then((instance) => {
+      instance.addEmployee(accounts[0], 1, {from: accounts[0]}).catch(error => {
+        assert.include(error.toString(), "invalid opcode", "address existence should be checked")
+        done();
+      });
+    });
+  });
 
-    }).then((result) => {
+});
 
-      balance = web3.eth.getBalance(constractAddress);
-      console.log(balance);
-      assert.equal(balance.valueOf(), web3.toWei(10, 'ether'), 'Fail to add fund');
-    
-    })
-  })
+contract('Payroll_2', function(accounts) {
 
-  it("Get paid", function() {
-    var old_balance = 0;
-    return Payroll.deployed().then(function(instance) {
+  it('...should remove by onwner', function(done) {
+    Payroll.deployed().then((instance) => {
+      payrollInstance = instance;
+      return payrollInstance.addEmployee(accounts[3], 1, {from: accounts[0]});
+    }).then((res) => {
+      return payrollInstance.removeEmployee(accounts[3], {from: accounts[0]});
+    }).then((res) => {
+      return payrollInstance.employees.call(accounts[3]);
+    }).then((employee) => {
+      employeeid = employee[0]
+      salary = employee[1]
+      assert.equal(employeeid.toString(), '0x0000000000000000000000000000000000000000', 'Address not removed correctly');
+      assert.equal(salary.valueOf(), web3.toWei(0, 'ether'), 'Salary not removed correctly');
+      done();
+    });
+  });
 
-      constractAddress = instance.address;
-      old_balance = web3.eth.getBalance(constractAddress).valueOf();
-      console.log(old_balance);
-      return instance.getPaid({from: accounts[1]});
+  it('...should not remove by others except owner', function(done) {
+    Payroll.deployed().then((instance) => {
+      payrollInstance = instance;
+      return payrollInstance.addEmployee(accounts[4], 1, {from: accounts[0]});
+    }).then((res) => {
+      payrollInstance.removeEmployee(accounts[4], {from: accounts[1]}).catch(error => {
+        assert.include(error.toString(), "invalid opcode", "owner should be checked");
+        done();
+      });
+    });
+  });
 
-    }).then(function() {
-      
-      var new_balance = web3.eth.getBalance(constractAddress).valueOf();
-      console.log(new_balance);
-      var for_salary = web3.fromWei(old_balance - new_balance, 'ether');
-      console.log(for_salary);
-      assert.equal(1,for_salary,"Fail to get paid");
-
-    })
-  })
-
-  it("Remove employee", function() {
-    return Payroll.deployed().then(function(instance) {
-      
-      payrollInstance.removeEmployee(accounts[1]);
-      return payrollInstance.getEmployeeSalary(accounts[1]);
-
-    }).then((salary) => {
-
-      assert.equal(salary.valueOf(), 0, "Fail to remove employee");
-
-    })
+  it('...should not remove unexisted employee by owner', function(done) {
+    Payroll.deployed().then((instance) => {
+      instance.removeEmployee(accounts[5], {from: accounts[0]}).catch(error => {
+        assert.include(error.toString(), "invalid opcode", "address existence should be checked");
+        done();
+      });
+    });
   });
 
 });
