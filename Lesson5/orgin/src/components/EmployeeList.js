@@ -64,7 +64,7 @@ class EmployeeList extends Component {
   }
 
   loadEmployees(employeeCount) {
-    const { payroll, account } = this.props;
+    const { payroll, account, web3 } = this.props;
     for (let i = 0; i < employeeCount; i++) {
       payroll.checkEmployee.call(
         i,
@@ -72,7 +72,7 @@ class EmployeeList extends Component {
       ).then((result) => {
         let employee = {
           'address': result[0],
-          'salary': result[1].toNumber(),
+          'salary': web3.fromWei(result[1].toNumber(), 'ether'),
           'lastPaidDay': result[2].toNumber(),
         };
         this.setState(prevState => ({
@@ -84,11 +84,11 @@ class EmployeeList extends Component {
   }
 
   addEmployee = () => {
-    const { payroll, account } = this.props;
+    const { payroll, account, web3 } = this.props;
     payroll.addEmployee(
       this.state.address,
       this.state.salary,
-      {from: account, gas: 1000000}
+      {from: account, gas: 5000000}
     ).then((result) => {
       this.setState({
         loading: false, // todo: only set loading after all employees loaded
@@ -101,7 +101,7 @@ class EmployeeList extends Component {
     }).then((result) => {
       let employee = {
         'address': result[0],
-        'salary': result[1].toNumber(),
+        'salary': web3.fromWei(result[1].toNumber(), 'ether'),
         'lastPaidDay': result[2].toNumber(),
       };
       this.setState(prevState => ({
@@ -111,13 +111,36 @@ class EmployeeList extends Component {
   }
 
   updateEmployee = (address, salary) => {
+    const { payroll, account, web3 } = this.props;
+    payroll.updateEmployee(
+      address,
+      salary,
+      {from: account, gas: 5000000}
+    ).then((result) => {
+      this.setState({
+        employees: this.state.employees.filter((x) => x.address !== address)
+      });
+      return payroll.employees.call(
+        address,
+        {from: account},
+      );
+    }).then((result) => {
+      let employee = {
+        'address': result[0],
+        'salary': web3.fromWei(result[1].toNumber(), 'ether'),
+        'lastPaidDay': result[2].toNumber(),
+      };
+      this.setState(prevState => ({
+        employees: [...prevState.employees, employee],
+      }));
+    });
   }
 
   removeEmployee = (employeeId) => {
     const { payroll, account } = this.props;
     payroll.removeEmployee(
       employeeId,
-      {from: account, gas: 1000000}
+      {from: account, gas: 5000000}
     ).then((result) => {
       this.setState({
         showModal: false,
