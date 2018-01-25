@@ -1,38 +1,30 @@
 /*作业请提交在这个目录下*/
 pragma solidity ^0.4.14;
 contract Payroll {
-    
+    uint constant payDuration = 10 seconds;
 
     address employee;
-    uint constant payDuration = 10 seconds;
-    uint lastPayday = now;
     address owner;
+    uint lastPayday = now;
     uint salary = 1 ether;
 
-    // 新加..
     function Payroll() {
         owner = msg.sender;
     }
     
     //设置地址和工资额+新增
     function updateEmployee(address e, uint s) {
+        // 检测发送地址
         require(msg.sender == owner);
-        
-        if (employee != 0x0) {
-            uint payment = salary * (now - lastPayday) / payDuration;
-            employee.transfer(payment);
-        }
-        
+        // 检测是否为空
+        assert(e != 0x0);
+        uint payment = salary * (now - lastPayday) / payDuration;
+        employee.transfer(payment);
         employee = e;
         salary = s * 1 ether;
         lastPayday = now;
     }
 
-    // 设置地址
-    function setAddress(address addr) {
-        employee = addr;
-    }
-    
     function addFund() payable returns (uint) {
         return this.balance;
     }
@@ -40,15 +32,11 @@ contract Payroll {
     function colculateRunway() returns (uint) {
         return this.balance / salary;
     }
-    
-    function get() returns (uint)  {
-        return this.balance;
-    }
-
+    // 支付次数
     function hasEnoughFund() returns (bool) {
         return colculateRunway() > 0;
     }
-    // 
+    // 发工资
     function getPaid() {
         require(msg.sender == employee);
         uint nextPayDay = lastPayday + payDuration;
