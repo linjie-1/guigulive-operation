@@ -17,7 +17,6 @@ class App extends Component {
     super(props)
 
     this.state = {
-      storageValue: 0, // todo: this state seems useless
       web3: null,
       mode: 'employer',
       account: [],

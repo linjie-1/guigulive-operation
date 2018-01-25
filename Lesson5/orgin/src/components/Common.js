@@ -4,28 +4,10 @@ import { Card, Col, Row } from 'antd';
 class Common extends Component {
   constructor(props) {
     super(props);
-
     this.state = {};
   }
 
   componentDidMount() {
-    const { payroll } = this.props;
-    const updateInfo = (error, result) => {
-      if (!error) {
-        this.checkInfo();
-      }
-    }
-
-    this.newFund = payroll.addFund(updateInfo);
-    this.getPaid = payroll.getPaid(updateInfo);
-    this.newEmployee = payroll.addEmployee(updateInfo);
-    this.updateEmployee = payroll.updateEmployee(updateInfo);
-    this.removeEmployee = payroll.removeEmployee(updateInfo);
-
-    this.checkInfo();
-  }
-
-  checkInfo = () => {
     const { payroll, account, web3 } = this.props;
     payroll.checkInfo.call({
       from: account,

@@ -18,6 +18,10 @@ class Fund extends Component {
     payroll.addFund({
       from: account,
       value: web3.toWei(this.state.fund)
+    }).then((result) => {
+      this.setState({
+        fund: null,
+      });
     });
   }
 
@@ -30,6 +34,7 @@ class Fund extends Component {
         <Form layout="inline" onSubmit={this.handleSubmit}>
           <FormItem>
             <InputNumber
+              value={this.state.fund}
               min={1}
               onChange={fund => this.setState({fund})}
             />
