@@ -73,6 +73,7 @@ class EmployeeList extends Component {
          requests.push(payroll.checkEmployee.call(index, {
              from: account
          }));
+      }
 
     Promise.all(requests).then( values => {
             const employees = values.map(value => ({
