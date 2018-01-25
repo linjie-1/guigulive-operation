@@ -106,6 +106,8 @@ class EmployeeList extends Component {
       };
       this.setState(prevState => ({
         employees: [...prevState.employees, employee],
+        address: null,
+        salary: null,
       }));
     });
   }
@@ -143,7 +145,6 @@ class EmployeeList extends Component {
       {from: account, gas: 5000000}
     ).then((result) => {
       this.setState({
-        showModal: false,
         employees: this.state.employees.filter((x) => x.address !== employeeId)
       });
     });
@@ -160,6 +161,7 @@ class EmployeeList extends Component {
         <Form>
           <FormItem label="地址">
             <Input
+              value={this.state.address}
               onChange={ev => this.setState({address: ev.target.value})}
             />
           </FormItem>
@@ -167,6 +169,7 @@ class EmployeeList extends Component {
           <FormItem label="薪水">
             <InputNumber
               min={1}
+              value={this.state.salary}
               onChange={salary => this.setState({salary})}
             />
           </FormItem>
