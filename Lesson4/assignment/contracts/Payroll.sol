@@ -14,7 +14,7 @@ contract Payroll is Ownable {
     }
     
     uint constant payDuration = 10 seconds;
-    uint totalSalary = 0;
+    uint public totalSalary = 0;
     address owner;
     mapping (address => Employee) public employees;
     
