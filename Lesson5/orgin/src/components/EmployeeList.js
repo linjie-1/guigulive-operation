@@ -74,20 +74,23 @@ class EmployeeList extends Component {
 
   loadEmployees(employeeCount) {
     const { payroll, account } = this.props;
+    const requests = [];
     for (let i = 0; i < employeeCount; i++) {
-      payroll.checkEmployee.call(
+      requests.push(payroll.checkEmployee.call(
         i,
-        {from: account}
-      ).then((result) => {
-        this.setState(prevState => ({
-          employees: [
-            ...prevState.employees,
-            this.createEmployeeFromRawData(result),
-          ],
-          loading: false, // todo: only set loading after all employees loaded
-        }));
-      });
+        {from: account},
+      ));
     }
+
+    Promise.all(requests).then(results => {
+      const employees = results.map(value => (
+        this.createEmployeeFromRawData(value)
+      ));
+      this.setState({
+        employees: employees,
+        loading: false,
+      });
+    });
   }
 
   addEmployee = () => {
