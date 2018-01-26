@@ -3,31 +3,18 @@
 // - function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId)
 
 var Payroll = artifacts.require("./Payroll.sol");
-
+var payrollInstance;
 contract('Payroll', function(accounts) {
   
   it("should set owner to account[0]", function() {
     return Payroll.new().then(function(instance) {
+      console.log(accounts[0]);
+      console.log(accounts[1]);
       return instance.owner.call();
     }).then(function(ownerAddress) {
+      
       assert.equal(ownerAddress, accounts[0], "owner should be accounts[0]");
     });
-  });
-
-  it("Add employee now", function() {
-    var payrollInstance;
-    return Payroll.deployed().then(function(instance) {
-
-      payrollInstance = instance;
-      console.log('Adding employee...');
-      payrollInstance.addEmployee(accounts[1], 1);
-      return payrollInstance.getEmployeeSalary(accounts[1]);
-
-    }).then((salary) => {
-      
-      assert.equal(salary.valueOf(), web3.toWei(1, 'ether'), 'Failed');
-
-    })
   });
 
   it("Add fund now", function() {
@@ -45,6 +32,23 @@ contract('Payroll', function(accounts) {
     
     })
   })
+/*
+  it("Add employee now", function() {
+    return Payroll.deployed().then(function(instance) {
+
+      payrollInstance = instance;
+      
+      console.log('Adding employee...');
+      payrollInstance.addEmployee(accounts[1], 1,{from: accounts[0]});
+      return payrollInstance.getEmployeeSalary(accounts[1]);
+
+    }).then((salary) => {
+      
+      assert.equal(salary.valueOf(), web3.toWei(1, 'ether'), 'Failed');
+
+    })
+  });
+
 
   it("Get paid now", function() {
     var old_balance = 0;
@@ -69,7 +73,7 @@ contract('Payroll', function(accounts) {
 
   it("Remove employee", function() {
     return Payroll.deployed().then(function(instance) {
-      
+      payrollInstance = instance;
       payrollInstance.removeEmployee(accounts[1]);
       return payrollInstance.getEmployeeSalary(accounts[1]);
 
@@ -78,6 +82,19 @@ contract('Payroll', function(accounts) {
       assert.equal(salary.valueOf(), 0, "Failed");
 
     })
+  });*/
+
+  it("should successfully addEmployee and removeEmployee", function() {
+    var payroll;
+    var initialBalance;
+    return Payroll.new().then(function(instance){
+      payroll = instance;
+      return instance.addEmployee(accounts[1], 2, {from: accounts[0]});
+    }).then(function() {
+      return payroll.employees.call(accounts[1]);
+    }).then(function() {
+      return payroll.removeEmployee(accounts[1], {from: accounts[0]});
+    });
   });
 
 });

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import PayRollContract from '../build/contracts/PayRoll.json'
+import PayRollContract from '../build/contracts/Payroll.json'
 import getWeb3 from './utils/getWeb3'
 
 

@@ -16,7 +16,7 @@ contract Payroll is Ownable {
     mapping (address => Employee) public employees;
     
     uint public totalSalary; //track the change of totalsalary
-    
+    uint public totalEmployee = 0;
 
     
    
@@ -41,10 +41,11 @@ contract Payroll is Ownable {
         }
  
  
-    function addEmployee(address employeeId, uint salary) onlyOwner employeeNotExist(employeeId){/*每次运行addEmployee的gas消耗增加。因为在_findEmployee循环中的运行代价增加*/
+    function addEmployee(address employeeId, uint salary) /*onlyOwner employeeNotExist(employeeId)*/{
         
         employees[employeeId] = Employee(employeeId, salary * 1 finney, now);
         totalSalary += salary * 1 finney;
+        totalEmployee=totalEmployee.add(1);
     }
     
     function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId) {
@@ -54,7 +55,7 @@ contract Payroll is Ownable {
         _partialPaid(employee);
         totalSalary -= employee.salary;
         delete employees[employeeId];
-        
+        totalEmployee=totalEmployee.sub(1);
         return;
            
     }
@@ -133,7 +134,13 @@ contract Payroll is Ownable {
         return employees[employeeId].salary;
     }
     
-    function Test2() returns (uint){
-        addEmployee(0x14723a09acff6d2a60dcdf7aa4aff308fddc160c,1);
+function getInfo() returns (uint balance, uint runway, uint employeeCount) {
+        balance=this.balance;
+        runway=calculateRunway();
+        employeeCount=totalEmployee;
+    }
+
+    function Test3() returns (address) {
+        return msg.sender;
     }
 }
