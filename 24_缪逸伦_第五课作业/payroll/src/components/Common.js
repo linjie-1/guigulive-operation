@@ -8,6 +8,7 @@ class Common extends Component {
     this.state = {};
   }
 
+  /*
   componentDidMount() {
     const { payroll, web3 } = this.props;
     const updateInfo = (error, result) => {
@@ -32,7 +33,8 @@ class Common extends Component {
     this.updateEmployee.stopWatching();
     this.removeEmployee.stopWatching();
   }
-
+  */
+  
   checkInfo = () => {
     const { payroll, account, web3 } = this.props;
     payroll.checkInfo.call({
