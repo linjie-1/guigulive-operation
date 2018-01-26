@@ -1,5 +1,4 @@
-/*作业请提交在这个目录下*/
-pragma solidity ^0.4.14;
+pragma solidity ^0.4.15;
 
 import './SafeMath.sol';
 import './Ownable.sol';
@@ -33,7 +32,7 @@ contract Payroll is Ownable {
     }
     
     function addEmployee(address eAddress,uint salary) onlyOwner employeeNotExist(eAddress) {
-        var employee = employees[eAddress];
+    
         uint _salary = salary.mul(1 ether);
         totalSalary = totalSalary.add(_salary);
         employees[eAddress] = Employee(eAddress,_salary,now);
