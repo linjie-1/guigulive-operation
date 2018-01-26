@@ -63,20 +63,27 @@ class EmployeeList extends Component {
     });
   }
 
+  createEmployeeFromRawData = (data) => {
+    const { web3 } = this.props;
+    return {
+      'address': data[0],
+      'salary': web3.fromWei(data[1].toNumber(), 'ether'),
+      'lastPaidDay': (new Date(data[2].toNumber() * 1000)).toString(),
+    };
+  }
+
   loadEmployees(employeeCount) {
-    const { payroll, account, web3 } = this.props;
+    const { payroll, account } = this.props;
     for (let i = 0; i < employeeCount; i++) {
       payroll.checkEmployee.call(
         i,
         {from: account}
       ).then((result) => {
-        let employee = {
-          'address': result[0],
-          'salary': web3.fromWei(result[1].toNumber(), 'ether'),
-          'lastPaidDay': result[2].toNumber(),
-        };
         this.setState(prevState => ({
-          employees: [...prevState.employees, employee],
+          employees: [
+            ...prevState.employees,
+            this.createEmployeeFromRawData(result),
+          ],
           loading: false, // todo: only set loading after all employees loaded
         }));
       });
@@ -84,7 +91,7 @@ class EmployeeList extends Component {
   }
 
   addEmployee = () => {
-    const { payroll, account, web3 } = this.props;
+    const { payroll, account } = this.props;
     payroll.addEmployee(
       this.state.address,
       this.state.salary,
@@ -99,13 +106,8 @@ class EmployeeList extends Component {
         {from: account},
       );
     }).then((result) => {
-      let employee = {
-        'address': result[0],
-        'salary': web3.fromWei(result[1].toNumber(), 'ether'),
-        'lastPaidDay': result[2].toNumber(),
-      };
       this.setState(prevState => ({
-        employees: [...prevState.employees, employee],
+        employees: [...prevState.employees, this.createEmployeeFromRawData(result)],
         address: null,
         salary: null,
       }));
@@ -113,7 +115,7 @@ class EmployeeList extends Component {
   }
 
   updateEmployee = (address, salary) => {
-    const { payroll, account, web3 } = this.props;
+    const { payroll, account } = this.props;
     payroll.updateEmployee(
       address,
       salary,
@@ -127,13 +129,8 @@ class EmployeeList extends Component {
         {from: account},
       );
     }).then((result) => {
-      let employee = {
-        'address': result[0],
-        'salary': web3.fromWei(result[1].toNumber(), 'ether'),
-        'lastPaidDay': result[2].toNumber(),
-      };
       this.setState(prevState => ({
-        employees: [...prevState.employees, employee],
+        employees: [...prevState.employees, this.createEmployeeFromRawData(result)],
       }));
     });
   }
