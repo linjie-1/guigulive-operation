@@ -38,12 +38,11 @@ contract Payroll is Ownable {
         owner = msg.sender;
     }
     
-    function _partialPaid(Employee employee) private {
-        uint payment = employee.salary.mul(now - employee.lastPayday).div(payDuration);
+    function _partialPaid(address employeeID) private {
+        uint payment = employees[employeeID].salary.mul(now - employees[employeeID].lastPayday).div(payDuration);
         assert(this.balance >= payment);
-        
-        employee.lastPayday = now; 
-        employee.id.transfer(payment);
+        employees[employeeID].lastPayday = now;
+        employees[employeeID].id.transfer(payment);
     }
     
     function addEmployee(address employeeId, uint salary) onlyOwner employeeNotExist(employeeId){
@@ -52,13 +51,13 @@ contract Payroll is Ownable {
     }
     
     function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId){
-        _partialPaid(employees[employeeId]);
+        _partialPaid(employeeId);
         totalSalary = totalSalary.sub(employees[employeeId].salary);
         delete employees[employeeId];
     }
     
     function updateEmployee(address employeeId, uint salary) onlyOwner employeeExist(employeeId){
-        _partialPaid(employees[employeeId]);
+        _partialPaid(employeeId);
         uint newSalary = salary.mul(1 ether);
         totalSalary = totalSalary.add(newSalary).sub(employees[employeeId].salary);
         employees[employeeId].salary = newSalary;
