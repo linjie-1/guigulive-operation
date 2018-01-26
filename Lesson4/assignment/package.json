@@ -1,0 +1,18 @@
+{
+  "name": "payroll",
+  "version": "0.0.1",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "HH",
+  "license": "ISC",
+  "dependencies": {
+    "promise": "^8.0.1"
+  }
+}
