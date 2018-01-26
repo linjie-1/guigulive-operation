@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Button, Modal, Form, InputNumber, Input, Popconfirm } from 'antd';
+import { Table, Button, Modal, Form, InputNumber, Input, Popconfirm, message } from 'antd';
 
 import EditableCell from './EditableCell';
 
@@ -99,7 +99,7 @@ class EmployeeList extends Component {
       this.state.address,
       this.state.salary,
       {from: account, gas: 5000000}
-    ).then((result) => {
+    ).then(() => {
       this.setState({
         loading: false, // todo: only set loading after all employees loaded
         showModal: false,
@@ -119,22 +119,22 @@ class EmployeeList extends Component {
 
   updateEmployee = (address, salary) => {
     const { payroll, account } = this.props;
+    const { employees} = this.state;
     payroll.updateEmployee(
       address,
       salary,
       {from: account, gas: 5000000}
-    ).then((result) => {
+    ).then(() => {
       this.setState({
-        employees: this.state.employees.filter((x) => x.address !== address)
+        employees: employees.map((employee) => {
+          if (employee.address === address) {
+            employee.salary = salary;
+          }
+          return employee;
+        })
       });
-      return payroll.employees.call(
-        address,
-        {from: account},
-      );
-    }).then((result) => {
-      this.setState(prevState => ({
-        employees: [...prevState.employees, this.createEmployeeFromRawData(result)],
-      }));
+    }).catch(() => {
+      message.error("合约没有足够的金额来支付员工！");
     });
   }
 
@@ -143,7 +143,7 @@ class EmployeeList extends Component {
     payroll.removeEmployee(
       employeeId,
       {from: account, gas: 5000000}
-    ).then((result) => {
+    ).then(() => {
       this.setState({
         employees: this.state.employees.filter((x) => x.address !== employeeId)
       });
