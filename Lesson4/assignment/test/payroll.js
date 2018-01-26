@@ -23,7 +23,7 @@ contract('Payroll_1', function(accounts) {
   it("...should not add employee by others except owner", function(done) {
     Payroll.deployed().then((instance) => {
       instance.addEmployee(accounts[1], 1, {from: accounts[1]}).catch(error =>{
-        assert.include(error.toString(), "invalid opcode", "owner should be checked")
+        assert.include(error.toString(), "revert", "owner should be checked")
         done();
       });
     });
@@ -65,7 +65,7 @@ contract('Payroll_2', function(accounts) {
       return payrollInstance.addEmployee(accounts[4], 1, {from: accounts[0]});
     }).then((res) => {
       payrollInstance.removeEmployee(accounts[4], {from: accounts[1]}).catch(error => {
-        assert.include(error.toString(), "invalid opcode", "owner should be checked");
+        assert.include(error.toString(), "revert", "owner should be checked");
         done();
       });
     });
