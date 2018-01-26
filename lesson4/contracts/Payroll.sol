@@ -1,7 +1,7 @@
 pragma solidity ^0.4.14;
 
-import "github.com/OpenZeppelin/zeppelin-solidity/contracts/math/SafeMath.sol";
-import "github.com/OpenZeppelin/zeppelin-solidity/contracts/ownership/Ownable.sol";
+import "zeppelin-solidity/contracts/math/SafeMath.sol";
+import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 
 /**
  * The Payroll contract does this and that...
@@ -23,8 +23,6 @@ contract Payroll is Ownable {
 
 	uint constant payDuration = 1 seconds;
 
-	event AddFund(address indexed sender, address indexed addr, uint value);
-
 	/**
 	 * 是否存在指定雇员
 	 */
@@ -40,7 +38,6 @@ contract Payroll is Ownable {
 	 * 添加余额
 	 */
 	function addFund() payable public returns(uint) {
-		AddFund(msg.sender, this, msg.value);
 		return this.balance;
 	}
 
@@ -68,7 +65,15 @@ contract Payroll is Ownable {
 		uint salary = _salary.mul(1 ether);
 		totalSalary = totalSalary.add(salary);
 		employees[_employeeAddr] = Employee(_employeeAddr, salary, now);
-	} 
+	} 	
+
+	/**
+	 * 获取雇员工资
+	 */
+	function getEmployee(address _employeeAddr) view public returns(uint) {
+
+		return employees[_employeeAddr].salary;
+	}
 
 	/**
 	 * 移除雇员
@@ -143,7 +148,7 @@ contract Payroll is Ownable {
 		if (nextPayDay > now) {
 			revert();
 		}
-
+		
 		employees[msg.sender].lastPayDay = nextPayDay; 
 		employees[msg.sender].addr.transfer(employee.salary);
 	}
