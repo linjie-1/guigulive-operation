@@ -101,7 +101,7 @@ class EmployeeList extends Component {
       {from: account, gas: 5000000}
     ).then(() => {
       this.setState({
-        loading: false, // todo: only set loading after all employees loaded
+        loading: false,
         showModal: false,
       });
       return payroll.employees.call(
