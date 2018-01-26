@@ -68,12 +68,33 @@ class EmployeeList extends Component {
   }
 
   addEmployee = () => {
+    const { payroll, employer } = this.props;
+    payroll.addEmployee(this.employeeInput.value, parseInt(this.salaryInput.value),{
+      from: employer,
+      gas: 1000000
+    }).then((result) => {
+      alert('success');
+    });
   }
 
   updateEmployee = (address, salary) => {
+      const { payroll, employer } = this.props;
+      payroll.updateEmployee(this.employeeInput.value, parseInt(this.salaryInput.value),{
+        from: employer,
+        gas: 1000000
+      }).then((result) => {
+        alert('success');
+      });
   }
 
   removeEmployee = (employeeId) => {
+      const { payroll, employer } = this.props;
+      payroll.removeEmployee(this.removeEmployeeInput.value,{
+        from: employer,
+        gas: 1000000
+      }).then((result) => {
+        alert('success');
+      });
   }
 
   renderModal() {
