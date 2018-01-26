@@ -29,7 +29,7 @@ class Employer extends Component {
 
   getPaid = () => {
     const { payroll, account } = this.props;
-    payroll.getPaid({from: account, gas: 5000000}).then((result) => {
+    payroll.getPaid({from: account, gas: 5000000}).then(() => {
       this.checkEmployee();
     });
   }
