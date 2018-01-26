@@ -8,7 +8,7 @@ class Common extends Component {
     this.state = {};
   }
 
-  /*
+  
   componentDidMount() {
     const { payroll, web3 } = this.props;
     const updateInfo = (error, result) => {
@@ -17,15 +17,16 @@ class Common extends Component {
       }
     }
 
-    this.newFund = payroll.NewFund(updateInfo);
-    this.getPaid = payroll.GetPaid(updateInfo);
-    this.newEmployee = payroll.NewEmployee(updateInfo);
-    this.updateEmployee = payroll.UpdateEmployee(updateInfo);
-    this.removeEmployee = payroll.RemoveEmployee(updateInfo);
+    //this.newFund = payroll.NewFund(updateInfo);
+    //this.getPaid = payroll.GetPaid(updateInfo);
+    //this.newEmployee = payroll.NewEmployee(updateInfo);
+    //this.updateEmployee = payroll.UpdateEmployee(updateInfo);
+    //this.removeEmployee = payroll.RemoveEmployee(updateInfo);
 
     this.checkInfo();
   }
 
+  /*
   componentWillUnmount() {
     this.newFund.stopWatching();
     this.getPaid.stopWatching();
