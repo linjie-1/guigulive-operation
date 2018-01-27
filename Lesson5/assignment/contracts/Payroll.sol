@@ -19,7 +19,7 @@ contract Payroll is Ownable {
     mapping(address => Employee) public employees;
 
 
-    modifier employeeExit(address employeeId) {
+    modifier employeeExist(address employeeId) {
         var employee = employees[employeeId];
         assert(employee.id != 0x0);
         _;
@@ -49,7 +49,7 @@ contract Payroll is Ownable {
         employeeList.push(employeeId);
     }
 
-    function removeEmployee(address employeeId) onlyOwner employeeExit(employeeId) {
+    function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId) {
         var employee = employees[employeeId];
 
         _partialPaid(employee);
@@ -58,7 +58,7 @@ contract Payroll is Ownable {
         totalEmployee = totalEmployee.sub(1);
     }
 
-    function updateEmployee(address employeeId, uint salary) onlyOwner employeeExit(employeeId) {
+    function updateEmployee(address employeeId, uint salary) onlyOwner employeeExist(employeeId) {
         var employee = employees[employeeId];
 
         _partialPaid(employee);
@@ -80,7 +80,7 @@ contract Payroll is Ownable {
         return calculateRunway() > 0;
     }
 
-    function getPaid() employeeExit(msg.sender) {
+    function getPaid() employeeExist(msg.sender) {
         var employee = employees[msg.sender];
 
         uint nextPayday = employee.lastPayday.add(payDuration);
