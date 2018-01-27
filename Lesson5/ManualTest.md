@@ -2,7 +2,7 @@
 
 1. 增加资金
 
-![AddFund](screenshots/1.AddFund.png)
+![AddFund](screenshots/1.addFund.png)
 
 2. 增加员工
 
@@ -14,11 +14,11 @@
 
 ![AddEmployee-2](screenshots/2.addEmployee.2.png)
 
-3. 点击获得酬劳后的员工界面
+3. 员工获得酬劳
 
 ![GetPaid](screenshots/3.getPaid.png)
 
-4. 将员工工资从1 ether修改为2 ether后的
+4. 将员工工资从1 ether修改为2 ether
 
 * 合约信息界面
 
