@@ -21,7 +21,7 @@ contract Payroll is Ownable {
 	mapping (address => Employee) public employees;
 	
 
-	uint constant payDuration = 1 seconds;
+	uint constant public payDuration = 1 seconds;
 
 	/**
 	 * 是否存在指定雇员
