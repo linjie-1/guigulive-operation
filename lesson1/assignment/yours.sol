@@ -1,10 +1,10 @@
 // version 2
 pragma solidity ^0.4.14;
-
-contract Payroll {
-    uint salary;
-    address boss;
-    address employee;
+contract Payroll{
+    
+    uint salary = 1 ether;
+    address employer ;
+    address employee ;
     uint constant payDuration = 10 seconds;
     uint lastPayday = now;
     
