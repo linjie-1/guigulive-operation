@@ -8,24 +8,24 @@ class Employer extends Component {
     super(props);
     this.state = {};
   }
-
   componentDidMount() {
     this.checkEmployee();
   }
 
   checkEmployee = () => {
+    var self = this;
     const {payroll, account, web3} = this.props;
     payroll.employees.call(account, {
       from: account
     }).then(function(result){
-      this.setState({
+      self.setState({
         salary: web3.fromWei(result[1].toNumber()),
         lastPaidDate: new Date(result[2].toNumber() * 1000).toString()
       });
     }).then(function(){
       web3.eth.getBalance(account, function(err, res){
         if(!err){
-          this.setState({
+          self.setState({
             balance: web3.fromWei(res.toNumber())
           });
         }
@@ -35,12 +35,13 @@ class Employer extends Component {
   }
 
   getPaid = () => {
+    var self = this;
     const {payroll, account} = this.props;
     payroll.getPaid({
       from: account, 
       gas: 3000000
     }).then(function(res){
-      this.setState({
+      self.setState({
         paymentMessage: "You have been paid"
       });
     });
