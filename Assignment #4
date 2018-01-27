@@ -1,26 +1,41 @@
-pragma solidity ^0.4.14;
+var Payroll = artifacts.require("./Payroll.sol");
 
-import "truffle/Assert.sol";
-import "truffle/DeployedAddresses.sol";
-import "../contracts/payroll.sol";
+contract('Payroll', function(accounts) {
 
-contract TestPayroll {
+    it("...should add/remove employee.", function() {
+        return Payroll.deployed().then(function(instance) {
+            payrollInstance = instance;
+    
+            return payrollInstance.addEmployee(accounts[1], 1,{from: accounts[0]});
+        }).then(function() {
+            return payrollInstance.removeEmployee(accounts[1]);
+        }).then(function() {
+            assert(true, "pass");
+        })
+    });
 
-  function testTotalSalary() public {
-    payroll payrolltest = payroll(DeployedAddresses.payroll());
+    it("...should add valid address.", function() {
+        return Payroll.deployed().then(function(instance) {
+            payrollInstance = instance;
+    
+            return payrollInstance.addEmployee("0x0", 1,{from: accounts[0]});
+        }).catch(function(error) {
+            assert(error.toString().includes('invalid opcode'), "expect exception here");
+    
+        });
+    });
 
-    address employeeId = 0x14723a09acff6d2a60dcdf7aa4aff308fddc160c;
-  
-    payrolltest.addEmployee(employeeId,1);
-
-    Assert.equal(employees[employeeId].id, employeeId, "The employee has been added.");
-    uint expectedSalary1 = 1 ether;
-    Assert.equal(totalSalary, expectedSalary1, "It should store the value 1.");
-
-    payrolltest.removeEmployee(employeeId);
-
-    Assert.equal(employees[employeeId].id, "0x0", "The employee has been removed.");
-    uint expectedSalary2 = 0 ether;
-    Assert.equal(totalSalary, expectedSalary2, "It should store the value 0.");
-  }
+    it("...should add employee only once.", function() {
+        return Payroll.deployed().then(function(instance) {
+            payrollInstance = instance;
+    
+            return payrollInstance.addEmployee(accounts[1], 1,{from: accounts[0]});
+        }).then(function() {
+            return payrollInstance.addEmployee(accounts[1], 1,{from: accounts[0]});
+        }).catch(function(error) {
+            assert(error.toString().includes('invalid opcode'), "expect exception here");
+    
+        });
+    });
+});
 
