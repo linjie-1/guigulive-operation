@@ -20,9 +20,16 @@ class Employer extends Component {
       {from: account, gas: 5000000}
     ).then((result) => {
       this.setState({
-        balance: web3.fromWei(web3.eth.getBalance(result[0]).toNumber(), 'ether'),
         salary: web3.fromWei(result[1].toNumber(), 'ether'),
         lastPaidDate: (new Date(result[2].toNumber() * 1000)).toString(),
+      });
+      return web3.eth.getBalance.call(result[0]);
+    }).then((result) => {
+      this.setState({
+        balance: web3.fromWei(
+          web3.eth.getBalance(result[0]).toNumber(),
+          'ether',
+        ),
       });
     });
   }
