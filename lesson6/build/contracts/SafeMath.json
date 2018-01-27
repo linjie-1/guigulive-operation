@@ -1342,17 +1342,37 @@
     "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
   },
   "networks": {
-    "1517025538078": {
+    "1517038413578": {
       "events": {},
       "links": {},
-      "address": "0x419cdc23f55529a7db029a544c666ebf10d36f4c"
+      "address": "0xff4bdc19e1acae8e92bd9b764f5af570e6a76ac2"
     },
-    "1517031408335": {
+    "1517040564590": {
       "events": {},
       "links": {},
-      "address": "0xa73227d2dc32ba3a2d3d208bca23ec3ce54f88d5"
+      "address": "0xd8521e8d4a8a2b53c328a3a304d0d94dac78c758"
+    },
+    "1517040860294": {
+      "events": {},
+      "links": {},
+      "address": "0x4761205c502d3c465898a994810970d7cbeb51cb"
+    },
+    "1517044843206": {
+      "events": {},
+      "links": {},
+      "address": "0x55b3ecca65439ed9296b2d2181941321bd2a73a8"
+    },
+    "1517045223195": {
+      "events": {},
+      "links": {},
+      "address": "0x3ae79a2a4d86823cbe6162d4f6a3241ddecf11b5"
+    },
+    "1517045757495": {
+      "events": {},
+      "links": {},
+      "address": "0xf8bd9575206f6744068d632087d95a41df24b368"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-01-27T05:55:10.096Z"
+  "updatedAt": "2018-01-27T09:39:48.436Z"
 }
