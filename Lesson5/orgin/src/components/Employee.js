@@ -32,7 +32,8 @@ class Employer extends Component {
     const { payroll, account, web3 } = this.props;
 
     payroll.getPaid({
-      from: account
+      from: account,
+      gas: 1000000
     }).then(() => message.info('You have been paid'));
   }
 

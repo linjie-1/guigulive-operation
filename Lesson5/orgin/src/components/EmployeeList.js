@@ -67,7 +67,7 @@ class EmployeeList extends Component {
   loadEmployees(employeeCount) {
     const { payroll, account, web3 } = this.props;
 
-    const ps = Array(employeeCount).keys().map(k => payroll.checkEmployee.call(k, { from: account }));
+    const ps = [...Array(employeeCount).keys()].map(k => payroll.checkEmployee.call(k, { from: account }));
     Promise.all(ps)
       .then(es => this.setState({
         employees: es.map(e => ({
@@ -112,7 +112,7 @@ class EmployeeList extends Component {
         if (e.address === address) e.salary = salary;
         return e;
       })
-    })).catch(e => message.error('not enough fund'));
+    })).catch(e => message.error(e.message));
   }
 
   removeEmployee = (employeeId) => {
@@ -123,8 +123,8 @@ class EmployeeList extends Component {
       from: account,
       gas: 1000000
     }).then(() => this.setState({
-      employees: employees.filter(e => e.address !== employees)
-    })).catch(e => message.error('not enough fund'));
+      employees: employees.filter(e => e.address !== employeeId)
+    })).catch(e => message.error(e.message));
   }
 
   renderModal() {
