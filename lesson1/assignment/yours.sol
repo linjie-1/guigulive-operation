@@ -52,27 +52,25 @@ contract Payroll{
         employer =  msg.sender;
     }
 
-    function payBalance(){
-        if (employee != 0){
-            uint payment  = salary * (now-lastPayday)/payDuration;
+    function updateEmployeeAddress(address a) {
+        require(msg.sender == boss);
+
+         if (employee != 0x0) {
+            uint payment = salary * (now - lastPayday) / payDuration;
             employee.transfer(payment);
         }
-    }
 
-    function changeEmployee(address e){
-        require(msg.sender == employer);
-        payBalance();
-        employee = e;
+        employee = a;
         lastPayday = now;
     }
 
-    function changeSalary(uint s){
-        require(msg.sender == employer);
-        payBalance();
+    function updateEmployeeSalary(uint s) {
+        require(msg.sender == boss);
+
         salary = s * 1 ether;
     }
 
-    function addFund() payable returns (uint){
+    function addFund() payable returns (uint) {
         return this.balance;
     }
 
@@ -86,6 +84,7 @@ contract Payroll{
     }
 
     function getPaid() {
+<<<<<<< 1607599632a969961e62c8c7f8bc3d256a0257fb
 <<<<<<< 8e696b03f5f3967117777c84fa3c21c67fee1099
         require(msg.sender == employee);
         
@@ -99,13 +98,19 @@ contract Payroll{
         }
 
         uint nextPayDay = lastPayday + payDuration;
+=======
+        require(msg.sender == employee);
+>>>>>>> Update "update homework 1"
 
-        if ( nextPayDay > now){
-            revert();
-        }
+        uint nextPayday = lastPayday + payDuration;
+        assert(nextPayday < now);
 
+<<<<<<< 1607599632a969961e62c8c7f8bc3d256a0257fb
         lastPayday = nextPayDay;
 >>>>>>> 第一课作业
+=======
+        lastPayday = nextPayday;
+>>>>>>> Update "update homework 1"
         employee.transfer(salary);
     }
 }
