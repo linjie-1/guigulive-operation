@@ -14,13 +14,40 @@ class Employer extends Component {
   }
 
   checkEmployee = () => {
+    const {payroll, account, web3} = this.props;
+    payroll.employees.call(account, {
+      from: account
+    }).then(function(result){
+      this.setState({
+        salary: web3.fromWei(result[1].toNumber()),
+        lastPaidDate: new Date(result[2].toNumber() * 1000).toString()
+      });
+    }).then(function(){
+      web3.eth.getBalance(account, function(err, res){
+        if(!err){
+          this.setState({
+            balance: web3.fromWei(res.toNumber())
+          });
+        }
+      });
+    });
+
   }
 
   getPaid = () => {
+    const {payroll, account} = this.props;
+    payroll.getPaid({
+      from: account, 
+      gas: 3000000
+    }).then(function(res){
+      this.setState({
+        paymentMessage: "You have been paid"
+      });
+    });
   }
 
   renderContent() {
-    const { salary, lastPaidDate, balance } = this.state;
+    const { salary, lastPaidDate, balance, paymentMessage } = this.state;
 
     if (!salary || salary === '0') {
       return   <Alert message="你不是员工" type="error" showIcon />;
@@ -47,6 +74,7 @@ class Employer extends Component {
         >
           获得酬劳
         </Button>
+        <div>{paymentMessage}</div>
       </div>
     );
   }
