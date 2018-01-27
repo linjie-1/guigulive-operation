@@ -18,7 +18,11 @@ contract Payroll is Ownable {
     address[] employeeList;
     mapping(address => Employee) public employees;
 
-    event NewFund();
+    event NewFund(uint balance);
+    event GetPaid(address employee);
+    event NewEmployee(address employee);
+    event UpdateEmployee(address employee);
+    event RemoveEmployee(address employee);
 
     modifier employeeExit(address employeeId) {
         var employee = employees[employeeId];
@@ -48,6 +52,8 @@ contract Payroll is Ownable {
         totalSalary = totalSalary.add(employees[employeeId].salary);
         totalEmployee = totalEmployee.add(1);
         employeeList.push(employeeId);
+
+        NewEmployee(employeeId);
     }
     
     function removeEmployee(address employeeId) onlyOwner employeeExit(employeeId) {
@@ -57,6 +63,16 @@ contract Payroll is Ownable {
         totalSalary = totalSalary.sub(employee.salary);
         delete employees[employeeId];
         totalEmployee = totalEmployee.sub(1);
+
+        for (var i = 0; i < employeeList.length; i++) {
+            if (employeeList[i] == employeeId) {
+                employeeList[i] = employeeList[employeeList.length - 1];
+                employeeList.length--;
+                break;
+            }
+        }
+
+        RemoveEmployee(employeeId);
     }
     
     function updateEmployee(address employeeId, uint salary) onlyOwner employeeExit(employeeId) {
@@ -67,11 +83,14 @@ contract Payroll is Ownable {
         employee.salary = salary.mul(1 ether);
         employee.lastPayday = now;
         totalSalary = totalSalary.add(employee.salary);
+
+        UpdateEmployee(employeeId);
     }
     
     function addFund() payable returns (uint) {
-        NewFund();
-        return this.balance;
+        uint balance = this.balance;
+        NewFund(balance);
+        return balance;
     }
     
     function calculateRunway() returns (uint) {
@@ -90,6 +109,8 @@ contract Payroll is Ownable {
 
         employee.lastPayday = nextPayday;
         employee.id.transfer(employee.salary);
+
+        GetPaid(msg.sender);
     }
 
     function checkInfo() returns (uint balance, uint runway, uint employeeCount) {
