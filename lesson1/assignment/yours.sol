@@ -5,10 +5,12 @@ contract Payroll {
 
     address employee;
     address owner;
+    //上次支付时间
     uint lastPayday = now;
     uint salary = 1 ether;
 
     function Payroll() {
+        //msg 需查询以太坊里的消息的概念
         owner = msg.sender;
     }
     
@@ -24,7 +26,8 @@ contract Payroll {
         salary = s * 1 ether;
         lastPayday = now;
     }
-
+    
+    //付钱
     function addFund() payable returns (uint) {
         return this.balance;
     }
