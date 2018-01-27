@@ -93,7 +93,7 @@ class EmployeeList extends Component {
         const { address, salary, employees } = this.state;
         payroll.addEmployee(address, salary, {
             from: account,
-            gas: 1000000
+            gas:4000000
         }).then(() => {
             const newEmployee = {
                 address,
@@ -116,6 +116,7 @@ class EmployeeList extends Component {
         const { employees } = this.state;
         payroll.updateEmployee(address, salary, {
             from: account,
+            gas:4000000
         }).then(() => {
             this.setState({
                 employees: employees.map((employee) => {
