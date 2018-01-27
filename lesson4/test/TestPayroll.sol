@@ -12,7 +12,7 @@ contract TestPayroll {
 	/**
 	 * 测试添加
 	 */
-	function testAddEmployee() {
+	function testAddEmployee() public {
 
 		pay.addEmployee(employeeAddr, 1);
 
@@ -24,7 +24,7 @@ contract TestPayroll {
 	/**
 	 * 测试移除
 	 */
-	function testRemoveEmployee() {
+	function testRemoveEmployee() public {
 
 		pay.removeEmployee(employeeAddr);
 
