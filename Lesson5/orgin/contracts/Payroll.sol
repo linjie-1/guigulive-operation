@@ -10,7 +10,11 @@ contract Payroll is Ownable {
         uint salary;
         uint lastPayday;
     }
-    
+
+    event NewFund(
+      uint balance
+    );
+
     uint constant payDuration = 10 seconds;
 
     uint totalSalary;
@@ -24,7 +28,7 @@ contract Payroll is Ownable {
         assert(employee.id != 0x0);
         _;
     }
-    
+
     function _partialPaid(Employee employee) private {
         uint payment = employee.salary
             .mul(now.sub(employee.lastPayday))
@@ -38,7 +42,7 @@ contract Payroll is Ownable {
         salary = employee.salary;
         lastPayday = employee.lastPayday;
     }
-    
+
     function addEmployee(address employeeId, uint salary) onlyOwner {
         var employee = employees[employeeId];
         assert(employee.id == 0x0);
@@ -48,7 +52,7 @@ contract Payroll is Ownable {
         totalEmployee = totalEmployee.add(1);
         employeeList.push(employeeId);
     }
-    
+
     function removeEmployee(address employeeId) onlyOwner employeeExit(employeeId) {
         var employee = employees[employeeId];
 
@@ -57,7 +61,7 @@ contract Payroll is Ownable {
         delete employees[employeeId];
         totalEmployee = totalEmployee.sub(1);
     }
-    
+
     function updateEmployee(address employeeId, uint salary) onlyOwner employeeExit(employeeId) {
         var employee = employees[employeeId];
 
@@ -67,19 +71,20 @@ contract Payroll is Ownable {
         employee.lastPayday = now;
         totalSalary = totalSalary.add(employee.salary);
     }
-    
+
     function addFund() payable returns (uint) {
+        NewFund(this.balance);
         return this.balance;
     }
-    
+
     function calculateRunway() returns (uint) {
         return this.balance.div(totalSalary);
     }
-    
+
     function hasEnoughFund() returns (bool) {
         return calculateRunway() > 0;
     }
-    
+
     function getPaid() employeeExit(msg.sender) {
         var employee = employees[msg.sender];
 

@@ -67,7 +67,7 @@ class EmployeeList extends Component {
     const { web3 } = this.props;
     return {
       'address': data[0],
-      'salary': web3.fromWei(data[1].toNumber(), 'ether'),
+      'salary': web3.fromWei(data[1].toNumber()),
       'lastPaidDay': (new Date(data[2].toNumber() * 1000)).toString(),
     };
   }
