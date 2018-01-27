@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Button, Modal, Form, InputNumber, Input, Popconfirm, message } from 'antd';
+import { Table, Button, Modal, Form, InputNumber, Input, Popconfirm } from 'antd';
 
 import EditableCell from './EditableCell';
 
@@ -67,7 +67,7 @@ class EmployeeList extends Component {
     const { web3 } = this.props;
     return {
       'address': data[0],
-      'salary': web3.fromWei(data[1].toNumber()),
+      'salary': web3.fromWei(data[1].toNumber(), 'ether'),
       'lastPaidDay': (new Date(data[2].toNumber() * 1000)).toString(),
     };
   }
@@ -99,9 +99,9 @@ class EmployeeList extends Component {
       this.state.address,
       this.state.salary,
       {from: account, gas: 5000000}
-    ).then(() => {
+    ).then((result) => {
       this.setState({
-        loading: false,
+        loading: false, // todo: only set loading after all employees loaded
         showModal: false,
       });
       return payroll.employees.call(
@@ -119,22 +119,22 @@ class EmployeeList extends Component {
 
   updateEmployee = (address, salary) => {
     const { payroll, account } = this.props;
-    const { employees} = this.state;
     payroll.updateEmployee(
       address,
       salary,
       {from: account, gas: 5000000}
-    ).then(() => {
+    ).then((result) => {
       this.setState({
-        employees: employees.map((employee) => {
-          if (employee.address === address) {
-            employee.salary = salary;
-          }
-          return employee;
-        })
+        employees: this.state.employees.filter((x) => x.address !== address)
       });
-    }).catch(() => {
-      message.error("合约没有足够的金额来支付员工！");
+      return payroll.employees.call(
+        address,
+        {from: account},
+      );
+    }).then((result) => {
+      this.setState(prevState => ({
+        employees: [...prevState.employees, this.createEmployeeFromRawData(result)],
+      }));
     });
   }
 
@@ -143,7 +143,7 @@ class EmployeeList extends Component {
     payroll.removeEmployee(
       employeeId,
       {from: account, gas: 5000000}
-    ).then(() => {
+    ).then((result) => {
       this.setState({
         employees: this.state.employees.filter((x) => x.address !== employeeId)
       });
