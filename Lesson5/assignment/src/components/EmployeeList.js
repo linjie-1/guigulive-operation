@@ -119,8 +119,8 @@ class EmployeeList extends Component {
         }).then(() => {
             this.setState({
                 employees: employees.map((employee) => {
-                    if (employee.address == address) {
-                        employee.salary == salary;
+                    if (employee.address === address) {
+                        employee.salary = salary;
                     }
 
                     return employee;
