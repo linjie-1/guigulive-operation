@@ -35,12 +35,12 @@ class EmployeeList extends Component {
       salary: null
     };
 
-    columns[1].render = (text, record) => (
-      <EditableCell
+    columns[1].render = (text, record) => {
+      return <EditableCell
         value={text}
         onChange={ this.updateEmployee.bind(this, record.address) }
       />
-    );
+    };
 
     columns[3].render = (text, record) => (
       <Popconfirm title="你确定删除吗?" onConfirm={() => this.removeEmployee(record.address)}>
@@ -197,7 +197,6 @@ class EmployeeList extends Component {
         <Form>
           <FormItem label="地址">
             <Input
-              value={this.state.address}
               onChange={ev => this.setState({address: ev.target.value})}
             />
           </FormItem>
@@ -205,7 +204,6 @@ class EmployeeList extends Component {
           <FormItem label="薪水">
             <InputNumber
               min={1}
-              value={this.state.salary}
               onChange={salary => this.setState({salary})}
             />
           </FormItem>

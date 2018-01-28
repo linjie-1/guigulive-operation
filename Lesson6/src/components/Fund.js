@@ -34,6 +34,10 @@ class Fund extends Component {
     });
   }
 
+  handleChange = (value) => {
+    this.setState({fund: value});
+  }
+
   render() {
     const { account, payroll, web3 } = this.props;
     return (
@@ -45,7 +49,7 @@ class Fund extends Component {
             <InputNumber
               value={this.state.fund}
               min={1}
-              onChange={fund => this.setState({fund})}
+              onChange={this.handleChange}
             />
           </FormItem>
           <FormItem>
