@@ -1,0 +1,37 @@
+1. payroll.sol程序导入truffle工程		
+思路：		
+	加入payroll.sol文件加到contract文件夹下面	
+	修改migrations文件中 2_deploy_contracts.js 的内容	
+
+注意：	
+	修改getWeb3.js的下面这句的端口号，使得该端口号和truffle.js中保持一致。		
+	var provider = new Web3.providers.HttpProvider('http://127.0.0.1:8545')	
+	
+	并且truffle.js修改为如下内容：		
+	module.exports = {	
+	  // See <http://truffleframework.com/docs/advanced/configuration>	
+	  // to customize your Truffle configuration!	
+	  networks: {	
+	    development: {	
+	      host: "localhost",	
+	      port: 8545,	
+	      network_id: "*" //Match any network id	
+	    }	
+	  }	
+	};	
+
+提交文件：		
+	Payroll.sol	
+	2_deploy_contracts.js	
+		
+2. test文件夹下中写出addEmployee和removeEmployee两个函数的单元测试。思考如何才能覆盖所有的测试路径，包括函数异常的捕捉。
+
+思路：		
+	1）针对函数中的每一个modifier进行测试	
+	2）针对函数中修改的状态变量进行测试	
+
+提交文件：		
+	TestPayroll.js	
+
+备注：
+	不知道如何查看状态变量。。。所以暂时不知道如何针对totalsalary是否正确修改进行测试。。。
