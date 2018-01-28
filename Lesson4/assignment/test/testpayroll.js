@@ -1,41 +1,122 @@
 var Payroll = artifacts.require("./PayRoll.sol");
 
-contract('Payroll', (accounts) => {
+contract('Payroll', function(accounts) {
+  const owner = accounts[0];
+  const employeeId1 = accounts[1];
+  const salary1 = 1;
+  const employeeId2 = accounts[2];
+  const salary2 = 1;
 
+  console.log(accounts);
 
-  //先添加fund再添加employee
-  it("should be able to add a valid employee with salary.", () => {
+  /**
+   * Test `addEmployee(address employeeId, uint salary) onlyOwner`
+   */
+  // Add employee successfully
+  it("should add employee successfully.", () => {
+    let payrollInstance;
+
     return Payroll.deployed().then((instance) => {
-      PayrollInstance = instance;
-      
-      return PayrollInstance.addFund({value: web3.toWei(10)});
+      payrollInstance = instance;
+
+      return payrollInstance.addEmployee(
+        employeeId1, salary1, {from: owner});
     }).then(() => {
-      return PayrollInstance.addEmployee(accounts[1], 2);
-    }).then(() => {
-      return PayrollInstance.employees.call(accounts[1]);
-    }).then((employeeData) => {
-      assert.equal(employeeData[1].valueOf(), web3.toWei(2), "Employee not stored with salary 1.");
+      return payrollInstance.employees.call(employeeId1);
+    }).then((employee) => {
+      // Check null
+      assert.notEqual(
+        employee[0], "0x0000000000000000000000000000000000000000",
+        "No employee has been added.");
+
+      // Check address
+      assert.equal(
+        employee[0], employeeId1,
+        "The address of new employee does not match.");
+
+      // Check salary
+      assert.equal(
+        web3.fromWei(employee[1], "ether").toNumber(), salary1,
+        "The salary of new employee does not match.");
     });
   });
 
+  // Check message sender
+  it("should not add employee, " +
+     "if the message sender is not the contract owner.", () => {
+    let payrollInstance;
 
-
-
-  it("should be able to remove an existing employee after paying owed salary.", () => {
     return Payroll.deployed().then((instance) => {
-      PayrollInstance = instance;
-      
-      return PayrollInstance.addFund({value: web3.toWei(10)});
+      payrollInstance = instance;
+
+      return payrollInstance.addEmployee(
+        employeeId1, salary1, {from: employeeId2});
     }).then(() => {
-      return PayrollInstance.addEmployee(accounts[2], 2);
-    }).then(() => {
-      return PayrollInstance.employees.call(accounts[2]);
-    }).then((employeeData) => {
-       return PayrollInstance.removeEmployee(accounts[2]);
-    }).then(() => {
-      return PayrollInstance.employees.call(accounts[2]);
-    }).then((employeeData) => {
-       assert.equal(employeeData[0].valueOf(), 0x0, "Employee not removed.");
+      assert(false, "The employee should not be added.");
+    }).catch((error) => {
+      assert(true, "The employee should not be added.");
     });
   });
+
+  /**
+   * Test `removeEmployee(address employeeId) onlyOwner employeeExist(employeeId)`
+   */
+  // Remove employee successfully
+  it("should remove employee successfully.", () => {
+    let payrollInstance;
+
+    return Payroll.deployed().then((instance) => {
+      payrollInstance = instance;
+
+      return payrollInstance.addEmployee(
+        employeeId2, salary2, {from: owner});
+    }).then(() => {
+      return payrollInstance.removeEmployee(
+        employeeId2, {from: owner});
+    }).then(() => {
+      return payrollInstance.employees.call(employeeId2);
+    }).then((employee) => {
+      // Check null
+      assert.equal(
+        employee[0], "0x0000000000000000000000000000000000000000",
+        "The employee should be removed.");
+    });
+  });
+
+  // Remove unknown employee
+  it("should not remove an unknown employee.", () => {
+    let payrollInstance;
+
+    return Payroll.deployed().then((instance) => {
+      payrollInstance = instance;
+
+      return payrollInstance.removeEmployee(
+        employeeId2, {from: owner});
+    }).then(() => {
+      assert(false, "Unknown employee.");
+    }).catch((error) => {
+      assert(true, "Unknown employee.");
+    });
+  });
+
+  // Check message sender
+  it("should not remove employee, " +
+     "if the message sender is not the contract owner.", () => {
+    let payrollInstance;
+
+    return Payroll.deployed().then((instance) => {
+      payrollInstance = instance;
+
+      return payrollInstance.addEmployee(
+        employeeId2, salary2, {from: owner});
+    }).then(() => {
+      return payrollInstance.removeEmployee(
+        employeeId2, {from: employeeId2});
+    }).then(() => {
+      assert(false, "The employee should not be added.");
+    }).catch((error) => {
+      assert(true, "The employee should not be added.");
+    });
+  });
+
 });
