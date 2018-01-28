@@ -192,6 +192,10 @@ class EmployeeList extends Component {
     this.setState({salary: value});
   }
 
+  handleAddressChange = (event) => {
+    this.setState({address: event.target.value});
+  }
+
   renderModal() {
       return (
       <Modal
@@ -203,7 +207,8 @@ class EmployeeList extends Component {
         <Form>
           <FormItem label="地址">
             <Input
-              onChange={ev => this.setState({address: ev.target.value})}
+              value={this.state.address}
+              onChange={this.handleAddressChange}
             />
           </FormItem>
 
