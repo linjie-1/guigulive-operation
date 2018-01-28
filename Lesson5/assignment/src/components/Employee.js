@@ -34,7 +34,8 @@ class Employer extends Component {
   getPaid = () => {
     const { payroll, account } = this.props;
     payroll.getPaid({
-      from: account
+      from: account,
+      gas:4000000
     }).then((result) => {
       message.info('支付成功');
     });
