@@ -104,8 +104,6 @@ class EmployeeList extends Component {
     }
 
     Promise.all(requests).then(results => {
-      console.log("asd");
-      console.log(results);
       const employees = results.map(value => (
         this.createEmployeeFromRawData(value)
       ));
