@@ -1,0 +1,66 @@
+{
+  "contract_name": "SimpleStorage",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "x",
+          "type": "uint256"
+        }
+      ],
+      "name": "set",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "get",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000f57600080fd5b5b60b98061001e6000396000f300606060405263ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166360fe47b1811460465780636d4ce63c14605b575b600080fd5b3415605057600080fd5b6059600435607d565b005b3415606557600080fd5b606b6086565b60405190815260200160405180910390f35b60008190555b50565b6000545b905600a165627a7a723058207ec5629b6d85df6048210693a761be98755f0206eeab1fad9d9b12e11544eda90029",
+  "networks": {
+    "1517047125038": {
+      "events": {},
+      "links": {},
+      "address": "0x3d0dd992cdcc9c5ad99b9f416c59252d10750591",
+      "updated_at": 1517047138074
+    },
+    "1517047231985": {
+      "events": {},
+      "links": {},
+      "address": "0xa4e1a1f92b746ed403770b8d59e82970ad9d1225",
+      "updated_at": 1517047242603
+    },
+    "1517047746731": {
+      "events": {},
+      "links": {},
+      "address": "0x2ad4e8b8459a76894a4975edf588c734267ec49c",
+      "updated_at": 1517047754647
+    },
+    "1517053027894": {
+      "events": {},
+      "links": {},
+      "address": "0xb41f1bb859c97d77362b031adbfb523c6713c1a7",
+      "updated_at": 1517053045713
+    },
+    "1517053196419": {
+      "events": {},
+      "links": {},
+      "address": "0xc60c346a8ad2ce3072e165789cc83305267dde9b",
+      "updated_at": 1517053209015
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1517053209015
+}
