@@ -10,7 +10,28 @@ class Employer extends Component {
   }
 
   componentDidMount() {
+    const { payroll } = this.props;
+    const updateInfo = (error, result) => {
+      if (!error) {
+        this.checkEmployee();
+      } else {
+        console.log(error);
+      }
+    }
+
+    this.getPaidEvent = payroll.GetPaid(updateInfo);
+    this.newEmployeeEvent = payroll.NewEmployee(updateInfo);
+    this.updateEmployeeEvent = payroll.UpdateEmployee(updateInfo);
+    this.removeEmployeeEvent = payroll.RemoveEmployee(updateInfo);
+
     this.checkEmployee();
+  }
+
+  componentWillUnmount() {
+    this.getPaidEvent.stopWatching();
+    this.newEmployeeEvent.stopWatching();
+    this.updateEmployeeEvent.stopWatching();
+    this.removeEmployeeEvent.stopWatching();
   }
 
   checkEmployee = () => {
@@ -24,17 +45,33 @@ class Employer extends Component {
         lastPaidDate: (new Date(result[2].toNumber() * 1000)).toString(),
       });
       web3.eth.getBalance(account, (error, result) => {
-        this.setState({
-          balance: web3.fromWei(result.toNumber()),
-        })
+        if (!error) {
+          this.setState({
+            balance: web3.fromWei(result.toNumber()),
+          })
+        } else {
+          console.log(error);
+          alert("发现异常！！！");
+        }
       });
+    }).catch((error) => {
+      console.log(error);
+      alert("发现异常！！！");
     });
   }
 
   getPaid = () => {
     const { payroll, account } = this.props;
-    payroll.getPaid({from: account, gas: 5000000}).then(() => {
-      this.checkEmployee();
+    payroll.getPaid({from: account, gas: 5000000}).then((result) => {
+      if (parseInt(result.receipt.status, 10) === 1) {
+        alert("领取薪水成功！");
+      } else {
+        console.log(result);
+        alert("领取薪水失败！！！");
+      }
+    }).catch((error) => {
+      console.log(error);
+      alert("领取薪水失败！！！");
     });
   }
 

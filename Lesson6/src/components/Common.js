@@ -12,9 +12,17 @@ class Common extends Component {
     const updateInfo = (error, result) => {
       if (!error) {
         this.checkInfo();
+      } else {
+        console.log(error);
       }
     }
-    this.newFund = payroll.NewFund(updateInfo);
+
+    this.newFundEvent = payroll.NewFund(updateInfo);
+    this.getPaidEvent = payroll.GetPaid(updateInfo);
+    this.newEmployeeEvent = payroll.NewEmployee(updateInfo);
+    this.updateEmployeeEvent = payroll.UpdateEmployee(updateInfo);
+    this.removeEmployeeEvent = payroll.RemoveEmployee(updateInfo);
+
     this.checkInfo();
   }
 
@@ -28,11 +36,18 @@ class Common extends Component {
         runway: result[1].toNumber(),
         employeeCount: result[2].toNumber()
       })
+    }).catch((error) => {
+      console.log(error);
+      alert("发现异常！！！");
     });
   }
 
   componentWillUnmount() {
-    this.newFund.stopWatching();
+    this.newFundEvent.stopWatching();
+    this.getPaidEvent.stopWatching();
+    this.newEmployeeEvent.stopWatching();
+    this.updateEmployeeEvent.stopWatching();
+    this.removeEmployeeEvent.stopWatching();
   }
 
   render() {

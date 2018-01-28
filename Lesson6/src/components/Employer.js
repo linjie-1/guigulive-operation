@@ -23,6 +23,9 @@ class Employer extends Component {
       this.setState({
         owner: result
       });
+    }).catch((error) => {
+      console.log(error);
+      alert("发现异常！！！");
     })
   }
 
