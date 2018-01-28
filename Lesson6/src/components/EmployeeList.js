@@ -137,6 +137,8 @@ class EmployeeList extends Component {
         this.setState({
           loading: false,
           showModal: false,
+          salary: null,
+          address: null,
         });
         alert("增加员工成功！");
       } else {
@@ -186,6 +188,10 @@ class EmployeeList extends Component {
     });
   }
 
+  handleSalaryChange = (value) => {
+    this.setState({salary: value});
+  }
+
   renderModal() {
       return (
       <Modal
@@ -203,8 +209,9 @@ class EmployeeList extends Component {
 
           <FormItem label="薪水">
             <InputNumber
+              value={this.state.salary}
               min={1}
-              onChange={salary => this.setState({salary})}
+              onChange={this.handleSalaryChange}
             />
           </FormItem>
         </Form>
