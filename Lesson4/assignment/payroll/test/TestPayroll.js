@@ -25,7 +25,7 @@ contract('TestPayroll', function(accounts) {
       PayrollInstance = instance;
       return PayrollInstance.addEmployee(accounts[1], testSalary, {from: accounts[1]});
     }).catch(function(error) {
-      assert(error.toString().includes('invalid'), "only owner can add employee");
+      assert(error.toString().includes('revert'), "only owner can add employee");
     });
   });
 
@@ -56,18 +56,18 @@ contract('TestPayroll', function(accounts) {
   it("only owner can remove employee", function() {
     return Payroll.deployed().then(function(instance) {
       PayrollInstance = instance;
-      return PayrollInstance.removeEmployee(accounts[1], testSalary, {from: accounts[1]});
+      return PayrollInstance.removeEmployee(accounts[1], {from: accounts[1]});
     }).catch(function(error) {
-      assert(error.toString().includes('invalid'), "only owner can remove employee");
+      assert(error.toString().includes('revert'), "only owner can remove employee");
     });
   });
 
-  it("if exployee already exist, can't add employee", function() {
+  it("if exployee not exist, can't remove employee", function() {
     return Payroll.deployed().then(function(instance) {
       PayrollInstance = instance;
-      return PayrollInstance.removeEmployee(accounts[1], testSalary, {from: owner});
+      return PayrollInstance.removeEmployee(accounts[3], {from: owner});
     }).catch(function(error) {
-      assert(error.toString().includes('invalid'), "The employee already not exist");
+      assert(error.toString().includes('invalid'), "The employee not exist");
     });
   });
 
