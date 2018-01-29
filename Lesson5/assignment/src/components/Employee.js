@@ -10,7 +10,21 @@ class Employer extends Component {
   }
 
   componentDidMount() {
+    // by h1994st
+    const { payroll } = this.props;
+
+    this.getPaidEvent = payroll.GetPaid((error, result) => {
+      if (!error) {
+        this.checkEmployee();
+      }
+    });
+
     this.checkEmployee();
+  }
+
+  componentWillUnmount() {
+    // by h1994st
+    this.getPaidEvent.stopWatching();
   }
 
   checkEmployee = () => {
@@ -19,9 +33,10 @@ class Employer extends Component {
     payroll.employees.call(account, {
       from: account
     }).then((result) => {
+      console.log(result[2]);
       this.setState({
         salary: web3.fromWei(result[1].toNumber()),
-        lastPaidDate: new Date(result[2].toNumber * 1000).toString()
+        lastPaidDate: new Date(result[2].toNumber() * 1000).toString()
       });
     });
 

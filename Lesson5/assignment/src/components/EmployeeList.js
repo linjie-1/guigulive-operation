@@ -84,6 +84,8 @@ class EmployeeList extends Component {
           lastPaidDay: new Date(value[2].toNumber() * 1000).toString()
         }));
 
+        console.log('Load: ' + employees);
+
         this.setState({
           employees: employees,
           loading: false
@@ -102,9 +104,11 @@ class EmployeeList extends Component {
       const newEmployee = {
         key: address,
         address: address,
-        salary: web3.toWei(salary),
+        salary: salary,
         lastPaidDay: new Date().toString()
       }
+
+      console.log('Add: ' + newEmployee);
 
       this.setState({
         address: '',
@@ -112,6 +116,8 @@ class EmployeeList extends Component {
         showModal: false,
         employees: employees.concat([newEmployee])
       });
+    }).catch(() => {
+      message.error('无法添加员工');
     });
   }
 
