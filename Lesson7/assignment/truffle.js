@@ -1,10 +1,15 @@
+var HDWalletProvider = require("truffle-hdwallet-provider");
+
+var mnemonic = "opinion destroy betray betray betray betray betray betray betray betray betray betray";
+
 module.exports = {
-  migrations_directory: "./migrations",
   networks: {
-    development: {
-      host: "localhost",
-      port: 8545,
-      network_id: "*" // Match any network id
+    migration_directory: "./migrations",
+    ropsten: {
+      provider: function() {
+        return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/TT6uQQrXNKFq26wxSqjG")
+      },
+      network_id: 3,
     }
   }
 };
