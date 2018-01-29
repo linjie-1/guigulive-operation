@@ -3,19 +3,38 @@ var Owner = artifacts.require("./Owner.sol");
 var SafeMath = artifacts.require("./SafeMath.sol");
 
 contract('TestPayroll', function(accounts) {
-  // const testEmployeeId = 0x1166fdf965cdd024bf6e7c520dc0f3ff3ec94d19;
   var testSalary = 1;
   var testBalance = 50;
   var owner = accounts[0];
 
+  // test addFund
   it("It should add fund.(js)", function() {
     return Payroll.deployed().then(function(instance) {
       payrollInstance = instance;
       return payrollInstance.addFund.call({value: web3.toWei(testBalance, 'ether'),from: owner});
     }).then(function(balance) {
-      assert.equal(balance.toNumber(), web3.toWei(testBalance));
+      assert.equal(balance.toNumber(), web3.toWei(testBalance), 'add fund');
     }).catch(function(error){
       console.log(error);
+    });
+  });
+
+  // test addEmployee
+  it("only owner can add employee", function() {
+    return Payroll.deployed().then(function(instance) {
+      PayrollInstance = instance;
+      return PayrollInstance.addEmployee(accounts[1], testSalary, {from: accounts[1]});
+    }).catch(function(error) {
+      assert(error.toString().includes('revert'), "only owner can add employee");
+    });
+  });
+
+  it("if exployee already exist, can't add employee", function() {
+    return Payroll.deployed().then(function(instance) {
+      PayrollInstance = instance;
+      return PayrollInstance.addEmployee(accounts[1], testSalary, {from: owner});
+    }).catch(function(error) {
+      assert(error.toString().includes('invalid'), "The employee already exist");
     });
   });
 
@@ -27,9 +46,28 @@ contract('TestPayroll', function(accounts) {
       return PayrollInstance.employees(accounts[1]);
     }).then(function(newEmployee) {
       assert.equal(newEmployee[0], accounts[1]);
-      assert.equal(newEmployee[1], web3.toWei(testSalary, 'ether'));
+      assert.equal(newEmployee[1], web3.toWei(testSalary, 'ether'), "add new employee");
     }).catch(function(error) {
       console.log(error)
+    });
+  });
+
+  //test removeEmployee
+  it("only owner can remove employee", function() {
+    return Payroll.deployed().then(function(instance) {
+      PayrollInstance = instance;
+      return PayrollInstance.removeEmployee(accounts[1], {from: accounts[1]});
+    }).catch(function(error) {
+      assert(error.toString().includes('revert'), "only owner can remove employee");
+    });
+  });
+
+  it("if exployee not exist, can't remove employee", function() {
+    return Payroll.deployed().then(function(instance) {
+      PayrollInstance = instance;
+      return PayrollInstance.removeEmployee(accounts[3], {from: owner});
+    }).catch(function(error) {
+      assert(error.toString().includes('invalid'), "The employee not exist");
     });
   });
 
