@@ -1,3 +1,4 @@
+
 pragma solidity ^0.4.14;
 
 contract Payroll {
@@ -55,7 +56,7 @@ contract Payroll {
     }
     
     function updateEmployee(address employeeId, uint salary) {
-        require(msg.sender == owner);
+        require(msg.sender == owner);偢
         require(employeeId != 0x0);
         var (emp, index) = _findEmployee(employeeId);
         require(emp.id != 0x0);
