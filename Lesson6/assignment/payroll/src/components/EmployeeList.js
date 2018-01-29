@@ -105,7 +105,7 @@ class EmployeeList extends Component {
                 address: '',
                 salary: '',
                 showModal: false,
-                employee: employees.concat([newEmployee])
+                employees: employees.concat([newEmployee])
             });
         });
     }
