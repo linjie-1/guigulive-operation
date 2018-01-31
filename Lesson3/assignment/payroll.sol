@@ -1,4 +1,5 @@
 /*作业请提交在这个目录下*/
+<<<<<<< HEAD
 /*## 硅谷live以太坊智能合约 第三课作业
 这里是同学提交作业的目录
 
@@ -86,3 +87,5 @@ contract Payroll is Ownable{
         addEmployee(newAddr, salary);
     }
 }
+=======
+>>>>>>> 6aa23514b6533809de7d0079ed31101390c85f7c
