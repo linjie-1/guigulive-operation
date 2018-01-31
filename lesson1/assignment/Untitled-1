@@ -1,0 +1,7 @@
+solidity
+block的概念
+
+
+msg.sender 谁调用这个函数
+
+
