@@ -49,7 +49,29 @@ class EmployeeList extends Component {
 
   componentDidMount() {
     const { payroll, account, web3 } = this.props;
-    payroll.checkInfo.call({
+    const updateInfo = (err, rst) => {
+      if(!err) {
+        this.getInfo();
+      }
+    }
+
+    this.employeeAdded = payroll.AddEmployee(updateInfo);
+    this.employeeUpdated = payroll.UpdateEmployee(updateInfo);
+    this.employeeRemoved = payroll.RemoveEmployee(updateInfo);
+
+    this.getInfo();
+  }
+
+  componentWillUnmount() {
+    this.employeeAdded.stopWatching();
+    this.employeeUpdated.stopWatching();
+    this.employeeRemoved.stopWatching();
+  }
+
+  getInfo = () => {
+    const { payroll, web3, account } = this.props;
+
+    return payroll.checkInfo.call({
       from: account,
     })
     .then((info) => {
@@ -61,7 +83,7 @@ class EmployeeList extends Component {
       }
       this.loadEmployees(totalEmployee);
     });
-  }
+  };
 
   loadEmployees(totalEmployee) {
     const { web3, payroll, account } = this.props;

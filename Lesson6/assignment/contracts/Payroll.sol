@@ -19,9 +19,7 @@ contract Payroll is Ownable {
 
     address[] employeeList;
 
-    event AddEmployee(
-        address employee
-    );
+    event AddEmployee(address employee);
     event RemoveEmployee(address employee);
     event UpdateEmployee(address employee);
     event NewFund(uint balance);

@@ -16,10 +16,7 @@ class Common extends Component {
       }
     }
 
-    this.addFund = payroll.NewFund((b) => {
-      alert("b");
-      updateInfo(b);
-    });
+    this.addFund = payroll.NewFund(updateInfo);
     this.getPaid = payroll.GetPaid(updateInfo);
     this.addEmployee = payroll.AddEmployee(updateInfo);
     this.updateEmployee = payroll.UpdateEmployee(updateInfo);
@@ -61,10 +58,10 @@ class Common extends Component {
             <Card title="合约金额">{balance} Ether</Card>
           </Col>
           <Col span={8}>
-            <Card title="员工人数">{employeeCount}</Card>
+            <Card title="员工人数">{employeeCount} 人</Card>
           </Col>
           <Col span={8}>
-            <Card title="可支付次数">{runway}</Card>
+            <Card title="可支付次数">{runway} 次</Card>
           </Col>
         </Row>
       </div>
