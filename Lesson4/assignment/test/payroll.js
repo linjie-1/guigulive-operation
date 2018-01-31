@@ -8,13 +8,14 @@ contract('PayRoll', function (accounts) {
       return PayRoll.deployed().then(function (instance) {
           payrollInstance = instance;
       }).then(function(){
-        return payrollInstance.addFund({value: web3.toWei(50)});
+        return payrollInstance.sendTransaction({value:web3.toWei(1, "ether")});
       }).then(function(){
-        return payrollInstance.addEmployee(accounts[1], 2);
-      }).then(function(){
-        return payrollInstance.employees.call(accounts[1]);
-      }).then(function(employee){
-        assert.equal(employee[1].valueOf(), web3.toWei(2), "fail");
+        return payrollInstance.addEmployee("0x123", 1);
+      }).then(function() {
+        return payrollInstance.getEmployeeSalary.call("0x123");
+      })
+      .then(function(salary){
+        assert.equal(salary, 1, "fail");
       });
     });
   
@@ -22,14 +23,17 @@ contract('PayRoll', function (accounts) {
   it("...remove employee successfully.", function() {
     return PayRoll.deployed().then(function (instance) {
       payrollInstance = instance;
+    }).then(function(){
+      return payrollInstance.sendTransaction({value:web3.toWei(1, "ether")});
     }).then(function() {
       return payrollInstance.addEmployee(accounts[2], 5);
     }).then(function() {
       return payrollInstance.removeEmployee(accounts[2]);
     }).then(function() {
-      return payrollInstance.employees.call(accounts[2]);
-    }).then(function(employee) {
-      assert.equal(employee[0].valueOf(), 0x0, "fail")
+      return payrollInstance.getEmployeeSalary.call(accounts[2]);
     })
+    .then(function(salary) {
+      assert.equal(salary, 0, "fail");
+    });
   });
 }); 

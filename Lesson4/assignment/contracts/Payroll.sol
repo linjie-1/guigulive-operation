@@ -1,4 +1,5 @@
-pragma solidity ^ 0.4.14;
+pragma solidity ^0.4.2;
+
 import "./SafeMath.sol";
 contract Payroll {
     using SafeMath for uint;
@@ -36,7 +37,7 @@ contract Payroll {
         _;
     }
     
-    function addEmployee(address employeeId, uint salary) public requireOwner
+    function addEmployee(address employeeId, uint salary) public  requireOwner
                 validAddress(employeeId){
         var e = employees[employeeId];
         if (e.id != 0x0) revert();
@@ -49,6 +50,11 @@ contract Payroll {
         if (e.id == 0x0) revert();
         _partialPaid(e);
         totalSalary-= e.salary;
+        e.id=0;
+        e.salary=0;
+
+        delete employees[employeeId];
+
     }
     
     function updateEmployee(address employeeId, uint salary) public requireOwner payable validAddress(employeeId){
@@ -62,15 +68,10 @@ contract Payroll {
     {
         return this.balance;
     }
-    
-    
-    
-    function calculateRunway() public view returns(uint) {
-       return totalSalary;
-    }
-    
-    function hasEnoughFund() public  view returns(bool) {
-        return calculateRunway() > 0;
+
+    function getPaid(address e) public requireOwner {
+        require(employees[e].id != 0x0);
+        getPaid(employees[e]);
     }
     
     function getPaid(Employee e) internal requireOwner {
@@ -80,4 +81,26 @@ contract Payroll {
         e.lastPayday = nextPayday;
         e.id.transfer(e.salary);
     }
+    
+    function calculateRunway() public view returns(uint) {
+       return totalSalary;
+    }
+    
+    function hasEnoughFund() public  view returns(bool) {
+        return this.balance - calculateRunway() > 0;
+    }
+
+    function getBalance() public view returns(uint) {
+        return this.balance;
+    }
+
+    function getEmployeeSalary(address addr) public view returns(uint) {
+        return employees[addr].salary;
+    }
+
+    function getAddress() public view returns(address) {
+        return this;
+    }
+    
+    
 }
