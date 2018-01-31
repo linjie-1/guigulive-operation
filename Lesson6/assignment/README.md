@@ -1,5 +1,18 @@
 ## 硅谷live以太坊智能合约 第六课作业
-这里是同学提交作业的目录
+20 申龙斌 
+
+增加10eth
+![addfund](lesson6-addfund-10eth.jpg)
+
+增加员工
+![add employee](lesson6-addemployee.jpg)
+
+取工资
+![get paid](lesson6-getpaid.jpg)
+
+删除员工
+![delete employee](lesson6-del.jpg)
+
 
 ### payroll.sol
 加了几个event，以前几次试验不通过，是因为代码没有抄正确。
