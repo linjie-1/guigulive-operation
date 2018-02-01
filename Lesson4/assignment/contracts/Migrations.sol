@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 pragma solidity ^0.4.2;
+=======
+pragma solidity ^0.4.17;
+>>>>>>> master
 
 contract Migrations {
   address public owner;
