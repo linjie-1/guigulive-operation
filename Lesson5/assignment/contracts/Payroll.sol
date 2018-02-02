@@ -1,120 +1,101 @@
 pragma solidity ^0.4.14;
 
-contract Payroll {
+import './SafeMath.sol';
+import './Ownable.sol';
+
+contract Payroll is Ownable {
+    using SafeMath for uint;
     struct Employee {
         address id;
         uint salary;
         uint lastPayday;
     }
-
+    
     uint constant payDuration = 10 seconds;
+
     uint totalSalary;
     uint totalEmployee;
+    address[] employeeList;
+    mapping(address => Employee) public employees;
 
-    address owner;
-    mapping(address => Employee) public employees; //Mapping
 
-    function Payroll() public {
-        owner = msg.sender;
-    }
-
-    // custom modifier
-    modifier onlyOwner {
-        require(msg.sender == owner);
-        _;
-    }
-    
-    // modifier with parameter
-    modifier employeeExist(address employeeId) {
+    modifier employeeExit(address employeeId) {
         var employee = employees[employeeId];
         assert(employee.id != 0x0);
         _;
     }
     
-     // modifier with parameter
-    modifier employeeNotExist(address employeeId) {
-        var employee = employees[employeeId];
-        assert(employee.id == 0x0);
-        _;
-    }
-
     function _partialPaid(Employee employee) private {
-        uint payment = employee.salary * (now - employee.lastPayday) / payDuration;
+        uint payment = employee.salary
+            .mul(now.sub(employee.lastPayday))
+            .div(payDuration);
         employee.id.transfer(payment);
     }
 
-    function addEmployee(address employeeId, uint salary) onlyOwner employeeNotExist(employeeId) public {
-        totalSalary += salary * 1 ether;
-        totalEmployee += 1;
-        employees[employeeId] = Employee(employeeId, salary, now);
-    }
-
-    function removeEmployee(address employeeId) onlyOwner employeeExist(employeeId) public {
+    function checkEmployee(uint index) returns (address employeeId, uint salary, uint lastPayday) {
+        employeeId = employeeList[index];
         var employee = employees[employeeId];
-
-        _partialPaid(employee);
-        totalSalary -= employee.salary;
-        totalEmployee -= 1;
-        delete employees[employeeId];
-    }
-
-    function findEmployee(address employeeId) employeeExist(employeeId) public returns (Employee){
-        return employees[employeeId];
-    }
-
-    function updateEmployee(address employeeId, uint salary) onlyOwner employeeExist(employeeId) public {
-        var employee = employees[employeeId];
-        _partialPaid(employee);
-        totalSalary -= employee.salary;
-        totalSalary += salary * 1 ether; // Don't forget the unit
-        employee.salary = salary;
-        employee.lastPayday = now;
-    }
-
-    function addFund() payable public returns (uint) {
-        return this.balance;
-    }
-
-    function calculateRunway() public returns (uint) {
-        assert(totalSalary != 0x0);
-        return this.balance / totalSalary;
-    }
-
-    function hasEnoughFund() public returns (bool) {
-        if (totalSalary == 0x0) {
-            return true;
-        }
-        return calculateRunway() > 0;
-    }
-    
-    function checkEmployee(address employeeId) public returns (uint salary, uint lastPayday) { //return parameters naming
-        var employee = employees[employeeId];
-        //return (employee.salary, employee.lastPayday);
-        // return parameters assignment
         salary = employee.salary;
         lastPayday = employee.lastPayday;
     }
+    
+    function addEmployee(address employeeId, uint salary) onlyOwner {
+        var employee = employees[employeeId];
+        assert(employee.id == 0x0);
 
-    function getPaid() employeeExist(msg.sender) public {
-        var employee = employees[msg.sender];
-
-        uint nextPayday = employee.lastPayday + payDuration;
-        assert(nextPayday < now);
-
-        employees[msg.sender].lastPayday = nextPayday;
-        employee.id.transfer(employee.salary);
+        employees[employeeId] = Employee(employeeId, salary.mul(1 ether), now);
+        totalSalary = totalSalary.add(employees[employeeId].salary);
+        totalEmployee = totalEmployee.add(1);
+        employeeList.push(employeeId);
     }
     
-    // new method
-    function changePaymentAddress(address newAddress) employeeExist(msg.sender) employeeNotExist(newAddress) public {
+    function removeEmployee(address employeeId) onlyOwner employeeExit(employeeId) {
+        var employee = employees[employeeId];
+
+        _partialPaid(employee);
+        totalSalary = totalSalary.sub(employee.salary);
+        delete employees[employeeId];
+        totalEmployee = totalEmployee.sub(1);
+    }
+    
+    function updateEmployee(address employeeId, uint salary) onlyOwner employeeExit(employeeId) {
+        var employee = employees[employeeId];
+
+        _partialPaid(employee);
+        totalSalary = totalSalary.sub(employee.salary);
+        employee.salary = salary.mul(1 ether);
+        employee.lastPayday = now;
+        totalSalary = totalSalary.add(employee.salary);
+    }
+    
+    function addFund() payable returns (uint) {
+        return this.balance;
+    }
+    
+    function calculateRunway() returns (uint) {
+        return this.balance.div(totalSalary);
+    }
+    
+    function hasEnoughFund() returns (bool) {
+        return calculateRunway() > 0;
+    }
+    
+    function getPaid() employeeExit(msg.sender) {
         var employee = employees[msg.sender];
-        employees[newAddress] = Employee(newAddress, employee.salary, employee.lastPayday);
-        delete employees[msg.sender];
+
+        uint nextPayday = employee.lastPayday.add(payDuration);
+        assert(nextPayday < now);
+
+        employee.lastPayday = nextPayday;
+        employee.id.transfer(employee.salary);
     }
 
-    function checkInfo() public returns (uint balance, uint runway, uint employeeCount) {
+    function checkInfo() returns (uint balance, uint runway, uint employeeCount) {
         balance = this.balance;
-        runway = calculateRunway();
         employeeCount = totalEmployee;
+
+        if (totalSalary > 0) {
+            runway = calculateRunway();
+        }
     }
 }

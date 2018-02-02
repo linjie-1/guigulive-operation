@@ -283,7 +283,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 67,
+                                  "referencedDeclaration": 528,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -363,7 +363,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 70,
+                              "referencedDeclaration": 531,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -404,7 +404,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 67,
+                                      "referencedDeclaration": 528,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -574,7 +574,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 70,
+                              "referencedDeclaration": 531,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -840,8 +840,13 @@
       "events": {},
       "links": {},
       "address": "0x345ca3e014aaf5dca488057592ee47305d9b3e10"
+    },
+    "1517553807066": {
+      "events": {},
+      "links": {},
+      "address": "0xeccf5ad75d26abebc7c48698747b4ce4bd18de20"
     }
   },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-01-28T00:10:05.911Z"
+  "updatedAt": "2018-02-02T06:50:06.910Z"
 }
