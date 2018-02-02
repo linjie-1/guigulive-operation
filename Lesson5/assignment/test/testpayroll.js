@@ -1,4 +1,4 @@
-var Payroll = artifacts.require("./PayRoll.sol");
+var Payroll = artifacts.require("./Payroll.sol");
 
 contract('Payroll', function(accounts) {
   const owner = accounts[0];
