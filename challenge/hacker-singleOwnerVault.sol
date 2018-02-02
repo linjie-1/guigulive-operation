@@ -126,8 +126,6 @@ contract TimeDelayedVault is BasicMultiOwnerVault {
 
 contract Attacker{
     uint public stack = 0;
-    uint constant stacklimit = 10;
-    uint public amount;
     TimeDelayedVault vault;
 
     function Attacker(address vaultAddress) payable {
