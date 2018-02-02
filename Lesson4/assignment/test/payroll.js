@@ -1,4 +1,4 @@
-var Payroll = artifacts.require("./Payroll.sol");
+// var async = require("async");
 
 // I am trying to use zeppelin-solidity increaseTime helper here, but failed.
 // function increaseTime (duration) {
@@ -33,11 +33,13 @@ var Payroll = artifacts.require("./Payroll.sol");
 //   years: function (val) { return val * this.days(365); },
 // };
 
-contract('Payroll', function() {
-  var testEmployeeId = '0x123';
-  var testEmployeeId2 = '0x124';
+const Payroll = artifacts.require("./Payroll.sol");
 
-  contract('TestAddEmployee', function(accounts){
+contract('Payroll', function(accounts) {
+  describe('TestAddEmployee', function(){
+    var testEmployeeId = accounts[5];
+    var testEmployeeId2 = accounts[6];
+
     it("should add employee and set salary successfully.", function() {
       return Payroll.deployed().then(function(instance) {
         payroll = instance;
@@ -82,7 +84,10 @@ contract('Payroll', function() {
     });
   });
 
-  contract('TestRemoveEmployee', function(accounts){
+  describe('TestRemoveEmployee', function(){
+    var testEmployeeId = accounts[5];
+    var testEmployeeId2 = accounts[6];
+
     it("should remove employee and reduce total salary successfully.", function() {
       return Payroll.deployed().then(function(instance) {
         payroll = instance;
@@ -129,7 +134,10 @@ contract('Payroll', function() {
     });
   });
 
-  contract("TestGetPaid", function(accounts){
+  describe("TestGetPaid", function(){
+    var testEmployeeId = accounts[5];
+    var testEmployeeId2 = accounts[6];
+
     it("should check employee existence before paying salary", function() {
       return Payroll.deployed().then(function(instance) {
         payroll = instance;
@@ -157,6 +165,27 @@ contract('Payroll', function() {
           assert.equal(newBalance - oldBalance, 1, "employee is paid successfully");
         });
       });
+
+      // const employee = accounts[1];
+      // const before_paid = new BigNumber(web3.eth.getBalance(employee));
+      // try {
+      //   const pay_duration = await payroll.payDuration();
+      //   // Increase next block's timestamp with 2 * payDuration.
+      //   web3.currentProvider.send({jsonrpc: "2.0", method: "evm_increaseTime", params: [ 2 * pay_duration ], id: 1});
+      //   web3.currentProvider.send({jsonrpc: "2.0", method: "evm_mine", params: [], id: 2});
+      //   let result = await payroll.getPaid({from : employee});
+      //   var gasPrice = web3.eth.getTransaction(result.tx).gasPrice.toNumber();
+      //   // Get gas consumed by function getPaid().
+      //   // See https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethestimategas:
+      //   // Executes a message call or transaction, which is directly executed in
+      //   // the VM of the node, but never mined into the blockchain.
+      //   let gas = await payroll.getPaid.estimateGas({from : employee});
+      //
+      //   const after_paid = new BigNumber(web3.eth.getBalance(employee));
+      //   assert.equal(base_salary, after_paid.minus(before_paid).plus(gasPrice * gas).toString());
+      // } catch (err) {
+      //   console.log("await promise error: ", err);
+      // }
     });
 
     it("should not pay employee if employee has not worked long enough", function() {

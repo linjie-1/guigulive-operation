@@ -13,6 +13,7 @@
   "author": "HH",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.0",
     "promise": "^8.0.1"
   }
 }
