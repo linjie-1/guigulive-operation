@@ -1,15 +1,15 @@
 {
   "contractName": "SafeMath",
   "abi": [],
-  "bytecode": "0x60606040523415600e57600080fd5b603580601b6000396000f3006060604052600080fd00a165627a7a7230582040651b5e20d14382db6918da4120533999d1f41e3f22575bca26bc932ab8eaee0029",
-  "deployedBytecode": "0x6060604052600080fd00a165627a7a7230582040651b5e20d14382db6918da4120533999d1f41e3f22575bca26bc932ab8eaee0029",
+  "bytecode": "0x60606040523415600e57600080fd5b603580601b6000396000f3006060604052600080fd00a165627a7a72305820ff3aa4d3b29a07bf52fccfbbdddfc7ef8310a37d71b56ec1cc35aa67640103300029",
+  "deployedBytecode": "0x6060604052600080fd00a165627a7a72305820ff3aa4d3b29a07bf52fccfbbdddfc7ef8310a37d71b56ec1cc35aa67640103300029",
   "sourceMap": "117:1022:3:-;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "117:1022:3:-;;;;;",
   "source": "pragma solidity ^0.4.18;\n\n\n/**\n * @title SafeMath\n * @dev Math operations with safety checks that throw on error\n */\nlibrary SafeMath {\n\n  /**\n  * @dev Multiplies two numbers, throws on overflow.\n  */\n  function mul(uint256 a, uint256 b) internal pure returns (uint256) {\n    if (a == 0) {\n      return 0;\n    }\n    uint256 c = a * b;\n    assert(c / a == b);\n    return c;\n  }\n\n  /**\n  * @dev Integer division of two numbers, truncating the quotient.\n  */\n  function div(uint256 a, uint256 b) internal pure returns (uint256) {\n    // assert(b > 0); // Solidity automatically throws when dividing by 0\n    uint256 c = a / b;\n    // assert(a == b * c + a % b); // There is no case in which this doesn't hold\n    return c;\n  }\n\n  /**\n  * @dev Substracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).\n  */\n  function sub(uint256 a, uint256 b) internal pure returns (uint256) {\n    assert(b <= a);\n    return a - b;\n  }\n\n  /**\n  * @dev Adds two numbers, throws on overflow.\n  */\n  function add(uint256 a, uint256 b) internal pure returns (uint256) {\n    uint256 c = a + b;\n    assert(c >= a);\n    return c;\n  }\n}",
-  "sourcePath": "/home/juicebox/Desktop/guigulive-operation/Lesson4/assignment/contracts/SafeMath.sol",
+  "sourcePath": "/home/juicebox/Desktop/guigulive-operation/Lesson5/assignment/contracts/SafeMath.sol",
   "ast": {
     "attributes": {
-      "absolutePath": "/home/juicebox/Desktop/guigulive-operation/Lesson4/assignment/contracts/SafeMath.sol",
+      "absolutePath": "/home/juicebox/Desktop/guigulive-operation/Lesson5/assignment/contracts/SafeMath.sol",
       "exportedSymbols": {
         "SafeMath": [
           572
@@ -1341,7 +1341,13 @@
     "name": "solc",
     "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "1517198540932": {
+      "events": {},
+      "links": {},
+      "address": "0x76703312b3055b67df2a1b43cf6f2113041ccc2a"
+    }
+  },
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-01-29T04:05:56.621Z"
+  "updatedAt": "2018-01-29T04:22:48.572Z"
 }
