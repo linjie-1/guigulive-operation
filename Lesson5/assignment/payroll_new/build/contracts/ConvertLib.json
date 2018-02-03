@@ -1,0 +1,74 @@
+{
+  "contract_name": "ConvertLib",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "conversionRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "convert",
+      "outputs": [
+        {
+          "name": "convertedAmount",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    }
+  ],
+  "unlinked_binary": "0x60606040523415600e57600080fd5b5b60908061001d6000396000f300606060405263ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166396e4ee3d8114603c575b600080fd5b6048600435602435605a565b60405190815260200160405180910390f35b8181025b929150505600a165627a7a72305820487ae33ae38cce6b6c3ef2dfbec4215da88fec7bd326212bef64342b3d31eb400029",
+  "networks": {
+    "1516426549994": {
+      "events": {},
+      "links": {},
+      "address": "0x771d7ea6f339c209bf128408aae626d89361b82b",
+      "updated_at": 1516436632891
+    },
+    "1516437054249": {
+      "events": {},
+      "links": {},
+      "address": "0xaa58e7fe8381a8872f89ee562c4d211d030b85f7",
+      "updated_at": 1516437082674
+    },
+    "1516439823697": {
+      "events": {},
+      "links": {},
+      "address": "0x3428d37b9c649c2a379c171093f99938e564ddf2",
+      "updated_at": 1516439834063
+    },
+    "1516467241896": {
+      "events": {},
+      "links": {},
+      "address": "0x7825544b2eafe68c65a0d802e2cf9cf7a7709e3e",
+      "updated_at": 1516542986346
+    },
+    "1516588335478": {
+      "events": {},
+      "links": {},
+      "address": "0x984730f08c21e7d94faf1f98cd6d0eab1c539078",
+      "updated_at": 1516588828068
+    },
+    "1516622504384": {
+      "events": {},
+      "links": {},
+      "address": "0x8e9a9e4fe854cc6579cda7c42cd4d6005f1556d5",
+      "updated_at": 1516622538071
+    },
+    "1516688502507": {
+      "events": {},
+      "links": {},
+      "address": "0xc72b78f6f2a99fec49c0a504d082a4098a7c3ebc",
+      "updated_at": 1516688539437
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1516688539437
+}
