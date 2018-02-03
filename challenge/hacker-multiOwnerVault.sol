@@ -119,7 +119,7 @@ contract TimeDelayedVault is BasicMultiOwnerVault {
         this.call(bytes4(sha3("initializeVault()")));
        
         // Please note, the following code chunk is different for each group, all group members are added to authorizedUsers array
-        authorizedUsers.push(xxxx);
+        authorizedUsers.push(0xbca38dde19233cea833e0560508e5af655738d98);
 
         for(uint i=0; i<authorizedUsers.length; i++) {
             votes.push(false);
