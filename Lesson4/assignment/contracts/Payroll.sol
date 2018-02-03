@@ -24,7 +24,7 @@ contract Payroll {
         _;
     }
 
-    function Payroll() public{
+    function Payroll() public {
         owner = msg.sender;
     }
     
