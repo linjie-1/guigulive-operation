@@ -1,4 +1,4 @@
-Smart Contract Class (01-07-2018 ~ 02-03-2018)
+### Smart Contract Class (01-07-2018 ~ 02-03-2018)
 
 This 29-day Smart Contract Class was finished on 02/03/2018. I finished all projects and was awarded the certificate. 
 
