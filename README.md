@@ -1,8 +1,8 @@
-### Smart Contract Class (01-07-2018 ~ 02-03-2018)
+# Smart Contract Class (01-07-2018 ~ 02-03-2018)
 
-This 29-day Smart Contract Class was finished on 02/03/2018. I finished all projects and was awarded the certificate. 
+## This 29-day Smart Contract Class was finished on 02/03/2018. I finished all projects and was awarded the certificate. 
 
-It is an amazing class and recommend it to all other people. Let us explore the blockchain technology together!
+## It is an amazing class and recommend it to all other people. Let us explore the blockchain technology together!
 
 # 硅谷live以太坊智能合约频道官方地址
 
