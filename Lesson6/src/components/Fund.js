@@ -19,10 +19,23 @@ class Fund extends Component {
       from: account,
       value: web3.toWei(this.state.fund)
     }).then((result) => {
-      this.setState({
-        fund: null,
-      });
+      if (parseInt(result.receipt.status, 10) === 1) {
+        this.setState({
+          fund: null,
+        });
+        alert("增加资金成功！");
+      } else {
+        console.log(result);
+        alert("增加资金失败！！！");
+      }
+    }).catch((error) => {
+      console.log(error);
+      alert("增加资金失败！！！");
     });
+  }
+
+  handleChange = (value) => {
+    this.setState({fund: value});
   }
 
   render() {
@@ -36,7 +49,7 @@ class Fund extends Component {
             <InputNumber
               value={this.state.fund}
               min={1}
-              onChange={fund => this.setState({fund})}
+              onChange={this.handleChange}
             />
           </FormItem>
           <FormItem>

@@ -8,6 +8,25 @@ class Common extends Component {
   }
 
   componentDidMount() {
+    const { payroll } = this.props;
+    const updateInfo = (error, result) => {
+      if (!error) {
+        this.checkInfo();
+      } else {
+        console.log(error);
+      }
+    }
+
+    this.newFundEvent = payroll.NewFund(updateInfo);
+    this.getPaidEvent = payroll.GetPaid(updateInfo);
+    this.newEmployeeEvent = payroll.NewEmployee(updateInfo);
+    this.updateEmployeeEvent = payroll.UpdateEmployee(updateInfo);
+    this.removeEmployeeEvent = payroll.RemoveEmployee(updateInfo);
+
+    this.checkInfo();
+  }
+
+  checkInfo = () => {
     const { payroll, account, web3 } = this.props;
     payroll.checkInfo.call({
       from: account,
@@ -17,7 +36,18 @@ class Common extends Component {
         runway: result[1].toNumber(),
         employeeCount: result[2].toNumber()
       })
+    }).catch((error) => {
+      console.log(error);
+      alert("发现异常！！！");
     });
+  }
+
+  componentWillUnmount() {
+    this.newFundEvent.stopWatching();
+    this.getPaidEvent.stopWatching();
+    this.newEmployeeEvent.stopWatching();
+    this.updateEmployeeEvent.stopWatching();
+    this.removeEmployeeEvent.stopWatching();
   }
 
   render() {

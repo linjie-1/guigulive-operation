@@ -35,12 +35,12 @@ class EmployeeList extends Component {
       salary: null
     };
 
-    columns[1].render = (text, record) => (
-      <EditableCell
+    columns[1].render = (text, record) => {
+      return <EditableCell
         value={text}
         onChange={ this.updateEmployee.bind(this, record.address) }
       />
-    );
+    };
 
     columns[3].render = (text, record) => (
       <Popconfirm title="你确定删除吗?" onConfirm={() => this.removeEmployee(record.address)}>
@@ -50,29 +50,50 @@ class EmployeeList extends Component {
   }
 
   componentDidMount() {
+    const { payroll } = this.props;
+    const updateInfo = (error, result) => {
+      if (error) {
+        return;
+      }
+      this.loadAllEmployees();
+    }
+
+    this.getPaidEvent = payroll.GetPaid(updateInfo);
+    this.newEmployeeEvent = payroll.NewEmployee(updateInfo);
+    this.updateEmployeeEvent = payroll.UpdateEmployee(updateInfo);
+    this.removeEmployeeEvent = payroll.RemoveEmployee(updateInfo);
+
+    this.loadAllEmployees();
+  }
+
+  componentWillUnmount() {
+    this.getPaidEvent.stopWatching();
+    this.newEmployeeEvent.stopWatching();
+    this.updateEmployeeEvent.stopWatching();
+    this.removeEmployeeEvent.stopWatching();
+  }
+
+  loadAllEmployees = () => {
     const { payroll, account } = this.props;
     payroll.checkInfo.call({
       from: account
     }).then((result) => {
       const employeeCount = result[2].toNumber();
       if (employeeCount === 0) {
-        this.setState({loading: false});
-        return;
+        this.setState({
+          loading: false,
+          employees: []
+        });
+      } else {
+        this.loadEmployeesHelper(employeeCount);
       }
-      this.loadEmployees(employeeCount);
+    }).catch((error) => {
+      console.log(error);
+      alert("加载员工失败！！！");
     });
   }
 
-  createEmployeeFromRawData = (data) => {
-    const { web3 } = this.props;
-    return {
-      'address': data[0],
-      'salary': web3.fromWei(data[1].toNumber(), 'ether'),
-      'lastPaidDay': (new Date(data[2].toNumber() * 1000)).toString(),
-    };
-  }
-
-  loadEmployees(employeeCount) {
+  loadEmployeesHelper = (employeeCount) => {
     const { payroll, account } = this.props;
     const requests = [];
     for (let i = 0; i < employeeCount; i++) {
@@ -90,7 +111,19 @@ class EmployeeList extends Component {
         employees: employees,
         loading: false,
       });
+    }).catch((error) => {
+      console.log(error);
+      alert("加载员工失败！！！");
     });
+  }
+
+  createEmployeeFromRawData = (data) => {
+    const { web3 } = this.props;
+    return {
+      'address': data[0],
+      'salary': web3.fromWei(data[1].toNumber()),
+      'lastPaidDay': (new Date(data[2].toNumber() * 1000)).toString(),
+    };
   }
 
   addEmployee = () => {
@@ -100,20 +133,21 @@ class EmployeeList extends Component {
       this.state.salary,
       {from: account, gas: 5000000}
     ).then((result) => {
-      this.setState({
-        loading: false, // todo: only set loading after all employees loaded
-        showModal: false,
-      });
-      return payroll.employees.call(
-        this.state.address,
-        {from: account},
-      );
-    }).then((result) => {
-      this.setState(prevState => ({
-        employees: [...prevState.employees, this.createEmployeeFromRawData(result)],
-        address: null,
-        salary: null,
-      }));
+      if (parseInt(result.receipt.status, 10) === 1) {
+        this.setState({
+          loading: false,
+          showModal: false,
+          salary: null,
+          address: null,
+        });
+        alert("增加员工成功！");
+      } else {
+        console.log(result);
+        alert("增加员工失败！！！");
+      }
+    }).catch((error) => {
+      console.log(error);
+      alert("增加员工失败！！！");
     });
   }
 
@@ -124,17 +158,15 @@ class EmployeeList extends Component {
       salary,
       {from: account, gas: 5000000}
     ).then((result) => {
-      this.setState({
-        employees: this.state.employees.filter((x) => x.address !== address)
-      });
-      return payroll.employees.call(
-        address,
-        {from: account},
-      );
-    }).then((result) => {
-      this.setState(prevState => ({
-        employees: [...prevState.employees, this.createEmployeeFromRawData(result)],
-      }));
+      if (parseInt(result.receipt.status, 10) === 1) {
+        alert("更新员工薪水成功！");
+      } else {
+        console.log(result);
+        alert("更新员工薪水失败！！！");
+      }
+    }).catch((error) => {
+      console.log(error);
+      alert("更新员工薪水失败！！！");
     });
   }
 
@@ -144,10 +176,24 @@ class EmployeeList extends Component {
       employeeId,
       {from: account, gas: 5000000}
     ).then((result) => {
-      this.setState({
-        employees: this.state.employees.filter((x) => x.address !== employeeId)
-      });
+      if (parseInt(result.receipt.status, 10) === 1) {
+        alert("删除员工成功！");
+      } else {
+        console.log(result);
+        alert("删除员工失败！！！");
+      }
+    }).catch((error) => {
+      console.log(error);
+      alert("删除员工失败！！！");
     });
+  }
+
+  handleSalaryChange = (value) => {
+    this.setState({salary: value});
+  }
+
+  handleAddressChange = (event) => {
+    this.setState({address: event.target.value});
   }
 
   renderModal() {
@@ -162,15 +208,15 @@ class EmployeeList extends Component {
           <FormItem label="地址">
             <Input
               value={this.state.address}
-              onChange={ev => this.setState({address: ev.target.value})}
+              onChange={this.handleAddressChange}
             />
           </FormItem>
 
           <FormItem label="薪水">
             <InputNumber
-              min={1}
               value={this.state.salary}
-              onChange={salary => this.setState({salary})}
+              min={1}
+              onChange={this.handleSalaryChange}
             />
           </FormItem>
         </Form>
@@ -180,7 +226,6 @@ class EmployeeList extends Component {
   }
 
   render() {
-    const { loading, employees } = this.state;
     return (
       <div>
         <Button
@@ -193,8 +238,8 @@ class EmployeeList extends Component {
         {this.renderModal()}
 
         <Table
-          loading={loading}
-          dataSource={employees}
+          loading={this.state.loading}
+          dataSource={this.state.employees}
           columns={columns}
         />
       </div>
