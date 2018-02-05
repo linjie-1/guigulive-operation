@@ -1,0 +1,328 @@
+{
+  "contract_name": "Payroll",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "hasEnoughFund",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "calculateRunway",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "employeeId",
+          "type": "address"
+        },
+        {
+          "name": "salary",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateEmployee",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "checkInfo",
+      "outputs": [
+        {
+          "name": "balance",
+          "type": "uint256"
+        },
+        {
+          "name": "runway",
+          "type": "uint256"
+        },
+        {
+          "name": "employeeCount",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "checkEmployee",
+      "outputs": [
+        {
+          "name": "employeeId",
+          "type": "address"
+        },
+        {
+          "name": "salary",
+          "type": "uint256"
+        },
+        {
+          "name": "lastPayday",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "addFund",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": true,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "getPaid",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "employees",
+      "outputs": [
+        {
+          "name": "id",
+          "type": "address"
+        },
+        {
+          "name": "salary",
+          "type": "uint256"
+        },
+        {
+          "name": "lastPayday",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "employeeId",
+          "type": "address"
+        }
+      ],
+      "name": "removeEmployee",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "employeeId",
+          "type": "address"
+        },
+        {
+          "name": "salary",
+          "type": "uint256"
+        }
+      ],
+      "name": "addEmployee",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "NewFund",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "GetPaid",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "NewEmployee",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "UpdateEmployee",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "RemoveEmployee",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    }
+  ],
+  "unlinked_binary": "0x60606040525b60008054600160a060020a03191633600160a060020a03161790555b5b610ad7806100316000396000f300606060405236156100b75763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166323fed09e81146100bc5780634ec19512146100e35780635e91d8ec1461010857806385a962581461012c5780638da5cb5b1461016357806396b0269614610192578063a2f09dfa146101de578063cf41d6f8146101f8578063d06789471461020d578063d108177a14610262578063e7fd9a1314610283578063f2fde38b146102a7575b600080fd5b34156100c757600080fd5b6100cf6102c8565b604051901515815260200160405180910390f35b34156100ee57600080fd5b6100f66102da565b60405190815260200160405180910390f35b341561011357600080fd5b61012a600160a060020a0360043516602435610301565b005b341561013757600080fd5b61013f610423565b60405180848152602001838152602001828152602001935050505060405180910390f35b341561016e57600080fd5b610176610451565b604051600160a060020a03909116815260200160405180910390f35b341561019d57600080fd5b6101a8600435610460565b6040518084600160a060020a0316600160a060020a03168152602001838152602001828152602001935050505060405180910390f35b6100f66104c2565b60405190815260200160405180910390f35b341561020357600080fd5b61012a610500565b005b341561021857600080fd5b6101a8600160a060020a03600435166105db565b6040518084600160a060020a0316600160a060020a03168152602001838152602001828152602001935050505060405180910390f35b341561026d57600080fd5b61012a600160a060020a0360043516610606565b005b341561028e57600080fd5b61012a600160a060020a0360043516602435610745565b005b34156102b257600080fd5b61012a600160a060020a03600435166108d6565b005b6000806102d36102da565b1190505b90565b60006102fb60015430600160a060020a03163161096f90919063ffffffff16565b90505b90565b6000805433600160a060020a0390811691161461031d57600080fd5b600160a060020a0380841660009081526004602052604090208054859216151561034357fe5b600160a060020a03851660009081526004602052604090819020935061039a9084906060905190810160409081528254600160a060020a03168252600183015460208301526002909201549181019190915261098b565b60018084015490546103b19163ffffffff610a0016565b6001556103cc84670de0b6b3a764000063ffffffff610a1716565b6001808501829055426002860155546103ea9163ffffffff610a4616565b6001557f44b26fcedcec0ce3cfb6fe5939cf649e34efdf3a1a4cad4def783efd83a7f85260405160405180910390a15b5b50505b505050565b600254600154600160a060020a03301631916000918290111561044b576104486102da565b91505b5b909192565b600054600160a060020a031681565b60008060008060038581548110151561047557fe5b906000526020600020900160005b9054600160a060020a036101009290920a900416600081815260046020526040902060018101546002820154929650945090925090505b509193909250565b60007f8a95ef04de579fe157bcb630c29fd74571ee2d76bf3bf9edd104b30152c1929c60405160405180910390a150600160a060020a033016315b90565b600160a060020a033381811660009081526004602052604081208054919384939216151561052a57fe5b600160a060020a0333166000908152600460205260409020600281015490945061055b90600a63ffffffff610a4616565b925042831061056657fe5b6002840183905583546001850154600160a060020a039091169080156108fc0290604051600060405180830381858888f1935050505015156105a757600080fd5b7f74acc6e2f8a9388733f3192d57b11c971c54237bc680f052864572b7ad50f1f860405160405180910390a15b5b50505050565b600460205260009081526040902080546001820154600290920154600160a060020a03909116919083565b6000805433600160a060020a0390811691161461062257600080fd5b600160a060020a0380831660009081526004602052604090208054849216151561064857fe5b600160a060020a03841660009081526004602052604090819020935061069f9084906060905190810160409081528254600160a060020a03168252600183015460208301526002909201549181019190915261098b565b60018084015490546106b69163ffffffff610a0016565b6001908155600160a060020a0385166000908152600460205260408120805473ffffffffffffffffffffffffffffffffffffffff191681558083018290556002908101919091555461070d9163ffffffff610a0016565b6002557f7c7076c2a87e78a9e637f6cd669dd1b07ee1d32910863879286961263aca953960405160405180910390a15b5b50505b5050565b6000805433600160a060020a0390811691161461076157600080fd5b50600160a060020a03808316600090815260046020526040902080549091161561078757fe5b6060604051908101604052600160a060020a0384168152602081016107ba84670de0b6b3a764000063ffffffff610a1716565b815242602091820152600160a060020a03851660009081526004909152604090208151815473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a039190911617815560208201518160010155604082015160029091015550600160a060020a0383166000908152600460205260409020600190810154905461084a9163ffffffff610a4616565b60019081556002546108619163ffffffff610a4616565b60025560038054600181016108768382610a60565b916000526020600020900160005b8154600160a060020a038088166101009390930a92830292021916179055507fba86615bfe38c15fd81da0547f0b62b5b336285d8f4b8b2260700c7e9f8ae23f60405160405180910390a15b5b505050565b60005433600160a060020a039081169116146108f157600080fd5b600160a060020a038116151561090657600080fd5b600054600160a060020a0380831691167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a36000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0383161790555b5b50565b600080828481151561097d57fe5b0490508091505b5092915050565b60006109c7600a6109bb6109aa8560400151429063ffffffff610a0016565b85602001519063ffffffff610a1716565b9063ffffffff61096f16565b90508151600160a060020a031681156108fc0282604051600060405180830381858888f19350505050151561074157600080fd5b5b5050565b600082821115610a0c57fe5b508082035b92915050565b6000828202831580610a335750828482811515610a3057fe5b04145b1515610a3b57fe5b8091505b5092915050565b600082820183811015610a3b57fe5b8091505b5092915050565b81548183558181151161041e5760008381526020902061041e918101908301610a8a565b5b505050565b6102d791905b80821115610aa45760008155600101610a90565b5090565b905600a165627a7a72305820efa10360a317e385d8079c8bcf2cc52fdedb2f4bbd1779c585dba739dd54dec50029",
+  "networks": {
+    "1516712482165": {
+      "events": {
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x2fc032449fdd82ff376429a06922fa2e3bb27337",
+      "updated_at": 1516721131608
+    },
+    "1516969540417": {
+      "events": {
+        "0x8a95ef04de579fe157bcb630c29fd74571ee2d76bf3bf9edd104b30152c1929c": {
+          "anonymous": false,
+          "inputs": [],
+          "name": "NewFund",
+          "type": "event"
+        },
+        "0x74acc6e2f8a9388733f3192d57b11c971c54237bc680f052864572b7ad50f1f8": {
+          "anonymous": false,
+          "inputs": [],
+          "name": "GetPaid",
+          "type": "event"
+        },
+        "0xba86615bfe38c15fd81da0547f0b62b5b336285d8f4b8b2260700c7e9f8ae23f": {
+          "anonymous": false,
+          "inputs": [],
+          "name": "NewEmployee",
+          "type": "event"
+        },
+        "0x44b26fcedcec0ce3cfb6fe5939cf649e34efdf3a1a4cad4def783efd83a7f852": {
+          "anonymous": false,
+          "inputs": [],
+          "name": "UpdateEmployee",
+          "type": "event"
+        },
+        "0x7c7076c2a87e78a9e637f6cd669dd1b07ee1d32910863879286961263aca9539": {
+          "anonymous": false,
+          "inputs": [],
+          "name": "RemoveEmployee",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x8703388d43ae1e0a2c3200c49135df6bfef55d7f",
+      "updated_at": 1516969875747
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1516969875747
+}
