@@ -1,35 +1,9 @@
-/*
-C3 Linearization Problem:
-contract O
-=> O
-contract A is O
-=> A + merge(L[O], [O])
-   A + merge([O], [O])
-   [A, O]
-contract B is O
-=> [B, O]
-contract C is O
-=> [C, O]
-contract K1 is A, B
-=> K1 + merge(L[B], L[A], [B, A])
-   K1 + merge([B, O], [A, O], [B, A])
-   [K1, B, A, O]
-contract K2 is A, C
-=> [K2, C, A, O]
-contract Z is K1, K2
-=> Z + merge(L[K2], L[K1], [K2, K1])
-   Z + merge([K2, C, A, O], [K1, B, A, O], [K2, K1])
-   [Z, K2] + merge([C, A, O], [K1, B, A, O], [K1])
-   [Z, K2, C] + merge([A, O], [K1, B, A, O])
-   [Z, K2, C, K1, B, A, O]
-*/
-
 pragma solidity ^0.4.14;
 
-import "github.com/OpenZeppelin/zeppelin-solidity/contracts/math/SafeMath.sol";
-import "github.com/OpenZeppelin/zeppelin-solidity/contracts/ownership/Ownable.sol";
+import "./SafeMath.sol";
+import "./Ownable.sol";
 
-contract Payroll is Ownable{
+contract Payroll is Ownable {
     using SafeMath for uint;
 
     struct Employee {
@@ -38,10 +12,32 @@ contract Payroll is Ownable{
         uint lastPayday;
     }
 
-    uint constant payDuration = 10 seconds;
+    uint constant payDuration = 10 days;
     uint totalSalary;
+    uint totalEmployees;
 
     mapping(address => Employee) public employees;
+    address[] employeeList;
+
+    event NewEmployee(
+      address employee
+    );
+
+    event UpdateEmployee(
+      address employee
+    );
+
+    event RemoveEmployee(
+      address employee
+    );
+
+    event NewFund(
+      uint balance
+    );
+
+    event GetPaid(
+      address employee
+    );
 
     modifier onlyEmployee {
         Employee employee = employees[msg.sender];
@@ -67,13 +63,23 @@ contract Payroll is Ownable{
         employee.id.transfer(partialPayment);
     }
 
+    function checkEmployee(uint index) returns (address employeeId, uint salary, uint lastPayday) {
+        employeeId = employeeList[index];
+        Employee employee = employees[employeeId];
+        salary = employee.salary;
+        lastPayday = employee.lastPayday;
+    }
+
     function addEmployee(address employeeId, uint salary) onlyOwner {
         Employee employee = employees[employeeId];
         assert(employee.id == 0x0);
 
         salary = salary.mul(1 ether);
         employees[employeeId] = Employee(employeeId, salary, now);
+        employeeList.push(employeeId);
         totalSalary = totalSalary.add(salary);
+        totalEmployees = totalEmployees.add(1);
+        NewEmployee(employeeId);
     }
 
     function removeEmployee(address employeeId) onlyOwner employeeExists(employeeId) {
@@ -82,7 +88,18 @@ contract Payroll is Ownable{
         _partialPaid(employees[employeeId]);
 
         totalSalary = totalSalary.sub(employee.salary);
+        totalEmployees = totalEmployees.sub(1);
         delete employees[employeeId];
+        
+        for (uint index = 0; index < employeeList.length; index++) {
+          if (employeeList[index] == employeeId) {
+            delete employeeList[index];
+            employeeList[index] = employeeList[employeeList.length - 1];
+            employeeList.length--;
+          }
+        }
+
+        RemoveEmployee(employeeId);
     }
 
     function updateEmployee(address employeeId, uint salary) onlyOwner employeeExists(employeeId) {
@@ -93,6 +110,7 @@ contract Payroll is Ownable{
         uint newSalary = salary.mul(1 ether);
         totalSalary = totalSalary.add(newSalary).sub(employee.salary);
         employees[employeeId].salary = newSalary;
+        UpdateEmployee(employeeId);
     }
 
     function changeEmployeeAddress(address newEmployeeId) onlyEmployee {
@@ -103,9 +121,8 @@ contract Payroll is Ownable{
         delete employees[msg.sender];
     }
 
-    function addFund() payable returns (uint) {
-        require(msg.sender == owner);
-
+    function addFund() payable onlyOwner returns (uint) {
+        NewFund(this.balance);
         return this.balance;
     }
 
@@ -117,6 +134,14 @@ contract Payroll is Ownable{
         return calculateRunway() > 0;
     }
 
+    function getInfo() returns (uint balance, uint runway, uint employeeCount) {
+        balance = this.balance;
+        if (totalSalary > 0) {
+          runway = calculateRunway();
+        }
+        employeeCount = totalEmployees;
+    }
+
     function getPaid() onlyEmployee returns (Employee) {
         Employee employee = employees[msg.sender];
 
@@ -126,5 +151,6 @@ contract Payroll is Ownable{
 
         employees[msg.sender].lastPayday = nextPayday;
         employee.id.transfer(employee.salary);
+        GetPaid(employee.id);
     }
 }
