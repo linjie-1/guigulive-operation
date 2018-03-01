@@ -1,22 +1,10 @@
-# 老董区块链干货铺
-硅谷live以太坊智能合约频道官方地址
+# Smart Contract Class (01-07-2018 ~ 02-03-2018)
 
-### Lesson 1: Basic Concept of Solidity - Jan 06, 2018
+### This 29-day Smart Contract Class was finished on 02/03/2018. I finished all projects and was awarded the certificate. 
 
-- declaration and structure of "contract"
-- Variable types: bool, unit/int, address
-- Global variables: Ether, Time, Block, Msg
-- Key Words: constant(diff in variables and functions), payable, this, revert
-- local variable: scope of local variable can go through the entire function
+### It is an amazing class and recommend it to all other people. Let us explore the blockchain technology together!
 
-Homework: extension of payroll system:
-
-- update account address
-- adjust the salary amount
-
-Solidity code: guigulive-operation/lesson1/assignment/payroll.sol
-
-Report:  https://medium.com/@gongf05/smart-contract-class-1-summary-ea8338feefd5
+Class summary:  https://medium.com/@gongf05/graduate-from-smart-contract-class-5d1e25cc061b
 
 # 硅谷live以太坊智能合约频道官方地址
 
